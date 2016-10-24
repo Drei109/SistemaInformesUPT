@@ -48,12 +48,17 @@ public class FrmPrinicipal extends javax.swing.JFrame {
         );
         escritorioLayout.setVerticalGroup(
             escritorioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 463, Short.MAX_VALUE)
+            .addGap(0, 479, Short.MAX_VALUE)
         );
 
         mnuInformes.setText("Informes");
 
         informePruebaEntrada.setText("Informe prueba de entrada");
+        informePruebaEntrada.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                informePruebaEntradaActionPerformed(evt);
+            }
+        });
         mnuInformes.add(informePruebaEntrada);
 
         informeFinalCurso.setText("Informe final de curso");
@@ -127,6 +132,12 @@ public class FrmPrinicipal extends javax.swing.JFrame {
     private void informeFinalCursoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_informeFinalCursoActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_informeFinalCursoActionPerformed
+
+    private void informePruebaEntradaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_informePruebaEntradaActionPerformed
+        FrmInformePruebaEntrada informePrueabaEntrada = new FrmInformePruebaEntrada();
+        escritorio.add(informePrueabaEntrada);
+        informePrueabaEntrada.setVisible(true);
+    }//GEN-LAST:event_informePruebaEntradaActionPerformed
 
     /**
      * @param args the command line arguments
