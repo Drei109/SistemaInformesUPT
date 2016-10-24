@@ -57,6 +57,11 @@ public class FrmLogin extends javax.swing.JFrame {
         });
 
         btnSalir.setText("Salir");
+        btnSalir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSalirActionPerformed(evt);
+            }
+        });
 
         lblFecha.setFont(new java.awt.Font("Dialog", 2, 13)); // NOI18N
         lblFecha.setForeground(new java.awt.Color(47, 119, 236));
@@ -131,6 +136,9 @@ public class FrmLogin extends javax.swing.JFrame {
                                                      ,"Login de Acceso",1);
                         
                         FrmPrinicipal principal = new FrmPrinicipal();
+                        principal.setExtendedState(JFrame.MAXIMIZED_BOTH); 
+//                        principal.setUndecorated(true);
+                        principal.setVisible(true);
                         principal.show();
                         this.dispose();
                         //enviar parametro al formulario principal
@@ -158,6 +166,10 @@ public class FrmLogin extends javax.swing.JFrame {
             ex.printStackTrace();
         }
     }//GEN-LAST:event_btnIngresarActionPerformed
+
+    private void btnSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalirActionPerformed
+        this.dispose();
+    }//GEN-LAST:event_btnSalirActionPerformed
 
     /**
      * @param args the command line arguments

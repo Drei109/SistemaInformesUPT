@@ -2,11 +2,14 @@
 package Presentacion;
 
 
+
 public class FrmPrinicipal extends javax.swing.JFrame {
+
 
    
     public FrmPrinicipal() {
         initComponents();
+        
     }
 
     
@@ -48,7 +51,7 @@ public class FrmPrinicipal extends javax.swing.JFrame {
         );
         escritorioLayout.setVerticalGroup(
             escritorioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 479, Short.MAX_VALUE)
+            .addGap(0, 579, Short.MAX_VALUE)
         );
 
         mnuInformes.setText("Informes");
@@ -119,7 +122,7 @@ public class FrmPrinicipal extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(escritorio)
                 .addContainerGap())
