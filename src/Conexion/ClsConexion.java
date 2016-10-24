@@ -6,7 +6,7 @@ import javax.swing.*;
 
 public class ClsConexion {
    private static Connection cnxmysql = null;
-   //HOLA MUNDO
+   //Hello World!
    public Connection getConnection(){
        try {
            // MYSQL Server
