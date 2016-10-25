@@ -19,6 +19,7 @@ import javax.swing.JOptionPane;
 public class FrmInformePruebaEntrada extends javax.swing.JInternalFrame {
 
     public String cDocente;
+    private boolean menuAbierto = false;
     
     public FrmInformePruebaEntrada() {
         initComponents();
@@ -46,6 +47,11 @@ public class FrmInformePruebaEntrada extends javax.swing.JInternalFrame {
         }
     }
     private void cargarDatosCompletoDocenteCurso(){
+        /**
+         * @param curso             String      "Obtiene el codigo del curso seleccionado"
+         * @param codigoDocente     String      "Obtiene el codigo del docente que esta seleccionado"
+         */
+        
         String curso = cmbCodigoCurso.getSelectedItem().toString();
         String codigoDocente = cDocente;
         
@@ -53,18 +59,21 @@ public class FrmInformePruebaEntrada extends javax.swing.JInternalFrame {
             //Instanciar la clase NegocioUsuario
             ClsNegocioUsuario docente = new ClsNegocioUsuario();
             
+            //Obtiene el resultado de la consulta hecha a la BD
             ResultSet rsDocente = docente.obtenerDatosPruebaEntrada(codigoDocente, curso);
             
-            
+            //itera los valores hechas en la consulta
             while (rsDocente.next()) {
+                //llenar los valores con los valores respectivos
                 txtDocente.setText(rsDocente.getString(5));
                 txtPractico.setText(String.valueOf(rsDocente.getInt(4)));
                 txtTeorico.setText(String.valueOf(rsDocente.getInt(3)));
                 txtMatriculados.setText(String.valueOf(rsDocente.getInt(6)));
                 lblSemestre.setText("Semestre " + rsDocente.getString(7));
                 
-                cmbCodigoCurso.setSelectedItem(rsDocente.getString(1));
                 cmbNombreCurso.setSelectedItem(rsDocente.getString(2));
+                cmbCodigoCurso.setSelectedItem(rsDocente.getString(1));
+                
             }
             
         } catch (Exception e) {
@@ -138,16 +147,6 @@ public class FrmInformePruebaEntrada extends javax.swing.JInternalFrame {
         lblSemestre.setText("SEMESTRE");
 
         cmbCodigoCurso.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        cmbCodigoCurso.addItemListener(new java.awt.event.ItemListener() {
-            public void itemStateChanged(java.awt.event.ItemEvent evt) {
-                cmbCodigoCursoItemStateChanged(evt);
-            }
-        });
-        cmbCodigoCurso.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                cmbCodigoCursoMouseClicked(evt);
-            }
-        });
         cmbCodigoCurso.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cmbCodigoCursoActionPerformed(evt);
@@ -155,9 +154,9 @@ public class FrmInformePruebaEntrada extends javax.swing.JInternalFrame {
         });
 
         cmbNombreCurso.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        cmbNombreCurso.addItemListener(new java.awt.event.ItemListener() {
-            public void itemStateChanged(java.awt.event.ItemEvent evt) {
-                cmbNombreCursoItemStateChanged(evt);
+        cmbNombreCurso.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cmbNombreCursoActionPerformed(evt);
             }
         });
 
@@ -325,33 +324,40 @@ public class FrmInformePruebaEntrada extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_btnRemoverFilaActionPerformed
 
     private void formInternalFrameOpened(javax.swing.event.InternalFrameEvent evt) {//GEN-FIRST:event_formInternalFrameOpened
+        /**
+         * @param munuAbierto       Boolean     "Verifica que la ventana se encuentre abierta"
+         */
+        
         cargarDatosDocenteFormulario();
         cargarDatosCompletoDocenteCurso();
+        menuAbierto = true;
     }//GEN-LAST:event_formInternalFrameOpened
 
-    private void cmbCodigoCursoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cmbCodigoCursoMouseClicked
-        
-    }//GEN-LAST:event_cmbCodigoCursoMouseClicked
-
     private void cmbCodigoCursoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbCodigoCursoActionPerformed
-
+        /**
+         * @param menuAbierto       boolean     "verifica que JInternal este abierto"
+         */
+        
+        if (menuAbierto) {
+            //seleccionamos el nombre del curso de acurdo al codigo del curso
+            //seleccionado
+            cmbNombreCurso.setSelectedIndex(cmbCodigoCurso.getSelectedIndex());
+            cargarDatosCompletoDocenteCurso();
+        }
     }//GEN-LAST:event_cmbCodigoCursoActionPerformed
 
-    private void cmbCodigoCursoItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cmbCodigoCursoItemStateChanged
-        if (evt.getStateChange() == ItemEvent.SELECTED) {
-            if (cmbCodigoCurso.getSelectedIndex()>=0) {
-                cargarDatosCompletoDocenteCurso();
-            }
+    private void cmbNombreCursoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbNombreCursoActionPerformed
+        /**
+         * @param menuAbierto       boolean     "verifica que JInternal este abierto"
+         */
+        
+        if (menuAbierto) {
+            //seleccionamos el nombre del curso de acurdo al codigo del curso
+            //seleccionado
+            cmbCodigoCurso.setSelectedIndex(cmbNombreCurso.getSelectedIndex());
+            cargarDatosCompletoDocenteCurso();
         }
-    }//GEN-LAST:event_cmbCodigoCursoItemStateChanged
-
-    private void cmbNombreCursoItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cmbNombreCursoItemStateChanged
-//        if (evt.getStateChange() == ItemEvent.SELECTED) {
-//            if (cmbNombreCurso.getSelectedIndex()>=0) {
-//                cargarDatosCompletoDocenteCurso();
-//            }
-//        }
-    }//GEN-LAST:event_cmbNombreCursoItemStateChanged
+    }//GEN-LAST:event_cmbNombreCursoActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
