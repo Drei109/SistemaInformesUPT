@@ -16,6 +16,7 @@ public class FrmLogin extends javax.swing.JFrame {
 
     String usu,pass;
     static ResultSet rs = null;
+    public String codDocente;
     
     public FrmLogin() {
         initComponents();
@@ -122,7 +123,7 @@ public class FrmLogin extends javax.swing.JFrame {
     private void btnIngresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnIngresarActionPerformed
         usu = txtUsuario.getText();
         pass = txtContrasena.getText();
-        
+        codDocente = usu;
         ClsNegocioUsuario usuario = new ClsNegocioUsuario();
         
         try {
@@ -140,7 +141,10 @@ public class FrmLogin extends javax.swing.JFrame {
 //                        principal.setUndecorated(true);
                         principal.setVisible(true);
                         principal.show();
+                        principal.codigoDocente = usu;
                         this.dispose();
+                        
+                        
                         //enviar parametro al formulario principal
                         //frm_Pricipal form_principal = new frm_Pricipal();
                         //form_principal.show();

@@ -1,15 +1,16 @@
 
 package Presentacion;
 
+import javax.swing.JOptionPane;
+
 
 
 public class FrmPrinicipal extends javax.swing.JFrame {
 
-
+    public String codigoDocente;
    
     public FrmPrinicipal() {
         initComponents();
-        
     }
 
     
@@ -138,8 +139,10 @@ public class FrmPrinicipal extends javax.swing.JFrame {
 
     private void informePruebaEntradaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_informePruebaEntradaActionPerformed
         FrmInformePruebaEntrada informePrueabaEntrada = new FrmInformePruebaEntrada();
+        informePrueabaEntrada.cDocente = codigoDocente;
         escritorio.add(informePrueabaEntrada);
         informePrueabaEntrada.setVisible(true);
+        
     }//GEN-LAST:event_informePruebaEntradaActionPerformed
 
     /**

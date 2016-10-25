@@ -1,26 +1,77 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package Presentacion;
 
 import javax.swing.table.DefaultTableModel;
+import Conexion.ClsConexion;
+import Negocio.ClsNegocioUsuario;
+import java.awt.event.ItemEvent;
+import java.sql.Connection;
+import java.sql.SQLException;
+import java.io.*;
+import java.sql.ResultSet;
+import javax.swing.DefaultComboBoxModel;
+import javax.swing.JOptionPane;
 
 /**
  *
- * @author Drei
+ * @author Andrei
+ * @author Enzo
  */
 public class FrmInformePruebaEntrada extends javax.swing.JInternalFrame {
 
-    /**
-     * Creates new form FrmInformePruebaEntreada
-     */
+    public String cDocente;
+    
     public FrmInformePruebaEntrada() {
         initComponents();
         cargarTabla();
     }
-
+    
+    private void cargarDatosDocenteFormulario(){
+        String codigoDocente = cDocente;
+        try {
+            //Instanciar la clase NegocioUsuario
+            ClsNegocioUsuario docente = new ClsNegocioUsuario();
+            
+            ResultSet rsDocente = docente.obtenerCursosDocente(codigoDocente);
+            
+            cmbCodigoCurso.removeAllItems();
+            cmbNombreCurso.removeAllItems();
+            
+            while (rsDocente.next()) {
+                 cmbCodigoCurso.addItem(rsDocente.getString(1));
+                 cmbNombreCurso.addItem(rsDocente.getString(2));
+            }
+            
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+    private void cargarDatosCompletoDocenteCurso(){
+        String curso = cmbCodigoCurso.getSelectedItem().toString();
+        String codigoDocente = cDocente;
+        
+        try {
+            //Instanciar la clase NegocioUsuario
+            ClsNegocioUsuario docente = new ClsNegocioUsuario();
+            
+            ResultSet rsDocente = docente.obtenerDatosPruebaEntrada(codigoDocente, curso);
+            
+            
+            while (rsDocente.next()) {
+                txtDocente.setText(rsDocente.getString(5));
+                txtPractico.setText(String.valueOf(rsDocente.getInt(4)));
+                txtTeorico.setText(String.valueOf(rsDocente.getInt(3)));
+                txtMatriculados.setText(String.valueOf(rsDocente.getInt(6)));
+                lblSemestre.setText("Semestre " + rsDocente.getString(7));
+                
+                cmbCodigoCurso.setSelectedItem(rsDocente.getString(1));
+                cmbNombreCurso.setSelectedItem(rsDocente.getString(2));
+            }
+            
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+    
     private void cargarTabla(){
         DefaultTableModel modelo = new DefaultTableModel(null,new Object[]{"Nro", "Conocimiento o Habilidad","No Aceptable","%","Suficiente","%","Bueno","%","Total"});
         tabla.setModel(modelo);
@@ -64,13 +115,51 @@ public class FrmInformePruebaEntrada extends javax.swing.JInternalFrame {
         btnAgregarFila = new javax.swing.JButton();
         btnRemoverFila = new javax.swing.JButton();
 
+        addInternalFrameListener(new javax.swing.event.InternalFrameListener() {
+            public void internalFrameActivated(javax.swing.event.InternalFrameEvent evt) {
+            }
+            public void internalFrameClosed(javax.swing.event.InternalFrameEvent evt) {
+            }
+            public void internalFrameClosing(javax.swing.event.InternalFrameEvent evt) {
+            }
+            public void internalFrameDeactivated(javax.swing.event.InternalFrameEvent evt) {
+            }
+            public void internalFrameDeiconified(javax.swing.event.InternalFrameEvent evt) {
+            }
+            public void internalFrameIconified(javax.swing.event.InternalFrameEvent evt) {
+            }
+            public void internalFrameOpened(javax.swing.event.InternalFrameEvent evt) {
+                formInternalFrameOpened(evt);
+            }
+        });
+
         jLabel1.setText("PRUEBA ENTRADA");
 
         lblSemestre.setText("SEMESTRE");
 
         cmbCodigoCurso.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        cmbCodigoCurso.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                cmbCodigoCursoItemStateChanged(evt);
+            }
+        });
+        cmbCodigoCurso.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                cmbCodigoCursoMouseClicked(evt);
+            }
+        });
+        cmbCodigoCurso.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cmbCodigoCursoActionPerformed(evt);
+            }
+        });
 
         cmbNombreCurso.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        cmbNombreCurso.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                cmbNombreCursoItemStateChanged(evt);
+            }
+        });
 
         jLabel2.setText("Código:");
 
@@ -234,6 +323,35 @@ public class FrmInformePruebaEntrada extends javax.swing.JInternalFrame {
     private void btnRemoverFilaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRemoverFilaActionPerformed
         removerFila();
     }//GEN-LAST:event_btnRemoverFilaActionPerformed
+
+    private void formInternalFrameOpened(javax.swing.event.InternalFrameEvent evt) {//GEN-FIRST:event_formInternalFrameOpened
+        cargarDatosDocenteFormulario();
+        cargarDatosCompletoDocenteCurso();
+    }//GEN-LAST:event_formInternalFrameOpened
+
+    private void cmbCodigoCursoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cmbCodigoCursoMouseClicked
+        
+    }//GEN-LAST:event_cmbCodigoCursoMouseClicked
+
+    private void cmbCodigoCursoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbCodigoCursoActionPerformed
+
+    }//GEN-LAST:event_cmbCodigoCursoActionPerformed
+
+    private void cmbCodigoCursoItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cmbCodigoCursoItemStateChanged
+        if (evt.getStateChange() == ItemEvent.SELECTED) {
+            if (cmbCodigoCurso.getSelectedIndex()>=0) {
+                cargarDatosCompletoDocenteCurso();
+            }
+        }
+    }//GEN-LAST:event_cmbCodigoCursoItemStateChanged
+
+    private void cmbNombreCursoItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cmbNombreCursoItemStateChanged
+//        if (evt.getStateChange() == ItemEvent.SELECTED) {
+//            if (cmbNombreCurso.getSelectedIndex()>=0) {
+//                cargarDatosCompletoDocenteCurso();
+//            }
+//        }
+    }//GEN-LAST:event_cmbNombreCursoItemStateChanged
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

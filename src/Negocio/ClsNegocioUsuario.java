@@ -38,5 +38,34 @@ public class ClsNegocioUsuario implements ClsInterfaceUsuario {
             throw ex;
         }
     }
+
+    @Override
+    public ResultSet obtenerDatosPruebaEntrada(String codDocente, String idCurso) throws Exception {
+        ResultSet rs = null;
+        try {
+            CallableStatement cst = conexion.prepareCall("{call UPS_DatosPruebaEntrada(?,?)}");
+            cst.setString("pcodDocente", codDocente);
+            cst.setString("pidCurso", idCurso);
+            
+            rs = cst.executeQuery();
+            return rs;
+        } catch (SQLException ex) {
+            throw ex;
+        }
+    }
+
+    @Override
+    public ResultSet obtenerCursosDocente(String pcodDocente) throws Exception {
+        ResultSet rs = null;
+        try {
+            CallableStatement cst = conexion.prepareCall("{call UPS_CursosDeDocente(?)}");
+            cst.setString("pcodDocente", pcodDocente);
+            
+            rs = cst.executeQuery();
+            return rs;
+        } catch (SQLException ex) {
+            throw ex;
+        }
+    }
     
 }
