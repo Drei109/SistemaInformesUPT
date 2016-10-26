@@ -8,6 +8,7 @@ import java.sql.Connection;
 import java.sql.SQLException;
 import java.io.*;
 import java.sql.ResultSet;
+import java.util.Iterator;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JOptionPane;
 
@@ -190,6 +191,11 @@ public class FrmInformePruebaEntrada extends javax.swing.JInternalFrame {
         jLabel9.setText("Describa las medidas correctivas que tomará en los casos de grado no aceptable:");
 
         btnEnviar.setText("Enviar");
+        btnEnviar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEnviarActionPerformed(evt);
+            }
+        });
 
         txtComentario.setColumns(20);
         txtComentario.setRows(5);
@@ -358,6 +364,24 @@ public class FrmInformePruebaEntrada extends javax.swing.JInternalFrame {
             cargarDatosCompletoDocenteCurso();
         }
     }//GEN-LAST:event_cmbNombreCursoActionPerformed
+
+    private void btnEnviarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEnviarActionPerformed
+        /**
+         * @param valores       String          "Almacena todos los id de la tabla"
+         * @param filas         Integer         "Obtiene las Filas de la tabla"
+         * @param valor         String          "Obtiene el primer valor de cada fila"
+         */
+        
+        String valores = "" ;
+        int filas = tabla.getRowCount();
+        
+        for (int i = 0; i < filas; i++) {
+            String valor = (String) tabla.getValueAt(i, 0);
+            valores += valor + ",\n ";
+        }
+        
+        
+    }//GEN-LAST:event_btnEnviarActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
