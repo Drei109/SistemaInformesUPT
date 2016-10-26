@@ -125,6 +125,7 @@ public class FrmInformePruebaEntrada extends javax.swing.JInternalFrame {
         btnAgregarFila = new javax.swing.JButton();
         btnRemoverFila = new javax.swing.JButton();
         btnCerrar = new javax.swing.JButton();
+        btnGuardar = new javax.swing.JButton();
 
         addInternalFrameListener(new javax.swing.event.InternalFrameListener() {
             public void internalFrameActivated(javax.swing.event.InternalFrameEvent evt) {
@@ -211,6 +212,13 @@ public class FrmInformePruebaEntrada extends javax.swing.JInternalFrame {
 
         btnCerrar.setText("Cerrar");
 
+        btnGuardar.setText("Guardar");
+        btnGuardar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnGuardarActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -261,7 +269,8 @@ public class FrmInformePruebaEntrada extends javax.swing.JInternalFrame {
                                             .addComponent(jLabel5)))
                                     .addComponent(txtDocente, javax.swing.GroupLayout.PREFERRED_SIZE, 383, javax.swing.GroupLayout.PREFERRED_SIZE)))
                             .addGroup(layout.createSequentialGroup()
-                                .addGap(167, 167, 167)
+                                .addComponent(btnGuardar, javax.swing.GroupLayout.PREFERRED_SIZE, 149, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
                                 .addComponent(btnCerrar, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                                 .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 760, Short.MAX_VALUE)
@@ -314,7 +323,9 @@ public class FrmInformePruebaEntrada extends javax.swing.JInternalFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(btnCerrar)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnCerrar)
+                    .addComponent(btnGuardar))
                 .addContainerGap(14, Short.MAX_VALUE))
         );
 
@@ -365,10 +376,27 @@ public class FrmInformePruebaEntrada extends javax.swing.JInternalFrame {
         }
     }//GEN-LAST:event_cmbNombreCursoActionPerformed
 
+    private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed
+        /**
+         * @param valores       String          "Almacena todos los id de la tabla"
+         * @param filas         Integer         "Obtiene las Filas de la tabla"
+         * @param valor         String          "Obtiene el primer valor de cada fila"
+         */
+        
+        String valores = "" ;
+        int filas = tabla.getRowCount();
+        
+        for (int i = 0; i < filas; i++) {
+            String valor = (String) tabla.getValueAt(i, 0);
+            valores += valor + ",\n ";
+        }
+    }//GEN-LAST:event_btnGuardarActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAgregarFila;
     private javax.swing.JButton btnCerrar;
+    private javax.swing.JButton btnGuardar;
     private javax.swing.JButton btnRemoverFila;
     private javax.swing.JComboBox<String> cmbCodigoCurso;
     private javax.swing.JComboBox<String> cmbNombreCurso;
