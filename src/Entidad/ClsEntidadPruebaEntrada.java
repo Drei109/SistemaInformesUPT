@@ -1,7 +1,5 @@
 package Entidad;
 
-import java.util.Date;
-
 /**
  *
  * @author enzocv
@@ -13,7 +11,8 @@ public class ClsEntidadPruebaEntrada {
     private int idPruebaEntrada; //AUTO INCREMENT
     private int idPlanEstudio;
     private String medidasCorrectivas;
-    private String fechaPruebaEntrada; 
+    private String fechaPruebaEntrada;
+    private int evaluados;
     
     
     //GET Y SETTER
@@ -47,6 +46,14 @@ public class ClsEntidadPruebaEntrada {
 
     public void setFechaPruebaEntrada(String fechaPruebaEntrada) {
         this.fechaPruebaEntrada = fechaPruebaEntrada;
+    }
+    
+    public int getEvaluados() {
+        return evaluados;
+    }
+
+    public void setEvaluados(int evaluados) {
+        this.evaluados = evaluados;
     }
     
 }

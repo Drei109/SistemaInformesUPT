@@ -8,6 +8,8 @@ import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.sql.SQLException;
 import Conexion.ClsConexion;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 /**
  *
  * @author enzocv
@@ -57,6 +59,20 @@ public class ClsNegocioDetallePruebaEntrada implements ClsInterfaceDetallePrueba
             cst.execute();
         } catch (SQLException ex) {
             ex.printStackTrace();
+        }
+    }
+
+    @Override
+    public ResultSet ObtenerIdPruebaEntrada(String codigoPlanEstudio) throws Exception {
+        ResultSet rs = null;
+        try {
+            CallableStatement cst = conexion.prepareCall("{call USP_IdPruebaEntrada(?)}");
+            cst.setString("pidPlanEstudio", codigoPlanEstudio);
+            
+            rs = cst.executeQuery();
+            return rs;
+        } catch (SQLException ex) {
+            throw ex;
         }
     }
     
