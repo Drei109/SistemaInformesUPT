@@ -20,9 +20,10 @@ public class ClsNegocioPruebaEntrada implements ClsInterfacePruebaEntrada{
     @Override
     public void AgregarPruebaEntrada(ClsEntidadPruebaEntrada PruebaEntrada) {
         try {
-            CallableStatement cst = conexion.prepareCall("{call USP_PruebaEntrada_I(?,?)}");
+            CallableStatement cst = conexion.prepareCall("{call USP_PruebaEntrada_I(?,?,?)}");
             cst.setString("pidPlanEstudio", String.valueOf(PruebaEntrada.getIdPlanEstudio())); 
             cst.setString("pmedidasCorrectivas", PruebaEntrada.getMedidasCorrectivas());
+            cst.setString("pevaluados", String.valueOf(PruebaEntrada.getEvaluados()));
             cst.execute();
         } catch (SQLException ex) {
             ex.printStackTrace();
@@ -32,10 +33,11 @@ public class ClsNegocioPruebaEntrada implements ClsInterfacePruebaEntrada{
     @Override
     public void ModificarPruebaEntrada(String codigo, ClsEntidadPruebaEntrada PruebaEntrada) {
         try {
-            CallableStatement cst = conexion.prepareCall("{call USP_PruebaEntrada_U(?,?,?)}");
+            CallableStatement cst = conexion.prepareCall("{call USP_PruebaEntrada_U(?,?,?,?)}");
             cst.setString("pidPruebaEntrada", String.valueOf(PruebaEntrada.getIdPruebaEntrada())); 
             cst.setString("pidPlanEstudio",  String.valueOf(PruebaEntrada.getIdPlanEstudio()));
             cst.setString("pmedidasCorrectivas", PruebaEntrada.getMedidasCorrectivas());
+            cst.setString("pevaluados",  String.valueOf(PruebaEntrada.getEvaluados()));
             cst.execute();
         } catch (SQLException ex) {
             ex.printStackTrace();

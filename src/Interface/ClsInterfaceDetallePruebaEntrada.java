@@ -14,4 +14,6 @@ public interface ClsInterfaceDetallePruebaEntrada {
     void ModificarDetallePruebaEntrada(String codigoDetalle,String codigoPrueba,ClsEntidadDetallePruebaEntrada DetallePruebaEntrada);
     
     void EliminarDetallePruebaEntrada(String codigo);
+    
+    public ResultSet ObtenerIdPruebaEntrada(String codigoPlanEstudio)throws Exception;
 }

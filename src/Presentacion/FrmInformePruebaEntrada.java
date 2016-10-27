@@ -2,6 +2,12 @@ package Presentacion;
 
 import javax.swing.table.DefaultTableModel;
 import Conexion.ClsConexion;
+import Entidad.ClsEntidadDetallePruebaEntrada;
+import Entidad.ClsEntidadPruebaEntrada;
+
+import Negocio.ClsNegocioDetallePruebaEntrada;
+import Negocio.ClsNegocioPruebaEntrada;
+
 import Negocio.ClsNegocioUsuario;
 import java.awt.event.ItemEvent;
 import java.sql.Connection;
@@ -9,6 +15,8 @@ import java.sql.SQLException;
 import java.io.*;
 import java.sql.ResultSet;
 import java.util.Iterator;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JOptionPane;
 
@@ -20,6 +28,7 @@ import javax.swing.JOptionPane;
 public class FrmInformePruebaEntrada extends javax.swing.JInternalFrame {
 
     public String cDocente;
+    String idPlanEstudios;
     private boolean menuAbierto = false;
     
     public FrmInformePruebaEntrada() {
@@ -70,10 +79,14 @@ public class FrmInformePruebaEntrada extends javax.swing.JInternalFrame {
                 txtPractico.setText(String.valueOf(rsDocente.getInt(4)));
                 txtTeorico.setText(String.valueOf(rsDocente.getInt(3)));
                 txtMatriculados.setText(String.valueOf(rsDocente.getInt(6)));
+                txtRetirados.setText(rsDocente.getString(9));
                 lblSemestre.setText("Semestre " + rsDocente.getString(7));
                 
                 cmbNombreCurso.setSelectedItem(rsDocente.getString(2));
                 cmbCodigoCurso.setSelectedItem(rsDocente.getString(1));
+                
+                idPlanEstudios = rsDocente.getString(8);
+                
                 
             }
             
@@ -126,6 +139,8 @@ public class FrmInformePruebaEntrada extends javax.swing.JInternalFrame {
         btnRemoverFila = new javax.swing.JButton();
         btnCerrar = new javax.swing.JButton();
         btnGuardar = new javax.swing.JButton();
+        jLabel10 = new javax.swing.JLabel();
+        txtEvaluados = new javax.swing.JTextField();
 
         addInternalFrameListener(new javax.swing.event.InternalFrameListener() {
             public void internalFrameActivated(javax.swing.event.InternalFrameEvent evt) {
@@ -221,6 +236,8 @@ public class FrmInformePruebaEntrada extends javax.swing.JInternalFrame {
             }
         });
 
+        jLabel10.setText("Evaluados:");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -262,12 +279,16 @@ public class FrmInformePruebaEntrada extends javax.swing.JInternalFrame {
                                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                         .addGroup(layout.createSequentialGroup()
                                             .addComponent(jLabel4)
-                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 64, Short.MAX_VALUE)
                                             .addComponent(txtTeorico, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE))
                                         .addGroup(layout.createSequentialGroup()
-                                            .addComponent(jLabel5)
+                                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                                .addComponent(jLabel5)
+                                                .addComponent(jLabel10))
                                             .addGap(52, 52, 52)
-                                            .addComponent(txtPractico, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                                .addComponent(txtPractico, javax.swing.GroupLayout.DEFAULT_SIZE, 119, Short.MAX_VALUE)
+                                                .addComponent(txtEvaluados))))))
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(btnGuardar, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(18, 18, 18)
@@ -278,7 +299,7 @@ public class FrmInformePruebaEntrada extends javax.swing.JInternalFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addGap(358, 358, 358)
                         .addComponent(lblSemestre)))
-                .addContainerGap(38, Short.MAX_VALUE))
+                .addContainerGap(31, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -312,7 +333,9 @@ public class FrmInformePruebaEntrada extends javax.swing.JInternalFrame {
                 .addGap(21, 21, 21)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel6)
-                    .addComponent(txtDocente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtDocente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel10)
+                    .addComponent(txtEvaluados, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(28, 28, 28)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -379,18 +402,68 @@ public class FrmInformePruebaEntrada extends javax.swing.JInternalFrame {
 
     private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed
         /**
-         * @param valores       String          "Almacena todos los id de la tabla"
-         * @param filas         Integer         "Obtiene las Filas de la tabla"
-         * @param valor         String          "Obtiene el primer valor de cada fila"
+         * @param valores           String          "Almacena todos los id de la tabla"
+         * @param filas             Integer         "Obtiene las Filas de la tabla"
+         * @param columnas          Integer         "Obtiene las Columnas de la tabla"
+         * @param valor             String          "Obtiene el primer valor de cada fila"
+         * @param negocioDetalle    Objeto          "Instancia para Negocio de Detalle de Prueba de Entrada"
+         * @param negocioPrueba     Objeto          "Instancia para Negocio de Prueba de Entrada"
+         * @param entidadDetalle    Objeto          "Instancia para Entidad de Detalle de Prueba de Entrada"
+         * @param entidadPrueba     Objeto          "Instancia para Entidad de Prueba de Entrada"
+         * 
          */
+        ClsNegocioDetallePruebaEntrada negocioDetalle = new ClsNegocioDetallePruebaEntrada();
+        ClsEntidadDetallePruebaEntrada entidadDetalle = new ClsEntidadDetallePruebaEntrada();
         
-        String valores = "" ;
+        ClsNegocioPruebaEntrada negocioPrueba = new ClsNegocioPruebaEntrada();
+        ClsEntidadPruebaEntrada entidadPrueba = new ClsEntidadPruebaEntrada();
+        
+        
         int filas = tabla.getRowCount();
+        int columnas = tabla.getColumnCount();
+        
+        
+        //GUARDAR PRUEBA DE ENTRADA
+        entidadPrueba.setIdPlanEstudio(Integer.parseInt(idPlanEstudios));
+        entidadPrueba.setMedidasCorrectivas(txtComentario.getText());
+        entidadPrueba.setEvaluados(Integer.parseInt(txtEvaluados.getText()));
+        
+        negocioPrueba.AgregarPruebaEntrada(entidadPrueba);
+        
+        
+        //GUARDAR DETALLE DE PRUEBA DE ENTRADA
+        String IDPruebaEntrada = "--";
+        try {
+            ResultSet rs = negocioDetalle.ObtenerIdPruebaEntrada(idPlanEstudios);
+            while (rs.next()) {
+                IDPruebaEntrada = rs.getString(1);
+            }
+            
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+        
         
         for (int i = 0; i < filas; i++) {
-            String valor = (String) tabla.getValueAt(i, 0);
-            valores += valor + ",\n ";
+            for (int j = 0; j < columnas; j++) {
+                if (j == 3 || j == 5 || j == 7) {
+                    
+                }
+                else{
+                    int n = Integer.parseInt((String) tabla.getValueAt(0, 0));
+                    entidadDetalle.setIdPruebaEntrada(Integer.parseInt(IDPruebaEntrada));
+                    entidadDetalle.setIdDetallePruebaEntrada(n);
+                    entidadDetalle.setHabilidad((String) tabla.getValueAt(i, j+1));
+                    entidadDetalle.setCantNoAceptalbe(Integer.parseInt((String) tabla.getValueAt(i, j+2)));
+                    entidadDetalle.setCantSuficiente(Integer.parseInt((String) tabla.getValueAt(i, j+4)));
+                    entidadDetalle.setCantBueno(Integer.parseInt((String) tabla.getValueAt(i, j+6)));
+                }
+                negocioDetalle.AgregarDetallePruebaEntrada(entidadDetalle);
+            }
         }
+        
+        
+        
     }//GEN-LAST:event_btnGuardarActionPerformed
 
 
@@ -402,6 +475,7 @@ public class FrmInformePruebaEntrada extends javax.swing.JInternalFrame {
     private javax.swing.JComboBox<String> cmbCodigoCurso;
     private javax.swing.JComboBox<String> cmbNombreCurso;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -416,6 +490,7 @@ public class FrmInformePruebaEntrada extends javax.swing.JInternalFrame {
     private javax.swing.JTable tabla;
     private javax.swing.JTextArea txtComentario;
     private javax.swing.JTextField txtDocente;
+    private javax.swing.JTextField txtEvaluados;
     private javax.swing.JTextField txtMatriculados;
     private javax.swing.JTextField txtPractico;
     private javax.swing.JTextField txtRetirados;
