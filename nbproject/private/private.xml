@@ -3,7 +3,11 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
+            <file>file:/D:/GitHub/SistemaInformesUPT/src/Negocio/ClsNegocioUsuario.java</file>
             <file>file:/D:/GitHub/SistemaInformesUPT/src/Presentacion/FrmInformePruebaEntrada.java</file>
+            <file>file:/D:/GitHub/SistemaInformesUPT/src/Negocio/ClsNegocioPruebaEntrada.java</file>
+            <file>file:/D:/GitHub/SistemaInformesUPT/src/Conexion/ClsConexion.java</file>
+            <file>file:/D:/GitHub/SistemaInformesUPT/src/Negocio/ClsNegocioDetallePruebaEntrada.java</file>
         </group>
     </open-files>
 </project-private>

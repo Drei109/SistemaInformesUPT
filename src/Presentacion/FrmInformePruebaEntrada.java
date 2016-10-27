@@ -115,6 +115,8 @@ public class FrmInformePruebaEntrada extends javax.swing.JInternalFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        menuCelda = new javax.swing.JPopupMenu();
+        jMenuItem1 = new javax.swing.JMenuItem();
         jLabel1 = new javax.swing.JLabel();
         lblSemestre = new javax.swing.JLabel();
         cmbCodigoCurso = new javax.swing.JComboBox<>();
@@ -142,6 +144,14 @@ public class FrmInformePruebaEntrada extends javax.swing.JInternalFrame {
         btnGuardar = new javax.swing.JButton();
         jLabel10 = new javax.swing.JLabel();
         txtEvaluados = new javax.swing.JTextField();
+
+        jMenuItem1.setText("Calcular Porcentajes");
+        jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem1ActionPerformed(evt);
+            }
+        });
+        menuCelda.add(jMenuItem1);
 
         addInternalFrameListener(new javax.swing.event.InternalFrameListener() {
             public void internalFrameActivated(javax.swing.event.InternalFrameEvent evt) {
@@ -206,6 +216,8 @@ public class FrmInformePruebaEntrada extends javax.swing.JInternalFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
+        tabla.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        tabla.setInheritsPopupMenu(true);
         jScrollPane1.setViewportView(tabla);
 
         jLabel9.setText("Describa las medidas correctivas que tomará en los casos de grado no aceptable:");
@@ -378,6 +390,10 @@ public class FrmInformePruebaEntrada extends javax.swing.JInternalFrame {
         cargarDatosDocenteFormulario();
         cargarDatosCompletoDocenteCurso();
         menuAbierto = true;
+        
+        
+//        menuCelda.add("Calcular Porcentajes");
+        tabla.setComponentPopupMenu(menuCelda);
     }//GEN-LAST:event_formInternalFrameOpened
 
     private void cmbCodigoCursoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbCodigoCursoActionPerformed
@@ -410,7 +426,6 @@ public class FrmInformePruebaEntrada extends javax.swing.JInternalFrame {
         /**
          * @param valores           String          "Almacena todos los id de la tabla"
          * @param filas             Integer         "Obtiene las Filas de la tabla"
-         * @param columnas          Integer         "Obtiene las Columnas de la tabla"
          * @param valor             String          "Obtiene el primer valor de cada fila"
          * @param negocioDetalle    Objeto          "Instancia para Negocio de Detalle de Prueba de Entrada"
          * @param negocioPrueba     Objeto          "Instancia para Negocio de Prueba de Entrada"
@@ -426,20 +441,19 @@ public class FrmInformePruebaEntrada extends javax.swing.JInternalFrame {
         
         
         int filas = tabla.getRowCount();
-        int columnas = tabla.getColumnCount();
         
         
-        //GUARDAR PRUEBA DE ENTRADA
-        entidadPrueba.setIdPlanEstudio(Integer.parseInt(idPlanEstudios));
-        entidadPrueba.setMedidasCorrectivas(txtComentario.getText());
-        entidadPrueba.setEvaluados(Integer.parseInt(txtEvaluados.getText()));
-        
-        negocioPrueba.AgregarPruebaEntrada(entidadPrueba);
-        
-        
-        //GUARDAR DETALLE DE PRUEBA DE ENTRADA
         String IDPruebaEntrada = "--";
         try {
+            
+            //GUARDAR PRUEBA DE ENTRADA
+            entidadPrueba.setIdPlanEstudio(Integer.parseInt(idPlanEstudios));
+            entidadPrueba.setMedidasCorrectivas(txtComentario.getText());
+            entidadPrueba.setEvaluados(Integer.parseInt(txtEvaluados.getText()));
+
+            negocioPrueba.AgregarPruebaEntrada(entidadPrueba);
+            
+            //GUARDAR DETALLE DE PRUEBA DE ENTRADA
             ResultSet rs = negocioDetalle.ObtenerIdPruebaEntrada(idPlanEstudios);
             while (rs.next()) {
                 IDPruebaEntrada = rs.getString(1);
@@ -469,6 +483,36 @@ public class FrmInformePruebaEntrada extends javax.swing.JInternalFrame {
         this.dispose();
     }//GEN-LAST:event_btnCerrarActionPerformed
 
+    private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
+        
+        int filas = tabla.getRowCount();
+        int evaluados = Integer.parseInt(txtEvaluados.getText());
+        int CantNoAceptable = 0;
+        int CantSuficiente  = 0;
+        int CantBueno       = 0;  
+        
+        //3 5 7
+        
+        if (!(filas == 0 && evaluados <= 0)) {
+            for (int i = 0; i < filas; i++) {
+                CantNoAceptable = Integer.parseInt((String) tabla.getValueAt(i, 2));
+                CantSuficiente  = Integer.parseInt((String) tabla.getValueAt(i, 4));
+                CantBueno       = Integer.parseInt((String) tabla.getValueAt(i, 6));
+                
+                tabla.setValueAt(((CantNoAceptable*100)/evaluados), i, 3);
+                tabla.setValueAt(((CantSuficiente*100)/evaluados), i, 5);
+                tabla.setValueAt(((CantBueno*100)/evaluados), i, 7);
+                tabla.setValueAt((((CantNoAceptable*100)/evaluados) +
+                                    ((CantSuficiente*100)/evaluados) +
+                                    ((CantBueno*100)/evaluados)), i, 8);
+            }
+        }
+        else{
+            JOptionPane.showMessageDialog(null, "Ingrese una cantidad de Evaluados o Ingrese Una Fila.");
+        }
+           
+    }//GEN-LAST:event_jMenuItem1ActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAgregarFila;
@@ -487,9 +531,11 @@ public class FrmInformePruebaEntrada extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
+    private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JLabel lblSemestre;
+    private javax.swing.JPopupMenu menuCelda;
     private javax.swing.JTable tabla;
     private javax.swing.JTextArea txtComentario;
     private javax.swing.JTextField txtDocente;
