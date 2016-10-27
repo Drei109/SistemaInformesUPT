@@ -424,11 +424,11 @@ public class FrmInformePruebaEntrada extends javax.swing.JInternalFrame {
         
         
         //GUARDAR PRUEBA DE ENTRADA
-        entidadPrueba.setIdPlanEstudio(Integer.parseInt(idPlanEstudios));
-        entidadPrueba.setMedidasCorrectivas(txtComentario.getText());
-        entidadPrueba.setEvaluados(Integer.parseInt(txtEvaluados.getText()));
+//        entidadPrueba.setIdPlanEstudio(Integer.parseInt(idPlanEstudios));
+//        entidadPrueba.setMedidasCorrectivas(txtComentario.getText());
+//        entidadPrueba.setEvaluados(Integer.parseInt(txtEvaluados.getText()));
         
-        negocioPrueba.AgregarPruebaEntrada(entidadPrueba);
+//        negocioPrueba.AgregarPruebaEntrada(entidadPrueba);
         
         
         //GUARDAR DETALLE DE PRUEBA DE ENTRADA
@@ -439,30 +439,23 @@ public class FrmInformePruebaEntrada extends javax.swing.JInternalFrame {
                 IDPruebaEntrada = rs.getString(1);
             }
             
-        } catch (Exception ex) {
-            ex.printStackTrace();
-        }
-        
-        
-        for (int i = 0; i < filas; i++) {
-            for (int j = 0; j < columnas; j++) {
-                if (j == 3 || j == 5 || j == 7) {
-                    
-                }
-                else{
-                    int n = Integer.parseInt((String) tabla.getValueAt(0, 0));
-                    entidadDetalle.setIdPruebaEntrada(Integer.parseInt(IDPruebaEntrada));
-                    entidadDetalle.setIdDetallePruebaEntrada(n);
-                    entidadDetalle.setHabilidad((String) tabla.getValueAt(i, j+1));
-                    entidadDetalle.setCantNoAceptalbe(Integer.parseInt((String) tabla.getValueAt(i, j+2)));
-                    entidadDetalle.setCantSuficiente(Integer.parseInt((String) tabla.getValueAt(i, j+4)));
-                    entidadDetalle.setCantBueno(Integer.parseInt((String) tabla.getValueAt(i, j+6)));
-                }
-                negocioDetalle.AgregarDetallePruebaEntrada(entidadDetalle);
+            //3 5 7
+            for (int i = 0; i < filas; i++) {
+                entidadDetalle.setIdPruebaEntrada(Integer.parseInt(IDPruebaEntrada));
+                entidadDetalle.setIdDetallePruebaEntrada(Integer.parseInt((String) tabla.getValueAt(i, 0)));
+                entidadDetalle.setHabilidad((String) tabla.getValueAt(i, 1));
+                entidadDetalle.setCantNoAceptalbe(Integer.parseInt((String) tabla.getValueAt(i, 2)));
+                entidadDetalle.setCantSuficiente(Integer.parseInt((String) tabla.getValueAt(i, 4)));
+                entidadDetalle.setCantBueno(Integer.parseInt((String) tabla.getValueAt(i, 6)));
             }
-        }
-        
-        
+            negocioDetalle.AgregarDetallePruebaEntrada(entidadDetalle);
+            
+            JOptionPane.showMessageDialog(null, "Operacion Exitosa");
+
+
+            } catch (Exception ex) {
+                ex.printStackTrace();
+            }
         
     }//GEN-LAST:event_btnGuardarActionPerformed
 
