@@ -51,6 +51,7 @@ public class FrmInformePruebaEntrada extends javax.swing.JInternalFrame {
                  cmbCodigoCurso.addItem(rsDocente.getString(1));
                  cmbNombreCurso.addItem(rsDocente.getString(2));
             }
+            docente.conexion.close();
             
         } catch (Exception e) {
             e.printStackTrace();
@@ -89,7 +90,7 @@ public class FrmInformePruebaEntrada extends javax.swing.JInternalFrame {
                 
                 
             }
-            
+            docente.conexion.close();
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -456,7 +457,8 @@ public class FrmInformePruebaEntrada extends javax.swing.JInternalFrame {
             
             JOptionPane.showMessageDialog(null, "Operacion Exitosa");
 
-
+            negocioDetalle.conexion.close();
+            negocioPrueba.conexion.close();
             } catch (Exception ex) {
                 ex.printStackTrace();
             }

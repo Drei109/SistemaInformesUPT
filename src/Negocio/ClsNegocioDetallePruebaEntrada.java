@@ -16,7 +16,7 @@ import java.util.logging.Logger;
  */
 public class ClsNegocioDetallePruebaEntrada implements ClsInterfaceDetallePruebaEntrada {
 
-    private Connection conexion = new ClsConexion().getConnection();
+    public Connection conexion = new ClsConexion().getConnection();
     
     @Override
     public void AgregarDetallePruebaEntrada(ClsEntidadDetallePruebaEntrada DetallePruebaEntrada) {
