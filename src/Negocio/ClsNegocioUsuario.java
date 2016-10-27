@@ -21,11 +21,11 @@ public class ClsNegocioUsuario implements ClsInterfaceUsuario {
     /**
      *  @param conexion     "obtiene la Conexion con la BD"
      */
-    private Connection conexion = new ClsConexion().getConnection();
+    public Connection conexion = new ClsConexion().getConnection();
     
     @Override
     public ResultSet LoginUsuario(String usuario, String password) throws Exception {
-        
+        conexion = new ClsConexion().getConnection();
         ResultSet rs = null;
         try {
             CallableStatement cst = conexion.prepareCall("{call USP_Usuario_Login(?,?)}");
@@ -33,10 +33,12 @@ public class ClsNegocioUsuario implements ClsInterfaceUsuario {
             cst.setString("ppass_usu", password);
             
             rs = cst.executeQuery();
+//            conexion.close();
             return rs;
         } catch (SQLException ex) {
+            
             throw ex;
-        }
+        }        
     }
 
     @Override
@@ -48,8 +50,10 @@ public class ClsNegocioUsuario implements ClsInterfaceUsuario {
             cst.setString("pidCurso", idCurso);
             
             rs = cst.executeQuery();
+//            conexion.close();
             return rs;
         } catch (SQLException ex) {
+            
             throw ex;
         }
     }
@@ -62,8 +66,10 @@ public class ClsNegocioUsuario implements ClsInterfaceUsuario {
             cst.setString("pcodDocente", pcodDocente);
             
             rs = cst.executeQuery();
-            return rs;
+//            conexion.close();
+            return rs;            
         } catch (SQLException ex) {
+            
             throw ex;
         }
     }

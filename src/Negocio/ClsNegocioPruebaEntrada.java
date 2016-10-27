@@ -15,7 +15,7 @@ import Conexion.ClsConexion;
  */
 public class ClsNegocioPruebaEntrada implements ClsInterfacePruebaEntrada{
 
-    private Connection conexion = new ClsConexion().getConnection();
+    public Connection conexion = new ClsConexion().getConnection();
     
     @Override
     public void AgregarPruebaEntrada(ClsEntidadPruebaEntrada PruebaEntrada) {

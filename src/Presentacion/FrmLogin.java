@@ -166,9 +166,11 @@ public class FrmLogin extends javax.swing.JFrame {
                 existe = true;
                 break;
             }
+            usuario.conexion.close();
         } catch (Exception ex) {
             ex.printStackTrace();
         }
+        
     }//GEN-LAST:event_btnIngresarActionPerformed
 
     private void btnSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalirActionPerformed
