@@ -228,6 +228,11 @@ public class FrmInformePruebaEntrada extends javax.swing.JInternalFrame {
         });
 
         btnCerrar.setText("Cerrar");
+        btnCerrar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCerrarActionPerformed(evt);
+            }
+        });
 
         btnGuardar.setText("Guardar");
         btnGuardar.addActionListener(new java.awt.event.ActionListener() {
@@ -424,11 +429,11 @@ public class FrmInformePruebaEntrada extends javax.swing.JInternalFrame {
         
         
         //GUARDAR PRUEBA DE ENTRADA
-//        entidadPrueba.setIdPlanEstudio(Integer.parseInt(idPlanEstudios));
-//        entidadPrueba.setMedidasCorrectivas(txtComentario.getText());
-//        entidadPrueba.setEvaluados(Integer.parseInt(txtEvaluados.getText()));
+        entidadPrueba.setIdPlanEstudio(Integer.parseInt(idPlanEstudios));
+        entidadPrueba.setMedidasCorrectivas(txtComentario.getText());
+        entidadPrueba.setEvaluados(Integer.parseInt(txtEvaluados.getText()));
         
-//        negocioPrueba.AgregarPruebaEntrada(entidadPrueba);
+        negocioPrueba.AgregarPruebaEntrada(entidadPrueba);
         
         
         //GUARDAR DETALLE DE PRUEBA DE ENTRADA
@@ -458,6 +463,10 @@ public class FrmInformePruebaEntrada extends javax.swing.JInternalFrame {
             }
         
     }//GEN-LAST:event_btnGuardarActionPerformed
+
+    private void btnCerrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCerrarActionPerformed
+        this.dispose();
+    }//GEN-LAST:event_btnCerrarActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
