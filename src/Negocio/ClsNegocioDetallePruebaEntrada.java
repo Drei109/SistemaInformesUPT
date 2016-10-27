@@ -21,7 +21,7 @@ public class ClsNegocioDetallePruebaEntrada implements ClsInterfaceDetallePrueba
     @Override
     public void AgregarDetallePruebaEntrada(ClsEntidadDetallePruebaEntrada DetallePruebaEntrada) {
         try {
-            CallableStatement cst = conexion.prepareCall("{call USP_DetallePruebaEntrada_I(?,?,?,?,?)}"); 
+            CallableStatement cst = conexion.prepareCall("{call USP_DetallePruebaEntrada_I(?,?,?,?,?)}");
             cst.setString("pidPruebaEntrada", String.valueOf(DetallePruebaEntrada.getIdPruebaEntrada()));
             cst.setString("phabilidad", DetallePruebaEntrada.getHabilidad());
             cst.setString("pcantNoAceptalbe", String.valueOf(DetallePruebaEntrada.getCantNoAceptalbe()));
