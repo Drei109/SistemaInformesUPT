@@ -91,6 +91,7 @@ public class FrmInformePruebaEntrada extends javax.swing.JInternalFrame {
                 
                 
             }
+            rsDocente.close();
             docente.conexion.close();
         } catch (Exception e) {
             e.printStackTrace();
