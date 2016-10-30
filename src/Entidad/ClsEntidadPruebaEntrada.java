@@ -9,7 +9,7 @@ public class ClsEntidadPruebaEntrada {
 
     //Atributos
     private int idPruebaEntrada; //AUTO INCREMENT
-    private int idPlanEstudio;
+    private int idCargaAcademica;
     private String fechaPruebaEntrada;
     private int evaluados;
     private String estado;
@@ -32,12 +32,12 @@ public class ClsEntidadPruebaEntrada {
         this.idPruebaEntrada = idPruebaEntrada;
     }
 
-    public int getIdPlanEstudio() {
-        return idPlanEstudio;
+    public int getIdCargaAcademica() {
+        return idCargaAcademica;
     }
 
-    public void setIdPlanEstudio(int idPlanEstudio) {
-        this.idPlanEstudio = idPlanEstudio;
+    public void setIdCargaAcademica(int idCargaAcademica) {
+        this.idCargaAcademica = idCargaAcademica;
     }
 
     
