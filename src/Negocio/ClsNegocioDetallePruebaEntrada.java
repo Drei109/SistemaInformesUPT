@@ -21,12 +21,13 @@ public class ClsNegocioDetallePruebaEntrada implements ClsInterfaceDetallePrueba
     @Override
     public void AgregarDetallePruebaEntrada(ClsEntidadDetallePruebaEntrada DetallePruebaEntrada) {
         try {
-            CallableStatement cst = conexion.prepareCall("{call USP_DetallePruebaEntrada_I(?,?,?,?,?)}");
+            CallableStatement cst = conexion.prepareCall("{call USP_DetallePruebaEntrada_I(?,?,?,?,?,?)}");
             cst.setString("pidPruebaEntrada", String.valueOf(DetallePruebaEntrada.getIdPruebaEntrada()));
             cst.setString("phabilidad", DetallePruebaEntrada.getHabilidad());
             cst.setString("pcantNoAceptalbe", String.valueOf(DetallePruebaEntrada.getCantNoAceptalbe()));
             cst.setString("pcantSuficiente", String.valueOf(DetallePruebaEntrada.getCantSuficiente()));
             cst.setString("pcantBueno", String.valueOf(DetallePruebaEntrada.getCantBueno()));
+            cst.setString("pmedidasCorrectivas", DetallePruebaEntrada.getMedidasCorrectivas());
             cst.execute();
         } catch (SQLException ex) {
             ex.printStackTrace();
@@ -36,13 +37,14 @@ public class ClsNegocioDetallePruebaEntrada implements ClsInterfaceDetallePrueba
     @Override
     public void ModificarDetallePruebaEntrada(String codigoDetalle, String codigoPrueba, ClsEntidadDetallePruebaEntrada DetallePruebaEntrada) {
         try {
-            CallableStatement cst = conexion.prepareCall("{call USP_DetallePruebaEntrada_U(?,?,?,?,?,?)}");
+            CallableStatement cst = conexion.prepareCall("{call USP_DetallePruebaEntrada_U(?,?,?,?,?,?,?)}");
             cst.setString("pidDetallePruebaEntrada",codigoDetalle); 
             cst.setString("pidPruebaEntrada", codigoPrueba);
             cst.setString("phabilidad", DetallePruebaEntrada.getHabilidad());
             cst.setString("pcantNoAceptalbe", String.valueOf(DetallePruebaEntrada.getCantNoAceptalbe()));
             cst.setString("pcantSuficiente", String.valueOf(DetallePruebaEntrada.getCantSuficiente()));
             cst.setString("pcantBueno", String.valueOf(DetallePruebaEntrada.getCantBueno()));
+            cst.setString("pmedidasCorrectivas", DetallePruebaEntrada.getMedidasCorrectivas());
             cst.execute();
         } catch (SQLException ex) {
             ex.printStackTrace();
