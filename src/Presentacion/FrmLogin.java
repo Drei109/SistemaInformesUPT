@@ -166,6 +166,7 @@ public class FrmLogin extends javax.swing.JFrame {
                 existe = true;
                 break;
             }
+            rs.close();
             usuario.conexion.close();
         } catch (Exception ex) {
             ex.printStackTrace();
