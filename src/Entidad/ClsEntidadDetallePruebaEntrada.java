@@ -13,6 +13,15 @@ public class ClsEntidadDetallePruebaEntrada {
     private int cantNoAceptalbe;// SMALLINT(6) NULL DEFAULT NULL,
     private int cantSuficiente;// SMALLINT(6) NULL DEFAULT NULL,
     private int cantBueno;// SMALLINT(6) NULL DEFAULT NULL,
+    private String medidasCorrectivas;
+
+    public String getMedidasCorrectivas() {
+        return medidasCorrectivas;
+    }
+
+    public void setMedidasCorrectivas(String medidasCorrectivas) {
+        this.medidasCorrectivas = medidasCorrectivas;
+    }
     
     //GET y SET
     public int getIdDetallePruebaEntrada() {

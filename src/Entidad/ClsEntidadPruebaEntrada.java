@@ -10,9 +10,17 @@ public class ClsEntidadPruebaEntrada {
     //Atributos
     private int idPruebaEntrada; //AUTO INCREMENT
     private int idPlanEstudio;
-    private String medidasCorrectivas;
     private String fechaPruebaEntrada;
     private int evaluados;
+    private String estado;
+
+    public String getEstado() {
+        return estado;
+    }
+
+    public void setEstado(String estado) {
+        this.estado = estado;
+    }
     
     
     //GET Y SETTER
@@ -32,13 +40,7 @@ public class ClsEntidadPruebaEntrada {
         this.idPlanEstudio = idPlanEstudio;
     }
 
-    public String getMedidasCorrectivas() {
-        return medidasCorrectivas;
-    }
-
-    public void setMedidasCorrectivas(String medidasCorrectivas) {
-        this.medidasCorrectivas = medidasCorrectivas;
-    }
+    
 
     public String getFechaPruebaEntrada() {
         return fechaPruebaEntrada;
