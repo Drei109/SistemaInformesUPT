@@ -64,11 +64,11 @@ public class ClsNegocioDetallePruebaEntrada implements ClsInterfaceDetallePrueba
     }
 
     @Override
-    public ResultSet ObtenerIdPruebaEntrada(String codigoPlanEstudio) throws Exception {
+    public ResultSet ObtenerIdPruebaEntrada(String idCargaAcademica) throws Exception {
         ResultSet rs = null;
         try {
             CallableStatement cst = conexion.prepareCall("{call USP_IdPruebaEntrada(?)}");
-            cst.setString("pidPlanEstudio", codigoPlanEstudio);
+            cst.setString("pidCargaAcademica", idCargaAcademica);
             
             rs = cst.executeQuery();
             return rs;
