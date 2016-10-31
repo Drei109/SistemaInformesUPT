@@ -21,9 +21,9 @@ public class ClsNegocioPruebaEntrada implements ClsInterfacePruebaEntrada{
     public void AgregarPruebaEntrada(ClsEntidadPruebaEntrada PruebaEntrada) {
         try {
             CallableStatement cst = conexion.prepareCall("{call USP_PruebaEntrada_I(?,?,?)}");
-            cst.setString("pidPlanEstudio", String.valueOf(PruebaEntrada.getIdCargaAcademica())); 
-            cst.setString("pestadoPruebaEntrada", PruebaEntrada.getEstado());
+            cst.setString("pidCargaAcademica", String.valueOf(PruebaEntrada.getIdCargaAcademica())); 
             cst.setString("pevaluados", String.valueOf(PruebaEntrada.getEvaluados()));
+            cst.setString("pestadoPruebaEntrada", PruebaEntrada.getEstado());
             cst.execute();
         } catch (SQLException ex) {
             ex.printStackTrace();
@@ -35,7 +35,7 @@ public class ClsNegocioPruebaEntrada implements ClsInterfacePruebaEntrada{
         try {
             CallableStatement cst = conexion.prepareCall("{call USP_PruebaEntrada_U(?,?,?,?)}");
             cst.setString("pidPruebaEntrada", String.valueOf(PruebaEntrada.getIdPruebaEntrada())); 
-            cst.setString("pidPlanEstudio",  String.valueOf(PruebaEntrada.getIdCargaAcademica()));
+            cst.setString("pidCargaAcademica",  String.valueOf(PruebaEntrada.getIdCargaAcademica()));
             cst.setString("pestadoPruebaEntrada", PruebaEntrada.getEstado());
             cst.setString("pevaluados",  String.valueOf(PruebaEntrada.getEvaluados()));
             cst.execute();

@@ -40,8 +40,6 @@ public class ClsEntidadPruebaEntrada {
         this.idCargaAcademica = idCargaAcademica;
     }
 
-    
-
     public String getFechaPruebaEntrada() {
         return fechaPruebaEntrada;
     }
