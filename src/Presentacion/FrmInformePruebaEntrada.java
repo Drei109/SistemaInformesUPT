@@ -494,6 +494,7 @@ public class FrmInformePruebaEntrada extends javax.swing.JInternalFrame {
                 entidadDetalle.setCantNoAceptalbe(Integer.parseInt((String) tabla.getValueAt(i, 2)));
                 entidadDetalle.setCantSuficiente(Integer.parseInt((String) tabla.getValueAt(i, 4)));
                 entidadDetalle.setCantBueno(Integer.parseInt((String) tabla.getValueAt(i, 6)));
+                entidadDetalle.setMedidasCorrectivas(txtComentario.getText());
                 negocioDetalle.AgregarDetallePruebaEntrada(entidadDetalle);
             }
             
