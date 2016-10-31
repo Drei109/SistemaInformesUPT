@@ -17,11 +17,12 @@ import java.util.logging.Logger;
 public class ClsNegocioDetallePruebaEntrada implements ClsInterfaceDetallePruebaEntrada {
 
     public Connection conexion = new ClsConexion().getConnection();
+    public CallableStatement  cst = null;
     
     @Override
     public void AgregarDetallePruebaEntrada(ClsEntidadDetallePruebaEntrada DetallePruebaEntrada) {
         try {
-            CallableStatement cst = conexion.prepareCall("{call USP_DetallePruebaEntrada_I(?,?,?,?,?,?)}");
+            cst = conexion.prepareCall("{call USP_DetallePruebaEntrada_I(?,?,?,?,?,?)}");
             cst.setString("pidPruebaEntrada", String.valueOf(DetallePruebaEntrada.getIdPruebaEntrada()));
             cst.setString("phabilidad", DetallePruebaEntrada.getHabilidad());
             cst.setString("pcantNoAceptalbe", String.valueOf(DetallePruebaEntrada.getCantNoAceptalbe()));
@@ -37,7 +38,7 @@ public class ClsNegocioDetallePruebaEntrada implements ClsInterfaceDetallePrueba
     @Override
     public void ModificarDetallePruebaEntrada(String codigoDetalle, String codigoPrueba, ClsEntidadDetallePruebaEntrada DetallePruebaEntrada) {
         try {
-            CallableStatement cst = conexion.prepareCall("{call USP_DetallePruebaEntrada_U(?,?,?,?,?,?,?)}");
+            cst = conexion.prepareCall("{call USP_DetallePruebaEntrada_U(?,?,?,?,?,?,?)}");
             cst.setString("pidDetallePruebaEntrada",codigoDetalle); 
             cst.setString("pidPruebaEntrada", codigoPrueba);
             cst.setString("phabilidad", DetallePruebaEntrada.getHabilidad());
@@ -54,7 +55,7 @@ public class ClsNegocioDetallePruebaEntrada implements ClsInterfaceDetallePrueba
     @Override
     public void EliminarDetallePruebaEntrada(String codigo) {
         try {
-            CallableStatement cst = conexion.prepareCall("{call USP_DetallaPruebaEntrada_D(?)}");
+            cst = conexion.prepareCall("{call USP_DetallaPruebaEntrada_D(?)}");
             cst.setString("pidDetallePruebaEntrada",codigo);
             
             cst.execute();
@@ -67,7 +68,7 @@ public class ClsNegocioDetallePruebaEntrada implements ClsInterfaceDetallePrueba
     public ResultSet ObtenerIdPruebaEntrada(String idCargaAcademica) throws Exception {
         ResultSet rs = null;
         try {
-            CallableStatement cst = conexion.prepareCall("{call USP_IdPruebaEntrada(?)}");
+            cst = conexion.prepareCall("{call USP_IdPruebaEntrada(?)}");
             cst.setString("pidCargaAcademica", idCargaAcademica);
             
             rs = cst.executeQuery();

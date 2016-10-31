@@ -51,6 +51,7 @@ public class FrmInformePruebaEntrada extends javax.swing.JInternalFrame {
                  cmbCodigoCurso.addItem(rsDocente.getString(1));
                  cmbNombreCurso.addItem(rsDocente.getString(2));
             }
+            rsDocente.close();            
             docente.conexion.close();
             
         } catch (Exception e) {
@@ -457,7 +458,7 @@ public class FrmInformePruebaEntrada extends javax.swing.JInternalFrame {
          * @param entidadPrueba     Objeto          "Instancia para Entidad de Prueba de Entrada"
          * 
          */
-        ClsNegocioDetallePruebaEntrada negocioDetalle = new ClsNegocioDetallePruebaEntrada();
+        
         ClsEntidadDetallePruebaEntrada entidadDetalle = new ClsEntidadDetallePruebaEntrada();
         
         ClsNegocioPruebaEntrada negocioPrueba = new ClsNegocioPruebaEntrada();
@@ -476,8 +477,11 @@ public class FrmInformePruebaEntrada extends javax.swing.JInternalFrame {
             entidadPrueba.setEvaluados(Integer.parseInt(txtEvaluados.getText()));
 
             negocioPrueba.AgregarPruebaEntrada(entidadPrueba);
+            negocioPrueba.cst.close();
+            negocioPrueba.conexion.close();
             
             //GUARDAR DETALLE DE PRUEBA DE ENTRADA
+            ClsNegocioDetallePruebaEntrada negocioDetalle = new ClsNegocioDetallePruebaEntrada();
             ResultSet rs = negocioDetalle.ObtenerIdPruebaEntrada(idPlanEstudios);
             while (rs.next()) {
                 IDPruebaEntrada = rs.getString(1);
@@ -494,9 +498,9 @@ public class FrmInformePruebaEntrada extends javax.swing.JInternalFrame {
             }
             
         JOptionPane.showMessageDialog(null, "Operacion Exitosa");
-
+        
         negocioDetalle.conexion.close();
-        negocioPrueba.conexion.close();
+        
         } catch (Exception ex) {
             ex.printStackTrace();
         }
