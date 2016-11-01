@@ -25,7 +25,6 @@ public class ClsNegocioUsuario implements ClsInterfaceUsuario {
     
     @Override
     public ResultSet LoginUsuario(String usuario, String password) throws Exception {
-        conexion = new ClsConexion().getConnection();
         ResultSet rs = null;
         try {
             CallableStatement cst = conexion.prepareCall("{call USP_Usuario_Login(?,?)}");

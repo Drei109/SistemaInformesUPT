@@ -3,11 +3,15 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/D:/GitHub/SistemaInformesUPT/src/Negocio/ClsNegocioPruebaEntrada.java</file>
-            <file>file:/D:/GitHub/SistemaInformesUPT/src/Presentacion/FrmPrinicipal.java</file>
-            <file>file:/D:/GitHub/SistemaInformesUPT/src/Interface/ClsInterfacePruebaEntrada.java</file>
-            <file>file:/D:/GitHub/SistemaInformesUPT/src/Presentacion/FrmReportesFaltantes.java</file>
-            <file>file:/D:/GitHub/SistemaInformesUPT/src/Negocio/ClsNegocioDetallePruebaEntrada.java</file>
+            <file>file:/C:/Users/Drei/Documents/NetBeansProjects/Proyecto-Final-Aguirre-Catalan/src/Conexion/ClsConexion.java</file>
+            <file>file:/C:/Users/Drei/Documents/NetBeansProjects/Proyecto-Final-Aguirre-Catalan/src/Presentacion/FrmConsultaPruebaEntrada.java</file>
+            <file>file:/C:/Users/Drei/Documents/NetBeansProjects/Proyecto-Final-Aguirre-Catalan/src/Interface/ClsInterfaceUsuario.java</file>
+            <file>file:/C:/Users/Drei/Documents/NetBeansProjects/Proyecto-Final-Aguirre-Catalan/src/Interface/ClsInterfacePruebaEntrada.java</file>
+            <file>file:/C:/Users/Drei/Documents/NetBeansProjects/Proyecto-Final-Aguirre-Catalan/src/Presentacion/FrmInformePruebaEntrada.java</file>
+            <file>file:/C:/Users/Drei/Documents/NetBeansProjects/Proyecto-Final-Aguirre-Catalan/src/Presentacion/FrmPrinicipal.java</file>
+            <file>file:/C:/Users/Drei/Documents/NetBeansProjects/Proyecto-Final-Aguirre-Catalan/src/Interface/ClsInterfaceDetallePruebaEntrada.java</file>
+            <file>file:/C:/Users/Drei/Documents/NetBeansProjects/Proyecto-Final-Aguirre-Catalan/src/Presentacion/FrmLogin.java</file>
+            <file>file:/C:/Users/Drei/Documents/NetBeansProjects/Proyecto-Final-Aguirre-Catalan/src/Negocio/ClsNegocioPruebaEntrada.java</file>
         </group>
     </open-files>
 </project-private>

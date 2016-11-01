@@ -142,6 +142,8 @@ public class FrmLogin extends javax.swing.JFrame {
                         principal.setVisible(true);
                         principal.show();
                         principal.codigoDocente = usu;
+//                        rs.close();
+//                        usuario.conexion.close();
                         this.dispose();
                         
                         
@@ -168,8 +170,7 @@ public class FrmLogin extends javax.swing.JFrame {
             }
             rs.close();
             usuario.conexion.close();
-        } catch (Exception ex) {
-            ex.printStackTrace();
+        } catch (Exception ex) {            
         }
         
     }//GEN-LAST:event_btnIngresarActionPerformed
