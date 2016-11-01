@@ -17,6 +17,7 @@ public class FrmLogin extends javax.swing.JFrame {
     String usu,pass;
     static ResultSet rs = null;
     public String codDocente;
+    public String nivelUsuario;
     
     public FrmLogin() {
         initComponents();
@@ -138,6 +139,7 @@ public class FrmLogin extends javax.swing.JFrame {
                         
                         FrmPrinicipal principal = new FrmPrinicipal();
                         principal.setExtendedState(JFrame.MAXIMIZED_BOTH); 
+                        principal.nivelUsuario= rs.getString(4);
 //                        principal.setUndecorated(true);
                         principal.setVisible(true);
                         principal.show();

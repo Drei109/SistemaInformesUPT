@@ -18,10 +18,14 @@ public class FrmConsultaPruebaEntrada extends javax.swing.JInternalFrame {
 
     static ResultSet rs = null;
     DefaultTableModel dtm = new DefaultTableModel();
+    String nivelUsuario = "";
+    String codDocente = "";
     
-    public FrmConsultaPruebaEntrada() {
+    public FrmConsultaPruebaEntrada(String nivelUsuario,String codDocente) {
         initComponents();
-        definirTituloTabla();
+        this.codDocente = codDocente;
+        this.nivelUsuario = nivelUsuario;
+        definirTituloTabla(nivelUsuario);
     }
 
     /**
@@ -141,21 +145,59 @@ public class FrmConsultaPruebaEntrada extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_btnSalirActionPerformed
 
     private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
+        buscarPruebaEntrada(nivelUsuario,codDocente);        
+    }//GEN-LAST:event_btnBuscarActionPerformed
+
+    private void buscarPruebaEntrada(String nivelUsuario,String codDocente){
         ClsNegocioPruebaEntrada negPruebaEntrada = new ClsNegocioPruebaEntrada();
         
         String criterio = cmbCriterio.getSelectedItem().toString();
 //        JOptionPane.showMessageDialog(null, criterio);
         String busqueda = txtBuscar.getText();
-                
-        try {
+             
+        switch(nivelUsuario){
+        case "Usuario":
+            try {
+            rs  =negPruebaEntrada.ConsultaAvanzaPruebaEntradaUsuario(criterio, busqueda,codDocente);
+
+            boolean encuentra = false;
+            String Campo[] = new String[4];
+            int fila;
+            fila = dtm.getRowCount();
+            if (fila > 0) {
+                for (int i = 0; i < fila; i++) {
+                    dtm.removeRow(0);
+                }
+            }
+            while (rs.next()) {
+                Campo[0] = (String) rs.getString(1); 
+                Campo[1] = (String) rs.getString(2); 
+                Campo[2] = (String) rs.getString(3); 
+                Campo[3] = (String) rs.getString(4); 
+
+                dtm.addRow(Campo);
+                encuentra = true;
+            }
+
+            if (encuentra == false) {
+                JOptionPane.showMessageDialog(null,"No se encuentra.");
+            }
+            rs.close();
+            negPruebaEntrada.conexion.close();
+            } catch (Exception ex) {
+            }
+            break;
+        case "Supervisor":            
+        case "Administrador":
+            try {
             rs  =negPruebaEntrada.ConsultaAvanzaPruebaEntrada(criterio, busqueda);
-            
+
             boolean encuentra = false;
             String Campo[] = new String[7];
             int fila;
             fila = dtm.getRowCount();
             if (fila > 0) {
-                for (int i = 0; i < 10; i++) {
+                for (int i = 0; i < fila; i++) {
                     dtm.removeRow(0);
                 }
             }
@@ -177,15 +219,29 @@ public class FrmConsultaPruebaEntrada extends javax.swing.JInternalFrame {
             }
             rs.close();
             negPruebaEntrada.conexion.close();
-        } catch (Exception ex) {
+            } catch (Exception ex) {
+            }
+        }       
+        
+    }
+    
+    private void definirTituloTabla(String nivelUsuario) {
+        
+        switch(nivelUsuario){
+        case "Usuario":
+            String titulosUsuario[] = {"ID","Cod Curso","Curso","Fecha"};
+            dtm.setColumnIdentifiers(titulosUsuario);
+            tblBuscar.setModel(dtm);
+            break;
+        case "Supervisor":
+        case "Administrador":
+            String titulosAdministrador[] = {"ID","Cod Docente","Nombre","Semestre","Cod Curso","Curso","Fecha"};
+            dtm.setColumnIdentifiers(titulosAdministrador);
+            tblBuscar.setModel(dtm);
+            break;
         }
         
-    }//GEN-LAST:event_btnBuscarActionPerformed
-
-    private void definirTituloTabla() {
-        String titulos[] = {"ID","Cod Docente","Nombre","Semestre","Cod Curso","Curso","Fecha"};
-        dtm.setColumnIdentifiers(titulos);
-        tblBuscar.setModel(dtm);
+        
     }
     
 

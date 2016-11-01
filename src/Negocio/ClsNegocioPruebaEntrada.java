@@ -83,5 +83,20 @@ public class ClsNegocioPruebaEntrada implements ClsInterfacePruebaEntrada{
             throw ex;
         }
     }
+
+    @Override
+    public ResultSet ConsultaAvanzaPruebaEntradaUsuario(String criterio, String busqueda, String codDocente) throws Exception {
+        ResultSet rs = null;
+        try {
+            cst = conexion.prepareCall("{call USP_BusquedaAvanzadaPruebaEntradaUsuario(?,?,?)}");
+            cst.setString("pcriterio", criterio);
+            cst.setString("pbusqueda", busqueda);
+            cst.setString("pcodDocente", codDocente);
+             rs = cst.executeQuery();
+            return rs;
+        } catch (SQLException ex) {
+            throw ex;
+        }
+    }
     
 }
