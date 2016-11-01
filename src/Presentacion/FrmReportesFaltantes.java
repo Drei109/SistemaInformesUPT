@@ -3,8 +3,12 @@ package Presentacion;
 import Entidad.ClsEntidadPruebaCursosFaltantes;
 import Entidad.ClsEntidadPruebaEntrada;
 import Negocio.ClsNegocioPruebaEntrada;
+import java.sql.Array;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
@@ -16,10 +20,12 @@ public class FrmReportesFaltantes extends javax.swing.JInternalFrame {
 
     public String codDocente;
     public String reporteAbierto;
+    public ArrayList<ClsNegocioPruebaEntrada> dato = null;
     
     public FrmReportesFaltantes() {
         initComponents();
     }
+    
 
     
     @SuppressWarnings("unchecked")
@@ -28,7 +34,7 @@ public class FrmReportesFaltantes extends javax.swing.JInternalFrame {
 
         jLabel1 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        tabla = new javax.swing.JTable();
+        tablaF = new javax.swing.JTable();
         jLabel2 = new javax.swing.JLabel();
         btnTerminar = new javax.swing.JButton();
 
@@ -54,7 +60,7 @@ public class FrmReportesFaltantes extends javax.swing.JInternalFrame {
         jLabel1.setForeground(new java.awt.Color(47, 119, 236));
         jLabel1.setText("Reportes Restantes");
 
-        tabla.setModel(new javax.swing.table.DefaultTableModel(
+        tablaF.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -65,12 +71,17 @@ public class FrmReportesFaltantes extends javax.swing.JInternalFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
-        jScrollPane1.setViewportView(tabla);
+        jScrollPane1.setViewportView(tablaF);
 
         jLabel2.setForeground(new java.awt.Color(47, 119, 236));
         jLabel2.setText("Lista de tus Reportes:");
 
         btnTerminar.setText("Terminar");
+        btnTerminar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnTerminarActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -105,43 +116,87 @@ public class FrmReportesFaltantes extends javax.swing.JInternalFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void cargarTabla(){
-        DefaultTableModel modelo = new DefaultTableModel(null,new Object[]{"Id Curso", "Nombre del Curso","Nombre del Docente"});
-        tabla.setModel(modelo);
-    }
     
     private void formInternalFrameOpened(javax.swing.event.InternalFrameEvent evt) {//GEN-FIRST:event_formInternalFrameOpened
-        cargarTabla();
         listarTabla();
     }//GEN-LAST:event_formInternalFrameOpened
 
+    private void btnTerminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTerminarActionPerformed
+        seleccionarTabla();
+    }//GEN-LAST:event_btnTerminarActionPerformed
+    
     void listarTabla(){
         String titulos[] = {"Id Curso",
                             "Nombre del Curso",
                             "Nombre del Docente"};
         
-        ClsNegocioPruebaEntrada datos = new ClsNegocioPruebaEntrada();
-        ArrayList<ClsNegocioPruebaEntrada> dato = datos.hacerInformePruebaFaltante(codDocente);
-        
-        Iterator iterator = dato.iterator();
-        
-        DefaultTableModel modeloTabla = new DefaultTableModel(null, titulos);
-        
-        String campo[] = new String[3];
-        
-        while (iterator.hasNext()) {
-            ClsEntidadPruebaCursosFaltantes objenti = new ClsEntidadPruebaCursosFaltantes();
+        try {
+            ClsNegocioPruebaEntrada datos = new ClsNegocioPruebaEntrada();
+            dato = datos.hacerInformePruebaFaltante(codDocente);//ArrayList
+
+            Iterator iterator = dato.iterator();
+
+            DefaultTableModel modeloTabla = new DefaultTableModel(null, titulos);
+
+            String campo[] = new String[3];
+
+            while (iterator.hasNext()) {
+                ClsEntidadPruebaCursosFaltantes objenti = new ClsEntidadPruebaCursosFaltantes();
+
+                objenti = (ClsEntidadPruebaCursosFaltantes) iterator.next();
+
+                campo[0] = objenti.getIdCurso();
+                campo[1] = objenti.getNombreCurso();
+                campo[2] = objenti.getNombreDocente();
+
+                modeloTabla.addRow(campo);
+            }
+            tablaF.setModel(modeloTabla);
+
+            datos.conexion.close();
             
-            objenti = (ClsEntidadPruebaCursosFaltantes) iterator.next();
-            
-            campo[0] = objenti.getIdCurso();
-            campo[1] = objenti.getNombreCurso();
-            campo[2] = objenti.getNombreDocente();
-            
-            modeloTabla.addRow(campo);
+        } catch (Exception e) {
+            e.printStackTrace();
         }
-        tabla.setModel(modeloTabla);
+        
     }
+    
+    void seleccionarTabla(){
+        String campo[] = new String[9];
+        try {
+            Iterator iterator = dato.iterator();
+
+            int filaS = tablaF.getSelectedRow();
+
+            while (iterator.hasNext()) {
+                ClsEntidadPruebaCursosFaltantes objenti = new ClsEntidadPruebaCursosFaltantes();
+
+                objenti = (ClsEntidadPruebaCursosFaltantes) iterator.next();
+                
+                if (tablaF.getValueAt(filaS, 0) == objenti.getIdCurso()) {
+                    campo[0] = objenti.getIdCurso();
+                    campo[1] = objenti.getNombreCurso();
+                    campo[2] = String.valueOf(objenti.getHorasTeoricas());
+                    campo[3] = String.valueOf(objenti.getHoraPracticas());
+                    campo[4] = String.valueOf(objenti.getAlumnosMatriculados());
+                    campo[5] = String.valueOf(objenti.getAlumnosRetirados());
+                    campo[6] = String.valueOf(objenti.getAlumnosAbandono());
+                    campo[7] = String.valueOf(objenti.getCodigoDocente());
+                    campo[8] = String.valueOf(objenti.getNombreDocente());
+                    break;
+                }
+                
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        
+        FrmInformePruebaEntrada info = new FrmInformePruebaEntrada(campo);
+        FrmPrinicipal.escritorio.add(info);
+        info.setVisible(true);
+    }
+    
     
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -149,6 +204,6 @@ public class FrmReportesFaltantes extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable tabla;
+    public static javax.swing.JTable tablaF;
     // End of variables declaration//GEN-END:variables
 }

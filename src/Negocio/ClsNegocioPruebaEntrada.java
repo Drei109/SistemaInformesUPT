@@ -18,6 +18,7 @@ public class ClsNegocioPruebaEntrada implements ClsInterfacePruebaEntrada{
 
     public Connection conexion = new ClsConexion().getConnection();
     public CallableStatement cst = null;
+    public ResultSet rs = null;
     
     @Override
     public void AgregarPruebaEntrada(ClsEntidadPruebaEntrada PruebaEntrada) {
@@ -59,12 +60,11 @@ public class ClsNegocioPruebaEntrada implements ClsInterfacePruebaEntrada{
 
     @Override
     public ResultSet ConsultaAvanzaPruebaEntrada(String criterio, String busqueda) throws Exception {
-        ResultSet rs = null;
         try {
             cst = conexion.prepareCall("{call USP_BusquedaAvanzadaPruebaEntrada(?,?)}");
             cst.setString("pcriterio", criterio);
             cst.setString("pbusqueda", busqueda);
-             rs = cst.executeQuery();
+            rs = cst.executeQuery();
             return rs;
         } catch (SQLException ex) {
             throw ex;
@@ -79,7 +79,7 @@ public class ClsNegocioPruebaEntrada implements ClsInterfacePruebaEntrada{
         try {
             CallableStatement cst = conexion.prepareCall("{call USP_FaltaInforme(?)}");
             cst.setString("pcodDocente", codDocente);
-            ResultSet rs = cst.executeQuery();
+            rs = cst.executeQuery();
             
             while (rs.next()) {
                 ClsEntidadPruebaCursosFaltantes pru = new ClsEntidadPruebaCursosFaltantes();

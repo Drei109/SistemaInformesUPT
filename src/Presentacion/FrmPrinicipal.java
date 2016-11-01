@@ -202,7 +202,7 @@ public class FrmPrinicipal extends javax.swing.JFrame {
     private javax.swing.JMenuItem edicionFinalCurso;
     private javax.swing.JMenuItem edicionPortafolio;
     private javax.swing.JMenuItem edicionPruebaEntrada;
-    private javax.swing.JDesktopPane escritorio;
+    public static javax.swing.JDesktopPane escritorio;
     private javax.swing.JMenuItem informeFinalCurso;
     private javax.swing.JMenuItem informePortafolio;
     private javax.swing.JMenuItem informePruebaEntrada;
