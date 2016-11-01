@@ -175,6 +175,7 @@ public class FrmConsultaPruebaEntrada extends javax.swing.JInternalFrame {
             if (encuentra == false) {
                 JOptionPane.showMessageDialog(null,"No se encuentra.");
             }
+            rs.close();
             negPruebaEntrada.conexion.close();
         } catch (Exception ex) {
         }

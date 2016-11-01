@@ -18,6 +18,7 @@ public class ClsConexion {
            
            ds.setServerName("us-cdbr-azure-southcentral-f.cloudapp.net"); //ip,nombre,domino
            ds.setPort(3306);
+//           ds.setConnectTimeout(250);
            ds.setDatabaseName("sistemasupt");
            cnxmysql = ds.getConnection("b2fe0e0d9cd109","d27f4f27");          
            
