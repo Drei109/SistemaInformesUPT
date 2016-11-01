@@ -25,7 +25,7 @@
           <SubComponents>
             <MenuItem class="javax.swing.JMenuItem" name="informePruebaEntrada">
               <Properties>
-                <Property name="text" type="java.lang.String" value="Informe prueba de entrada"/>
+                <Property name="text" type="java.lang.String" value="Prueba de Entrada Restantes"/>
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="informePruebaEntradaActionPerformed"/>
@@ -33,7 +33,7 @@
             </MenuItem>
             <MenuItem class="javax.swing.JMenuItem" name="informeFinalCurso">
               <Properties>
-                <Property name="text" type="java.lang.String" value="Informe final de curso"/>
+                <Property name="text" type="java.lang.String" value="Informe final de curso Restantes"/>
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="informeFinalCursoActionPerformed"/>
@@ -41,7 +41,7 @@
             </MenuItem>
             <MenuItem class="javax.swing.JMenuItem" name="informePortafolio">
               <Properties>
-                <Property name="text" type="java.lang.String" value="Informe portafolio"/>
+                <Property name="text" type="java.lang.String" value="Informe portafolio Restantes"/>
               </Properties>
             </MenuItem>
           </SubComponents>

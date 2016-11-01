@@ -57,7 +57,7 @@ public class FrmPrinicipal extends javax.swing.JFrame {
 
         mnuInformes.setText("Informes");
 
-        informePruebaEntrada.setText("Informe prueba de entrada");
+        informePruebaEntrada.setText("Prueba de Entrada Restantes");
         informePruebaEntrada.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 informePruebaEntradaActionPerformed(evt);
@@ -65,7 +65,7 @@ public class FrmPrinicipal extends javax.swing.JFrame {
         });
         mnuInformes.add(informePruebaEntrada);
 
-        informeFinalCurso.setText("Informe final de curso");
+        informeFinalCurso.setText("Informe final de curso Restantes");
         informeFinalCurso.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 informeFinalCursoActionPerformed(evt);
@@ -73,7 +73,7 @@ public class FrmPrinicipal extends javax.swing.JFrame {
         });
         mnuInformes.add(informeFinalCurso);
 
-        informePortafolio.setText("Informe portafolio");
+        informePortafolio.setText("Informe portafolio Restantes");
         mnuInformes.add(informePortafolio);
 
         jMenuBar1.add(mnuInformes);
@@ -138,11 +138,11 @@ public class FrmPrinicipal extends javax.swing.JFrame {
     }//GEN-LAST:event_informeFinalCursoActionPerformed
 
     private void informePruebaEntradaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_informePruebaEntradaActionPerformed
-        FrmInformePruebaEntrada informePrueabaEntrada = new FrmInformePruebaEntrada();
-        informePrueabaEntrada.cDocente = codigoDocente;
-        escritorio.add(informePrueabaEntrada);
-        informePrueabaEntrada.setVisible(true);
-        
+          FrmReportesFaltantes reporteFaltante = new FrmReportesFaltantes();
+          reporteFaltante.codDocente = codigoDocente;
+          reporteFaltante.reporteAbierto = "Entrada";
+          escritorio.add(reporteFaltante);
+          reporteFaltante.setVisible(true);
     }//GEN-LAST:event_informePruebaEntradaActionPerformed
 
     /**

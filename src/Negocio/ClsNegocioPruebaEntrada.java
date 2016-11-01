@@ -56,6 +56,18 @@ public class ClsNegocioPruebaEntrada implements ClsInterfacePruebaEntrada{
         }
     }
 
-    
-    
+    @Override
+    public ResultSet hacerInformePruebaFaltante(String codDocente) throws Exception {
+        ResultSet rs = null;
+        try {
+            cst = conexion.prepareCall("{call USP_FaltaInforme(?)}");
+            cst.setString("pcodDocente", codDocente);
+            
+            rs = cst.executeQuery();
+            return rs;
+        } catch (SQLException ex) {
+            throw ex;
+        }
+    }
+
 }
