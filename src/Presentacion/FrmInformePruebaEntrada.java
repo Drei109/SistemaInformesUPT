@@ -3,6 +3,7 @@ package Presentacion;
 import javax.swing.table.DefaultTableModel;
 import Conexion.ClsConexion;
 import Entidad.ClsEntidadDetallePruebaEntrada;
+import Entidad.ClsEntidadPruebaCursosFaltantes;
 import Entidad.ClsEntidadPruebaEntrada;
 
 import Negocio.ClsNegocioDetallePruebaEntrada;
@@ -13,7 +14,9 @@ import java.awt.event.ItemEvent;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.io.*;
+import java.sql.Array;
 import java.sql.ResultSet;
+import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -30,73 +33,16 @@ public class FrmInformePruebaEntrada extends javax.swing.JInternalFrame {
     public String cDocente;
     String idPlanEstudios;
     private boolean menuAbierto = false;
+    public String[] datoPE = null;
     
     public FrmInformePruebaEntrada() {
         initComponents();
-        cargarTabla();
+        
     }
     
-    private void cargarDatosDocenteFormulario(){
-        String codigoDocente = cDocente;
-        try {
-            //Instanciar la clase NegocioUsuario
-            ClsNegocioUsuario docente = new ClsNegocioUsuario();
-            
-            ResultSet rsDocente = docente.obtenerCursosDocente(codigoDocente);
-            
-            cmbCodigoCurso.removeAllItems();
-            cmbNombreCurso.removeAllItems();
-            
-            while (rsDocente.next()) {
-                 cmbCodigoCurso.addItem(rsDocente.getString(1));
-                 cmbNombreCurso.addItem(rsDocente.getString(2));
-            }
-            rsDocente.close();            
-            docente.conexion.close();
-            
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
-    private void cargarDatosCompletoDocenteCurso(){
-        /**
-         * @param curso             String      "Obtiene el codigo del curso seleccionado"
-         * @param codigoDocente     String      "Obtiene el codigo del docente que esta seleccionado"
-         */
-        
-        String curso = cmbCodigoCurso.getSelectedItem().toString();
-        String codigoDocente = cDocente;
-        
-        try {
-            //Instanciar la clase NegocioUsuario
-            ClsNegocioUsuario docente = new ClsNegocioUsuario();
-            
-            //Obtiene el resultado de la consulta hecha a la BD
-            ResultSet rsDocente = docente.obtenerDatosPruebaEntrada(codigoDocente, curso);
-            
-            //itera los valores hechas en la consulta
-            while (rsDocente.next()) {
-                //llenar los valores con los valores respectivos
-                txtDocente.setText(rsDocente.getString(5));
-                txtPractico.setText(String.valueOf(rsDocente.getInt(4)));
-                txtTeorico.setText(String.valueOf(rsDocente.getInt(3)));
-                txtMatriculados.setText(String.valueOf(rsDocente.getInt(6)));
-                txtRetirados.setText(rsDocente.getString(9));
-                lblSemestre.setText("Semestre " + rsDocente.getString(7));
-                txtAbandono.setText(rsDocente.getString(10));
-                
-                cmbNombreCurso.setSelectedItem(rsDocente.getString(2));
-                cmbCodigoCurso.setSelectedItem(rsDocente.getString(1));
-                
-                idPlanEstudios = rsDocente.getString(8);
-                
-                
-            }
-            rsDocente.close();
-            docente.conexion.close();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+    public FrmInformePruebaEntrada(String[] datoPEF){
+        initComponents();
+        this.datoPE = datoPEF;
     }
     
     private void cargarTabla(){
@@ -406,13 +352,9 @@ public class FrmInformePruebaEntrada extends javax.swing.JInternalFrame {
         /**
          * @param munuAbierto       Boolean     "Verifica que la ventana se encuentre abierta"
          */
-        
-        cargarDatosDocenteFormulario();
-        cargarDatosCompletoDocenteCurso();
+        recibeDatosFormulario();
+        cargarTabla();
         menuAbierto = true;
-        
-        
-//        menuCelda.add("Calcular Porcentajes");
         tabla.setComponentPopupMenu(menuCelda);
     }//GEN-LAST:event_formInternalFrameOpened
 
@@ -425,7 +367,6 @@ public class FrmInformePruebaEntrada extends javax.swing.JInternalFrame {
             //seleccionamos el nombre del curso de acurdo al codigo del curso
             //seleccionado
             cmbNombreCurso.setSelectedIndex(cmbCodigoCurso.getSelectedIndex());
-            cargarDatosCompletoDocenteCurso();
         }
     }//GEN-LAST:event_cmbCodigoCursoActionPerformed
 
@@ -438,13 +379,13 @@ public class FrmInformePruebaEntrada extends javax.swing.JInternalFrame {
             //seleccionamos el nombre del curso de acurdo al codigo del curso
             //seleccionado
             cmbCodigoCurso.setSelectedIndex(cmbNombreCurso.getSelectedIndex());
-            cargarDatosCompletoDocenteCurso();
         }
     }//GEN-LAST:event_cmbNombreCursoActionPerformed
 
     private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed
         String estado = "Guardado";
         guardarInforme(estado);
+        
     }//GEN-LAST:event_btnGuardarActionPerformed
 
     private void guardarInforme(String estado){
@@ -546,6 +487,26 @@ public class FrmInformePruebaEntrada extends javax.swing.JInternalFrame {
         guardarInforme(estado);
     }//GEN-LAST:event_btnEnviarActionPerformed
 
+    void recibeDatosFormulario(){
+        
+        cmbCodigoCurso.removeAllItems();
+        cmbNombreCurso.removeAllItems();
+        
+        //Llenar los ComboBox con los datos seleccionados del foormulario
+        //Reportes Faltantes
+        cmbCodigoCurso.addItem(datoPE[0]);
+        cmbNombreCurso.addItem(datoPE[1]);
+        
+        txtTeorico.setText(datoPE[2]);
+        txtPractico.setText(datoPE[3]);
+        txtMatriculados.setText(datoPE[4]);
+        txtRetirados.setText(datoPE[5]);
+        txtAbandono.setText(datoPE[6]);
+        cDocente = datoPE[7];
+        txtDocente.setText(datoPE[8]);
+        
+    }
+    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAgregarFila;

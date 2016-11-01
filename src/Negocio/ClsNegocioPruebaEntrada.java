@@ -8,6 +8,7 @@ import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.sql.SQLException;
 import Conexion.ClsConexion;
+import Entidad.ClsEntidadPruebaCursosFaltantes;
 
 /**
  *
@@ -17,6 +18,7 @@ public class ClsNegocioPruebaEntrada implements ClsInterfacePruebaEntrada{
 
     public Connection conexion = new ClsConexion().getConnection();
     public CallableStatement cst = null;
+    public ResultSet rs = null;
     
     @Override
     public void AgregarPruebaEntrada(ClsEntidadPruebaEntrada PruebaEntrada) {
@@ -58,12 +60,11 @@ public class ClsNegocioPruebaEntrada implements ClsInterfacePruebaEntrada{
 
     @Override
     public ResultSet ConsultaAvanzaPruebaEntrada(String criterio, String busqueda) throws Exception {
-        ResultSet rs = null;
         try {
             cst = conexion.prepareCall("{call USP_BusquedaAvanzadaPruebaEntrada(?,?)}");
             cst.setString("pcriterio", criterio);
             cst.setString("pbusqueda", busqueda);
-             rs = cst.executeQuery();
+            rs = cst.executeQuery();
             return rs;
         } catch (SQLException ex) {
             throw ex;
@@ -72,15 +73,33 @@ public class ClsNegocioPruebaEntrada implements ClsInterfacePruebaEntrada{
     }
 
     @Override
-    public ResultSet hacerInformePruebaFaltante(String codDocente) throws Exception {
-        ResultSet rs = null;
+    public ArrayList hacerInformePruebaFaltante(String codDocente){
+        ArrayList<ClsEntidadPruebaCursosFaltantes> Usuario = new ArrayList<ClsEntidadPruebaCursosFaltantes>();
+        
         try {
-            cst = conexion.prepareCall("{call USP_FaltaInforme(?)}");
+            CallableStatement cst = conexion.prepareCall("{call USP_FaltaInforme(?)}");
             cst.setString("pcodDocente", codDocente);
             rs = cst.executeQuery();
-            return rs;
-        } catch (SQLException ex) {
-            throw ex;
+            
+            while (rs.next()) {
+                ClsEntidadPruebaCursosFaltantes pru = new ClsEntidadPruebaCursosFaltantes();
+                
+                pru.setIdCurso(rs.getString("idCurso"));
+                pru.setNombreCurso(rs.getString("nombre"));
+                pru.setHorasTeoricas(rs.getInt("horasTeoricas"));
+                pru.setHoraPracticas(rs.getInt("horasPracticas"));
+                pru.setAlumnosMatriculados(rs.getInt("alumnosMatriculados"));
+                pru.setAlumnosRetirados(rs.getInt("alumnosRetirados"));
+                pru.setAlumnosAbandono(rs.getInt("alumnosAbandono"));
+                pru.setCodigoDocente(rs.getString("codDocente"));
+                pru.setNombreDocente(rs.getString("nombreDocente"));
+                
+                Usuario.add(pru);
+            }
+            return Usuario;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
         }
     }
 
