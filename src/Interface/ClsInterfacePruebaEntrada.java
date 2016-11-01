@@ -14,4 +14,6 @@ public interface ClsInterfacePruebaEntrada {
     void ModificarPruebaEntrada(String codigo,ClsEntidadPruebaEntrada PruebaEntrada);
     
     void EliminarPruebaEntrada(String codigo);
+    
+    public ResultSet ConsultaAvanzaPruebaEntrada(String criterio, String busqueda) throws Exception;
 }

@@ -8,6 +8,7 @@ import javax.swing.JOptionPane;
 public class FrmPrinicipal extends javax.swing.JFrame {
 
     public String codigoDocente;
+    
    
     public FrmPrinicipal() {
         initComponents();
@@ -81,6 +82,11 @@ public class FrmPrinicipal extends javax.swing.JFrame {
         mnuConsultas.setText("Consultas");
 
         consultaPruebaEntrada.setText("Consulta informe prueba de entrada");
+        consultaPruebaEntrada.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                consultaPruebaEntradaActionPerformed(evt);
+            }
+        });
         mnuConsultas.add(consultaPruebaEntrada);
 
         consultaFinalCurso.setText("Consulta informe final de curso");
@@ -144,6 +150,13 @@ public class FrmPrinicipal extends javax.swing.JFrame {
         informePrueabaEntrada.setVisible(true);
         
     }//GEN-LAST:event_informePruebaEntradaActionPerformed
+
+    private void consultaPruebaEntradaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_consultaPruebaEntradaActionPerformed
+        FrmConsultaPruebaEntrada consultaInformePrueabaEntrada = new FrmConsultaPruebaEntrada();
+//        consultaInformePrueabaEntrada.cDocente = codigoDocente;
+        escritorio.add(consultaInformePrueabaEntrada);
+        consultaInformePrueabaEntrada.setVisible(true);
+    }//GEN-LAST:event_consultaPruebaEntradaActionPerformed
 
     /**
      * @param args the command line arguments
