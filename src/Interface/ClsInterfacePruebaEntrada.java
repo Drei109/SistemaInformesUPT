@@ -17,5 +17,5 @@ public interface ClsInterfacePruebaEntrada {
 
     public ResultSet ConsultaAvanzaPruebaEntrada(String criterio, String busqueda) throws Exception;
 
-    public ResultSet hacerInformePruebaFaltante(String codDocente)throws Exception;
+    public ArrayList hacerInformePruebaFaltante(String codDocente);
 }

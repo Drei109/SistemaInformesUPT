@@ -1,5 +1,11 @@
 package Presentacion;
 
+import Entidad.ClsEntidadPruebaCursosFaltantes;
+import Entidad.ClsEntidadPruebaEntrada;
+import Negocio.ClsNegocioPruebaEntrada;
+import java.util.ArrayList;
+import java.util.Iterator;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -106,8 +112,37 @@ public class FrmReportesFaltantes extends javax.swing.JInternalFrame {
     
     private void formInternalFrameOpened(javax.swing.event.InternalFrameEvent evt) {//GEN-FIRST:event_formInternalFrameOpened
         cargarTabla();
+        listarTabla();
     }//GEN-LAST:event_formInternalFrameOpened
 
+    void listarTabla(){
+        String titulos[] = {"Id Curso",
+                            "Nombre del Curso",
+                            "Nombre del Docente"};
+        
+        ClsNegocioPruebaEntrada datos = new ClsNegocioPruebaEntrada();
+        ArrayList<ClsNegocioPruebaEntrada> dato = datos.hacerInformePruebaFaltante(codDocente);
+        
+        Iterator iterator = dato.iterator();
+        
+        DefaultTableModel modeloTabla = new DefaultTableModel(null, titulos);
+        
+        String campo[] = new String[3];
+        
+        while (iterator.hasNext()) {
+            ClsEntidadPruebaCursosFaltantes objenti = new ClsEntidadPruebaCursosFaltantes();
+            
+            objenti = (ClsEntidadPruebaCursosFaltantes) iterator.next();
+            
+            campo[0] = objenti.getIdCurso();
+            campo[1] = objenti.getNombreCurso();
+            campo[2] = objenti.getNombreDocente();
+            
+            modeloTabla.addRow(campo);
+        }
+        tabla.setModel(modeloTabla);
+    }
+    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnTerminar;
