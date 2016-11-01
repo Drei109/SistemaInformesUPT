@@ -505,6 +505,23 @@ public class FrmInformePruebaEntrada extends javax.swing.JInternalFrame {
         cDocente = datoPE[7];
         txtDocente.setText(datoPE[8]);
         
+        try {
+            //Instanciar la clase NegocioUsuario
+            ClsNegocioUsuario docente = new ClsNegocioUsuario();
+            
+            //Obtiene el resultado de la consulta hecha a la BD
+            ResultSet rsDocente = docente.obtenerDatosPruebaEntrada(datoPE[7], datoPE[0]);
+            
+            //itera los valores hechas en la consulta
+            while (rsDocente.next()) {
+                //llenar los valores con los valores respectivos
+                lblSemestre.setText("Semestre " + rsDocente.getString(7));
+                
+                idPlanEstudios = rsDocente.getString(8);
+            }
+        } catch (Exception e) {
+        }
+        
     }
     
 
