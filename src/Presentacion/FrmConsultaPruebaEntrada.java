@@ -26,6 +26,7 @@ public class FrmConsultaPruebaEntrada extends javax.swing.JInternalFrame {
         this.codDocente = codDocente;
         this.nivelUsuario = nivelUsuario;
         definirTituloTabla(nivelUsuario);
+        cargarCombo(nivelUsuario);
     }
 
     /**
@@ -148,6 +149,29 @@ public class FrmConsultaPruebaEntrada extends javax.swing.JInternalFrame {
         buscarPruebaEntrada(nivelUsuario,codDocente);        
     }//GEN-LAST:event_btnBuscarActionPerformed
 
+    private void cargarCombo(String nivelUsuario){
+        switch(nivelUsuario){
+        case "Usuario":
+            cmbCriterio.removeAllItems();
+            cmbCriterio.addItem("Todos");
+            cmbCriterio.addItem("Código Curso");
+            cmbCriterio.addItem("Nombre Curso");
+            cmbCriterio.addItem("Fecha");
+            break;
+        case "Supervisor":
+        case "Administrador":
+            cmbCriterio.removeAllItems();
+            cmbCriterio.addItem("Todos");
+            cmbCriterio.addItem("Código Docente");
+            cmbCriterio.addItem("Nombre Docente");
+            cmbCriterio.addItem("Semestre");
+            cmbCriterio.addItem("Código Curso");
+            cmbCriterio.addItem("Nombre Curso");
+            cmbCriterio.addItem("Fecha");
+            break;
+        }
+    }
+    
     private void buscarPruebaEntrada(String nivelUsuario,String codDocente){
         ClsNegocioPruebaEntrada negPruebaEntrada = new ClsNegocioPruebaEntrada();
         
@@ -221,6 +245,7 @@ public class FrmConsultaPruebaEntrada extends javax.swing.JInternalFrame {
             negPruebaEntrada.conexion.close();
             } catch (Exception ex) {
             }
+            break;
         }       
         
     }
