@@ -64,8 +64,6 @@ public class FrmInformePruebaEntrada extends javax.swing.JInternalFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        menuCelda = new javax.swing.JPopupMenu();
-        jMenuItem1 = new javax.swing.JMenuItem();
         jLabel1 = new javax.swing.JLabel();
         lblSemestre = new javax.swing.JLabel();
         cmbCodigoCurso = new javax.swing.JComboBox<>();
@@ -96,14 +94,7 @@ public class FrmInformePruebaEntrada extends javax.swing.JInternalFrame {
         jLabel11 = new javax.swing.JLabel();
         txtAbandono = new javax.swing.JTextField();
         btnEnviar = new javax.swing.JButton();
-
-        jMenuItem1.setText("Calcular Porcentajes");
-        jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem1ActionPerformed(evt);
-            }
-        });
-        menuCelda.add(jMenuItem1);
+        btnCalcularPorcentajes = new javax.swing.JButton();
 
         addInternalFrameListener(new javax.swing.event.InternalFrameListener() {
             public void internalFrameActivated(javax.swing.event.InternalFrameEvent evt) {
@@ -217,6 +208,13 @@ public class FrmInformePruebaEntrada extends javax.swing.JInternalFrame {
             }
         });
 
+        btnCalcularPorcentajes.setText("Calcular Porcentajes");
+        btnCalcularPorcentajes.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCalcularPorcentajesActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -271,7 +269,9 @@ public class FrmInformePruebaEntrada extends javax.swing.JInternalFrame {
                                             .addComponent(txtPractico, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)
                                             .addComponent(txtEvaluados, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(btnEnviar, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(btnEnviar, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(btnCalcularPorcentajes, javax.swing.GroupLayout.PREFERRED_SIZE, 137, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addGap(18, 18, 18)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                                     .addGroup(layout.createSequentialGroup()
@@ -324,7 +324,8 @@ public class FrmInformePruebaEntrada extends javax.swing.JInternalFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnAgregarFila)
-                    .addComponent(btnRemoverFila))
+                    .addComponent(btnRemoverFila)
+                    .addComponent(btnCalcularPorcentajes))
                 .addGap(11, 11, 11)
                 .addComponent(jLabel9)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -355,7 +356,6 @@ public class FrmInformePruebaEntrada extends javax.swing.JInternalFrame {
         recibeDatosFormulario();
         cargarTabla();
         menuAbierto = true;
-        tabla.setComponentPopupMenu(menuCelda);
     }//GEN-LAST:event_formInternalFrameOpened
 
     private void cmbCodigoCursoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbCodigoCursoActionPerformed
@@ -385,7 +385,7 @@ public class FrmInformePruebaEntrada extends javax.swing.JInternalFrame {
     private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed
         String estado = "Guardado";
         guardarInforme(estado);
-        
+        this.dispose();
     }//GEN-LAST:event_btnGuardarActionPerformed
 
     private void guardarInforme(String estado){
@@ -452,8 +452,13 @@ public class FrmInformePruebaEntrada extends javax.swing.JInternalFrame {
         this.dispose();
     }//GEN-LAST:event_btnCerrarActionPerformed
 
-    private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
-        
+    private void btnEnviarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEnviarActionPerformed
+        String estado = "Enviado";
+        guardarInforme(estado);
+        this.dispose();
+    }//GEN-LAST:event_btnEnviarActionPerformed
+
+    private void btnCalcularPorcentajesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCalcularPorcentajesActionPerformed
         int filas = tabla.getRowCount();
         int evaluados = Integer.parseInt(txtEvaluados.getText());
         int CantNoAceptable = 0;
@@ -462,7 +467,7 @@ public class FrmInformePruebaEntrada extends javax.swing.JInternalFrame {
         
         //3 5 7
         
-        if (!(filas == 0 && evaluados <= 0)) {
+        if (!(filas < 0 || evaluados <= 0)) {
             for (int i = 0; i < filas; i++) {
                 CantNoAceptable = Integer.parseInt((String) tabla.getValueAt(i, 2));
                 CantSuficiente  = Integer.parseInt((String) tabla.getValueAt(i, 4));
@@ -479,13 +484,7 @@ public class FrmInformePruebaEntrada extends javax.swing.JInternalFrame {
         else{
             JOptionPane.showMessageDialog(null, "Ingrese una cantidad de Evaluados o Ingrese Una Fila.");
         }
-           
-    }//GEN-LAST:event_jMenuItem1ActionPerformed
-
-    private void btnEnviarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEnviarActionPerformed
-        String estado = "Enviado";
-        guardarInforme(estado);
-    }//GEN-LAST:event_btnEnviarActionPerformed
+    }//GEN-LAST:event_btnCalcularPorcentajesActionPerformed
 
     void recibeDatosFormulario(){
         
@@ -527,6 +526,7 @@ public class FrmInformePruebaEntrada extends javax.swing.JInternalFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAgregarFila;
+    private javax.swing.JButton btnCalcularPorcentajes;
     private javax.swing.JButton btnCerrar;
     private javax.swing.JButton btnEnviar;
     private javax.swing.JButton btnGuardar;
@@ -544,11 +544,9 @@ public class FrmInformePruebaEntrada extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
-    private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JLabel lblSemestre;
-    private javax.swing.JPopupMenu menuCelda;
     private javax.swing.JTable tabla;
     private javax.swing.JTextField txtAbandono;
     private javax.swing.JTextArea txtComentario;

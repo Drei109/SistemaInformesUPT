@@ -37,6 +37,7 @@ public class FrmReportesFaltantes extends javax.swing.JInternalFrame {
         tablaF = new javax.swing.JTable();
         jLabel2 = new javax.swing.JLabel();
         btnTerminar = new javax.swing.JButton();
+        btnSalir = new javax.swing.JButton();
 
         addInternalFrameListener(new javax.swing.event.InternalFrameListener() {
             public void internalFrameActivated(javax.swing.event.InternalFrameEvent evt) {
@@ -83,6 +84,13 @@ public class FrmReportesFaltantes extends javax.swing.JInternalFrame {
             }
         });
 
+        btnSalir.setText("Salir");
+        btnSalir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSalirActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -94,7 +102,10 @@ public class FrmReportesFaltantes extends javax.swing.JInternalFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(btnTerminar)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(btnTerminar)
+                        .addGap(18, 18, 18)
+                        .addComponent(btnSalir, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(jLabel2)
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 510, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(21, Short.MAX_VALUE))
@@ -107,7 +118,9 @@ public class FrmReportesFaltantes extends javax.swing.JInternalFrame {
                 .addGap(18, 18, 18)
                 .addComponent(jLabel2)
                 .addGap(18, 18, 18)
-                .addComponent(btnTerminar)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnTerminar)
+                    .addComponent(btnSalir))
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(18, Short.MAX_VALUE))
@@ -124,6 +137,10 @@ public class FrmReportesFaltantes extends javax.swing.JInternalFrame {
     private void btnTerminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTerminarActionPerformed
         seleccionarTabla();
     }//GEN-LAST:event_btnTerminarActionPerformed
+
+    private void btnSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalirActionPerformed
+        this.dispose();
+    }//GEN-LAST:event_btnSalirActionPerformed
     
     void listarTabla(){
         String titulos[] = {"Id Curso",
@@ -163,43 +180,50 @@ public class FrmReportesFaltantes extends javax.swing.JInternalFrame {
     
     void seleccionarTabla(){
         String campo[] = new String[9];
-        try {
-            Iterator iterator = dato.iterator();
+        if (tablaF.getSelectedRow() >= 0) {
+            try {
+                Iterator iterator = dato.iterator();
 
-            int filaS = tablaF.getSelectedRow();
+                int filaS = tablaF.getSelectedRow();
 
-            while (iterator.hasNext()) {
-                ClsEntidadPruebaCursosFaltantes objenti = new ClsEntidadPruebaCursosFaltantes();
+                while (iterator.hasNext()) {
+                    ClsEntidadPruebaCursosFaltantes objenti = new ClsEntidadPruebaCursosFaltantes();
 
-                objenti = (ClsEntidadPruebaCursosFaltantes) iterator.next();
-                
-                if (tablaF.getValueAt(filaS, 0) == objenti.getIdCurso()) {
-                    campo[0] = objenti.getIdCurso();
-                    campo[1] = objenti.getNombreCurso();
-                    campo[2] = String.valueOf(objenti.getHorasTeoricas());
-                    campo[3] = String.valueOf(objenti.getHoraPracticas());
-                    campo[4] = String.valueOf(objenti.getAlumnosMatriculados());
-                    campo[5] = String.valueOf(objenti.getAlumnosRetirados());
-                    campo[6] = String.valueOf(objenti.getAlumnosAbandono());
-                    campo[7] = String.valueOf(objenti.getCodigoDocente());
-                    campo[8] = String.valueOf(objenti.getNombreDocente());
-                    break;
+                    objenti = (ClsEntidadPruebaCursosFaltantes) iterator.next();
+
+                    if (tablaF.getValueAt(filaS, 0) == objenti.getIdCurso()) {
+                        campo[0] = objenti.getIdCurso();
+                        campo[1] = objenti.getNombreCurso();
+                        campo[2] = String.valueOf(objenti.getHorasTeoricas());
+                        campo[3] = String.valueOf(objenti.getHoraPracticas());
+                        campo[4] = String.valueOf(objenti.getAlumnosMatriculados());
+                        campo[5] = String.valueOf(objenti.getAlumnosRetirados());
+                        campo[6] = String.valueOf(objenti.getAlumnosAbandono());
+                        campo[7] = String.valueOf(objenti.getCodigoDocente());
+                        campo[8] = String.valueOf(objenti.getNombreDocente());
+                        break;
+                    }
+
                 }
-                
+
+            } catch (Exception e) {
+                e.printStackTrace();
             }
 
-        } catch (Exception e) {
-            e.printStackTrace();
+            FrmInformePruebaEntrada info = new FrmInformePruebaEntrada(campo);
+            FrmPrinicipal.escritorio.add(info);
+            info.setVisible(true);
+            this.dispose();
         }
-        
-        FrmInformePruebaEntrada info = new FrmInformePruebaEntrada(campo);
-        FrmPrinicipal.escritorio.add(info);
-        info.setVisible(true);
+        else{
+            JOptionPane.showMessageDialog(null, "Seleccione un Curso.");
+        }
     }
     
     
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnSalir;
     private javax.swing.JButton btnTerminar;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
