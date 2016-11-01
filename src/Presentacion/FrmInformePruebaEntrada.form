@@ -87,7 +87,7 @@
                           <Group type="102" attributes="0">
                               <Group type="103" groupAlignment="1" attributes="0">
                                   <Component id="btnEnviar" min="-2" pref="139" max="-2" attributes="0"/>
-                                  <Component id="btnCalcularPorcentajes" min="-2" pref="137" max="-2" attributes="0"/>
+                                  <Component id="btnCalcularPorcentajes" min="-2" pref="185" max="-2" attributes="0"/>
                               </Group>
                               <EmptySpace type="separate" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="1" attributes="0">

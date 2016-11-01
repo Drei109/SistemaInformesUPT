@@ -271,7 +271,7 @@ public class FrmInformePruebaEntrada extends javax.swing.JInternalFrame {
                             .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                                     .addComponent(btnEnviar, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(btnCalcularPorcentajes, javax.swing.GroupLayout.PREFERRED_SIZE, 137, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addComponent(btnCalcularPorcentajes, javax.swing.GroupLayout.PREFERRED_SIZE, 185, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addGap(18, 18, 18)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                                     .addGroup(layout.createSequentialGroup()
@@ -467,7 +467,7 @@ public class FrmInformePruebaEntrada extends javax.swing.JInternalFrame {
         
         //3 5 7
         
-        if (!(filas < 0 || evaluados <= 0)) {
+        if (!(filas <= 0 || evaluados <= 0)) {
             for (int i = 0; i < filas; i++) {
                 CantNoAceptable = Integer.parseInt((String) tabla.getValueAt(i, 2));
                 CantSuficiente  = Integer.parseInt((String) tabla.getValueAt(i, 4));
