@@ -32,14 +32,14 @@ public class FrmInformePruebaEntrada extends javax.swing.JInternalFrame {
 
     public String cDocente;
     String idPlanEstudios;
+    String idPruebaEntrada;
     private boolean menuAbierto = false;
     public String[] datoPE = null;
     
     public FrmInformePruebaEntrada() {
-        initComponents();
-        
+        initComponents();        
     }
-    
+       
     public FrmInformePruebaEntrada(String[] datoPEF){
         initComponents();
         this.datoPE = datoPEF;

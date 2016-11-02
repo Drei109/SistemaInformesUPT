@@ -20,4 +20,6 @@ public interface ClsInterfacePruebaEntrada {
     public ResultSet ConsultaAvanzaPruebaEntradaUsuario(String criterio, String busqueda, String codDocente) throws Exception;
 
     public ArrayList hacerInformePruebaFaltante(String codDocente);
+    
+    public ArrayList seleccionarPruebaEntrada(String codPruebaEntrada); 
 }

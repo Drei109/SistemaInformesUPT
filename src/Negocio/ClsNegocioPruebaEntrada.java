@@ -117,5 +117,31 @@ public class ClsNegocioPruebaEntrada implements ClsInterfacePruebaEntrada{
             throw ex;
         }
     }
+
+    @Override
+    public ArrayList seleccionarPruebaEntrada(String codPruebaEntrada) {
+        ArrayList<String> pruebaEntrada = new ArrayList<String>();
+        try {
+            CallableStatement cst = conexion.prepareCall("{call USP_PruebaEntradaPorId(?)}");
+            cst.setString("pidPruebaEntrada", codPruebaEntrada);
+            rs = cst.executeQuery();
+            
+            while (rs.next()) {
+                pruebaEntrada.add(rs.getString(1));
+                pruebaEntrada.add(rs.getString(2));
+                pruebaEntrada.add(rs.getString(3));
+                pruebaEntrada.add(rs.getString(4));
+                pruebaEntrada.add(rs.getString(5));
+                pruebaEntrada.add(rs.getString(6));
+                pruebaEntrada.add(rs.getString(7));
+                pruebaEntrada.add(rs.getString(8));
+                pruebaEntrada.add(rs.getString(9));
+            }
+            return pruebaEntrada;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
     
 }

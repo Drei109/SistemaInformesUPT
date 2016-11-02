@@ -5,8 +5,11 @@
  */
 package Presentacion;
 
+import Entidad.ClsEntidadPruebaCursosFaltantes;
 import Negocio.ClsNegocioPruebaEntrada;
 import java.sql.ResultSet;
+import java.util.ArrayList;
+import java.util.Iterator;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
@@ -20,6 +23,7 @@ public class FrmConsultaPruebaEntrada extends javax.swing.JInternalFrame {
     DefaultTableModel dtm = new DefaultTableModel();
     String nivelUsuario = "";
     String codDocente = "";
+    public ArrayList<ClsNegocioPruebaEntrada> dato = null;
     
     public FrmConsultaPruebaEntrada(String nivelUsuario,String codDocente) {
         initComponents();
@@ -78,6 +82,11 @@ public class FrmConsultaPruebaEntrada extends javax.swing.JInternalFrame {
         });
 
         btnVer.setText("Ver");
+        btnVer.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnVerActionPerformed(evt);
+            }
+        });
 
         btnSalir.setText("Salir");
         btnSalir.addActionListener(new java.awt.event.ActionListener() {
@@ -150,6 +159,31 @@ public class FrmConsultaPruebaEntrada extends javax.swing.JInternalFrame {
         buscarPruebaEntrada(nivelUsuario,codDocente);        
     }//GEN-LAST:event_btnBuscarActionPerformed
 
+    private void btnVerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVerActionPerformed
+        abrirFrmInformePruebaEntrada(); 
+    }//GEN-LAST:event_btnVerActionPerformed
+
+    private void abrirFrmInformePruebaEntrada(){
+        String idPruebaEntrada = (String) tblBuscar.getValueAt(tblBuscar.getSelectedRow(), 0);
+        String campo[] = new String[9];
+        if (tblBuscar.getSelectedRow() >= 0) {
+            try {
+                
+                ClsNegocioPruebaEntrada negNegocioPruebaEntrada = new ClsNegocioPruebaEntrada();
+                ArrayList<String> pruebaEntrada = negNegocioPruebaEntrada.seleccionarPruebaEntrada(idPruebaEntrada);
+                campo = pruebaEntrada.toArray(new String[pruebaEntrada.size()]);
+                negNegocioPruebaEntrada.conexion.close();
+
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+
+            FrmInformePruebaEntrada info = new FrmInformePruebaEntrada(campo);
+            FrmPrinicipal.escritorio.add(info);
+            info.setVisible(true);
+        }        
+    }
+    
     private void cargarCombo(String nivelUsuario){
         switch(nivelUsuario){
         case "Usuario":
