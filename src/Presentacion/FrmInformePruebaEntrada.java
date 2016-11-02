@@ -460,29 +460,52 @@ public class FrmInformePruebaEntrada extends javax.swing.JInternalFrame {
 
     private void btnCalcularPorcentajesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCalcularPorcentajesActionPerformed
         int filas = tabla.getRowCount();
-        int evaluados = Integer.parseInt(txtEvaluados.getText());
-        int CantNoAceptable = 0;
-        int CantSuficiente  = 0;
-        int CantBueno       = 0;  
-        
-        //3 5 7
-        
-        if (!(filas <= 0 || evaluados <= 0)) {
-            for (int i = 0; i < filas; i++) {
-                CantNoAceptable = Integer.parseInt((String) tabla.getValueAt(i, 2));
-                CantSuficiente  = Integer.parseInt((String) tabla.getValueAt(i, 4));
-                CantBueno       = Integer.parseInt((String) tabla.getValueAt(i, 6));
-                
-                tabla.setValueAt(((CantNoAceptable*100)/evaluados), i, 3);
-                tabla.setValueAt(((CantSuficiente*100)/evaluados), i, 5);
-                tabla.setValueAt(((CantBueno*100)/evaluados), i, 7);
-                tabla.setValueAt((((CantNoAceptable*100)/evaluados) +
-                                    ((CantSuficiente*100)/evaluados) +
-                                    ((CantBueno*100)/evaluados)), i, 8);
+        if (!txtEvaluados.getText().equals("")) {
+            int evaluados = Integer.parseInt(txtEvaluados.getText());
+            int matriculados = Integer.parseInt(txtMatriculados.getText());
+            int CantNoAceptable = 0;
+            int CantSuficiente  = 0;
+            int CantBueno       = 0;  
+
+            //3 5 7
+
+
+            if (!(filas <= 0 || evaluados <= 0 || evaluados > matriculados)) {
+
+                for (int i = 0; i < filas; i++) {
+                    
+                    if (!(tabla.getValueAt(i, 2).equals("") || tabla.getValueAt(i, 4).equals("") || tabla.getValueAt(i, 6).equals("") )) {
+                        CantNoAceptable = Integer.parseInt((String) tabla.getValueAt(i, 2));
+                        CantSuficiente  = Integer.parseInt((String) tabla.getValueAt(i, 4));
+                        CantBueno       = Integer.parseInt((String) tabla.getValueAt(i, 6));
+
+                        if ((CantNoAceptable+CantSuficiente+CantBueno) > evaluados) {
+                            JOptionPane.showMessageDialog(null, "Cantidades de la tabla superior a los evaluados");
+                            break;
+                        }
+                        else{
+                            tabla.setValueAt(((CantNoAceptable*100)/evaluados), i, 3);
+                            tabla.setValueAt(((CantSuficiente*100)/evaluados), i, 5);
+                            tabla.setValueAt(((CantBueno*100)/evaluados), i, 7);
+                            tabla.setValueAt((((CantNoAceptable*100)/evaluados) +
+                                                ((CantSuficiente*100)/evaluados) +
+                                                ((CantBueno*100)/evaluados)), i, 8);
+                        }
+                    }
+                    else{
+                        JOptionPane.showMessageDialog(null, "Datos de la Tabla Vacios.");
+                        break;
+                    }
+                    
+                }
+
+            }
+            else{
+                JOptionPane.showMessageDialog(null, "Datos incorrectos.");
             }
         }
         else{
-            JOptionPane.showMessageDialog(null, "Ingrese una cantidad de Evaluados o Ingrese Una Fila.");
+            JOptionPane.showMessageDialog(null, "Ingrese la cantidad de evaluados.");
         }
     }//GEN-LAST:event_btnCalcularPorcentajesActionPerformed
 
