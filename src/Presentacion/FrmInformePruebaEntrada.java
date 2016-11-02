@@ -10,6 +10,7 @@ import Negocio.ClsNegocioDetallePruebaEntrada;
 import Negocio.ClsNegocioPruebaEntrada;
 
 import Negocio.ClsNegocioUsuario;
+import Utilidad.ClsRenderTable;
 import java.awt.event.ItemEvent;
 import java.sql.Connection;
 import java.sql.SQLException;
@@ -35,9 +36,9 @@ public class FrmInformePruebaEntrada extends javax.swing.JInternalFrame {
     private boolean menuAbierto = false;
     public String[] datoPE = null;
     
+    
     public FrmInformePruebaEntrada() {
         initComponents();
-        
     }
     
     public FrmInformePruebaEntrada(String[] datoPEF){
@@ -460,6 +461,7 @@ public class FrmInformePruebaEntrada extends javax.swing.JInternalFrame {
 
     private void btnCalcularPorcentajesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCalcularPorcentajesActionPerformed
         int filas = tabla.getRowCount();
+        ClsRenderTable render = new ClsRenderTable();
         if (!txtEvaluados.getText().equals("")) {
             int evaluados = Integer.parseInt(txtEvaluados.getText());
             int matriculados = Integer.parseInt(txtMatriculados.getText());
@@ -490,6 +492,8 @@ public class FrmInformePruebaEntrada extends javax.swing.JInternalFrame {
                             tabla.setValueAt((((CantNoAceptable*100)/evaluados) +
                                                 ((CantSuficiente*100)/evaluados) +
                                                 ((CantBueno*100)/evaluados)), i, 8);
+                            
+                            tabla.setDefaultRenderer(Object.class, render);
                         }
                     }
                     else{
@@ -574,7 +578,7 @@ public class FrmInformePruebaEntrada extends javax.swing.JInternalFrame {
     private javax.swing.JTextField txtAbandono;
     private javax.swing.JTextArea txtComentario;
     private javax.swing.JTextField txtDocente;
-    private javax.swing.JTextField txtEvaluados;
+    public static javax.swing.JTextField txtEvaluados;
     private javax.swing.JTextField txtMatriculados;
     private javax.swing.JTextField txtPractico;
     private javax.swing.JTextField txtRetirados;
