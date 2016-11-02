@@ -27,6 +27,7 @@ public class FrmConsultaPruebaEntrada extends javax.swing.JInternalFrame {
         this.nivelUsuario = nivelUsuario;
         definirTituloTabla(nivelUsuario);
         cargarCombo(nivelUsuario);
+        buscarPruebaEntrada(nivelUsuario,codDocente);
     }
 
     /**
