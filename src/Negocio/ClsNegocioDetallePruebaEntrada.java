@@ -77,5 +77,31 @@ public class ClsNegocioDetallePruebaEntrada implements ClsInterfaceDetallePrueba
             throw ex;
         }
     }
+
+    @Override
+    public ArrayList seleccionarDetallePruebaEntrada(String codPruebaEntrada) {
+        ArrayList<ClsEntidadDetallePruebaEntrada> detallePruebaEntrada = new ArrayList<ClsEntidadDetallePruebaEntrada>();
+        try{
+            CallableStatement cst = conexion.prepareCall("{call USP_DetallePruebaEntradaPorId(?)}");
+            cst.setString("pidPruebaEntrada", codPruebaEntrada);
+            ResultSet rs = cst.executeQuery();
+            while (rs.next()) {                
+                ClsEntidadDetallePruebaEntrada detalle =  new ClsEntidadDetallePruebaEntrada();
+                detalle.setIdDetallePruebaEntrada(Integer.parseInt(rs.getString(1)));
+                detalle.setIdPruebaEntrada(Integer.parseInt(rs.getString(2)));
+                detalle.setHabilidad(rs.getString(3));
+                detalle.setCantNoAceptalbe(Integer.parseInt(rs.getString(4)));
+                detalle.setCantSuficiente(Integer.parseInt(rs.getString(5)));
+                detalle.setCantBueno(Integer.parseInt(rs.getString(6)));
+                detalle.setMedidasCorrectivas(rs.getString(7));
+                
+                detallePruebaEntrada.add(detalle);
+            }
+            return detallePruebaEntrada;
+        }
+        catch(Exception ex){
+            return null;
+        }
+    }
     
 }
