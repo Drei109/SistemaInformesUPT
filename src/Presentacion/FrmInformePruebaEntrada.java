@@ -51,6 +51,40 @@ public class FrmInformePruebaEntrada extends javax.swing.JInternalFrame {
         DefaultTableModel modelo = new DefaultTableModel(null,new Object[]{"Nro", "Conocimiento o Habilidad","No Aceptable","%","Suficiente","%","Bueno","%","Total"});
         tabla.setModel(modelo);
     }
+    
+    private void cargarDatosTabla(){
+        DefaultTableModel modelo = (DefaultTableModel) tabla.getModel();
+        
+        ClsNegocioDetallePruebaEntrada detallePruebaEntrada = new ClsNegocioDetallePruebaEntrada();
+        ArrayList<ClsEntidadDetallePruebaEntrada> detalle = detallePruebaEntrada.seleccionarDetallePruebaEntrada(datoPE[0]);
+        Iterator iterator = detalle.iterator();
+        
+        String campo[] = new String[9];
+        
+        while (iterator.hasNext()) {            
+            ClsEntidadDetallePruebaEntrada objDetalle = new ClsEntidadDetallePruebaEntrada();
+            objDetalle = (ClsEntidadDetallePruebaEntrada) iterator.next();
+            
+//            campo[1] = String.valueOf(objDetalle.getIdPruebaEntrada());
+            campo[0] = String.valueOf(objDetalle.getIdDetallePruebaEntrada());
+            campo[1] = objDetalle.getHabilidad();
+            campo[2] = String.valueOf(objDetalle.getCantNoAceptalbe());
+            campo[3] = "";
+            campo[4] = String.valueOf(objDetalle.getCantSuficiente());
+            campo[5] = "";
+            campo[6] = String.valueOf(objDetalle.getCantBueno());
+            campo[7] = "";
+            campo[8] = "";
+//            campo[6] = objDetalle.getMedidasCorrectivas();
+            txtComentario.setText(objDetalle.getMedidasCorrectivas());
+            
+            modelo.addRow(campo);
+            
+        }
+        tabla.setModel(modelo);
+        
+    }
+    
     private void agregarFila(){
         DefaultTableModel modelo = (DefaultTableModel) tabla.getModel();
         modelo.addRow(new Object[]{"", "","","","","","","",""});
@@ -357,6 +391,7 @@ public class FrmInformePruebaEntrada extends javax.swing.JInternalFrame {
          */
         recibeDatosFormulario();
         cargarTabla();
+//        cargarDatosTabla();
         menuAbierto = true;
     }//GEN-LAST:event_formInternalFrameOpened
 
@@ -514,7 +549,7 @@ public class FrmInformePruebaEntrada extends javax.swing.JInternalFrame {
         }
     }//GEN-LAST:event_btnCalcularPorcentajesActionPerformed
 
-    void recibeDatosFormulario(){
+    private void recibeDatosFormulario(){
         
         cmbCodigoCurso.removeAllItems();
         cmbNombreCurso.removeAllItems();
