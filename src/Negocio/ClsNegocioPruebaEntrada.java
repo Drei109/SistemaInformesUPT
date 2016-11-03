@@ -136,6 +136,8 @@ public class ClsNegocioPruebaEntrada implements ClsInterfacePruebaEntrada{
                 pruebaEntrada.add(rs.getString(7));
                 pruebaEntrada.add(rs.getString(8));
                 pruebaEntrada.add(rs.getString(9));
+                pruebaEntrada.add(rs.getString(10));
+                pruebaEntrada.add(rs.getString(11));
             }
             return pruebaEntrada;
         } catch (Exception e) {

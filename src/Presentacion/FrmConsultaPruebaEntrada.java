@@ -165,7 +165,7 @@ public class FrmConsultaPruebaEntrada extends javax.swing.JInternalFrame {
 
     private void abrirFrmInformePruebaEntrada(){
         String idPruebaEntrada = (String) tblBuscar.getValueAt(tblBuscar.getSelectedRow(), 0);
-        String campo[] = new String[9];
+        String campo[] = new String[10];
         if (tblBuscar.getSelectedRow() >= 0) {
             try {
                 

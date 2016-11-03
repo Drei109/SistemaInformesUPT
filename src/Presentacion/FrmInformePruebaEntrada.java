@@ -53,10 +53,12 @@ public class FrmInformePruebaEntrada extends javax.swing.JInternalFrame {
     }
     
     private void cargarDatosTabla(){
+        txtEvaluados.setText(datoPE[10]);
+        
         DefaultTableModel modelo = (DefaultTableModel) tabla.getModel();
         
         ClsNegocioDetallePruebaEntrada detallePruebaEntrada = new ClsNegocioDetallePruebaEntrada();
-        ArrayList<ClsEntidadDetallePruebaEntrada> detalle = detallePruebaEntrada.seleccionarDetallePruebaEntrada(datoPE[0]);
+        ArrayList<ClsEntidadDetallePruebaEntrada> detalle = detallePruebaEntrada.seleccionarDetallePruebaEntrada(datoPE[9]);
         Iterator iterator = detalle.iterator();
         
         String campo[] = new String[9];
@@ -391,7 +393,9 @@ public class FrmInformePruebaEntrada extends javax.swing.JInternalFrame {
          */
         recibeDatosFormulario();
         cargarTabla();
-//        cargarDatosTabla();
+        if (datoPE.length == 11) {
+            cargarDatosTabla();            
+        } 
         menuAbierto = true;
     }//GEN-LAST:event_formInternalFrameOpened
 
