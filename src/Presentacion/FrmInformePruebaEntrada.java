@@ -45,7 +45,7 @@ public class FrmInformePruebaEntrada extends javax.swing.JInternalFrame {
     
     
     String IDPruebaEntrada = "--";
-    
+    int contador = 0;
     public FrmInformePruebaEntrada() {
         initComponents();
     }
@@ -58,6 +58,7 @@ public class FrmInformePruebaEntrada extends javax.swing.JInternalFrame {
     
     private void cargarTabla(){
         DefaultTableModel modelo = new DefaultTableModel(null,new Object[]{"Nro", "Conocimiento o Habilidad","No Aceptable","%","Suficiente","%","Bueno","%","Total"});
+        
         tabla.setModel(modelo);
     }
     
@@ -96,11 +97,13 @@ public class FrmInformePruebaEntrada extends javax.swing.JInternalFrame {
         
     }
     
-    private void agregarFila(){
+    private void agregarFila(int contador){
         DefaultTableModel modelo = (DefaultTableModel) tabla.getModel();
-        modelo.addRow(new Object[]{"", "","","","","","","",""});
+        modelo.addRow(new Object[]{contador, "","","","","","","",""});
+        modelo.isCellEditable(0, 0);
         tabla.setRowHeight(30);
         medidasCorrectivas.add("");
+        
     }
     
     private void removerFila(){
@@ -191,6 +194,8 @@ public class FrmInformePruebaEntrada extends javax.swing.JInternalFrame {
             }
         });
 
+        txtPractico.setEnabled(false);
+
         jLabel2.setText("Código :");
 
         jLabel3.setText("Nombre :");
@@ -199,12 +204,31 @@ public class FrmInformePruebaEntrada extends javax.swing.JInternalFrame {
 
         jLabel5.setText("Práctico :");
 
+        txtTeorico.setEnabled(false);
+
         jLabel6.setText("Docente:");
+
+        txtDocente.setEditable(false);
+        txtDocente.setEnabled(false);
+
+        txtRetirados.setEnabled(false);
 
         jLabel7.setText("Matriculados :");
 
         jLabel8.setText("Retirados :");
 
+        txtMatriculados.setEnabled(false);
+
+        tabla = new javax.swing.JTable(){
+            public boolean isCellEditable(int rowIndex, int colIndex){
+                if(colIndex == 0 || colIndex == 3 || colIndex == 5 || colIndex == 7 || colIndex == 8){
+                    return false;
+                }
+                else{
+                    return true;
+                }
+            }
+        };
         tabla.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
@@ -262,6 +286,8 @@ public class FrmInformePruebaEntrada extends javax.swing.JInternalFrame {
         jLabel10.setText("Evaluados:");
 
         jLabel11.setText("Abandono :");
+
+        txtAbandono.setEnabled(false);
 
         btnEnviar.setText("Enviar");
         btnEnviar.addActionListener(new java.awt.event.ActionListener() {
@@ -425,10 +451,12 @@ public class FrmInformePruebaEntrada extends javax.swing.JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnAgregarFilaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarFilaActionPerformed
-        agregarFila();
+        contador++;
+        agregarFila(contador);
     }//GEN-LAST:event_btnAgregarFilaActionPerformed
 
     private void btnRemoverFilaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRemoverFilaActionPerformed
+        contador--;
         removerFila();
     }//GEN-LAST:event_btnRemoverFilaActionPerformed
 
@@ -560,7 +588,6 @@ public class FrmInformePruebaEntrada extends javax.swing.JInternalFrame {
 
     private void btnCalcularPorcentajesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCalcularPorcentajesActionPerformed
         int filas = tabla.getRowCount();
-        ClsRenderTable render = new ClsRenderTable();
         if (!txtEvaluados.getText().equals("")) {
             int evaluados = Integer.parseInt(txtEvaluados.getText());
             int matriculados = Integer.parseInt(txtMatriculados.getText());
@@ -592,7 +619,6 @@ public class FrmInformePruebaEntrada extends javax.swing.JInternalFrame {
                                                 ((CantSuficiente*100)/evaluados) +
                                                 ((CantBueno*100)/evaluados)), i, 8);
                             
-                            tabla.setDefaultRenderer(Object.class, render);
                             calculadoPorcentajes = true;
                         }
                     }
@@ -611,6 +637,7 @@ public class FrmInformePruebaEntrada extends javax.swing.JInternalFrame {
         else{
             JOptionPane.showMessageDialog(null, "Ingrese la cantidad de evaluados.");
         }
+        tabla.setDefaultRenderer(Object.class, new  ClsRenderTable());
     }//GEN-LAST:event_btnCalcularPorcentajesActionPerformed
 
     private void tablaMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tablaMousePressed
