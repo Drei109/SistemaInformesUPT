@@ -103,5 +103,17 @@ public class ClsNegocioDetallePruebaEntrada implements ClsInterfaceDetallePrueba
             return null;
         }
     }
+
+    @Override
+    public void EliminarDetallPruebaEntradaTodo(String codigo) {
+        try {
+            cst = conexion.prepareCall("{call USP_DetallePruebaEntrada_D_Todos(?)}");
+            cst.setString("pidPruebaEntrada",codigo);
+            
+            cst.execute();
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+    }
     
 }
