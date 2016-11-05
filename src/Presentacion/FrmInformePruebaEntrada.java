@@ -42,6 +42,9 @@ public class FrmInformePruebaEntrada extends javax.swing.JInternalFrame {
     boolean filaRemovida = false;
     
     
+    
+    String IDPruebaEntrada = "--";
+    
     public FrmInformePruebaEntrada() {
         initComponents();
     }
@@ -145,6 +148,8 @@ public class FrmInformePruebaEntrada extends javax.swing.JInternalFrame {
         txtAbandono = new javax.swing.JTextField();
         btnEnviar = new javax.swing.JButton();
         btnCalcularPorcentajes = new javax.swing.JButton();
+        btnAceptar = new javax.swing.JButton();
+        btnRechazar = new javax.swing.JButton();
 
         addInternalFrameListener(new javax.swing.event.InternalFrameListener() {
             public void internalFrameActivated(javax.swing.event.InternalFrameEvent evt) {
@@ -270,6 +275,20 @@ public class FrmInformePruebaEntrada extends javax.swing.JInternalFrame {
             }
         });
 
+        btnAceptar.setText("Aceptar");
+        btnAceptar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAceptarActionPerformed(evt);
+            }
+        });
+
+        btnRechazar.setText("Rechazar");
+        btnRechazar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnRechazarActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -325,8 +344,13 @@ public class FrmInformePruebaEntrada extends javax.swing.JInternalFrame {
                                             .addComponent(txtEvaluados, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                             .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(btnEnviar, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(btnCalcularPorcentajes, javax.swing.GroupLayout.PREFERRED_SIZE, 185, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addComponent(btnCalcularPorcentajes, javax.swing.GroupLayout.PREFERRED_SIZE, 185, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(btnAceptar, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(40, 40, 40)
+                                        .addComponent(btnRechazar)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(btnEnviar, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE)))
                                 .addGap(18, 18, 18)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                                     .addGroup(layout.createSequentialGroup()
@@ -389,7 +413,9 @@ public class FrmInformePruebaEntrada extends javax.swing.JInternalFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnCerrar)
                     .addComponent(btnGuardar)
-                    .addComponent(btnEnviar))
+                    .addComponent(btnEnviar)
+                    .addComponent(btnAceptar)
+                    .addComponent(btnRechazar))
                 .addGap(38, 38, 38))
         );
 
@@ -472,7 +498,7 @@ public class FrmInformePruebaEntrada extends javax.swing.JInternalFrame {
         int filas = tabla.getRowCount();
         
         
-        String IDPruebaEntrada = "--";
+        
         try {
             
             //GUARDAR PRUEBA DE ENTRADA
@@ -595,6 +621,38 @@ public class FrmInformePruebaEntrada extends javax.swing.JInternalFrame {
         }
     }//GEN-LAST:event_tablaMousePressed
 
+    private void btnRechazarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRechazarActionPerformed
+        String estado = "Aceptado";
+        ClsNegocioPruebaEntrada nego = new ClsNegocioPruebaEntrada();
+        nego.ModificarEstadoPruebaEntrada(IDPruebaEntrada, estado);
+    }//GEN-LAST:event_btnRechazarActionPerformed
+
+    private void btnAceptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAceptarActionPerformed
+        ClsNegocioDetallePruebaEntrada negocioDetalle = new ClsNegocioDetallePruebaEntrada();
+        ResultSet rs;
+        try {
+            rs = negocioDetalle.ObtenerIdPruebaEntrada(idPlanEstudios);
+            while (rs.next()) {
+                IDPruebaEntrada = rs.getString(1);
+            }
+            negocioDetalle.cst.close();
+            negocioDetalle.conexion.close();
+            
+            String estado = "Aceptado";
+            
+            ClsNegocioPruebaEntrada prueba = new ClsNegocioPruebaEntrada();
+            prueba.ModificarEstadoPruebaEntrada(IDPruebaEntrada, estado);
+            
+            prueba.cst.close();
+            prueba.conexion.close();
+            
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(null, "No se pudo Modificar el Estado de la Prueba de Entrada.");
+        }
+        
+        
+    }//GEN-LAST:event_btnAceptarActionPerformed
+
     private void recibeDatosFormulario(){
         
         cmbCodigoCurso.removeAllItems();
@@ -634,11 +692,13 @@ public class FrmInformePruebaEntrada extends javax.swing.JInternalFrame {
     
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnAceptar;
     private javax.swing.JButton btnAgregarFila;
     private javax.swing.JButton btnCalcularPorcentajes;
     private javax.swing.JButton btnCerrar;
     private javax.swing.JButton btnEnviar;
     private javax.swing.JButton btnGuardar;
+    private javax.swing.JButton btnRechazar;
     private javax.swing.JButton btnRemoverFila;
     private javax.swing.JComboBox<String> cmbCodigoCurso;
     private javax.swing.JComboBox<String> cmbNombreCurso;
