@@ -210,7 +210,7 @@ public class FrmReportesFaltantes extends javax.swing.JInternalFrame {
                 e.printStackTrace();
             }
 
-            FrmInformePruebaEntrada info = new FrmInformePruebaEntrada(campo);
+            FrmInformePruebaEntrada info = new FrmInformePruebaEntrada(campo,true);
             FrmPrinicipal.escritorio.add(info);
             info.setVisible(true);
             this.dispose();

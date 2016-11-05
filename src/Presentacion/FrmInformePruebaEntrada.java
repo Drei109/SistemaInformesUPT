@@ -40,6 +40,7 @@ public class FrmInformePruebaEntrada extends javax.swing.JInternalFrame {
     ArrayList<String> medidasCorrectivas = new ArrayList<>();
     int filaSeleccionada = -2;
     boolean filaRemovida = false;
+    boolean guardarNuevo = true;
     
     
     
@@ -49,9 +50,10 @@ public class FrmInformePruebaEntrada extends javax.swing.JInternalFrame {
         initComponents();
     }
        
-    public FrmInformePruebaEntrada(String[] datoPEF){
+    public FrmInformePruebaEntrada(String[] datoPEF, boolean guardarNuevo){
         initComponents();
         this.datoPE = datoPEF;
+        this.guardarNuevo = guardarNuevo;
     }
     
     private void cargarTabla(){
@@ -469,7 +471,11 @@ public class FrmInformePruebaEntrada extends javax.swing.JInternalFrame {
     private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed
         if (calculadoPorcentajes) {
             String estado = "Guardado";
-            guardarInforme(estado);
+            if (guardarNuevo) {
+                guardarInforme(estado);
+            }else{
+                
+            }
             this.dispose();
         }
         else{
@@ -622,9 +628,27 @@ public class FrmInformePruebaEntrada extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_tablaMousePressed
 
     private void btnRechazarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRechazarActionPerformed
-        String estado = "Aceptado";
-        ClsNegocioPruebaEntrada nego = new ClsNegocioPruebaEntrada();
-        nego.ModificarEstadoPruebaEntrada(IDPruebaEntrada, estado);
+        ClsNegocioDetallePruebaEntrada negocioDetalle = new ClsNegocioDetallePruebaEntrada();
+        ResultSet rs;
+        try {
+            rs = negocioDetalle.ObtenerIdPruebaEntrada(idPlanEstudios);
+            while (rs.next()) {
+                IDPruebaEntrada = rs.getString(1);
+            }
+            negocioDetalle.cst.close();
+            negocioDetalle.conexion.close();
+            
+            String estado = "Rechazado";
+            
+            ClsNegocioPruebaEntrada prueba = new ClsNegocioPruebaEntrada();
+            prueba.ModificarEstadoPruebaEntrada(IDPruebaEntrada, estado);
+            
+            prueba.cst.close();
+            prueba.conexion.close();
+            
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(null, "No se pudo Modificar el Estado de la Prueba de Entrada.");
+        }
     }//GEN-LAST:event_btnRechazarActionPerformed
 
     private void btnAceptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAceptarActionPerformed
@@ -649,8 +673,6 @@ public class FrmInformePruebaEntrada extends javax.swing.JInternalFrame {
         } catch (Exception ex) {
             JOptionPane.showMessageDialog(null, "No se pudo Modificar el Estado de la Prueba de Entrada.");
         }
-        
-        
     }//GEN-LAST:event_btnAceptarActionPerformed
 
     private void recibeDatosFormulario(){

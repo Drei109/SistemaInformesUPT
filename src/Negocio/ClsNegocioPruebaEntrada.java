@@ -39,8 +39,8 @@ public class ClsNegocioPruebaEntrada implements ClsInterfacePruebaEntrada{
             cst = conexion.prepareCall("{call USP_PruebaEntrada_U(?,?,?,?)}");
             cst.setString("pidPruebaEntrada", String.valueOf(PruebaEntrada.getIdPruebaEntrada())); 
             cst.setString("pidCargaAcademica",  String.valueOf(PruebaEntrada.getIdCargaAcademica()));
-            cst.setString("pestadoPruebaEntrada", PruebaEntrada.getEstado());
             cst.setString("pevaluados",  String.valueOf(PruebaEntrada.getEvaluados()));
+            cst.setString("pestadoPruebaEntrada", PruebaEntrada.getEstado());
             cst.execute();
         } catch (SQLException ex) {
             ex.printStackTrace();
