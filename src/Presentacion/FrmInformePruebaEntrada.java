@@ -40,15 +40,17 @@ public class FrmInformePruebaEntrada extends javax.swing.JInternalFrame {
     ArrayList<String> medidasCorrectivas = new ArrayList<>();
     int filaSeleccionada = -2;
     boolean filaRemovida = false;
+    boolean guardarNuevo = true;
     
     
     public FrmInformePruebaEntrada() {
         initComponents();
     }
        
-    public FrmInformePruebaEntrada(String[] datoPEF){
+    public FrmInformePruebaEntrada(String[] datoPEF, boolean guardarNuevo){
         initComponents();
         this.datoPE = datoPEF;
+        this.guardarNuevo = guardarNuevo;
     }
     
     private void cargarTabla(){
@@ -443,7 +445,11 @@ public class FrmInformePruebaEntrada extends javax.swing.JInternalFrame {
     private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed
         if (calculadoPorcentajes) {
             String estado = "Guardado";
-            guardarInforme(estado);
+            if (guardarNuevo) {
+                guardarInforme(estado);
+            }else{
+                
+            }
             this.dispose();
         }
         else{

@@ -23,7 +23,7 @@ public class FrmConsultaPruebaEntrada extends javax.swing.JInternalFrame {
     DefaultTableModel dtm = new DefaultTableModel();
     String nivelUsuario = "";
     String codDocente = "";
-    public ArrayList<ClsNegocioPruebaEntrada> dato = null;
+//    public ArrayList<ClsNegocioPruebaEntrada> dato;
     
     public FrmConsultaPruebaEntrada(String nivelUsuario,String codDocente) {
         initComponents();
@@ -178,7 +178,7 @@ public class FrmConsultaPruebaEntrada extends javax.swing.JInternalFrame {
                 e.printStackTrace();
             }
 
-            FrmInformePruebaEntrada info = new FrmInformePruebaEntrada(campo);
+            FrmInformePruebaEntrada info = new FrmInformePruebaEntrada(campo,false);
             FrmPrinicipal.escritorio.add(info);
             info.setVisible(true);
         }        
