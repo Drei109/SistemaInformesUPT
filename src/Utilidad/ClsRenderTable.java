@@ -18,25 +18,32 @@ public class ClsRenderTable extends DefaultTableCellRenderer{
     public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int column) {
         
         JLabel cell = (JLabel) super.getTableCellRendererComponent(table, value, isSelected, hasFocus, row, column); //To change body of generated methods, choose Tools | Templates.
+        
+        /*(sufi + bueno) > evaluados/2*/
         if (value instanceof Integer) {
             int valor  = (int) value;
             if (column == 3 || column == 5 || column == 7) {
-                if (valor <= 15) {
-                    cell.setBackground(Color.red);
-                    cell.setForeground(Color.BLACK);
-                }
-                else if (valor > 15 && valor < 50) {
-                    cell.setBackground(Color.YELLOW);
-                    cell.setForeground(Color.BLACK);
-                }
-                else if (valor >= 50 && valor <= 100) {
-                    cell.setBackground(Color.GREEN);
-                    cell.setForeground(Color.WHITE);
-                }
+                cell.setBackground(Color.yellow);
+                cell.setForeground(Color.BLACK);
             }
             if (column == 0) {
                 cell.setBackground(Color.WHITE);
                 cell.setForeground(Color.BLACK);
+            }
+            if (column == 8) {
+                int sufi = Integer.parseInt(String.valueOf(FrmInformePruebaEntrada.tabla.getValueAt(row,4)));
+                int bueno = Integer.parseInt(String.valueOf(FrmInformePruebaEntrada.tabla.getValueAt(row, 6)));
+                int eva   = Integer.parseInt(FrmInformePruebaEntrada.txtEvaluados.getText());
+                
+                if ( (sufi+bueno) > (eva/2) ) {
+                    cell.setBackground(Color.GREEN);
+                    cell.setForeground(Color.BLACK);
+                }
+                else{
+                    cell.setBackground(Color.RED);
+                    cell.setForeground(Color.BLACK);
+                }
+                
             }
         }
         if (value instanceof String) {

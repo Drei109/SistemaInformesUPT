@@ -351,6 +351,7 @@
           </Events>
           <AuxValues>
             <AuxValue name="JavaCodeGenerator_InitCodePre" type="java.lang.String" value="tabla = new javax.swing.JTable(){&#xa;    public boolean isCellEditable(int rowIndex, int colIndex){&#xa;        if(colIndex == 0 || colIndex == 3 || colIndex == 5 || colIndex == 7 || colIndex == 8){&#xa;            return false;&#xa;        }&#xa;        else{&#xa;            return true;&#xa;        }&#xa;    }&#xa;};"/>
+            <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="9"/>
           </AuxValues>
         </Component>
       </SubComponents>

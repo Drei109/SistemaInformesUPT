@@ -830,7 +830,7 @@ public class FrmInformePruebaEntrada extends javax.swing.JInternalFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JLabel lblSemestre;
-    private javax.swing.JTable tabla;
+    public static javax.swing.JTable tabla;
     private javax.swing.JTextField txtAbandono;
     private javax.swing.JTextArea txtComentario;
     private javax.swing.JTextField txtDocente;
