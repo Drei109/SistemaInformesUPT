@@ -36,6 +36,7 @@ public class FrmInformePruebaEntrada extends javax.swing.JInternalFrame {
     String idPruebaEntrada;
     private boolean menuAbierto = false;
     public String[] datoPE = null;
+    private boolean calculadoPorcentajes = false;
     
     
     public FrmInformePruebaEntrada() {
@@ -424,9 +425,14 @@ public class FrmInformePruebaEntrada extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_cmbNombreCursoActionPerformed
 
     private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed
-        String estado = "Guardado";
-        guardarInforme(estado);
-        this.dispose();
+        if (calculadoPorcentajes) {
+            String estado = "Guardado";
+            guardarInforme(estado);
+            this.dispose();
+        }
+        else{
+            JOptionPane.showMessageDialog(null, "Tabla vacia.");
+        }
     }//GEN-LAST:event_btnGuardarActionPerformed
 
     private void guardarInforme(String estado){
@@ -494,9 +500,14 @@ public class FrmInformePruebaEntrada extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_btnCerrarActionPerformed
 
     private void btnEnviarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEnviarActionPerformed
-        String estado = "Enviado";
-        guardarInforme(estado);
-        this.dispose();
+        if (calculadoPorcentajes) {
+            String estado = "Enviado";
+            guardarInforme(estado);
+            this.dispose();
+        }
+        else{
+            JOptionPane.showMessageDialog(null, "Tabla vacia.");
+        }
     }//GEN-LAST:event_btnEnviarActionPerformed
 
     private void btnCalcularPorcentajesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCalcularPorcentajesActionPerformed
@@ -534,6 +545,7 @@ public class FrmInformePruebaEntrada extends javax.swing.JInternalFrame {
                                                 ((CantBueno*100)/evaluados)), i, 8);
                             
                             tabla.setDefaultRenderer(Object.class, render);
+                            calculadoPorcentajes = true;
                         }
                     }
                     else{

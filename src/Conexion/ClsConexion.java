@@ -11,16 +11,16 @@ public class ClsConexion {
        try {
            // MYSQL Server
            MysqlConnectionPoolDataSource ds = new MysqlConnectionPoolDataSource();
-//           ds.setServerName("localhost"); //ip,nombre,domino
-//           ds.setPort(3306);
-//           ds.setDatabaseName("sistemaupt");
-//           cnxmysql = ds.getConnection("root","");          
-           
-           ds.setServerName("us-cdbr-azure-southcentral-f.cloudapp.net"); //ip,nombre,domino
+           ds.setServerName("localhost"); //ip,nombre,domino
            ds.setPort(3306);
-//           ds.setConnectTimeout(250);
            ds.setDatabaseName("sistemasupt");
-           cnxmysql = ds.getConnection("b2fe0e0d9cd109","d27f4f27");          
+           cnxmysql = ds.getConnection("root","");          
+           
+//           ds.setServerName("us-cdbr-azure-southcentral-f.cloudapp.net"); //ip,nombre,domino
+//           ds.setPort(3306);
+//           ds.setConnectTimeout(250);
+//           ds.setDatabaseName("sistemasupt");
+//           cnxmysql = ds.getConnection("b2fe0e0d9cd109","d27f4f27");          
            
        } catch (Exception e) {
            JOptionPane.showMessageDialog(null,"Error de conexión a la BD");
