@@ -37,6 +37,9 @@ public class FrmInformePruebaEntrada extends javax.swing.JInternalFrame {
     private boolean menuAbierto = false;
     public String[] datoPE = null;
     private boolean calculadoPorcentajes = false;
+    ArrayList<String> medidasCorrectivas = new ArrayList<>();
+    int filaSeleccionada = -2;
+    boolean filaRemovida = false;
     
     
     public FrmInformePruebaEntrada() {
@@ -92,11 +95,19 @@ public class FrmInformePruebaEntrada extends javax.swing.JInternalFrame {
         DefaultTableModel modelo = (DefaultTableModel) tabla.getModel();
         modelo.addRow(new Object[]{"", "","","","","","","",""});
         tabla.setRowHeight(30);
+        medidasCorrectivas.add("");
     }
     
     private void removerFila(){
         DefaultTableModel modelo = (DefaultTableModel) tabla.getModel();
-        modelo.removeRow(tabla.getSelectedRow());
+        if (tabla.getSelectedRow()!= -1) {
+            filaRemovida = true;
+            medidasCorrectivas.remove(tabla.getSelectedRow());
+            modelo.removeRow(tabla.getSelectedRow());
+        } else {
+            JOptionPane.showMessageDialog(null, "¡Seleccione una fila!");
+        }
+        
     }
     
     @SuppressWarnings("unchecked")
@@ -200,6 +211,11 @@ public class FrmInformePruebaEntrada extends javax.swing.JInternalFrame {
         ));
         tabla.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         tabla.setInheritsPopupMenu(true);
+        tabla.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                tablaMousePressed(evt);
+            }
+        });
         jScrollPane1.setViewportView(tabla);
 
         jLabel9.setText("Describa las medidas correctivas que tomará en los casos de grado no aceptable:");
@@ -482,11 +498,11 @@ public class FrmInformePruebaEntrada extends javax.swing.JInternalFrame {
                 entidadDetalle.setCantNoAceptalbe(Integer.parseInt((String) tabla.getValueAt(i, 2)));
                 entidadDetalle.setCantSuficiente(Integer.parseInt((String) tabla.getValueAt(i, 4)));
                 entidadDetalle.setCantBueno(Integer.parseInt((String) tabla.getValueAt(i, 6)));
-                entidadDetalle.setMedidasCorrectivas(txtComentario.getText());
+                entidadDetalle.setMedidasCorrectivas(medidasCorrectivas.get(i));
                 negocioDetalle.AgregarDetallePruebaEntrada(entidadDetalle);
             }
             
-        JOptionPane.showMessageDialog(null, "Operacion Exitosa");
+        JOptionPane.showMessageDialog(null, "Operación Exitosa");
         
         negocioDetalle.conexion.close();
         
@@ -564,6 +580,20 @@ public class FrmInformePruebaEntrada extends javax.swing.JInternalFrame {
             JOptionPane.showMessageDialog(null, "Ingrese la cantidad de evaluados.");
         }
     }//GEN-LAST:event_btnCalcularPorcentajesActionPerformed
+
+    private void tablaMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tablaMousePressed
+        if (tabla.getSelectedRow()!= -1) {
+            if (filaSeleccionada == -2 || filaRemovida == true) {
+                filaSeleccionada = tabla.getSelectedRow();
+                txtComentario.setText(medidasCorrectivas.get(filaSeleccionada));
+                filaRemovida = false;
+            } else {
+                medidasCorrectivas.set(filaSeleccionada, txtComentario.getText());
+                filaSeleccionada = tabla.getSelectedRow();
+                txtComentario.setText(medidasCorrectivas.get(filaSeleccionada));
+            }
+        }
+    }//GEN-LAST:event_tablaMousePressed
 
     private void recibeDatosFormulario(){
         
