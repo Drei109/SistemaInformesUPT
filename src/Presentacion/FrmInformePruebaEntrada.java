@@ -88,12 +88,14 @@ public class FrmInformePruebaEntrada extends javax.swing.JInternalFrame {
             campo[7] = "";
             campo[8] = "";
 //            campo[6] = objDetalle.getMedidasCorrectivas();
-            txtComentario.setText(objDetalle.getMedidasCorrectivas());
+//            txtComentario.setText(objDetalle.getMedidasCorrectivas());
+            medidasCorrectivas.add(objDetalle.getMedidasCorrectivas());
             
             modelo.addRow(campo);
             
         }
         tabla.setModel(modelo);
+        calcularPorcentajes();
         
     }
     
@@ -470,6 +472,9 @@ public class FrmInformePruebaEntrada extends javax.swing.JInternalFrame {
             cargarDatosTabla();            
         } 
         menuAbierto = true;
+        DefaultTableModel modelo = (DefaultTableModel) tabla.getModel();
+        tabla.setRowHeight(30);
+
     }//GEN-LAST:event_formInternalFrameOpened
 
     private void cmbCodigoCursoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbCodigoCursoActionPerformed
@@ -502,7 +507,10 @@ public class FrmInformePruebaEntrada extends javax.swing.JInternalFrame {
             if (guardarNuevo) {
                 guardarInforme(estado);
             }else{
-                
+                if (tabla.getSelectedRow() != -1) {
+                    medidasCorrectivas.set(tabla.getSelectedRow(), txtComentario.getText());
+                }
+                actualizarInforme();
             }
             this.dispose();
         }
@@ -511,6 +519,58 @@ public class FrmInformePruebaEntrada extends javax.swing.JInternalFrame {
         }
     }//GEN-LAST:event_btnGuardarActionPerformed
 
+    private void actualizarInforme(){
+        ClsEntidadDetallePruebaEntrada entidadDetalle = new ClsEntidadDetallePruebaEntrada();
+        
+        ClsNegocioPruebaEntrada negocioPrueba = new ClsNegocioPruebaEntrada();
+        ClsEntidadPruebaEntrada entidadPrueba = new ClsEntidadPruebaEntrada();
+        
+        
+        int filas = tabla.getRowCount();
+        
+        
+        
+        try {
+            
+            //MODIFICAR PRUEBA DE ENTRADA
+            entidadPrueba.setIdCargaAcademica(Integer.parseInt(idPlanEstudios));
+            entidadPrueba.setEstado("Guardado");
+            entidadPrueba.setEvaluados(Integer.parseInt(txtEvaluados.getText()));
+
+            negocioPrueba.ModificarPruebaEntrada(datoPE[9],entidadPrueba);
+            negocioPrueba.cst.close();
+            negocioPrueba.conexion.close();
+            
+            //MODIFICAR DETALLE DE PRUEBA DE ENTRADA
+            ClsNegocioDetallePruebaEntrada negocioDetalle = new ClsNegocioDetallePruebaEntrada();
+            negocioDetalle.EliminarDetallPruebaEntradaTodo(datoPE[9]);
+            
+            
+            ResultSet rs = negocioDetalle.ObtenerIdPruebaEntrada(idPlanEstudios);
+            while (rs.next()) {
+                IDPruebaEntrada = rs.getString(1);
+            }
+            
+            //3 5 7
+            for (int i = 0; i < filas; i++) {
+                entidadDetalle.setIdPruebaEntrada(Integer.parseInt(IDPruebaEntrada));
+                entidadDetalle.setHabilidad((String) tabla.getValueAt(i, 1));
+                entidadDetalle.setCantNoAceptalbe(Integer.parseInt((String) tabla.getValueAt(i, 2)));
+                entidadDetalle.setCantSuficiente(Integer.parseInt((String) tabla.getValueAt(i, 4)));
+                entidadDetalle.setCantBueno(Integer.parseInt((String) tabla.getValueAt(i, 6)));
+                entidadDetalle.setMedidasCorrectivas(medidasCorrectivas.get(i));
+                negocioDetalle.AgregarDetallePruebaEntrada(entidadDetalle);
+            }
+            
+        JOptionPane.showMessageDialog(null, "Operación Exitosa");
+        
+        negocioDetalle.conexion.close();
+        
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(null, ex);
+        }
+    }
+    
     private void guardarInforme(String estado){
         /**
          * @param valores           String          "Almacena todos los id de la tabla"
@@ -587,6 +647,10 @@ public class FrmInformePruebaEntrada extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_btnEnviarActionPerformed
 
     private void btnCalcularPorcentajesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCalcularPorcentajesActionPerformed
+        calcularPorcentajes();
+    }                                                      
+
+    private void calcularPorcentajes(){
         int filas = tabla.getRowCount();
         if (!txtEvaluados.getText().equals("")) {
             int evaluados = Integer.parseInt(txtEvaluados.getText());
@@ -637,6 +701,7 @@ public class FrmInformePruebaEntrada extends javax.swing.JInternalFrame {
         else{
             JOptionPane.showMessageDialog(null, "Ingrese la cantidad de evaluados.");
         }
+
         tabla.setDefaultRenderer(Object.class, new  ClsRenderTable());
     }//GEN-LAST:event_btnCalcularPorcentajesActionPerformed
 
