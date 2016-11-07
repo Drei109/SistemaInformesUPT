@@ -1,0 +1,227 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="report name" pageWidth="1000" pageHeight="595" orientation="Landscape" columnWidth="960" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="3c4e1b89-f4c1-4cc1-940e-af02e69a25aa">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<style name="table">
+		<box>
+			<pen lineWidth="1.0" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table_TH" mode="Opaque" backcolor="#0055ED">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table_CH" mode="Opaque" backcolor="#E6EFFF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table_TD" mode="Opaque" backcolor="#FFFFFF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table 1">
+		<box>
+			<pen lineWidth="1.0" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table 1_TH" mode="Opaque" backcolor="#0081FF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table 1_CH" mode="Opaque" backcolor="#E6F2FF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table 1_TD" mode="Opaque" backcolor="#FFFFFF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<subDataset name="Table Dataset 1" uuid="41038d59-122f-4534-aae8-f0187242e699">
+		<parameter name="idPE" class="java.lang.String">
+			<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+		</parameter>
+		<queryString>
+			<![CDATA[CALL USP_DetallePruebaEntradaPorId($P{idPE});]]>
+		</queryString>
+		<field name="idDetallePruebaEntrada" class="java.lang.Integer">
+			<fieldDescription><![CDATA[]]></fieldDescription>
+		</field>
+		<field name="idPruebaEntrada" class="java.lang.Integer">
+			<fieldDescription><![CDATA[]]></fieldDescription>
+		</field>
+		<field name="habilidad" class="java.lang.String">
+			<fieldDescription><![CDATA[]]></fieldDescription>
+		</field>
+		<field name="cantNoAceptalbe" class="java.lang.Integer">
+			<fieldDescription><![CDATA[]]></fieldDescription>
+		</field>
+		<field name="cantSuficiente" class="java.lang.Integer">
+			<fieldDescription><![CDATA[]]></fieldDescription>
+		</field>
+		<field name="cantBueno" class="java.lang.Integer">
+			<fieldDescription><![CDATA[]]></fieldDescription>
+		</field>
+		<field name="medidasCorrectivas" class="java.lang.String">
+			<fieldDescription><![CDATA[]]></fieldDescription>
+		</field>
+		<variable name="total" class="java.lang.Integer">
+			<variableExpression><![CDATA[($F{cantNoAceptalbe}.intValue() +$F{cantSuficiente}.intValue() + $F{cantBueno}.intValue())]]></variableExpression>
+		</variable>
+	</subDataset>
+	<parameter name="ID" class="java.lang.String"/>
+	<queryString>
+		<![CDATA[SELECT * FROM pruebaEntrada;]]>
+	</queryString>
+	<field name="idPruebaEntrada" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="idCargaAcademica" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="fechaPruebaEntrada" class="java.sql.Timestamp">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="evaluados" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="estadoPruebaEntrada" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="339" splitType="Stretch">
+			<staticText>
+				<reportElement x="127" y="31" width="100" height="20" uuid="723be6d9-eb67-4cde-b707-4d557c56c852"/>
+				<text><![CDATA[ítmaspdkñsalged]]></text>
+			</staticText>
+			<componentElement>
+				<reportElement key="table 1" style="table 1" x="21" y="109" width="900" height="140" uuid="74bf308b-ad89-45ed-aabc-7002d9d48b70"/>
+				<jr:table xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd">
+					<datasetRun subDataset="Table Dataset 1" uuid="d1898491-3cca-4e5b-abad-77052a60d8ab">
+						<datasetParameter name="idPE">
+							<datasetParameterExpression><![CDATA[$P{ID}]]></datasetParameterExpression>
+						</datasetParameter>
+					</datasetRun>
+					<jr:column width="29" uuid="f33a9023-eff4-42b4-8461-5ccc0cb9240d">
+						<jr:columnHeader style="table 1_CH" height="60" rowSpan="2"/>
+						<jr:columnFooter style="table 1_CH" height="5" rowSpan="1"/>
+						<jr:detailCell style="table 1_TD" height="20" rowSpan="1">
+							<textField>
+								<reportElement x="0" y="0" width="29" height="20" uuid="9c78fa4a-3625-4807-ab15-39733d45e4eb"/>
+								<textFieldExpression><![CDATA[$F{idDetallePruebaEntrada}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="231" uuid="7ce9e751-9a22-49a4-8816-29233009d896">
+						<jr:columnHeader style="table 1_CH" height="60" rowSpan="2"/>
+						<jr:columnFooter style="table 1_CH" height="5" rowSpan="1"/>
+						<jr:detailCell style="table 1_TD" height="20" rowSpan="1">
+							<textField>
+								<reportElement x="12" y="0" width="58" height="19" uuid="9b486daf-1de0-4137-b18f-1f5be5605345"/>
+								<textFieldExpression><![CDATA[$F{habilidad}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:columnGroup width="326" uuid="9b9c35b2-0cf4-4c49-9255-e8f3b3247029">
+						<jr:columnHeader style="table_CH" height="30" rowSpan="1"/>
+						<jr:columnFooter style="table_CH" height="5" rowSpan="1"/>
+						<jr:column width="44" uuid="68d9d333-fc73-4947-910d-8bf10c06229a">
+							<jr:columnHeader style="table_CH" height="30" rowSpan="1"/>
+							<jr:detailCell style="table_TD" height="20" rowSpan="1">
+								<textField>
+									<reportElement x="0" y="0" width="42" height="19" uuid="b23bb0d6-73c4-4e7e-b197-76e22697d0a2"/>
+									<textFieldExpression><![CDATA[$F{cantNoAceptalbe}]]></textFieldExpression>
+								</textField>
+							</jr:detailCell>
+						</jr:column>
+						<jr:column width="37" uuid="dd8c46c4-4e7f-484c-8bb7-c173e9510d91">
+							<jr:columnHeader style="table_CH" height="30" rowSpan="1"/>
+							<jr:detailCell style="table_TD" height="20" rowSpan="1">
+								<textField pattern="###0.00">
+									<reportElement x="0" y="0" width="37" height="19" uuid="d3393941-f043-4a9e-a0d6-fca0077da2ff"/>
+									<textFieldExpression><![CDATA[($F{cantNoAceptalbe}.doubleValue() * 103)/ ($F{cantNoAceptalbe}+$F{cantSuficiente}+$F{cantBueno})]]></textFieldExpression>
+								</textField>
+							</jr:detailCell>
+						</jr:column>
+						<jr:column width="40" uuid="c88acaf2-e105-46b2-b90c-ba5934962ced">
+							<jr:columnHeader style="table_CH" height="30" rowSpan="1"/>
+							<jr:detailCell style="table_TD" height="20" rowSpan="1">
+								<textField>
+									<reportElement x="0" y="0" width="40" height="19" uuid="12679629-7058-4540-8ff1-891bb751e395"/>
+									<textFieldExpression><![CDATA[$F{cantSuficiente}]]></textFieldExpression>
+								</textField>
+							</jr:detailCell>
+						</jr:column>
+						<jr:column width="41" uuid="7e7dc6ad-7319-4a1d-aaf1-1d48afdc7f2d">
+							<jr:columnHeader style="table_CH" height="30" rowSpan="1"/>
+							<jr:detailCell style="table_TD" height="20" rowSpan="1">
+								<textField pattern="###0.00">
+									<reportElement x="0" y="0" width="41" height="19" uuid="57980bda-3d63-486a-8aab-2f879464b622"/>
+									<textFieldExpression><![CDATA[($F{cantSuficiente}.doubleValue() * 103)/ ($F{cantNoAceptalbe}+$F{cantSuficiente}+$F{cantBueno})]]></textFieldExpression>
+								</textField>
+							</jr:detailCell>
+						</jr:column>
+						<jr:column width="38" uuid="4c91a687-2487-42f0-90a2-7bc9da19aa13">
+							<jr:columnHeader style="table_CH" height="30" rowSpan="1"/>
+							<jr:detailCell style="table_TD" height="20" rowSpan="1">
+								<textField>
+									<reportElement x="0" y="0" width="38" height="19" uuid="0616bad7-932b-4d3a-95d5-add6d8f99ecf"/>
+									<textFieldExpression><![CDATA[$F{cantBueno}]]></textFieldExpression>
+								</textField>
+							</jr:detailCell>
+						</jr:column>
+						<jr:column width="41" uuid="90d3ea8a-9328-4446-9e72-a76f21e1e85c">
+							<jr:columnHeader style="table_CH" height="30" rowSpan="1"/>
+							<jr:detailCell style="table_TD" height="20" rowSpan="1">
+								<textField pattern="###0.00">
+									<reportElement x="0" y="0" width="41" height="20" uuid="ab2cdf62-7d45-443d-8b43-0376b1e7caf3"/>
+									<textFieldExpression><![CDATA[($F{cantBueno}.doubleValue() * 103)/ ($F{cantNoAceptalbe}+$F{cantSuficiente}+$F{cantBueno})]]></textFieldExpression>
+								</textField>
+							</jr:detailCell>
+						</jr:column>
+						<jr:column width="64" uuid="e2f8c8c1-1a1a-4762-a3bb-b7cac875026f">
+							<jr:columnHeader style="table_CH" height="30" rowSpan="1"/>
+							<jr:detailCell style="table_TD" height="20" rowSpan="1">
+								<staticText>
+									<reportElement x="0" y="0" width="64" height="20" uuid="03f4214d-afd3-4f9b-8f49-4208ff735785"/>
+									<text><![CDATA[100 %]]></text>
+								</staticText>
+							</jr:detailCell>
+						</jr:column>
+						<jr:column width="21" uuid="9d5c6450-718d-4c0f-9ea7-b7448aa447c7">
+							<jr:columnHeader style="table_CH" height="30" rowSpan="1"/>
+							<jr:detailCell style="table_TD" height="20" rowSpan="1"/>
+						</jr:column>
+					</jr:columnGroup>
+				</jr:table>
+			</componentElement>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="35" splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band height="61" splitType="Stretch"/>
+	</columnHeader>
+	<detail>
+		<band height="70" splitType="Stretch"/>
+	</detail>
+	<columnFooter>
+		<band height="45" splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="54" splitType="Stretch"/>
+	</pageFooter>
+	<summary>
+		<band height="42" splitType="Stretch"/>
+	</summary>
+</jasperReport>
