@@ -15,6 +15,8 @@ public class ClsEntidadPruebaCursosFaltantes {
     private int alumnosAbandono;
     private String codigoDocente;
     private String nombreDocente;
+    private String emailDocente;
+    private String celuDocente;
     
     public String getIdCurso() {
         return idCurso;
@@ -87,6 +89,20 @@ public class ClsEntidadPruebaCursosFaltantes {
     public void setNombreDocente(String nombreDocente) {
         this.nombreDocente = nombreDocente;
     }
-    
+    public String getEmailDocente() {
+        return emailDocente;
+    }
+
+    public void setEmailDocente(String emailDocente) {
+        this.emailDocente = emailDocente;
+    }
+
+    public String getCeluDocente() {
+        return celuDocente;
+    }
+
+    public void setCeluDocente(String celuDocente) {
+        this.celuDocente = celuDocente;
+    }
     
 }
