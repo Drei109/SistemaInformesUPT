@@ -74,17 +74,19 @@ public class ClsNegocioPruebaEntrada implements ClsInterfacePruebaEntrada{
     }
 
     @Override
-    public ArrayList hacerInformePruebaFaltante(String codDocente){
+    public ArrayList hacerInformePruebaFaltante(String codDocente, String busqueda){
         ArrayList<ClsEntidadPruebaCursosFaltantes> Usuario = new ArrayList<ClsEntidadPruebaCursosFaltantes>();
         
         try {
-            CallableStatement cst = conexion.prepareCall("{call USP_FaltaInforme(?)}");
+            CallableStatement cst = conexion.prepareCall("{call USP_FaltaInforme(?,?)}");
             cst.setString("pcodDocente", codDocente);
+            cst.setString("pbusqueda", busqueda);
             rs = cst.executeQuery();
+            
             
             while (rs.next()) {
                 ClsEntidadPruebaCursosFaltantes pru = new ClsEntidadPruebaCursosFaltantes();
-                
+
                 pru.setIdCurso(rs.getString("idCurso"));
                 pru.setNombreCurso(rs.getString("nombre"));
                 pru.setHorasTeoricas(rs.getInt("horasTeoricas"));
@@ -94,9 +96,13 @@ public class ClsNegocioPruebaEntrada implements ClsInterfacePruebaEntrada{
                 pru.setAlumnosAbandono(rs.getInt("alumnosAbandono"));
                 pru.setCodigoDocente(rs.getString("codDocente"));
                 pru.setNombreDocente(rs.getString("nombreDocente"));
-                
+                pru.setEmailDocente("emailDocente");
+                pru.setCeluDocente("celularDocente");
+
                 Usuario.add(pru);
             }
+            
+            
             return Usuario;
         } catch (Exception e) {
             e.printStackTrace();
