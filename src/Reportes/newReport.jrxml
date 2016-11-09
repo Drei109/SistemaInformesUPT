@@ -54,6 +54,46 @@
 		</box>
 	</style>
 	<style name="font" isDefault="true" fontName="DejaVu Sans"/>
+	<style name="table 2">
+		<box>
+			<pen lineWidth="1.0" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table 2_TH" mode="Opaque" backcolor="#0000FF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table 2_CH" mode="Opaque" backcolor="#BFBFFF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table 2_TD" mode="Opaque" backcolor="#FFFFFF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table 3">
+		<box>
+			<pen lineWidth="1.0" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table 3_TH" mode="Opaque" backcolor="#00FFFF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table 3_CH" mode="Opaque" backcolor="#BFFFFF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table 3_TD" mode="Opaque" backcolor="#FFFFFF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
 	<subDataset name="Table Dataset 1" uuid="41038d59-122f-4534-aae8-f0187242e699">
 		<parameter name="idPE" class="java.lang.String">
 			<defaultValueExpression><![CDATA[]]></defaultValueExpression>
@@ -86,13 +126,43 @@
 			<variableExpression><![CDATA[($F{cantNoAceptalbe}.intValue() +$F{cantSuficiente}.intValue() + $F{cantBueno}.intValue())]]></variableExpression>
 		</variable>
 	</subDataset>
-	<parameter name="ID" class="java.lang.String"/>
+	<subDataset name="Table Dataset 2" uuid="6f315228-997b-43a6-88cc-711654a979b9">
+		<parameter name="idPe2" class="java.lang.String">
+			<parameterDescription><![CDATA[]]></parameterDescription>
+			<defaultValueExpression><![CDATA[31]]></defaultValueExpression>
+		</parameter>
+		<queryString>
+			<![CDATA[SELECT c.idCurso,c.nombre,c.horasTeoricas,c.horasPracticas
+FROM pruebaEntrada pe 
+INNER JOIN cargaAcademica ca ON
+pe.idCargaAcademica = ca.idCargaAcademica 
+INNER JOIN curso c ON
+c.idCurso = ca.idCurso
+WHERE pe.idPruebaEntrada = $P{idPe2};]]>
+		</queryString>
+		<field name="idCurso" class="java.lang.String">
+			<fieldDescription><![CDATA[]]></fieldDescription>
+		</field>
+		<field name="nombre" class="java.lang.String">
+			<fieldDescription><![CDATA[]]></fieldDescription>
+		</field>
+		<field name="horasTeoricas" class="java.lang.Integer">
+			<fieldDescription><![CDATA[]]></fieldDescription>
+		</field>
+		<field name="horasPracticas" class="java.lang.Integer">
+			<fieldDescription><![CDATA[]]></fieldDescription>
+		</field>
+	</subDataset>
+	<parameter name="ID" class="java.lang.String">
+		<defaultValueExpression><![CDATA[31]]></defaultValueExpression>
+	</parameter>
 	<queryString>
 		<![CDATA[SELECT * FROM pruebaEntrada pe 
 INNER JOIN cargaAcademica ca ON
 pe.idCargaAcademica = ca.idCargaAcademica 
-INNER JOIN semestre s ON 
-ca.idSemestre = s.idSemestre WHERE pe.idPruebaEntrada = $P{ID};]]>
+INNER JOIN semestre s ON
+s.idSemestre = ca.idSemestre
+WHERE pe.idPruebaEntrada = $P{ID};]]>
 	</queryString>
 	<field name="idPruebaEntrada" class="java.lang.Integer">
 		<fieldDescription><![CDATA[]]></fieldDescription>
@@ -143,7 +213,7 @@ ca.idSemestre = s.idSemestre WHERE pe.idPruebaEntrada = $P{ID};]]>
 		<band splitType="Stretch"/>
 	</background>
 	<title>
-		<band height="339" splitType="Stretch">
+		<band height="384" splitType="Stretch">
 			<staticText>
 				<reportElement x="0" y="29" width="660" height="21" uuid="723be6d9-eb67-4cde-b707-4d557c56c852"/>
 				<textElement textAlignment="Center">
@@ -152,9 +222,9 @@ ca.idSemestre = s.idSemestre WHERE pe.idPruebaEntrada = $P{ID};]]>
 				<text><![CDATA[Informe de la Prueba de Entrada]]></text>
 			</staticText>
 			<componentElement>
-				<reportElement key="table 1" style="table 1" mode="Opaque" x="15" y="209" width="631" height="116" backcolor="#000000" uuid="74bf308b-ad89-45ed-aabc-7002d9d48b70"/>
+				<reportElement key="table 1" style="table 1" mode="Opaque" x="15" y="238" width="631" height="116" backcolor="#000000" uuid="74bf308b-ad89-45ed-aabc-7002d9d48b70"/>
 				<jr:table xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd">
-					<datasetRun subDataset="Table Dataset 1" uuid="d1898491-3cca-4e5b-abad-77052a60d8ab">
+					<datasetRun subDataset="Table Dataset 1" uuid="c148c2a4-0e26-4803-abf4-9fb2cede49a2">
 						<datasetParameter name="idPE">
 							<datasetParameterExpression><![CDATA[$P{ID}]]></datasetParameterExpression>
 						</datasetParameter>
@@ -370,6 +440,58 @@ ca.idSemestre = s.idSemestre WHERE pe.idPruebaEntrada = $P{ID};]]>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{nombreSemestre}]]></textFieldExpression>
 			</textField>
+			<componentElement>
+				<reportElement key="table 3" style="table 3" x="15" y="84" width="360" height="140" uuid="2e7d2435-1222-498f-bff8-d5880a6ffd7a"/>
+				<jr:table xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd">
+					<datasetRun subDataset="Table Dataset 2" uuid="a06432eb-05f2-4cfb-b154-d5bdc02ddc88">
+						<datasetParameter name="idPe2">
+							<datasetParameterExpression><![CDATA[$P{ID}]]></datasetParameterExpression>
+						</datasetParameter>
+					</datasetRun>
+					<jr:columnGroup width="360" uuid="9722b014-9d97-4a15-bc1f-e5a865e2cde1">
+						<jr:columnGroup width="360" uuid="f4971031-3537-46b0-a65a-fe37b76cf233">
+							<jr:columnHeader style="CH" height="30" rowSpan="1"/>
+							<jr:columnFooter style="CH" height="30" rowSpan="1"/>
+							<jr:column width="90" uuid="58256178-6552-4f6a-a821-c01a8cf9dc3c">
+								<jr:columnHeader style="CH" height="30" rowSpan="1"/>
+								<jr:detailCell height="30" rowSpan="1">
+									<textField>
+										<reportElement x="0" y="0" width="90" height="30" uuid="61d2c882-d8a8-4a39-bccd-20082d44e0cd"/>
+										<textFieldExpression><![CDATA[$F{idCurso}]]></textFieldExpression>
+									</textField>
+								</jr:detailCell>
+							</jr:column>
+							<jr:column width="90" uuid="6fd69efd-2783-41f3-b376-0b7f2ce626a6">
+								<jr:columnHeader style="CH" height="30" rowSpan="1"/>
+								<jr:detailCell height="30" rowSpan="1">
+									<textField>
+										<reportElement x="0" y="0" width="90" height="30" uuid="c6eabaf4-1185-4eaa-a187-c33b93c1eaa4"/>
+										<textFieldExpression><![CDATA[$F{nombre}]]></textFieldExpression>
+									</textField>
+								</jr:detailCell>
+							</jr:column>
+							<jr:column width="90" uuid="0a6fd5f2-5f2f-4191-95b2-3b9166b656de">
+								<jr:columnHeader style="CH" height="30" rowSpan="1"/>
+								<jr:detailCell height="30" rowSpan="1">
+									<textField>
+										<reportElement x="0" y="0" width="90" height="30" uuid="7df4892d-da01-440e-9835-9c9d7eb56d52"/>
+										<textFieldExpression><![CDATA[$F{horasTeoricas}]]></textFieldExpression>
+									</textField>
+								</jr:detailCell>
+							</jr:column>
+							<jr:column width="90" uuid="ba6ccbba-8b18-48b0-bc53-1aa74069971c">
+								<jr:columnHeader style="CH" height="30" rowSpan="1"/>
+								<jr:detailCell height="30" rowSpan="1">
+									<textField>
+										<reportElement x="0" y="0" width="90" height="30" uuid="83377faa-de2a-4723-ab67-e3039e918648"/>
+										<textFieldExpression><![CDATA[$F{horasPracticas}]]></textFieldExpression>
+									</textField>
+								</jr:detailCell>
+							</jr:column>
+						</jr:columnGroup>
+					</jr:columnGroup>
+				</jr:table>
+			</componentElement>
 		</band>
 	</title>
 	<pageHeader>
