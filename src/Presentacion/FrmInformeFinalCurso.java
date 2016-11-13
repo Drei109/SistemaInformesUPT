@@ -8,15 +8,17 @@ public class FrmInformeFinalCurso extends javax.swing.JInternalFrame {
 
     public String[] datoIFC = null;
     boolean guardarNuevo = true;
+    public String nivelUsuario;
     
     public FrmInformeFinalCurso() {
         initComponents();
     }
 
-    public FrmInformeFinalCurso(String[] datoRF, boolean guardarNuevo){
+    public FrmInformeFinalCurso(String[] datoRF, boolean guardarNuevo,String nivelusu){
         initComponents();
         this.datoIFC = datoRF;
         this.guardarNuevo = guardarNuevo;
+        this.nivelUsuario = nivelusu;
     }
     
     @SuppressWarnings("unchecked")
@@ -558,9 +560,37 @@ public class FrmInformeFinalCurso extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_btnCancelarActionPerformed
 
     private void formInternalFrameOpened(javax.swing.event.InternalFrameEvent evt) {//GEN-FIRST:event_formInternalFrameOpened
-        txtCodigoCurso.setText(datoIFC[0]);
+        cargarDatos();
+        if (nivelUsuario.equals("Usuario")) {
+            btnAceptar.setVisible(false);
+            btnRechazar.setVisible(false);
+        }
     }//GEN-LAST:event_formInternalFrameOpened
 
+    private void cargarDatos(){
+        txtCodigoCurso.setText(datoIFC[0]);
+        txtNombreCurso.setText(datoIFC[1]);
+        
+        int teoricas = Integer.parseInt(datoIFC[2]);
+        int practicas = Integer.parseInt(datoIFC[3]);
+        
+        if (practicas > 0) {
+            chkPractCurso.setSelected(true);
+        }
+        if (teoricas > 0) {
+            chkTeoriaCurso.setSelected(true);
+        }
+        
+        txtNumMatriculados.setText(datoIFC[4]);
+        txtNumRetirados.setText(datoIFC[5]);
+        txtNumAbandono.setText(datoIFC[6]); 
+        
+        String codigoDcoente = datoIFC[7];
+        
+        txtNombreDocente.setText(datoIFC[8]);
+        txtEmailDocente.setText(datoIFC[9]); 
+        txtCelularDocente.setText(datoIFC[10]);
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAceptar;

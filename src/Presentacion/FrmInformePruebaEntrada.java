@@ -46,6 +46,7 @@ public class FrmInformePruebaEntrada extends javax.swing.JInternalFrame {
     int filaSeleccionada = -2;
     boolean filaRemovida = false;
     boolean guardarNuevo = true;
+    String nivelUsuario;
     
     
     
@@ -55,10 +56,11 @@ public class FrmInformePruebaEntrada extends javax.swing.JInternalFrame {
         initComponents();
     }
        
-    public FrmInformePruebaEntrada(String[] datoPEF, boolean guardarNuevo){
+    public FrmInformePruebaEntrada(String[] datoPEF, boolean guardarNuevo,String nivelusu){
         initComponents();
         this.datoPE = datoPEF;
         this.guardarNuevo = guardarNuevo;
+        this.nivelUsuario = nivelusu;
     }
     
     private void cargarTabla(){
@@ -68,7 +70,7 @@ public class FrmInformePruebaEntrada extends javax.swing.JInternalFrame {
     }
     
     private void cargarDatosTabla(){
-        txtEvaluados.setText(datoPE[10]);
+//        txtEvaluados.setText(datoPE[10]);
         
         DefaultTableModel modelo = (DefaultTableModel) tabla.getModel();
         
@@ -100,7 +102,7 @@ public class FrmInformePruebaEntrada extends javax.swing.JInternalFrame {
             
         }
         tabla.setModel(modelo);
-        calcularPorcentajes();
+//        calcularPorcentajes();
         
     }
     
@@ -487,17 +489,27 @@ public class FrmInformePruebaEntrada extends javax.swing.JInternalFrame {
         /**
          * @param munuAbierto       Boolean     "Verifica que la ventana se encuentre abierta"
          */
+        
         recibeDatosFormulario();
         cargarTabla();
         if (datoPE.length == 11) {
             cargarDatosTabla();            
         } 
         menuAbierto = true;
+        evaluarNivel();
         DefaultTableModel modelo = (DefaultTableModel) tabla.getModel();
         tabla.setRowHeight(30);
 
     }//GEN-LAST:event_formInternalFrameOpened
-
+    
+    private void evaluarNivel(){
+        if (nivelUsuario.equals("Usuario")) {
+            btnAceptar.setVisible(false);
+            btnRechazar.setVisible(false);
+            btnInforme.setVisible(false);
+        }
+    }
+    
     private void cmbCodigoCursoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbCodigoCursoActionPerformed
         /**
          * @param menuAbierto       boolean     "verifica que JInternal este abierto"
@@ -716,7 +728,7 @@ public class FrmInformePruebaEntrada extends javax.swing.JInternalFrame {
 
             }
             else{
-                JOptionPane.showMessageDialog(null, "Datos incorrectos.");
+                JOptionPane.showMessageDialog(null, "Datos incorrectos (tabla).");
             }
         }
         else{
@@ -807,9 +819,7 @@ public class FrmInformePruebaEntrada extends javax.swing.JInternalFrame {
             view.setTitle("Reporte Prueba Entrada");
             view.setVisible(true);
             cnx.close();
-        } catch (JRException ex) {
-            Logger.getLogger(FrmInformePruebaEntrada.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (SQLException ex) {
+        } catch (JRException | SQLException ex) {
             Logger.getLogger(FrmInformePruebaEntrada.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_btnInformeActionPerformed
