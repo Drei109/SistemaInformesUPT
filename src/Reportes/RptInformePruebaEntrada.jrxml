@@ -2,7 +2,7 @@
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="report name" pageWidth="700" pageHeight="1000" columnWidth="660" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="3c4e1b89-f4c1-4cc1-940e-af02e69a25aa">
 	<property name="ireport.zoom" value="0.9090909090909105"/>
 	<property name="ireport.x" value="0"/>
-	<property name="ireport.y" value="223"/>
+	<property name="ireport.y" value="220"/>
 	<style name="table">
 		<box>
 			<pen lineWidth="1.0" lineColor="#000000"/>
@@ -189,19 +189,6 @@ WHERE pe.idPruebaEntrada = $P{idPe2};]]>
 			<fieldDescription><![CDATA[]]></fieldDescription>
 		</field>
 		<field name="horasPracticas" class="java.lang.Integer">
-			<fieldDescription><![CDATA[]]></fieldDescription>
-		</field>
-	</subDataset>
-	<subDataset name="Docentes" uuid="224ed604-8cd5-42dd-949c-47e032f3bb8b">
-		<queryString language="SQL">
-			<![CDATA[SELECT * FROM pruebaEntrada pe 
-INNER JOIN cargaAcademica ca ON
-pe.idCargaAcademica = ca.idCargaAcademica 
-INNER JOIN docente d ON
-d.codDocente = ca.codDocente
-WHERE pe.idPruebaEntrada = 31;]]>
-		</queryString>
-		<field name="nombreDocente" class="java.lang.String">
 			<fieldDescription><![CDATA[]]></fieldDescription>
 		</field>
 	</subDataset>

@@ -18,7 +18,9 @@ import java.io.*;
 import java.sql.Array;
 import java.sql.ResultSet;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Iterator;
+import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.DefaultComboBoxModel;
@@ -787,16 +789,25 @@ public class FrmInformePruebaEntrada extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_btnAceptarActionPerformed
 
     private void btnInformeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnInformeActionPerformed
+        Map p = new HashMap();
+        p.put("ID", datoPE[9]);
+        p.put("idPE", datoPE[9]);
+        p.put("idPe2", datoPE[9]);
+        
+        
+        Connection cnx = new ClsConexion().getConnection();
+        
         try {           
             JasperReport report;
             JasperPrint print;
-            report = JasperCompileManager.compileReport("../Sistema_Aguirre/src/Reportes/RptAvanzadoUsuario.jrxml");
+            report = JasperCompileManager.compileReport("../Proyecto-Final-Aguirre-Catalan/src/Reportes/RptInformePruebaEntrada.jrxml");
             print = JasperFillManager.fillReport(report,p,cnx);
             JasperViewer view = new JasperViewer(print,false);
-            view.setTitle("Report Avanzado de Usuario");
+            view.setTitle("Reporte Prueba Entrada");
             view.setVisible(true);
-
-        } catch (Exception ex) {
+            cnx.close();
+        } catch (JRException ex) {
+            Logger.getLogger(FrmInformePruebaEntrada.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_btnInformeActionPerformed
 
