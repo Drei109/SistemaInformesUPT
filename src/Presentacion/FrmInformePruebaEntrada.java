@@ -801,7 +801,7 @@ public class FrmInformePruebaEntrada extends javax.swing.JInternalFrame {
         try {           
             JasperReport report;
             JasperPrint print;
-            report = JasperCompileManager.compileReport("../Proyecto-Final-Aguirre-Catalan/src/Reportes/RptInformePruebaEntrada.jrxml");
+            report = JasperCompileManager.compileReport("../SistemaInformesUPT/src/Reportes/RptInformePruebaEntrada.jrxml");
             print = JasperFillManager.fillReport(report,p,cnx);
             JasperViewer view = new JasperViewer(print,false);
             view.setTitle("Reporte Prueba Entrada");
