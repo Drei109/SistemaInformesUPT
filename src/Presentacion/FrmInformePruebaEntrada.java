@@ -46,6 +46,7 @@ public class FrmInformePruebaEntrada extends javax.swing.JInternalFrame {
     int filaSeleccionada = -2;
     boolean filaRemovida = false;
     boolean guardarNuevo = true;
+    String nivelUsuario;
     
     
     
@@ -55,10 +56,11 @@ public class FrmInformePruebaEntrada extends javax.swing.JInternalFrame {
         initComponents();
     }
        
-    public FrmInformePruebaEntrada(String[] datoPEF, boolean guardarNuevo){
+    public FrmInformePruebaEntrada(String[] datoPEF, boolean guardarNuevo,String nivelusu){
         initComponents();
         this.datoPE = datoPEF;
         this.guardarNuevo = guardarNuevo;
+        this.nivelUsuario = nivelusu;
     }
     
     private void cargarTabla(){
@@ -487,17 +489,27 @@ public class FrmInformePruebaEntrada extends javax.swing.JInternalFrame {
         /**
          * @param munuAbierto       Boolean     "Verifica que la ventana se encuentre abierta"
          */
+        
         recibeDatosFormulario();
         cargarTabla();
         if (datoPE.length == 11) {
             cargarDatosTabla();            
         } 
         menuAbierto = true;
+        evaluarNivel();
         DefaultTableModel modelo = (DefaultTableModel) tabla.getModel();
         tabla.setRowHeight(30);
 
     }//GEN-LAST:event_formInternalFrameOpened
-
+    
+    private void evaluarNivel(){
+        if (nivelUsuario.equals("Usuario")) {
+            btnAceptar.setVisible(false);
+            btnRechazar.setVisible(false);
+            btnInforme.setVisible(false);
+        }
+    }
+    
     private void cmbCodigoCursoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbCodigoCursoActionPerformed
         /**
          * @param menuAbierto       boolean     "verifica que JInternal este abierto"
@@ -801,15 +813,13 @@ public class FrmInformePruebaEntrada extends javax.swing.JInternalFrame {
         try {           
             JasperReport report;
             JasperPrint print;
-            report = JasperCompileManager.compileReport("../Proyecto-Final-Aguirre-Catalan/src/Reportes/RptInformePruebaEntrada.jrxml");
+            report = JasperCompileManager.compileReport("../SistemaInformesUPT/src/Reportes/RptInformePruebaEntrada.jrxml");
             print = JasperFillManager.fillReport(report,p,cnx);
             JasperViewer view = new JasperViewer(print,false);
             view.setTitle("Reporte Prueba Entrada");
             view.setVisible(true);
             cnx.close();
         } catch (JRException | SQLException ex) {
-            Logger.getLogger(FrmInformePruebaEntrada.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (SQLException ex) {
             Logger.getLogger(FrmInformePruebaEntrada.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_btnInformeActionPerformed

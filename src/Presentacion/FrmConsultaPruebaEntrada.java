@@ -178,7 +178,7 @@ public class FrmConsultaPruebaEntrada extends javax.swing.JInternalFrame {
                 e.printStackTrace();
             }
 
-            FrmInformePruebaEntrada info = new FrmInformePruebaEntrada(campo,false);
+            FrmInformePruebaEntrada info = new FrmInformePruebaEntrada(campo,false,nivelUsuario);
             FrmPrinicipal.escritorio.add(info);
             info.setVisible(true);
         }        
