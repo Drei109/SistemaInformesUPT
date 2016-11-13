@@ -164,5 +164,33 @@ public class ClsNegocioPruebaEntrada implements ClsInterfacePruebaEntrada{
             ex.printStackTrace();
         }
     }
+
+    @Override
+    public ResultSet ConsultaInformeAdministrador(String criterio, String busqueda) throws Exception {
+        try {
+            cst = conexion.prepareCall("{call USP_PruebaEntradaInformesAdmin(?,?)}");
+            cst.setString("pcriterio", criterio);
+            cst.setString("pbusqueda", busqueda);
+            rs = cst.executeQuery();
+            return rs;
+        } catch (SQLException ex) {
+            throw ex;
+        }
+    }
+
+    @Override
+    public ResultSet ConsultaInformeUsuario(String criterio, String busqueda, String codDocente) throws Exception {
+        ResultSet rs = null;
+        try {
+            cst = conexion.prepareCall("{call USP_PruebaEntradaInformesUsuario(?,?,?)}");
+            cst.setString("pcriterio", criterio);
+            cst.setString("pbusqueda", busqueda);
+            cst.setString("pcodDocente", codDocente);
+             rs = cst.executeQuery();
+            return rs;
+        } catch (SQLException ex) {
+            throw ex;
+        }
+    }
     
 }

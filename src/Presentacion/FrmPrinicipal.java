@@ -25,17 +25,13 @@ public class FrmPrinicipal extends javax.swing.JFrame {
         jMenuBar1 = new javax.swing.JMenuBar();
         mnuInformes = new javax.swing.JMenu();
         informePruebaEntrada = new javax.swing.JMenuItem();
-        informeFinalCurso = new javax.swing.JMenuItem();
-        informePortafolio = new javax.swing.JMenuItem();
         mnuConsultas = new javax.swing.JMenu();
         consultaPruebaEntrada = new javax.swing.JMenuItem();
         consultaFinalCurso = new javax.swing.JMenuItem();
         consultaFinalCursoDoc = new javax.swing.JMenuItem();
         consultaPortafolio = new javax.swing.JMenuItem();
-        mnuEdicion = new javax.swing.JMenu();
-        edicionPruebaEntrada = new javax.swing.JMenuItem();
-        edicionFinalCurso = new javax.swing.JMenuItem();
-        edicionPortafolio = new javax.swing.JMenuItem();
+        mnuImprimir = new javax.swing.JMenu();
+        imprimirInformeAceptado = new javax.swing.JMenuItem();
         mnuAyuda = new javax.swing.JMenu();
 
         jMenu3.setText("jMenu3");
@@ -66,17 +62,6 @@ public class FrmPrinicipal extends javax.swing.JFrame {
         });
         mnuInformes.add(informePruebaEntrada);
 
-        informeFinalCurso.setText("Informe final de curso Restantes");
-        informeFinalCurso.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                informeFinalCursoActionPerformed(evt);
-            }
-        });
-        mnuInformes.add(informeFinalCurso);
-
-        informePortafolio.setText("Informe portafolio Restantes");
-        mnuInformes.add(informePortafolio);
-
         jMenuBar1.add(mnuInformes);
 
         mnuConsultas.setText("Consultas");
@@ -100,18 +85,17 @@ public class FrmPrinicipal extends javax.swing.JFrame {
 
         jMenuBar1.add(mnuConsultas);
 
-        mnuEdicion.setText("Edición");
+        mnuImprimir.setText("Imprimir");
 
-        edicionPruebaEntrada.setText("Edición informe prueba de entrada");
-        mnuEdicion.add(edicionPruebaEntrada);
+        imprimirInformeAceptado.setText("Imprimir Informe Aprobado");
+        imprimirInformeAceptado.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                imprimirInformeAceptadoActionPerformed(evt);
+            }
+        });
+        mnuImprimir.add(imprimirInformeAceptado);
 
-        edicionFinalCurso.setText("Edición informe final de curso");
-        mnuEdicion.add(edicionFinalCurso);
-
-        edicionPortafolio.setText("Edición portafolio");
-        mnuEdicion.add(edicionPortafolio);
-
-        jMenuBar1.add(mnuEdicion);
+        jMenuBar1.add(mnuImprimir);
 
         mnuAyuda.setText("Ayuda");
         jMenuBar1.add(mnuAyuda);
@@ -139,10 +123,6 @@ public class FrmPrinicipal extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void informeFinalCursoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_informeFinalCursoActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_informeFinalCursoActionPerformed
-
     private void informePruebaEntradaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_informePruebaEntradaActionPerformed
           FrmReportesFaltantes reporteFaltante = new FrmReportesFaltantes(this.nivelUsuario);
           reporteFaltante.codDocente = codigoDocente;
@@ -157,6 +137,13 @@ public class FrmPrinicipal extends javax.swing.JFrame {
         escritorio.add(consultaInformePrueabaEntrada);
         consultaInformePrueabaEntrada.setVisible(true);
     }//GEN-LAST:event_consultaPruebaEntradaActionPerformed
+
+    private void imprimirInformeAceptadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_imprimirInformeAceptadoActionPerformed
+        FrmImprimirReporte imprimirReportes = new FrmImprimirReporte(nivelUsuario,codigoDocente);
+//        consultaInformePrueabaEntrada.cDocente = codigoDocente;
+        escritorio.add(imprimirReportes);
+        imprimirReportes.setVisible(true);
+    }//GEN-LAST:event_imprimirInformeAceptadoActionPerformed
 
     /**
      * @param args the command line arguments
@@ -199,19 +186,15 @@ public class FrmPrinicipal extends javax.swing.JFrame {
     private javax.swing.JMenuItem consultaFinalCursoDoc;
     private javax.swing.JMenuItem consultaPortafolio;
     private javax.swing.JMenuItem consultaPruebaEntrada;
-    private javax.swing.JMenuItem edicionFinalCurso;
-    private javax.swing.JMenuItem edicionPortafolio;
-    private javax.swing.JMenuItem edicionPruebaEntrada;
     public static javax.swing.JDesktopPane escritorio;
-    private javax.swing.JMenuItem informeFinalCurso;
-    private javax.swing.JMenuItem informePortafolio;
+    private javax.swing.JMenuItem imprimirInformeAceptado;
     private javax.swing.JMenuItem informePruebaEntrada;
     private javax.swing.JMenu jMenu3;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem11;
     private javax.swing.JMenu mnuAyuda;
     private javax.swing.JMenu mnuConsultas;
-    private javax.swing.JMenu mnuEdicion;
+    private javax.swing.JMenu mnuImprimir;
     private javax.swing.JMenu mnuInformes;
     // End of variables declaration//GEN-END:variables
 }

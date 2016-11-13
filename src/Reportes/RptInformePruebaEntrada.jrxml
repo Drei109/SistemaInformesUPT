@@ -2,7 +2,7 @@
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="report name" pageWidth="700" pageHeight="1000" columnWidth="660" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20">
 	<property name="ireport.zoom" value="1.1000000000000019"/>
 	<property name="ireport.x" value="0"/>
-	<property name="ireport.y" value="0"/>
+	<property name="ireport.y" value="343"/>
 	<style name="table">
 		<box>
 			<pen lineWidth="1.0" lineColor="#000000"/>
@@ -372,7 +372,7 @@ WHERE pe.idPruebaEntrada = $P{ID};]]>
 							<jr:columnHeader style="CH" height="49" rowSpan="1">
 								<staticText>
 									<reportElement x="0" y="3" width="51" height="41" forecolor="#FFFFFF"/>
-									<textElement textAlignment="Center" verticalAlignment="Top">
+									<textElement textAlignment="Center" verticalAlignment="Middle">
 										<font fontName="SansSerif"/>
 									</textElement>
 									<text><![CDATA[No Aceptable (1-10)]]></text>
@@ -412,10 +412,10 @@ WHERE pe.idPruebaEntrada = $P{ID};]]>
 							<jr:columnHeader style="CH" height="49" rowSpan="1">
 								<staticText>
 									<reportElement x="0" y="3" width="52" height="41" forecolor="#FFFFFF"/>
-									<textElement textAlignment="Center">
+									<textElement textAlignment="Center" verticalAlignment="Middle">
 										<font fontName="SansSerif"/>
 									</textElement>
-									<text><![CDATA[     Suficiente (11-15)]]></text>
+									<text><![CDATA[Suficiente (11-15)]]></text>
 								</staticText>
 							</jr:columnHeader>
 							<jr:detailCell style="table_TD" height="30" rowSpan="1">
@@ -452,10 +452,10 @@ WHERE pe.idPruebaEntrada = $P{ID};]]>
 							<jr:columnHeader style="CH" height="49" rowSpan="1">
 								<staticText>
 									<reportElement x="4" y="2" width="43" height="42" forecolor="#FFFFFF"/>
-									<textElement textAlignment="Center">
+									<textElement textAlignment="Center" verticalAlignment="Middle">
 										<font fontName="SansSerif"/>
 									</textElement>
-									<text><![CDATA[     Bueno (16-20)]]></text>
+									<text><![CDATA[Bueno (16-20)]]></text>
 								</staticText>
 							</jr:columnHeader>
 							<jr:detailCell style="table_TD" height="30" rowSpan="1">
@@ -492,7 +492,7 @@ WHERE pe.idPruebaEntrada = $P{ID};]]>
 							<jr:columnHeader style="CH" height="49" rowSpan="1">
 								<staticText>
 									<reportElement x="0" y="15" width="64" height="15" forecolor="#FFFFFF"/>
-									<textElement textAlignment="Center">
+									<textElement textAlignment="Center" verticalAlignment="Middle">
 										<font fontName="SansSerif"/>
 									</textElement>
 									<text><![CDATA[Total %]]></text>
