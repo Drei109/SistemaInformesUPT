@@ -456,17 +456,17 @@ public class FrmInformePruebaEntrada extends javax.swing.JInternalFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnInforme)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(btnEnviar)
-                        .addComponent(btnGuardar)))
+                        .addComponent(btnGuardar))
+                    .addComponent(btnInforme))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnCerrar)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(btnAceptar)
-                        .addComponent(btnRechazar)))
+                        .addComponent(btnRechazar))
+                    .addComponent(btnCerrar))
                 .addGap(27, 27, 27))
         );
 
@@ -791,8 +791,9 @@ public class FrmInformePruebaEntrada extends javax.swing.JInternalFrame {
     private void btnInformeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnInformeActionPerformed
         Map p = new HashMap();
         p.put("ID", datoPE[9]);
-        p.put("idPE", datoPE[9]);
-        p.put("idPe2", datoPE[9]);
+        
+//        p.put("idPE", datoPE[9]);
+//        p.put("idPe2", datoPE[9]);
         
         
         Connection cnx = new ClsConexion().getConnection();
@@ -807,6 +808,8 @@ public class FrmInformePruebaEntrada extends javax.swing.JInternalFrame {
             view.setVisible(true);
             cnx.close();
         } catch (JRException ex) {
+            Logger.getLogger(FrmInformePruebaEntrada.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException ex) {
             Logger.getLogger(FrmInformePruebaEntrada.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_btnInformeActionPerformed

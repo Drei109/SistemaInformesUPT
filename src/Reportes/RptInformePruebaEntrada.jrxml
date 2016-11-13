@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="report name" pageWidth="700" pageHeight="1000" columnWidth="660" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="3c4e1b89-f4c1-4cc1-940e-af02e69a25aa">
-	<property name="ireport.zoom" value="0.9090909090909105"/>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="report name" pageWidth="700" pageHeight="1000" columnWidth="660" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20">
+	<property name="ireport.zoom" value="1.1000000000000019"/>
 	<property name="ireport.x" value="0"/>
-	<property name="ireport.y" value="220"/>
+	<property name="ireport.y" value="196"/>
 	<style name="table">
 		<box>
 			<pen lineWidth="1.0" lineColor="#000000"/>
@@ -54,7 +54,7 @@
 			<rightPen lineWidth="1.0" lineColor="#000000"/>
 		</box>
 	</style>
-	<style name="font" isDefault="true" fontName="DejaVu Sans"/>
+	<style name="font" isDefault="true" fontName="SansSerif"/>
 	<style name="table 2">
 		<box>
 			<pen lineWidth="1.0" lineColor="#000000"/>
@@ -133,7 +133,7 @@
 			<rightPen lineWidth="1.0" lineColor="#000000"/>
 		</box>
 	</style>
-	<subDataset name="Table Dataset 1" uuid="41038d59-122f-4534-aae8-f0187242e699">
+	<subDataset name="Table Dataset 1">
 		<parameter name="idPE" class="java.lang.String">
 			<defaultValueExpression><![CDATA[]]></defaultValueExpression>
 		</parameter>
@@ -165,10 +165,10 @@
 			<variableExpression><![CDATA[($F{cantNoAceptalbe}.intValue() +$F{cantSuficiente}.intValue() + $F{cantBueno}.intValue())]]></variableExpression>
 		</variable>
 	</subDataset>
-	<subDataset name="Table Dataset 2" uuid="6f315228-997b-43a6-88cc-711654a979b9">
+	<subDataset name="Table Dataset 2">
 		<parameter name="idPe2" class="java.lang.String">
 			<parameterDescription><![CDATA[]]></parameterDescription>
-			<defaultValueExpression><![CDATA[31]]></defaultValueExpression>
+			<defaultValueExpression><![CDATA[]]></defaultValueExpression>
 		</parameter>
 		<queryString>
 			<![CDATA[SELECT c.idCurso,c.nombre,c.horasTeoricas,c.horasPracticas
@@ -193,7 +193,7 @@ WHERE pe.idPruebaEntrada = $P{idPe2};]]>
 		</field>
 	</subDataset>
 	<parameter name="ID" class="java.lang.String">
-		<defaultValueExpression><![CDATA[31]]></defaultValueExpression>
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
 	</parameter>
 	<queryString>
 		<![CDATA[SELECT * FROM pruebaEntrada pe 
@@ -288,27 +288,27 @@ WHERE pe.idPruebaEntrada = $P{ID};]]>
 	<title>
 		<band height="406" splitType="Stretch">
 			<rectangle>
-				<reportElement style="table_TD" x="175" y="236" width="471" height="31" uuid="583a9137-2754-4ab3-aca6-5b4ff632f53c"/>
+				<reportElement style="table_TD" x="175" y="236" width="471" height="31"/>
 			</rectangle>
 			<rectangle>
-				<reportElement style="table_TD" x="15" y="236" width="160" height="31" uuid="d3d031be-8547-4dbd-a0d0-2d86ac38f6ac"/>
+				<reportElement style="table_TD" x="15" y="236" width="160" height="31"/>
 			</rectangle>
 			<staticText>
-				<reportElement x="0" y="29" width="660" height="21" uuid="723be6d9-eb67-4cde-b707-4d557c56c852"/>
+				<reportElement x="0" y="29" width="660" height="21"/>
 				<textElement textAlignment="Center">
-					<font fontName="DejaVu Sans" size="13" isBold="true"/>
+					<font fontName="SansSerif" size="13" isBold="true"/>
 				</textElement>
 				<text><![CDATA[Informe de la Prueba de Entrada]]></text>
 			</staticText>
 			<componentElement>
-				<reportElement key="table 1" style="table 1" mode="Opaque" x="15" y="284" width="631" height="116" backcolor="#000000" uuid="74bf308b-ad89-45ed-aabc-7002d9d48b70"/>
+				<reportElement key="table 1" style="table 1" mode="Opaque" x="15" y="284" width="631" height="116" backcolor="#000000"/>
 				<jr:table xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd">
-					<datasetRun subDataset="Table Dataset 1" uuid="c148c2a4-0e26-4803-abf4-9fb2cede49a2">
+					<datasetRun subDataset="Table Dataset 1">
 						<datasetParameter name="idPE">
 							<datasetParameterExpression><![CDATA[$P{ID}]]></datasetParameterExpression>
 						</datasetParameter>
 					</datasetRun>
-					<jr:column width="29" uuid="f33a9023-eff4-42b4-8461-5ccc0cb9240d">
+					<jr:column width="29">
 						<jr:columnHeader style="CH" height="81" rowSpan="2">
 							<box>
 								<pen lineColor="#000000"/>
@@ -318,28 +318,30 @@ WHERE pe.idPruebaEntrada = $P{ID};]]>
 								<rightPen lineColor="#000000"/>
 							</box>
 							<staticText>
-								<reportElement x="0" y="26" width="29" height="23" forecolor="#FFFFFF" uuid="72462c34-38ab-498f-94cb-a634668c710a"/>
-								<textElement textAlignment="Justified" verticalAlignment="Middle"/>
+								<reportElement x="0" y="26" width="29" height="23" forecolor="#FFFFFF"/>
+								<textElement textAlignment="Justified" verticalAlignment="Middle">
+									<font fontName="SansSerif"/>
+								</textElement>
 								<text><![CDATA[Nro]]></text>
 							</staticText>
 						</jr:columnHeader>
 						<jr:columnFooter style="CH" height="5" rowSpan="1"/>
 						<jr:detailCell style="table 1_TD" height="30" rowSpan="1">
 							<textField>
-								<reportElement x="0" y="8" width="29" height="14" uuid="9c78fa4a-3625-4807-ab15-39733d45e4eb"/>
+								<reportElement x="0" y="8" width="29" height="14"/>
 								<textElement>
-									<font fontName="DejaVu Sans"/>
+									<font fontName="SansSerif"/>
 								</textElement>
-								<textFieldExpression><![CDATA[$F{idDetallePruebaEntrada}]]></textFieldExpression>
+								<textFieldExpression class="java.lang.Integer"><![CDATA[$F{idDetallePruebaEntrada}]]></textFieldExpression>
 							</textField>
 						</jr:detailCell>
 					</jr:column>
-					<jr:column width="228" uuid="7ce9e751-9a22-49a4-8816-29233009d896">
+					<jr:column width="228">
 						<jr:columnHeader style="CH" height="81" rowSpan="2">
 							<staticText>
-								<reportElement x="0" y="0" width="228" height="81" forecolor="#FFFFFF" uuid="30841196-ab34-4c05-81a3-13faf0b6d35d"/>
+								<reportElement x="0" y="0" width="228" height="81" forecolor="#FFFFFF"/>
 								<textElement textAlignment="Center" verticalAlignment="Middle">
-									<font fontName="DejaVu Sans" size="10"/>
+									<font fontName="SansSerif" size="10"/>
 								</textElement>
 								<text><![CDATA[Conocimiento o habilidad]]></text>
 							</staticText>
@@ -347,166 +349,166 @@ WHERE pe.idPruebaEntrada = $P{ID};]]>
 						<jr:columnFooter style="CH" height="5" rowSpan="1"/>
 						<jr:detailCell style="table 1_TD" height="30" rowSpan="1">
 							<textField>
-								<reportElement x="14" y="8" width="200" height="14" uuid="9b486daf-1de0-4137-b18f-1f5be5605345"/>
+								<reportElement x="14" y="8" width="200" height="14"/>
 								<textElement>
-									<font fontName="DejaVu Sans"/>
+									<font fontName="SansSerif"/>
 								</textElement>
-								<textFieldExpression><![CDATA[$F{habilidad}]]></textFieldExpression>
+								<textFieldExpression class="java.lang.String"><![CDATA[$F{habilidad}]]></textFieldExpression>
 							</textField>
 						</jr:detailCell>
 					</jr:column>
-					<jr:columnGroup width="370" uuid="9b9c35b2-0cf4-4c49-9255-e8f3b3247029">
+					<jr:columnGroup width="370">
 						<jr:columnHeader style="CH" height="32" rowSpan="1">
 							<staticText>
-								<reportElement x="0" y="8" width="370" height="16" forecolor="#FFFFFF" uuid="9f1fe326-d2c0-4c63-b060-fe4e631f37c7"/>
+								<reportElement x="0" y="8" width="370" height="16" forecolor="#FFFFFF"/>
 								<textElement textAlignment="Center">
-									<font fontName="DejaVu Sans"/>
+									<font fontName="SansSerif"/>
 								</textElement>
 								<text><![CDATA[Nivel alcanzado en %]]></text>
 							</staticText>
 						</jr:columnHeader>
 						<jr:columnFooter style="CH" height="5" rowSpan="1"/>
-						<jr:column width="51" uuid="68d9d333-fc73-4947-910d-8bf10c06229a">
+						<jr:column width="51">
 							<jr:columnHeader style="CH" height="49" rowSpan="1">
 								<staticText>
-									<reportElement x="0" y="3" width="51" height="41" forecolor="#FFFFFF" uuid="51d58a14-5d2e-4187-b2fc-9ded24469429"/>
+									<reportElement x="0" y="3" width="51" height="41" forecolor="#FFFFFF"/>
 									<textElement textAlignment="Center" verticalAlignment="Top">
-										<font fontName="DejaVu Sans"/>
+										<font fontName="SansSerif"/>
 									</textElement>
 									<text><![CDATA[No Aceptable (1-10)]]></text>
 								</staticText>
 							</jr:columnHeader>
 							<jr:detailCell style="table_TD" height="30" rowSpan="1">
 								<textField>
-									<reportElement x="13" y="8" width="25" height="14" uuid="b23bb0d6-73c4-4e7e-b197-76e22697d0a2"/>
+									<reportElement x="13" y="8" width="25" height="14"/>
 									<textElement>
-										<font fontName="DejaVu Sans"/>
+										<font fontName="SansSerif"/>
 									</textElement>
-									<textFieldExpression><![CDATA[$F{cantNoAceptalbe}]]></textFieldExpression>
+									<textFieldExpression class="java.lang.Integer"><![CDATA[$F{cantNoAceptalbe}]]></textFieldExpression>
 								</textField>
 							</jr:detailCell>
 						</jr:column>
-						<jr:column width="48" uuid="dd8c46c4-4e7f-484c-8bb7-c173e9510d91">
+						<jr:column width="48">
 							<jr:columnHeader style="CH" height="49" rowSpan="1">
 								<staticText>
-									<reportElement x="0" y="15" width="48" height="17" forecolor="#FFFFFF" uuid="85310f9b-4b5a-401b-91f5-7b7858a703a6"/>
+									<reportElement x="0" y="15" width="48" height="17" forecolor="#FFFFFF"/>
 									<textElement textAlignment="Center">
-										<font fontName="DejaVu Sans"/>
+										<font fontName="SansSerif"/>
 									</textElement>
 									<text><![CDATA[%]]></text>
 								</staticText>
 							</jr:columnHeader>
 							<jr:detailCell style="table_TD" height="30" rowSpan="1">
 								<textField pattern="###0.00">
-									<reportElement x="6" y="9" width="37" height="13" uuid="d3393941-f043-4a9e-a0d6-fca0077da2ff"/>
+									<reportElement x="6" y="9" width="37" height="13"/>
 									<textElement>
-										<font fontName="DejaVu Sans"/>
+										<font fontName="SansSerif"/>
 									</textElement>
-									<textFieldExpression><![CDATA[($F{cantNoAceptalbe}.doubleValue() * 103)/ ($F{cantNoAceptalbe}+$F{cantSuficiente}+$F{cantBueno})]]></textFieldExpression>
+									<textFieldExpression class="java.lang.Double"><![CDATA[($F{cantNoAceptalbe}.doubleValue() * 103)/ ($F{cantNoAceptalbe}+$F{cantSuficiente}+$F{cantBueno})]]></textFieldExpression>
 								</textField>
 							</jr:detailCell>
 						</jr:column>
-						<jr:column width="55" uuid="c88acaf2-e105-46b2-b90c-ba5934962ced">
+						<jr:column width="55">
 							<jr:columnHeader style="CH" height="49" rowSpan="1">
 								<staticText>
-									<reportElement x="0" y="3" width="52" height="41" forecolor="#FFFFFF" uuid="6d580208-7d3c-4d8c-bdf6-63c2d583c551"/>
+									<reportElement x="0" y="3" width="52" height="41" forecolor="#FFFFFF"/>
 									<textElement textAlignment="Center">
-										<font fontName="DejaVu Sans"/>
+										<font fontName="SansSerif"/>
 									</textElement>
 									<text><![CDATA[     Suficiente (11-15)]]></text>
 								</staticText>
 							</jr:columnHeader>
 							<jr:detailCell style="table_TD" height="30" rowSpan="1">
 								<textField>
-									<reportElement x="15" y="8" width="25" height="14" uuid="12679629-7058-4540-8ff1-891bb751e395"/>
+									<reportElement x="15" y="8" width="25" height="14"/>
 									<textElement>
-										<font fontName="DejaVu Sans"/>
+										<font fontName="SansSerif"/>
 									</textElement>
-									<textFieldExpression><![CDATA[$F{cantSuficiente}]]></textFieldExpression>
+									<textFieldExpression class="java.lang.Integer"><![CDATA[$F{cantSuficiente}]]></textFieldExpression>
 								</textField>
 							</jr:detailCell>
 						</jr:column>
-						<jr:column width="48" uuid="7e7dc6ad-7319-4a1d-aaf1-1d48afdc7f2d">
+						<jr:column width="48">
 							<jr:columnHeader style="CH" height="49" rowSpan="1">
 								<staticText>
-									<reportElement x="5" y="15" width="39" height="15" forecolor="#FFFFFF" uuid="294bd2a9-9d8c-459a-8cd4-cd426e603951"/>
+									<reportElement x="5" y="15" width="39" height="15" forecolor="#FFFFFF"/>
 									<textElement textAlignment="Center">
-										<font fontName="DejaVu Sans"/>
+										<font fontName="SansSerif"/>
 									</textElement>
 									<text><![CDATA[%]]></text>
 								</staticText>
 							</jr:columnHeader>
 							<jr:detailCell style="table_TD" height="30" rowSpan="1">
 								<textField pattern="###0.00">
-									<reportElement x="5" y="8" width="39" height="14" uuid="57980bda-3d63-486a-8aab-2f879464b622"/>
+									<reportElement x="5" y="8" width="39" height="14"/>
 									<textElement>
-										<font fontName="DejaVu Sans"/>
+										<font fontName="SansSerif"/>
 									</textElement>
-									<textFieldExpression><![CDATA[($F{cantSuficiente}.doubleValue() * 103)/ ($F{cantNoAceptalbe}+$F{cantSuficiente}+$F{cantBueno})]]></textFieldExpression>
+									<textFieldExpression class="java.lang.Double"><![CDATA[($F{cantSuficiente}.doubleValue() * 103)/ ($F{cantNoAceptalbe}+$F{cantSuficiente}+$F{cantBueno})]]></textFieldExpression>
 								</textField>
 							</jr:detailCell>
 						</jr:column>
-						<jr:column width="47" uuid="4c91a687-2487-42f0-90a2-7bc9da19aa13">
+						<jr:column width="47">
 							<jr:columnHeader style="CH" height="49" rowSpan="1">
 								<staticText>
-									<reportElement x="4" y="2" width="43" height="42" forecolor="#FFFFFF" uuid="b135e8ed-b008-4ece-a368-4da9bc6e87fc"/>
+									<reportElement x="4" y="2" width="43" height="42" forecolor="#FFFFFF"/>
 									<textElement textAlignment="Center">
-										<font fontName="DejaVu Sans"/>
+										<font fontName="SansSerif"/>
 									</textElement>
 									<text><![CDATA[     Bueno (16-20)]]></text>
 								</staticText>
 							</jr:columnHeader>
 							<jr:detailCell style="table_TD" height="30" rowSpan="1">
 								<textField>
-									<reportElement x="10" y="8" width="27" height="14" uuid="0616bad7-932b-4d3a-95d5-add6d8f99ecf"/>
+									<reportElement x="10" y="8" width="27" height="14"/>
 									<textElement>
-										<font fontName="DejaVu Sans"/>
+										<font fontName="SansSerif"/>
 									</textElement>
-									<textFieldExpression><![CDATA[$F{cantBueno}]]></textFieldExpression>
+									<textFieldExpression class="java.lang.Integer"><![CDATA[$F{cantBueno}]]></textFieldExpression>
 								</textField>
 							</jr:detailCell>
 						</jr:column>
-						<jr:column width="46" uuid="90d3ea8a-9328-4446-9e72-a76f21e1e85c">
+						<jr:column width="46">
 							<jr:columnHeader style="CH" height="49" rowSpan="1">
 								<staticText>
-									<reportElement x="0" y="15" width="46" height="15" forecolor="#FFFFFF" uuid="e53a4565-7746-4d35-944d-cef787253622"/>
+									<reportElement x="0" y="15" width="46" height="15" forecolor="#FFFFFF"/>
 									<textElement textAlignment="Center">
-										<font fontName="DejaVu Sans"/>
+										<font fontName="SansSerif"/>
 									</textElement>
 									<text><![CDATA[%]]></text>
 								</staticText>
 							</jr:columnHeader>
 							<jr:detailCell style="table_TD" height="30" rowSpan="1">
 								<textField pattern="###0.00">
-									<reportElement x="4" y="8" width="39" height="15" uuid="ab2cdf62-7d45-443d-8b43-0376b1e7caf3"/>
+									<reportElement x="4" y="8" width="39" height="15"/>
 									<textElement>
-										<font fontName="DejaVu Sans"/>
+										<font fontName="SansSerif"/>
 									</textElement>
-									<textFieldExpression><![CDATA[($F{cantBueno}.doubleValue() * 103)/ ($F{cantNoAceptalbe}+$F{cantSuficiente}+$F{cantBueno})]]></textFieldExpression>
+									<textFieldExpression class="java.lang.Double"><![CDATA[($F{cantBueno}.doubleValue() * 103)/ ($F{cantNoAceptalbe}+$F{cantSuficiente}+$F{cantBueno})]]></textFieldExpression>
 								</textField>
 							</jr:detailCell>
 						</jr:column>
-						<jr:column width="64" uuid="e2f8c8c1-1a1a-4762-a3bb-b7cac875026f">
+						<jr:column width="64">
 							<jr:columnHeader style="CH" height="49" rowSpan="1">
 								<staticText>
-									<reportElement x="0" y="15" width="64" height="15" forecolor="#FFFFFF" uuid="a81e0889-f1e4-4013-8c48-765c86d2cd8f"/>
+									<reportElement x="0" y="15" width="64" height="15" forecolor="#FFFFFF"/>
 									<textElement textAlignment="Center">
-										<font fontName="DejaVu Sans"/>
+										<font fontName="SansSerif"/>
 									</textElement>
 									<text><![CDATA[Total %]]></text>
 								</staticText>
 							</jr:columnHeader>
 							<jr:detailCell style="table_TD" height="30" rowSpan="1">
 								<staticText>
-									<reportElement x="13" y="8" width="38" height="14" uuid="03f4214d-afd3-4f9b-8f49-4208ff735785"/>
+									<reportElement x="13" y="8" width="38" height="14"/>
 									<textElement>
-										<font fontName="DejaVu Sans"/>
+										<font fontName="SansSerif"/>
 									</textElement>
 									<text><![CDATA[100 %]]></text>
 								</staticText>
 							</jr:detailCell>
 						</jr:column>
-						<jr:column width="11" uuid="9d5c6450-718d-4c0f-9ea7-b7448aa447c7">
+						<jr:column width="11">
 							<jr:columnHeader style="CH" height="49" rowSpan="1"/>
 							<jr:detailCell style="table_TD" height="30" rowSpan="1"/>
 						</jr:column>
@@ -514,22 +516,22 @@ WHERE pe.idPruebaEntrada = $P{ID};]]>
 				</jr:table>
 			</componentElement>
 			<textField>
-				<reportElement x="0" y="50" width="660" height="23" uuid="2006b7d0-8740-460f-8c09-c5e116fc1de9"/>
+				<reportElement x="0" y="50" width="660" height="23"/>
 				<textElement textAlignment="Center">
-					<font fontName="DejaVu Sans" size="13" isBold="true"/>
+					<font fontName="SansSerif" size="13" isBold="true"/>
 				</textElement>
-				<textFieldExpression><![CDATA[$F{nombreSemestre}]]></textFieldExpression>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{nombreSemestre}]]></textFieldExpression>
 			</textField>
 			<componentElement>
-				<reportElement key="table 3" style="table 3" x="15" y="95" width="631" height="87" uuid="2e7d2435-1222-498f-bff8-d5880a6ffd7a"/>
+				<reportElement key="table 3" style="table 3" x="15" y="95" width="631" height="87"/>
 				<jr:table xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd">
-					<datasetRun subDataset="Table Dataset 2" uuid="a06432eb-05f2-4cfb-b154-d5bdc02ddc88">
+					<datasetRun subDataset="Table Dataset 2">
 						<datasetParameter name="idPe2">
 							<datasetParameterExpression><![CDATA[$P{ID}]]></datasetParameterExpression>
 						</datasetParameter>
 					</datasetRun>
-					<jr:columnGroup width="630" uuid="9722b014-9d97-4a15-bc1f-e5a865e2cde1">
-						<jr:columnGroup width="630" uuid="f4971031-3537-46b0-a65a-fe37b76cf233">
+					<jr:columnGroup width="630">
+						<jr:columnGroup width="630">
 							<jr:columnHeader style="CH" height="25" rowSpan="1">
 								<box>
 									<pen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
@@ -539,14 +541,14 @@ WHERE pe.idPruebaEntrada = $P{ID};]]>
 									<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
 								</box>
 								<staticText>
-									<reportElement x="0" y="5" width="624" height="20" forecolor="#FFFFFF" backcolor="#000000" uuid="e33fabfb-877f-40f6-a81a-78ab4be42a43"/>
+									<reportElement x="0" y="5" width="624" height="20" forecolor="#FFFFFF" backcolor="#000000"/>
 									<textElement textAlignment="Center">
 										<font size="13"/>
 									</textElement>
 									<text><![CDATA[Curso]]></text>
 								</staticText>
 							</jr:columnHeader>
-							<jr:column width="90" uuid="58256178-6552-4f6a-a821-c01a8cf9dc3c">
+							<jr:column width="90">
 								<jr:columnHeader style="CH" height="23" rowSpan="1">
 									<box>
 										<pen lineWidth="1.0"/>
@@ -556,20 +558,20 @@ WHERE pe.idPruebaEntrada = $P{ID};]]>
 										<rightPen lineWidth="1.0"/>
 									</box>
 									<staticText>
-										<reportElement x="0" y="5" width="90" height="17" forecolor="#FFFFFF" backcolor="#000000" uuid="fed2a079-9118-43f1-a118-db76b1e536b8"/>
+										<reportElement x="0" y="5" width="90" height="17" forecolor="#FFFFFF" backcolor="#000000"/>
 										<textElement textAlignment="Center"/>
 										<text><![CDATA[Código]]></text>
 									</staticText>
 								</jr:columnHeader>
 								<jr:detailCell style="table_TD" height="30" rowSpan="1">
 									<textField>
-										<reportElement x="0" y="5" width="90" height="21" uuid="61d2c882-d8a8-4a39-bccd-20082d44e0cd"/>
+										<reportElement x="0" y="5" width="90" height="21"/>
 										<textElement textAlignment="Center"/>
-										<textFieldExpression><![CDATA[$F{idCurso}]]></textFieldExpression>
+										<textFieldExpression class="java.lang.String"><![CDATA[$F{idCurso}]]></textFieldExpression>
 									</textField>
 								</jr:detailCell>
 							</jr:column>
-							<jr:column width="360" uuid="6fd69efd-2783-41f3-b376-0b7f2ce626a6">
+							<jr:column width="360">
 								<jr:columnHeader style="CH" height="23" rowSpan="1">
 									<box>
 										<pen lineWidth="1.0"/>
@@ -579,20 +581,20 @@ WHERE pe.idPruebaEntrada = $P{ID};]]>
 										<rightPen lineWidth="1.0"/>
 									</box>
 									<staticText>
-										<reportElement x="0" y="5" width="354" height="16" forecolor="#FFFFFF" backcolor="#000000" uuid="895a4df4-e6f4-4f9a-9d9d-686739a00645"/>
+										<reportElement x="0" y="5" width="354" height="16" forecolor="#FFFFFF" backcolor="#000000"/>
 										<textElement textAlignment="Center"/>
 										<text><![CDATA[Nombre]]></text>
 									</staticText>
 								</jr:columnHeader>
 								<jr:detailCell style="table_TD" height="30" rowSpan="1">
 									<textField>
-										<reportElement x="0" y="5" width="354" height="21" uuid="c6eabaf4-1185-4eaa-a187-c33b93c1eaa4"/>
+										<reportElement x="0" y="5" width="354" height="21"/>
 										<textElement textAlignment="Center"/>
-										<textFieldExpression><![CDATA[$F{nombre}]]></textFieldExpression>
+										<textFieldExpression class="java.lang.String"><![CDATA[$F{nombre}]]></textFieldExpression>
 									</textField>
 								</jr:detailCell>
 							</jr:column>
-							<jr:column width="90" uuid="0a6fd5f2-5f2f-4191-95b2-3b9166b656de">
+							<jr:column width="90">
 								<jr:columnHeader style="CH" height="23" rowSpan="1">
 									<box>
 										<pen lineWidth="1.0"/>
@@ -602,20 +604,20 @@ WHERE pe.idPruebaEntrada = $P{ID};]]>
 										<rightPen lineWidth="1.0"/>
 									</box>
 									<staticText>
-										<reportElement x="0" y="5" width="90" height="16" forecolor="#FFFFFF" backcolor="#000000" uuid="673c15d3-3e20-4c99-be2e-c2c145f12773"/>
+										<reportElement x="0" y="5" width="90" height="16" forecolor="#FFFFFF" backcolor="#000000"/>
 										<textElement textAlignment="Center"/>
 										<text><![CDATA[Horas Teóricas]]></text>
 									</staticText>
 								</jr:columnHeader>
 								<jr:detailCell style="table_TD" height="30" rowSpan="1">
 									<textField>
-										<reportElement x="0" y="5" width="90" height="20" uuid="7df4892d-da01-440e-9835-9c9d7eb56d52"/>
+										<reportElement x="0" y="5" width="90" height="20"/>
 										<textElement textAlignment="Center"/>
-										<textFieldExpression><![CDATA[$F{horasTeoricas}]]></textFieldExpression>
+										<textFieldExpression class="java.lang.Integer"><![CDATA[$F{horasTeoricas}]]></textFieldExpression>
 									</textField>
 								</jr:detailCell>
 							</jr:column>
-							<jr:column width="90" uuid="ba6ccbba-8b18-48b0-bc53-1aa74069971c">
+							<jr:column width="90">
 								<jr:columnHeader style="CH" height="23" rowSpan="1">
 									<box>
 										<pen lineWidth="1.0"/>
@@ -625,16 +627,16 @@ WHERE pe.idPruebaEntrada = $P{ID};]]>
 										<rightPen lineWidth="1.0"/>
 									</box>
 									<staticText>
-										<reportElement x="0" y="5" width="90" height="16" forecolor="#FFFFFF" backcolor="#000000" uuid="22a2ef8e-b659-4edb-a32e-a95092ea7086"/>
+										<reportElement x="0" y="5" width="90" height="16" forecolor="#FFFFFF" backcolor="#000000"/>
 										<textElement textAlignment="Center"/>
 										<text><![CDATA[Horas Prácticas]]></text>
 									</staticText>
 								</jr:columnHeader>
 								<jr:detailCell style="table_TD" height="30" rowSpan="1">
 									<textField>
-										<reportElement x="0" y="5" width="90" height="20" uuid="83377faa-de2a-4723-ab67-e3039e918648"/>
+										<reportElement x="0" y="5" width="90" height="20"/>
 										<textElement textAlignment="Center"/>
-										<textFieldExpression><![CDATA[$F{horasPracticas}]]></textFieldExpression>
+										<textFieldExpression class="java.lang.Integer"><![CDATA[$F{horasPracticas}]]></textFieldExpression>
 									</textField>
 								</jr:detailCell>
 							</jr:column>
@@ -643,61 +645,61 @@ WHERE pe.idPruebaEntrada = $P{ID};]]>
 				</jr:table>
 			</componentElement>
 			<rectangle>
-				<reportElement style="CH" x="15" y="189" width="160" height="31" uuid="29ece2e8-44f7-41d4-9a9a-f63805ede0c3"/>
+				<reportElement style="CH" x="15" y="189" width="160" height="31"/>
 			</rectangle>
 			<rectangle>
-				<reportElement style="table_TD" x="175" y="189" width="471" height="31" uuid="62271418-9246-4c55-8c99-c8e9560e208b"/>
+				<reportElement style="table_TD" x="175" y="189" width="471" height="31"/>
 			</rectangle>
 			<staticText>
-				<reportElement x="15" y="189" width="160" height="31" forecolor="#FFFFFF" uuid="423de5eb-c9c5-43b1-b1e6-d31a48bdcf89"/>
+				<reportElement x="15" y="189" width="160" height="31" forecolor="#FFFFFF"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font size="10"/>
 				</textElement>
 				<text><![CDATA[Docente :]]></text>
 			</staticText>
 			<textField>
-				<reportElement x="175" y="189" width="471" height="31" uuid="806a64fa-552c-4650-af16-e7c65d50e094"/>
+				<reportElement x="175" y="189" width="471" height="31"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font size="10"/>
 				</textElement>
-				<textFieldExpression><![CDATA[$F{nombreDocente}]]></textFieldExpression>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{nombreDocente}]]></textFieldExpression>
 			</textField>
 			<rectangle>
-				<reportElement style="CH" x="344" y="236" width="68" height="31" uuid="10dd4413-a33c-4051-be74-8839599efaa4"/>
+				<reportElement style="CH" x="344" y="236" width="68" height="31"/>
 			</rectangle>
 			<staticText>
-				<reportElement x="15" y="236" width="160" height="31" forecolor="#000000" uuid="69b5593b-a2cd-400c-bdb0-4273f028cd8d"/>
+				<reportElement x="15" y="236" width="160" height="31" forecolor="#000000"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font size="10"/>
 				</textElement>
 				<text><![CDATA[Nº de alumnos:]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="226" y="236" width="118" height="31" forecolor="#000000" uuid="e3b700f3-cfe0-4a9c-bf2b-bef069dc34c2"/>
+				<reportElement x="226" y="236" width="118" height="31" forecolor="#000000"/>
 				<textElement verticalAlignment="Middle">
 					<font size="10"/>
 				</textElement>
 				<text><![CDATA[Matriculados :]]></text>
 			</staticText>
 			<rectangle>
-				<reportElement style="CH" x="578" y="236" width="68" height="31" uuid="bb99b0a0-df15-426f-89ff-f852ef29b3e3"/>
+				<reportElement style="CH" x="578" y="236" width="68" height="31"/>
 			</rectangle>
 			<staticText>
-				<reportElement x="460" y="236" width="118" height="31" forecolor="#000000" uuid="0201895e-77d1-42c0-8193-b7c7f5b8d3f3"/>
+				<reportElement x="460" y="236" width="118" height="31" forecolor="#000000"/>
 				<textElement verticalAlignment="Middle">
 					<font size="10"/>
 				</textElement>
 				<text><![CDATA[Evaluados :]]></text>
 			</staticText>
 			<textField>
-				<reportElement x="578" y="236" width="68" height="31" forecolor="#FFFFFF" uuid="04ce4418-5801-4dd8-9068-d4056502c1bc"/>
+				<reportElement x="578" y="236" width="68" height="31" forecolor="#FFFFFF"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle"/>
-				<textFieldExpression><![CDATA[$F{evaluados}]]></textFieldExpression>
+				<textFieldExpression class="java.lang.Integer"><![CDATA[$F{evaluados}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="344" y="236" width="68" height="31" forecolor="#FFFFFF" uuid="6b6fd839-2662-4e1c-b095-8f369d92f331"/>
+				<reportElement x="344" y="236" width="68" height="31" forecolor="#FFFFFF"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle"/>
-				<textFieldExpression><![CDATA[$F{alumnosMatriculados}]]></textFieldExpression>
+				<textFieldExpression class="java.lang.Integer"><![CDATA[$F{alumnosMatriculados}]]></textFieldExpression>
 			</textField>
 		</band>
 	</title>
@@ -707,7 +709,7 @@ WHERE pe.idPruebaEntrada = $P{ID};]]>
 	<columnHeader>
 		<band height="34" splitType="Stretch">
 			<staticText>
-				<reportElement x="15" y="0" width="631" height="31" forecolor="#000000" uuid="06993632-f8cc-43e8-8020-fa3cfc59eba5"/>
+				<reportElement x="15" y="0" width="631" height="31" forecolor="#000000"/>
 				<textElement verticalAlignment="Middle">
 					<font size="10"/>
 				</textElement>
@@ -719,16 +721,16 @@ WHERE pe.idPruebaEntrada = $P{ID};]]>
 		<band height="53" splitType="Stretch">
 			<printWhenExpression><![CDATA[!($F{medidasCorrectivas}.equals(""))]]></printWhenExpression>
 			<rectangle>
-				<reportElement style="CH" x="15" y="0" width="631" height="49" backcolor="#FFFFFF" uuid="1f0c1879-3e8f-4152-a9bc-2924b2ffed6d"/>
+				<reportElement style="CH" x="15" y="0" width="631" height="49" backcolor="#FFFFFF"/>
 			</rectangle>
 			<textField isBlankWhenNull="true">
-				<reportElement x="22" y="7" width="617" height="37" isRemoveLineWhenBlank="true" uuid="8c04e9da-5b62-49ec-93fa-a3cab664b50f">
+				<reportElement x="22" y="7" width="617" height="37" isRemoveLineWhenBlank="true">
 					<printWhenExpression><![CDATA[!($F{medidasCorrectivas}.equals(""))]]></printWhenExpression>
 				</reportElement>
 				<textElement textAlignment="Justified">
 					<font isStrikeThrough="false"/>
 				</textElement>
-				<textFieldExpression><![CDATA[$F{medidasCorrectivas}]]></textFieldExpression>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{medidasCorrectivas}]]></textFieldExpression>
 			</textField>
 		</band>
 	</detail>
@@ -738,69 +740,69 @@ WHERE pe.idPruebaEntrada = $P{ID};]]>
 	<pageFooter>
 		<band height="217" splitType="Stretch">
 			<staticText>
-				<reportElement x="15" y="13" width="53" height="18" forecolor="#000000" uuid="a5d7ea89-7990-4b2c-bc7a-34b87dafba54"/>
+				<reportElement x="15" y="13" width="53" height="18" forecolor="#000000"/>
 				<textElement verticalAlignment="Middle">
 					<font size="10" isBold="true"/>
 				</textElement>
 				<text><![CDATA[LEYENDA]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="80" y="13" width="566" height="18" forecolor="#000000" uuid="014605e9-ba51-47ca-af17-eb53a10d7453"/>
+				<reportElement x="80" y="13" width="566" height="18" forecolor="#000000"/>
 				<textElement verticalAlignment="Middle">
 					<font size="10" isBold="false"/>
 				</textElement>
 				<text><![CDATA[Si el Indicador es de color verde capacidad alcanzada]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="80" y="31" width="566" height="18" forecolor="#000000" uuid="10e6deb5-3851-411d-b328-258661ea05c7"/>
+				<reportElement x="80" y="31" width="566" height="18" forecolor="#000000"/>
 				<textElement verticalAlignment="Middle">
 					<font size="10" isBold="false"/>
 				</textElement>
 				<text><![CDATA[Si el Indicador es de color rojo requiere acción de mejora]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="15" y="85" width="53" height="18" forecolor="#000000" uuid="612fb539-a144-416f-ae7b-de580c8489c8"/>
+				<reportElement x="15" y="85" width="53" height="18" forecolor="#000000"/>
 				<textElement verticalAlignment="Middle">
 					<font size="10" isBold="false"/>
 				</textElement>
 				<text><![CDATA[Fecha :]]></text>
 			</staticText>
 			<textField>
-				<reportElement x="80" y="85" width="95" height="18" uuid="fc4d99c5-1045-4408-a37e-910f5c32e9c8"/>
-				<textFieldExpression><![CDATA[$F{fechaPruebaEntrada}]]></textFieldExpression>
+				<reportElement x="80" y="85" width="95" height="18"/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{fechaPruebaEntrada}.toString()]]></textFieldExpression>
 			</textField>
 			<staticText>
-				<reportElement x="15" y="172" width="631" height="18" forecolor="#000000" uuid="f5dbef4c-f74a-4da4-a550-0bea8fb0da41"/>
+				<reportElement x="15" y="172" width="631" height="18" forecolor="#000000"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font size="10" isBold="false"/>
 				</textElement>
 				<text><![CDATA[Enviar en formato digital este informe y la prueba de entrada a:]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="15" y="144" width="92" height="18" forecolor="#000000" uuid="b31d4cc2-e740-4c5a-841a-afad962c1a37"/>
+				<reportElement x="15" y="144" width="92" height="18" forecolor="#000000"/>
 				<textElement verticalAlignment="Middle">
 					<font size="10" isBold="true"/>
 				</textElement>
 				<text><![CDATA[IMPORTANTE :]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="15" y="192" width="631" height="18" forecolor="#000000" uuid="47a4db64-8b02-4a7b-9894-50cbc0751d07"/>
+				<reportElement x="15" y="192" width="631" height="18" forecolor="#000000"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font size="10" isBold="true"/>
 				</textElement>
 				<text><![CDATA[upt_sistemas@yahoo.es]]></text>
 			</staticText>
 			<line>
-				<reportElement x="260" y="103" width="318" height="1" uuid="42f38f5a-3399-4d73-8850-f669d9596c1f"/>
+				<reportElement x="280" y="102" width="318" height="1"/>
 			</line>
 			<textField>
-				<reportElement x="260" y="104" width="318" height="20" uuid="c069f56f-a59c-42b4-b0c8-a35bfe11e8e9"/>
+				<reportElement x="280" y="103" width="318" height="20"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle"/>
-				<textFieldExpression><![CDATA[$F{nombreDocente}]]></textFieldExpression>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{nombreDocente}]]></textFieldExpression>
 			</textField>
 		</band>
 	</pageFooter>
 	<summary>
-		<band height="42" splitType="Stretch"/>
+		<band height="7" splitType="Stretch"/>
 	</summary>
 </jasperReport>
