@@ -58,7 +58,7 @@ public class FrmPrinicipal extends javax.swing.JFrame {
 
         mnuInformes.setText("Informes");
 
-        informePruebaEntrada.setText("Prueba de Entrada Restantes");
+        informePruebaEntrada.setText("Informes Restantes");
         informePruebaEntrada.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 informePruebaEntradaActionPerformed(evt);
@@ -144,7 +144,7 @@ public class FrmPrinicipal extends javax.swing.JFrame {
     }//GEN-LAST:event_informeFinalCursoActionPerformed
 
     private void informePruebaEntradaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_informePruebaEntradaActionPerformed
-          FrmReportesFaltantes reporteFaltante = new FrmReportesFaltantes();
+          FrmReportesFaltantes reporteFaltante = new FrmReportesFaltantes(this.nivelUsuario);
           reporteFaltante.codDocente = codigoDocente;
           reporteFaltante.reporteAbierto = "Entrada";
           escritorio.add(reporteFaltante);

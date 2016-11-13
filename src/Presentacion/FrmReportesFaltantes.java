@@ -21,9 +21,14 @@ public class FrmReportesFaltantes extends javax.swing.JInternalFrame {
     public String codDocente;
     public String reporteAbierto;
     public ArrayList<ClsNegocioPruebaEntrada> dato = null;
+    public String nivelUsuario;
     
     public FrmReportesFaltantes() {
         initComponents();
+    }
+    public FrmReportesFaltantes(String nivelusu) {
+        initComponents();
+        this.nivelUsuario = nivelusu;
     }
     
     @SuppressWarnings("unchecked")
@@ -252,7 +257,7 @@ public class FrmReportesFaltantes extends javax.swing.JInternalFrame {
                 this.dispose();
             }
             else if (tipoReporte.equals("Informe Final Curso")) {
-                FrmInformeFinalCurso info = new FrmInformeFinalCurso(campo,true);
+                FrmInformeFinalCurso info = new FrmInformeFinalCurso(campo,true, this.nivelUsuario);
                 FrmPrinicipal.escritorio.add(info);
                 info.setVisible(true);
                 this.dispose();

@@ -68,7 +68,7 @@ public class FrmInformePruebaEntrada extends javax.swing.JInternalFrame {
     }
     
     private void cargarDatosTabla(){
-        txtEvaluados.setText(datoPE[10]);
+//        txtEvaluados.setText(datoPE[10]);
         
         DefaultTableModel modelo = (DefaultTableModel) tabla.getModel();
         
@@ -100,7 +100,7 @@ public class FrmInformePruebaEntrada extends javax.swing.JInternalFrame {
             
         }
         tabla.setModel(modelo);
-        calcularPorcentajes();
+//        calcularPorcentajes();
         
     }
     
@@ -716,7 +716,7 @@ public class FrmInformePruebaEntrada extends javax.swing.JInternalFrame {
 
             }
             else{
-                JOptionPane.showMessageDialog(null, "Datos incorrectos.");
+                JOptionPane.showMessageDialog(null, "Datos incorrectos (tabla).");
             }
         }
         else{

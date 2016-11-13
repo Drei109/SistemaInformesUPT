@@ -25,7 +25,7 @@
           <SubComponents>
             <MenuItem class="javax.swing.JMenuItem" name="informePruebaEntrada">
               <Properties>
-                <Property name="text" type="java.lang.String" value="Prueba de Entrada Restantes"/>
+                <Property name="text" type="java.lang.String" value="Informes Restantes"/>
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="informePruebaEntradaActionPerformed"/>
