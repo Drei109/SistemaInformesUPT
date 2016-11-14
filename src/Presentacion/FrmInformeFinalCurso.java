@@ -130,9 +130,13 @@ public class FrmInformeFinalCurso extends javax.swing.JInternalFrame {
 
         jLabel5.setText("Codigo Curso :");
 
+        txtCodigoCurso.setEnabled(false);
+
         jLabel6.setText("Sec. :");
 
         jLabel7.setText("Nombre del Curso :");
+
+        txtNombreCurso.setEnabled(false);
 
         chkTeoriaCurso.setText("Teoría");
 
@@ -207,13 +211,18 @@ public class FrmInformeFinalCurso extends javax.swing.JInternalFrame {
 
         jLabel10.setText("E-mail Personal :");
 
+        txtNombreDocente.setEnabled(false);
         txtNombreDocente.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtNombreDocenteActionPerformed(evt);
             }
         });
 
+        txtEmailDocente.setEnabled(false);
+
         jLabel11.setText("Celular :");
+
+        txtCelularDocente.setEnabled(false);
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -267,6 +276,12 @@ public class FrmInformeFinalCurso extends javax.swing.JInternalFrame {
         jLabel17.setText("Estudiantes retirados:");
 
         jLabel18.setText("Estudiantes con abandono:");
+
+        txtNumMatriculados.setEnabled(false);
+
+        txtNumRetirados.setEnabled(false);
+
+        txtNumAbandono.setEnabled(false);
 
         jLabel19.setText("RESUMEN DEL CURSO");
 
@@ -441,7 +456,12 @@ public class FrmInformeFinalCurso extends javax.swing.JInternalFrame {
 
         jPanel4.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 77, 222)));
 
-        btnIndicaciones.setText("Indicaciones");
+        btnIndicaciones.setText("Capacidades");
+        btnIndicaciones.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnIndicacionesActionPerformed(evt);
+            }
+        });
 
         btnObservaciones.setText("Observaciones");
 
@@ -521,7 +541,7 @@ public class FrmInformeFinalCurso extends javax.swing.JInternalFrame {
                             .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
-                .addContainerGap(21, Short.MAX_VALUE))
+                .addContainerGap(19, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -567,6 +587,12 @@ public class FrmInformeFinalCurso extends javax.swing.JInternalFrame {
         }
     }//GEN-LAST:event_formInternalFrameOpened
 
+    private void btnIndicacionesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnIndicacionesActionPerformed
+        FrmCapacidadesInformeFinalCurso frmcapacidades = new FrmCapacidadesInformeFinalCurso();
+        FrmPrinicipal.escritorio.add(frmcapacidades);
+        frmcapacidades.setVisible(true);
+    }//GEN-LAST:event_btnIndicacionesActionPerformed
+
     private void cargarDatos(){
         txtCodigoCurso.setText(datoIFC[0]);
         txtNombreCurso.setText(datoIFC[1]);
@@ -591,7 +617,11 @@ public class FrmInformeFinalCurso extends javax.swing.JInternalFrame {
         txtEmailDocente.setText(datoIFC[9]); 
         txtCelularDocente.setText(datoIFC[10]);
     }
-
+    
+    private void guardarDatos(String opcion){
+        /*GUARDAR*/
+    }
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAceptar;
     private javax.swing.JButton btnCancelar;

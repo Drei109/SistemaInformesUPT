@@ -47,7 +47,7 @@
                       </Group>
                   </Group>
               </Group>
-              <EmptySpace pref="21" max="32767" attributes="0"/>
+              <EmptySpace pref="19" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -184,6 +184,9 @@
           </Properties>
         </Component>
         <Component class="javax.swing.JTextField" name="txtCodigoCurso">
+          <Properties>
+            <Property name="enabled" type="boolean" value="false"/>
+          </Properties>
         </Component>
         <Component class="javax.swing.JLabel" name="jLabel6">
           <Properties>
@@ -198,6 +201,9 @@
           </Properties>
         </Component>
         <Component class="javax.swing.JTextField" name="txtNombreCurso">
+          <Properties>
+            <Property name="enabled" type="boolean" value="false"/>
+          </Properties>
         </Component>
         <Component class="javax.swing.JCheckBox" name="chkTeoriaCurso">
           <Properties>
@@ -295,11 +301,17 @@
           </Properties>
         </Component>
         <Component class="javax.swing.JTextField" name="txtNombreDocente">
+          <Properties>
+            <Property name="enabled" type="boolean" value="false"/>
+          </Properties>
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txtNombreDocenteActionPerformed"/>
           </Events>
         </Component>
         <Component class="javax.swing.JTextField" name="txtEmailDocente">
+          <Properties>
+            <Property name="enabled" type="boolean" value="false"/>
+          </Properties>
         </Component>
         <Component class="javax.swing.JLabel" name="jLabel11">
           <Properties>
@@ -307,6 +319,9 @@
           </Properties>
         </Component>
         <Component class="javax.swing.JTextField" name="txtCelularDocente">
+          <Properties>
+            <Property name="enabled" type="boolean" value="false"/>
+          </Properties>
         </Component>
       </SubComponents>
     </Container>
@@ -548,10 +563,19 @@
         <Component class="javax.swing.JTextField" name="txtNumTrabajoInvestiga">
         </Component>
         <Component class="javax.swing.JTextField" name="txtNumMatriculados">
+          <Properties>
+            <Property name="enabled" type="boolean" value="false"/>
+          </Properties>
         </Component>
         <Component class="javax.swing.JTextField" name="txtNumRetirados">
+          <Properties>
+            <Property name="enabled" type="boolean" value="false"/>
+          </Properties>
         </Component>
         <Component class="javax.swing.JTextField" name="txtNumAbandono">
+          <Properties>
+            <Property name="enabled" type="boolean" value="false"/>
+          </Properties>
         </Component>
         <Component class="javax.swing.JLabel" name="jLabel19">
           <Properties>
@@ -696,8 +720,11 @@
       <SubComponents>
         <Component class="javax.swing.JButton" name="btnIndicaciones">
           <Properties>
-            <Property name="text" type="java.lang.String" value="Indicaciones"/>
+            <Property name="text" type="java.lang.String" value="Capacidades"/>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnIndicacionesActionPerformed"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JButton" name="btnObservaciones">
           <Properties>

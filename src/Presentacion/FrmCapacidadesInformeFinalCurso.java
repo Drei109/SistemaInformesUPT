@@ -1,6 +1,7 @@
 
 package Presentacion;
 
+import Entidad.ClsEntidadCacidadInformeFinalCurso;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
@@ -33,6 +34,7 @@ public class FrmCapacidadesInformeFinalCurso extends javax.swing.JInternalFrame 
         TablaCapacidades = new javax.swing.JTable();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
+        btnGuardar = new javax.swing.JButton();
 
         addInternalFrameListener(new javax.swing.event.InternalFrameListener() {
             public void internalFrameActivated(javax.swing.event.InternalFrameEvent evt) {
@@ -92,6 +94,13 @@ public class FrmCapacidadesInformeFinalCurso extends javax.swing.JInternalFrame 
 
         jLabel2.setText("Cuál cree que ha sido el motivo por el cual los estudiantes no alcanzaron el logro de capacidades");
 
+        btnGuardar.setText("Guardar");
+        btnGuardar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnGuardarActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -105,7 +114,10 @@ public class FrmCapacidadesInformeFinalCurso extends javax.swing.JInternalFrame 
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.LEADING)
                         .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                .addComponent(btnAgregarFila, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGroup(layout.createSequentialGroup()
+                                    .addComponent(btnGuardar, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGap(18, 18, 18)
+                                    .addComponent(btnAgregarFila, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addComponent(jLabel2))
                             .addGap(18, 18, 18)
                             .addComponent(btnRemoverFila, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))))
@@ -121,8 +133,9 @@ public class FrmCapacidadesInformeFinalCurso extends javax.swing.JInternalFrame 
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnRemoverFila)
-                    .addComponent(btnAgregarFila))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 9, Short.MAX_VALUE)
+                    .addComponent(btnAgregarFila)
+                    .addComponent(btnGuardar))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jLabel2)
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 146, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -160,6 +173,18 @@ public class FrmCapacidadesInformeFinalCurso extends javax.swing.JInternalFrame 
         }
     }//GEN-LAST:event_TablaCapacidadesMousePressed
 
+    private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed
+        //filas de la tabla capacidades
+        int filas = TablaCapacidades.getRowCount();
+        ArrayList<ClsEntidadCacidadInformeFinalCurso> datosCapacidad;
+        datosCapacidad = new ArrayList<>();
+        if (filas != 0) {
+            for (int i = 0; i < filas; i++) {
+                
+            }
+        }
+    }//GEN-LAST:event_btnGuardarActionPerformed
+
     private void agregarFila(int contador){
         DefaultTableModel modelo = (DefaultTableModel) TablaCapacidades.getModel();
         modelo.addRow(new Object[]{contador, "","","","","",""});
@@ -190,6 +215,7 @@ public class FrmCapacidadesInformeFinalCurso extends javax.swing.JInternalFrame 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTable TablaCapacidades;
     private javax.swing.JButton btnAgregarFila;
+    private javax.swing.JButton btnGuardar;
     private javax.swing.JButton btnRemoverFila;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
