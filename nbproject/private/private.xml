@@ -3,10 +3,10 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/Drei/Documents/NetBeansProjects/Proyecto-Final-Aguirre-Catalan/src/Conexion/ClsConexion.java</file>
-            <file>file:/C:/Users/Drei/Documents/NetBeansProjects/Proyecto-Final-Aguirre-Catalan/src/Presentacion/FrmConsultaPruebaEntrada.java</file>
-            <file>file:/C:/Users/Drei/Documents/NetBeansProjects/Proyecto-Final-Aguirre-Catalan/src/Presentacion/FrmInformePruebaEntrada.java</file>
+            <file>file:/C:/Users/Drei/Documents/NetBeansProjects/SistemaInformesUPT/src/Negocio/ClsNegocioPruebaEntrada.java</file>
+            <file>file:/C:/Users/Drei/Documents/NetBeansProjects/SistemaInformesUPT/src/Presentacion/FrmImprimirReporte.java</file>
+            <file>file:/C:/Users/Drei/Documents/NetBeansProjects/SistemaInformesUPT/src/Presentacion/FrmInformePruebaEntrada.java</file>
+            <file>file:/C:/Users/Drei/Documents/NetBeansProjects/SistemaInformesUPT/src/Interface/ClsInterfacePruebaEntrada.java</file>
         </group>
-
     </open-files>
 </project-private>
