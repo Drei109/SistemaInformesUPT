@@ -133,6 +133,16 @@
 			<rightPen lineWidth="1.0" lineColor="#000000"/>
 		</box>
 	</style>
+	<style name="Condic">
+		<conditionalStyle>
+			<conditionExpression><![CDATA[($F{cantSuficiente}.intValue()+$F{cantBueno}.intValue())>(($F{cantNoAceptalbe}.intValue()+$F{cantSuficiente}.intValue()+$F{cantBueno}.intValue())/2)]]></conditionExpression>
+			<style mode="Opaque" backcolor="#117E3A"/>
+		</conditionalStyle>
+		<conditionalStyle>
+			<conditionExpression><![CDATA[($F{cantSuficiente}.intValue()+$F{cantBueno}.intValue())<=(($F{cantNoAceptalbe}.intValue()+$F{cantSuficiente}.intValue()+$F{cantBueno}.intValue())/2)]]></conditionExpression>
+			<style mode="Opaque" backcolor="#FF3333"/>
+		</conditionalStyle>
+	</style>
 	<subDataset name="Table Dataset 1">
 		<parameter name="idPE" class="java.lang.String">
 			<defaultValueExpression><![CDATA[]]></defaultValueExpression>
@@ -510,7 +520,7 @@ WHERE pe.idPruebaEntrada = $P{ID};]]>
 						</jr:column>
 						<jr:column width="11">
 							<jr:columnHeader style="CH" height="49" rowSpan="1"/>
-							<jr:detailCell style="table_TD" height="30" rowSpan="1"/>
+							<jr:detailCell style="Condic" height="30" rowSpan="1"/>
 						</jr:column>
 					</jr:columnGroup>
 				</jr:table>
