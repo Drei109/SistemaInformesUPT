@@ -98,7 +98,7 @@ public class FrmInformeFinalCurso extends javax.swing.JInternalFrame {
         txtPorcenAsisten = new javax.swing.JTextField();
         txtPorcenAprobados = new javax.swing.JTextField();
         txtPorcenDesaprobados = new javax.swing.JTextField();
-        jButton1 = new javax.swing.JButton();
+        btnCalcularPorcentajes = new javax.swing.JButton();
         jPanel4 = new javax.swing.JPanel();
         btnIndicaciones = new javax.swing.JButton();
         btnObservaciones = new javax.swing.JButton();
@@ -313,10 +313,10 @@ public class FrmInformeFinalCurso extends javax.swing.JInternalFrame {
 
         jLabel29.setText("%");
 
-        jButton1.setText("Calcular Porcentejes");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        btnCalcularPorcentajes.setText("Calcular Porcentejes");
+        btnCalcularPorcentajes.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                btnCalcularPorcentajesActionPerformed(evt);
             }
         });
 
@@ -367,7 +367,7 @@ public class FrmInformeFinalCurso extends javax.swing.JInternalFrame {
                             .addComponent(jLabel25)
                             .addComponent(jLabel26)
                             .addComponent(jLabel27)
-                            .addComponent(jButton1)))
+                            .addComponent(btnCalcularPorcentajes)))
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addGap(30, 30, 30)
                         .addComponent(jLabel21)))
@@ -467,7 +467,7 @@ public class FrmInformeFinalCurso extends javax.swing.JInternalFrame {
                     .addComponent(jLabel18)
                     .addComponent(txtNumAbandono, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txtPorcenAbandono, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton1))
+                    .addComponent(btnCalcularPorcentajes))
                 .addContainerGap())
         );
 
@@ -490,6 +490,11 @@ public class FrmInformeFinalCurso extends javax.swing.JInternalFrame {
         });
 
         btnEnviar.setText("Enviar");
+        btnEnviar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEnviarActionPerformed(evt);
+            }
+        });
 
         btnAceptar.setText("Aceptar");
 
@@ -612,7 +617,7 @@ public class FrmInformeFinalCurso extends javax.swing.JInternalFrame {
         frmcapacidades.setVisible(true);
     }//GEN-LAST:event_btnIndicacionesActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void btnCalcularPorcentajesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCalcularPorcentajesActionPerformed
         
         if (!txtNumMatriculados.equals("")) {
             double matriculados = Double.parseDouble(txtNumMatriculados.getText());
@@ -653,7 +658,11 @@ public class FrmInformeFinalCurso extends javax.swing.JInternalFrame {
         else{
             JOptionPane.showMessageDialog(null, "Numero de Matriculados NULO");
         }
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_btnCalcularPorcentajesActionPerformed
+
+    private void btnEnviarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEnviarActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnEnviarActionPerformed
 
     private void cargarDatos(){
         txtCodigoCurso.setText(datoIFC[0]);
@@ -744,6 +753,7 @@ public class FrmInformeFinalCurso extends javax.swing.JInternalFrame {
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAceptar;
+    private javax.swing.JButton btnCalcularPorcentajes;
     private javax.swing.JButton btnCancelar;
     private javax.swing.JButton btnEnviar;
     private javax.swing.JButton btnGuardar;
@@ -754,7 +764,6 @@ public class FrmInformeFinalCurso extends javax.swing.JInternalFrame {
     private javax.swing.JCheckBox chkPractCurso;
     private javax.swing.JCheckBox chkTallerCurso;
     private javax.swing.JCheckBox chkTeoriaCurso;
-    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;

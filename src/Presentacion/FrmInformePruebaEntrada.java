@@ -47,6 +47,7 @@ public class FrmInformePruebaEntrada extends javax.swing.JInternalFrame {
     boolean filaRemovida = false;
     boolean guardarNuevo = true;
     String nivelUsuario;
+    String idPruebaEntradaModifica;
     
     
     
@@ -56,11 +57,12 @@ public class FrmInformePruebaEntrada extends javax.swing.JInternalFrame {
         initComponents();
     }
        
-    public FrmInformePruebaEntrada(String[] datoPEF, boolean guardarNuevo,String nivelusu){
+    public FrmInformePruebaEntrada(String[] datoPEF, boolean guardarNuevo,String nivelusu,String id){
         initComponents();
         this.datoPE = datoPEF;
         this.guardarNuevo = guardarNuevo;
         this.nivelUsuario = nivelusu;
+        this.idPruebaEntradaModifica = id;
     }
     
     private void cargarTabla(){
@@ -548,16 +550,22 @@ public class FrmInformePruebaEntrada extends javax.swing.JInternalFrame {
                 if (tabla.getSelectedRow() != -1) {
                     medidasCorrectivas.set(tabla.getSelectedRow(), txtComentario.getText());
                 }
-                actualizarInforme();
+                actualizarInforme(estado);
             }
-            this.dispose();
+            cerrarFormulario();
         }
         else{
             JOptionPane.showMessageDialog(null, "Tabla vacia.");
         }
     }//GEN-LAST:event_btnGuardarActionPerformed
 
-    private void actualizarInforme(){
+    private void cerrarFormulario(){
+        this.dispose();
+        FrmReportesFaltantes frm = new FrmReportesFaltantes(nivelUsuario);
+        FrmPrinicipal.escritorio.add(frm);
+        frm.setVisible(true);
+    }
+    private void actualizarInforme(String estado){
         ClsEntidadDetallePruebaEntrada entidadDetalle = new ClsEntidadDetallePruebaEntrada();
         
         ClsNegocioPruebaEntrada negocioPrueba = new ClsNegocioPruebaEntrada();
@@ -571,8 +579,8 @@ public class FrmInformePruebaEntrada extends javax.swing.JInternalFrame {
         try {
             
             //MODIFICAR PRUEBA DE ENTRADA
-            entidadPrueba.setIdCargaAcademica(Integer.parseInt(idPlanEstudios));
-            entidadPrueba.setEstado("Guardado");
+            entidadPrueba.setIdCargaAcademica(Integer.parseInt(datoPE[11]));
+            entidadPrueba.setEstado(estado);
             entidadPrueba.setEvaluados(Integer.parseInt(txtEvaluados.getText()));
 
             negocioPrueba.ModificarPruebaEntrada(datoPE[9],entidadPrueba);
@@ -583,15 +591,15 @@ public class FrmInformePruebaEntrada extends javax.swing.JInternalFrame {
             ClsNegocioDetallePruebaEntrada negocioDetalle = new ClsNegocioDetallePruebaEntrada();
             negocioDetalle.EliminarDetallPruebaEntradaTodo(datoPE[9]);
             
-            
-            ResultSet rs = negocioDetalle.ObtenerIdPruebaEntrada(idPlanEstudios);
-            while (rs.next()) {
-                IDPruebaEntrada = rs.getString(1);
-            }
+//            
+//            ResultSet rs = negocioDetalle.ObtenerIdPruebaEntrada(datoPE[11]);
+//            while (rs.next()) {
+//                IDPruebaEntrada = rs.getString(1);
+//            }
             
             //3 5 7
             for (int i = 0; i < filas; i++) {
-                entidadDetalle.setIdPruebaEntrada(Integer.parseInt(IDPruebaEntrada));
+                entidadDetalle.setIdPruebaEntrada(Integer.parseInt(datoPE[9]));
                 entidadDetalle.setHabilidad((String) tabla.getValueAt(i, 1));
                 entidadDetalle.setCantNoAceptalbe(Integer.parseInt((String) tabla.getValueAt(i, 2)));
                 entidadDetalle.setCantSuficiente(Integer.parseInt((String) tabla.getValueAt(i, 4)));
@@ -676,8 +684,15 @@ public class FrmInformePruebaEntrada extends javax.swing.JInternalFrame {
     private void btnEnviarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEnviarActionPerformed
         if (calculadoPorcentajes) {
             String estado = "Enviado";
-            guardarInforme(estado);
-            this.dispose();
+            if (guardarNuevo) {
+                guardarInforme(estado);
+            }else{
+                if (tabla.getSelectedRow() != -1) {
+                    medidasCorrectivas.set(tabla.getSelectedRow(), txtComentario.getText());
+                }
+                actualizarInforme(estado);
+            }
+            cerrarFormulario();
         }
         else{
             JOptionPane.showMessageDialog(null, "Tabla vacia.");
