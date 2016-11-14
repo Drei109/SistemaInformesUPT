@@ -101,6 +101,11 @@ public class FrmInformePruebaEntrada extends javax.swing.JInternalFrame {
             modelo.addRow(campo);
             
         }
+        try {
+            detallePruebaEntrada.conexion.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(FrmInformePruebaEntrada.class.getName()).log(Level.SEVERE, null, ex);
+        }
         tabla.setModel(modelo);
 //        calcularPorcentajes();
         
@@ -802,11 +807,7 @@ public class FrmInformePruebaEntrada extends javax.swing.JInternalFrame {
 
     private void btnInformeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnInformeActionPerformed
         Map p = new HashMap();
-        p.put("ID", datoPE[9]);
-        
-//        p.put("idPE", datoPE[9]);
-//        p.put("idPe2", datoPE[9]);
-        
+        p.put("ID", datoPE[9]);        
         
         Connection cnx = new ClsConexion().getConnection();
         
@@ -856,6 +857,7 @@ public class FrmInformePruebaEntrada extends javax.swing.JInternalFrame {
                 
                 idPlanEstudios = rsDocente.getString(8);
             }
+            docente.conexion.close();
         } catch (Exception e) {
         }
         
