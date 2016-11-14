@@ -33,6 +33,19 @@ public class ClsNegocioCapadidadInformeFinalCurso implements ClsInterfaceCapacid
             throw ex;
         }
     }
+
+    @Override
+    public void AgregarDetallePruebaEntrada(ClsEntidadCacidadInformeFinalCurso CapacidadInformeFinal) {
+        try {
+            cst = conexion.prepareCall("{call USP_Capacidad_I(?,?,?)}");
+            cst.setString("pdescripcion", CapacidadInformeFinal.getDescripcion());
+            cst.setString("pidnivelcapacidad", String.valueOf(CapacidadInformeFinal.getIdcapacidad()));
+            cst.setString("pidinformefinalcurso", String.valueOf(CapacidadInformeFinal.getIdinformefinalcurso()));
+            cst.execute();
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+    }
     
     
 }
