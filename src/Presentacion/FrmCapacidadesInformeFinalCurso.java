@@ -2,6 +2,10 @@
 package Presentacion;
 
 import Entidad.ClsEntidadCacidadInformeFinalCurso;
+import Negocio.ClsNegocioCapadidadInformeFinalCurso;
+import Negocio.ClsNegocioInformeFinalCurso;
+import Utilidad.ClsRenderTableCapacidad;
+import java.sql.ResultSet;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
@@ -17,6 +21,9 @@ public class FrmCapacidadesInformeFinalCurso extends javax.swing.JInternalFrame 
     int filaSeleccionada = -2;
     boolean filaRemovida = false;
     boolean guardarNuevo = true;
+    String IdInfoFinalCurso = "";
+    String TOdosIDFinalCurso[] = new String[50];
+    
     public FrmCapacidadesInformeFinalCurso() {
         initComponents();
     }
@@ -148,6 +155,7 @@ public class FrmCapacidadesInformeFinalCurso extends javax.swing.JInternalFrame 
     private void btnAgregarFilaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarFilaActionPerformed
         contador++;
         agregarFila(contador);
+        TablaCapacidades.setDefaultRenderer(Object.class, new  ClsRenderTableCapacidad());
     }//GEN-LAST:event_btnAgregarFilaActionPerformed
 
     private void btnRemoverFilaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRemoverFilaActionPerformed
@@ -157,6 +165,7 @@ public class FrmCapacidadesInformeFinalCurso extends javax.swing.JInternalFrame 
 
     private void formInternalFrameOpened(javax.swing.event.InternalFrameEvent evt) {//GEN-FIRST:event_formInternalFrameOpened
         cargarTabla();
+        cargarIDsInfoFinalCurso();
     }//GEN-LAST:event_formInternalFrameOpened
 
     private void TablaCapacidadesMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_TablaCapacidadesMousePressed
@@ -177,9 +186,20 @@ public class FrmCapacidadesInformeFinalCurso extends javax.swing.JInternalFrame 
         //filas de la tabla capacidades
         int filas = TablaCapacidades.getRowCount();
         ArrayList<ClsEntidadCacidadInformeFinalCurso> datosCapacidad;
+        ClsEntidadCacidadInformeFinalCurso entiCapacidad = new ClsEntidadCacidadInformeFinalCurso();
+        /*AGREGAR EL NIVEL*/
+        
         datosCapacidad = new ArrayList<>();
         if (filas != 0) {
             for (int i = 0; i < filas; i++) {
+                entiCapacidad.setDescripcion((String)TablaCapacidades.getValueAt(filas, 0));
+                
+                String nivelN = (String) TablaCapacidades.getValueAt(filas, 1);
+                String nivelP = (String) TablaCapacidades.getValueAt(filas, 2);
+                String nivelA = (String) TablaCapacidades.getValueAt(filas, 3);
+                String nivelB = (String) TablaCapacidades.getValueAt(filas, 4);
+                String nivelM = (String) TablaCapacidades.getValueAt(filas, 5);
+                
                 
             }
         }
@@ -211,6 +231,29 @@ public class FrmCapacidadesInformeFinalCurso extends javax.swing.JInternalFrame 
         TablaCapacidades.setModel(modelo);
     }
     
+    private void cargarIDsInfoFinalCurso() {
+        try {
+            //Instanciar la clase NegocioUsuario
+            ClsNegocioCapadidadInformeFinalCurso informe = new ClsNegocioCapadidadInformeFinalCurso();
+            
+            //Obtiene el resultado de la consulta hecha a la BD
+            ResultSet rsIdInforme = informe.obtenerIdInfoFinalCuro();
+            int contador = 0;
+            //itera los valores hechas en la consulta
+            while (rsIdInforme.next()) {
+                //cambiar de valor hasta llegar al ultimo ID
+                IdInfoFinalCurso = rsIdInforme.getString(0);
+                
+                //guardamos todos los id para si en algun momneto lo necesitamos
+                TOdosIDFinalCurso[contador] = rsIdInforme.getString(0);
+                
+                contador++;
+            }
+            informe.conexion.close();
+        } catch (Exception e) {
+        }
+    }
+    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTable TablaCapacidades;
@@ -223,4 +266,6 @@ public class FrmCapacidadesInformeFinalCurso extends javax.swing.JInternalFrame 
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTextArea txtComentario;
     // End of variables declaration//GEN-END:variables
+
+    
 }

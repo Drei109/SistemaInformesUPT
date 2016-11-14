@@ -8,7 +8,6 @@ public class ClsEntidadInformeFinalCurso {
     private int idinformefinalcurso; /*INT(11) NOT NULL AUTO_INCREMENT,*/
     private String fechainformefinalcurso;  /*DATETIME NULL DEFAULT NULL,*/
     private int idCargaAcademica; /*INT(11) NOT NULL,*/
-    private int practicascalificadas; /*INT(11) NULL DEFAULT NULL,*/
     private String estadoInformeFinalCurso; /*VARCHAR(10) NOT NULL,*/
     private int cumpliSilabo; /*INT(10) NOT NULL,*/
     private int practiRealizadas; /*INT(10) NOT NULL,*/
@@ -43,14 +42,6 @@ public class ClsEntidadInformeFinalCurso {
 
     public void setIdCargaAcademica(int idCargaAcademica) {
         this.idCargaAcademica = idCargaAcademica;
-    }
-
-    public int getPracticascalificadas() {
-        return practicascalificadas;
-    }
-
-    public void setPracticascalificadas(int practicascalificadas) {
-        this.practicascalificadas = practicascalificadas;
     }
 
     public String getEstadoInformeFinalCurso() {

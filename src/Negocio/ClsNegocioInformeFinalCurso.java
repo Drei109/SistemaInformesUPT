@@ -23,7 +23,6 @@ public class ClsNegocioInformeFinalCurso implements ClsInterfaceInformeFinalCurs
         try {
             cst = conexion.prepareCall("{call USP_InformeFinalCurso_I(?,?,?,?,?,?,?,?,?,?,?,?,?,?)}");
             cst.setString("pidCargaAcademica", String.valueOf(InformeFinal.getIdCargaAcademica()));
-            cst.setString("ppracticascalificadas", String.valueOf(InformeFinal.getPracticascalificadas()));
             cst.setString("pestadoInformeFinalCurso", InformeFinal.getEstadoInformeFinalCurso()); 
             cst.setString("pcumpliSilabo", String.valueOf(InformeFinal.getCumpliSilabo()));
             cst.setString("ppractiRealizadas", String.valueOf(InformeFinal.getPractiRealizadas()));
