@@ -34,6 +34,8 @@ public class ClsNegocioInformeFinalCurso implements ClsInterfaceInformeFinalCurs
             cst.setString("pnotaMasAlta",String.valueOf(InformeFinal.getNotaMasAlta()));
             cst.setString("pnotaPromedio",String.valueOf(InformeFinal.getNotaPromedio())); 
             cst.setString("pnotaMasBaja",String.valueOf(InformeFinal.getNotaMasBaja()));
+            cst.setString("plab", InformeFinal.getLab());
+            cst.setString("ptaller",InformeFinal.getTaller());
             cst.execute();
         } catch (SQLException ex) {
             ex.printStackTrace();

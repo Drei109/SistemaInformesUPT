@@ -589,7 +589,8 @@ public class FrmInformeFinalCurso extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_txtNombreDocenteActionPerformed
 
     private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed
-        // TODO add your handling code here:
+        String opcion = "Guardado";
+        guardarDatos(opcion);
     }//GEN-LAST:event_btnGuardarActionPerformed
 
     private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
@@ -623,20 +624,31 @@ public class FrmInformeFinalCurso extends javax.swing.JInternalFrame {
             else{
                 txtPorcenMatriculados.setText("0");
             }
+            
             double retirados = Double.parseDouble(txtNumRetirados.getText());
             double abandono = Double.parseDouble(txtNumAbandono.getText());
             double asisten = Double.parseDouble(txtNumAsisten.getText());
             double aprobados = Double.parseDouble(txtNumAprobados.getText());
             double desaprobados = Double.parseDouble(txtNumDesaprobados.getText());
             
-            txtPorcenRetirados.setText("" + (retirados * porcentajeTotal)/matriculados);
-            txtPorcenAbandono.setText("" + (abandono * porcentajeTotal)/matriculados);
-            txtPorcenAsisten.setText("" + (asisten * porcentajeTotal)/matriculados);
+            if (!(asisten > matriculados || asisten < 0)) {
+                if ((aprobados + desaprobados) <= asisten) {
+                    txtPorcenRetirados.setText("" + (retirados * porcentajeTotal)/matriculados);
+                    txtPorcenAbandono.setText("" + (abandono * porcentajeTotal)/matriculados);
+                    txtPorcenAsisten.setText("" + (asisten * porcentajeTotal)/matriculados);
             
-            double porcentajeAsisten = Double.parseDouble(txtPorcenAsisten.getText());
+                    double porcentajeAsisten = Double.parseDouble(txtPorcenAsisten.getText());
             
-            txtPorcenAprobados.setText(""+ (aprobados * porcentajeAsisten)/asisten);
-            txtNumDesaprobados.setText(""+ (desaprobados * porcentajeAsisten)/asisten);
+                    txtPorcenAprobados.setText(""+ (aprobados * porcentajeAsisten)/asisten);
+                    txtPorcenDesaprobados.setText(""+ (desaprobados * porcentajeAsisten)/asisten);
+                }
+                else{
+                    JOptionPane.showMessageDialog(null, "Cantidad de aprobados y desaprobados no coinciden");
+                }
+            }else{
+                JOptionPane.showMessageDialog(null, "Alumnos Asistentes mayores a los Matriculados");
+            }
+            
         }
         else{
             JOptionPane.showMessageDialog(null, "Numero de Matriculados NULO");
@@ -688,9 +700,24 @@ public class FrmInformeFinalCurso extends javax.swing.JInternalFrame {
             entiInfoFinalCurso.setNotaMasBaja(Integer.parseInt(txtNumBaja.getText()));
             entiInfoFinalCurso.setNotaPromedio(Integer.parseInt(txtNumNotaPromedio.getText()));
             
+            if (chkLabCurso.isSelected()) {
+                entiInfoFinalCurso.setLab("Si");
+            }
+            else{
+                entiInfoFinalCurso.setLab("No");
+            }
+            
+            if (chkTallerCurso.isSelected()) {
+                entiInfoFinalCurso.setTaller("Si");
+            }
+            else{
+                entiInfoFinalCurso.setTaller("No");
+            }
+            
             negoInfoFinalCurso.AgregarInformeFinal(entiInfoFinalCurso);
             negoInfoFinalCurso.cst.close();
             negoInfoFinalCurso.conexion.close();
+            JOptionPane.showMessageDialog(null, "Operación Exitosa.");
         } catch (Exception e) {
         }
     }
