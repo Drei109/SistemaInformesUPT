@@ -4,10 +4,15 @@ package Presentacion;
 import Entidad.ClsEntidadCacidadInformeFinalCurso;
 import Negocio.ClsNegocioCapadidadInformeFinalCurso;
 import Negocio.ClsNegocioInformeFinalCurso;
-import Utilidad.ClsRenderTableCapacidad;
+import Utilidad.ClsRadioEditor;
+import Utilidad.ClsRenderRadio;
 import java.sql.ResultSet;
 import java.util.ArrayList;
+import javafx.scene.control.RadioButton;
+import javax.swing.ButtonGroup;
+import javax.swing.JCheckBox;
 import javax.swing.JOptionPane;
+import javax.swing.JRadioButton;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -155,7 +160,11 @@ public class FrmCapacidadesInformeFinalCurso extends javax.swing.JInternalFrame 
     private void btnAgregarFilaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarFilaActionPerformed
         contador++;
         agregarFila(contador);
-        TablaCapacidades.setDefaultRenderer(Object.class, new  ClsRenderTableCapacidad());
+        
+        agregarRadioATabla();
+        
+        agruparBotones();
+        
     }//GEN-LAST:event_btnAgregarFilaActionPerformed
 
     private void btnRemoverFilaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRemoverFilaActionPerformed
@@ -207,7 +216,7 @@ public class FrmCapacidadesInformeFinalCurso extends javax.swing.JInternalFrame 
 
     private void agregarFila(int contador){
         DefaultTableModel modelo = (DefaultTableModel) TablaCapacidades.getModel();
-        modelo.addRow(new Object[]{contador, "","","","","",""});
+        modelo.addRow(new Object[]{contador, "",new JRadioButton(" "),new JRadioButton(" "),new JRadioButton(" "),new JRadioButton(" "),new JRadioButton(" ")});
         modelo.isCellEditable(0, 0);
         TablaCapacidades.setRowHeight(30);
         LogrosCapacidades.add("");
@@ -254,7 +263,42 @@ public class FrmCapacidadesInformeFinalCurso extends javax.swing.JInternalFrame 
         }
     }
     
-
+    private void agregarRadioATabla() {
+        //Agregar Radio a la Columna N
+        TablaCapacidades.getColumn("N").setCellRenderer(new ClsRenderRadio());
+        TablaCapacidades.getColumn("N").setCellEditor(new ClsRadioEditor(new JCheckBox()));
+        
+        //Agregar Radio a la Columna P
+        TablaCapacidades.getColumn("P").setCellRenderer(new ClsRenderRadio());
+        TablaCapacidades.getColumn("P").setCellEditor(new ClsRadioEditor(new JCheckBox()));
+        
+        //Agregar Radio a la Columna A
+        TablaCapacidades.getColumn("A").setCellRenderer(new ClsRenderRadio());
+        TablaCapacidades.getColumn("A").setCellEditor(new ClsRadioEditor(new JCheckBox()));
+        
+        //Agregar Radio a la Columna B
+        TablaCapacidades.getColumn("B").setCellRenderer(new ClsRenderRadio());
+        TablaCapacidades.getColumn("B").setCellEditor(new ClsRadioEditor(new JCheckBox()));
+        
+        //Agregar Radio a la Columna M
+        TablaCapacidades.getColumn("M").setCellRenderer(new ClsRenderRadio());
+        TablaCapacidades.getColumn("M").setCellEditor(new ClsRadioEditor(new JCheckBox()));
+    }
+    
+    private void agruparBotones(){
+        ButtonGroup bg = new ButtonGroup();
+        DefaultTableModel modelo = (DefaultTableModel) TablaCapacidades.getModel();
+        
+        for (int i = 0; i < TablaCapacidades.getRowCount(); i++) {
+            bg.add((JRadioButton) modelo.getValueAt(i, 2));
+            bg.add((JRadioButton) modelo.getValueAt(i, 3));
+            bg.add((JRadioButton) modelo.getValueAt(i, 4));
+            bg.add((JRadioButton) modelo.getValueAt(i, 5));
+            bg.add((JRadioButton) modelo.getValueAt(i, 6));
+        }
+        
+    }
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTable TablaCapacidades;
     private javax.swing.JButton btnAgregarFila;
@@ -266,6 +310,8 @@ public class FrmCapacidadesInformeFinalCurso extends javax.swing.JInternalFrame 
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTextArea txtComentario;
     // End of variables declaration//GEN-END:variables
+
+    
 
     
 }
