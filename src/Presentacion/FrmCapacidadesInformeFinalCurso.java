@@ -1,8 +1,18 @@
 
 package Presentacion;
 
+import Entidad.ClsEntidadCacidadInformeFinalCurso;
+import Negocio.ClsNegocioCapadidadInformeFinalCurso;
+import Negocio.ClsNegocioInformeFinalCurso;
+import Utilidad.ClsRadioEditor;
+import Utilidad.ClsRenderRadio;
+import java.sql.ResultSet;
 import java.util.ArrayList;
+import javafx.scene.control.RadioButton;
+import javax.swing.ButtonGroup;
+import javax.swing.JCheckBox;
 import javax.swing.JOptionPane;
+import javax.swing.JRadioButton;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -16,6 +26,9 @@ public class FrmCapacidadesInformeFinalCurso extends javax.swing.JInternalFrame 
     int filaSeleccionada = -2;
     boolean filaRemovida = false;
     boolean guardarNuevo = true;
+    String IdInfoFinalCurso = "";
+    String TOdosIDFinalCurso[] = new String[50];
+    
     public FrmCapacidadesInformeFinalCurso() {
         initComponents();
     }
@@ -33,6 +46,7 @@ public class FrmCapacidadesInformeFinalCurso extends javax.swing.JInternalFrame 
         TablaCapacidades = new javax.swing.JTable();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
+        btnGuardar = new javax.swing.JButton();
 
         addInternalFrameListener(new javax.swing.event.InternalFrameListener() {
             public void internalFrameActivated(javax.swing.event.InternalFrameEvent evt) {
@@ -92,6 +106,13 @@ public class FrmCapacidadesInformeFinalCurso extends javax.swing.JInternalFrame 
 
         jLabel2.setText("Cuál cree que ha sido el motivo por el cual los estudiantes no alcanzaron el logro de capacidades");
 
+        btnGuardar.setText("Guardar");
+        btnGuardar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnGuardarActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -105,7 +126,10 @@ public class FrmCapacidadesInformeFinalCurso extends javax.swing.JInternalFrame 
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.LEADING)
                         .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                .addComponent(btnAgregarFila, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGroup(layout.createSequentialGroup()
+                                    .addComponent(btnGuardar, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGap(18, 18, 18)
+                                    .addComponent(btnAgregarFila, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addComponent(jLabel2))
                             .addGap(18, 18, 18)
                             .addComponent(btnRemoverFila, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))))
@@ -121,8 +145,9 @@ public class FrmCapacidadesInformeFinalCurso extends javax.swing.JInternalFrame 
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnRemoverFila)
-                    .addComponent(btnAgregarFila))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 9, Short.MAX_VALUE)
+                    .addComponent(btnAgregarFila)
+                    .addComponent(btnGuardar))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jLabel2)
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 146, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -135,6 +160,11 @@ public class FrmCapacidadesInformeFinalCurso extends javax.swing.JInternalFrame 
     private void btnAgregarFilaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarFilaActionPerformed
         contador++;
         agregarFila(contador);
+        
+        agregarRadioATabla();
+        
+        agruparBotones();
+        
     }//GEN-LAST:event_btnAgregarFilaActionPerformed
 
     private void btnRemoverFilaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRemoverFilaActionPerformed
@@ -144,6 +174,7 @@ public class FrmCapacidadesInformeFinalCurso extends javax.swing.JInternalFrame 
 
     private void formInternalFrameOpened(javax.swing.event.InternalFrameEvent evt) {//GEN-FIRST:event_formInternalFrameOpened
         cargarTabla();
+        cargarIDsInfoFinalCurso();
     }//GEN-LAST:event_formInternalFrameOpened
 
     private void TablaCapacidadesMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_TablaCapacidadesMousePressed
@@ -160,9 +191,32 @@ public class FrmCapacidadesInformeFinalCurso extends javax.swing.JInternalFrame 
         }
     }//GEN-LAST:event_TablaCapacidadesMousePressed
 
+    private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed
+        //filas de la tabla capacidades
+        int filas = TablaCapacidades.getRowCount();
+        ArrayList<ClsEntidadCacidadInformeFinalCurso> datosCapacidad;
+        ClsEntidadCacidadInformeFinalCurso entiCapacidad = new ClsEntidadCacidadInformeFinalCurso();
+        /*AGREGAR EL NIVEL*/
+        
+        datosCapacidad = new ArrayList<>();
+        if (filas != 0) {
+            for (int i = 0; i < filas; i++) {
+                entiCapacidad.setDescripcion((String)TablaCapacidades.getValueAt(filas, 0));
+                
+                String nivelN = (String) TablaCapacidades.getValueAt(filas, 1);
+                String nivelP = (String) TablaCapacidades.getValueAt(filas, 2);
+                String nivelA = (String) TablaCapacidades.getValueAt(filas, 3);
+                String nivelB = (String) TablaCapacidades.getValueAt(filas, 4);
+                String nivelM = (String) TablaCapacidades.getValueAt(filas, 5);
+                
+                
+            }
+        }
+    }//GEN-LAST:event_btnGuardarActionPerformed
+
     private void agregarFila(int contador){
         DefaultTableModel modelo = (DefaultTableModel) TablaCapacidades.getModel();
-        modelo.addRow(new Object[]{contador, "","","","","",""});
+        modelo.addRow(new Object[]{contador, "",new JRadioButton(" "),new JRadioButton(" "),new JRadioButton(" "),new JRadioButton(" "),new JRadioButton(" ")});
         modelo.isCellEditable(0, 0);
         TablaCapacidades.setRowHeight(30);
         LogrosCapacidades.add("");
@@ -186,10 +240,69 @@ public class FrmCapacidadesInformeFinalCurso extends javax.swing.JInternalFrame 
         TablaCapacidades.setModel(modelo);
     }
     
-
+    private void cargarIDsInfoFinalCurso() {
+        try {
+            //Instanciar la clase NegocioUsuario
+            ClsNegocioCapadidadInformeFinalCurso informe = new ClsNegocioCapadidadInformeFinalCurso();
+            
+            //Obtiene el resultado de la consulta hecha a la BD
+            ResultSet rsIdInforme = informe.obtenerIdInfoFinalCuro();
+            int contador = 0;
+            //itera los valores hechas en la consulta
+            while (rsIdInforme.next()) {
+                //cambiar de valor hasta llegar al ultimo ID
+                IdInfoFinalCurso = rsIdInforme.getString(0);
+                
+                //guardamos todos los id para si en algun momneto lo necesitamos
+                TOdosIDFinalCurso[contador] = rsIdInforme.getString(0);
+                
+                contador++;
+            }
+            informe.conexion.close();
+        } catch (Exception e) {
+        }
+    }
+    
+    private void agregarRadioATabla() {
+        //Agregar Radio a la Columna N
+        TablaCapacidades.getColumn("N").setCellRenderer(new ClsRenderRadio());
+        TablaCapacidades.getColumn("N").setCellEditor(new ClsRadioEditor(new JCheckBox()));
+        
+        //Agregar Radio a la Columna P
+        TablaCapacidades.getColumn("P").setCellRenderer(new ClsRenderRadio());
+        TablaCapacidades.getColumn("P").setCellEditor(new ClsRadioEditor(new JCheckBox()));
+        
+        //Agregar Radio a la Columna A
+        TablaCapacidades.getColumn("A").setCellRenderer(new ClsRenderRadio());
+        TablaCapacidades.getColumn("A").setCellEditor(new ClsRadioEditor(new JCheckBox()));
+        
+        //Agregar Radio a la Columna B
+        TablaCapacidades.getColumn("B").setCellRenderer(new ClsRenderRadio());
+        TablaCapacidades.getColumn("B").setCellEditor(new ClsRadioEditor(new JCheckBox()));
+        
+        //Agregar Radio a la Columna M
+        TablaCapacidades.getColumn("M").setCellRenderer(new ClsRenderRadio());
+        TablaCapacidades.getColumn("M").setCellEditor(new ClsRadioEditor(new JCheckBox()));
+    }
+    
+    private void agruparBotones(){
+        ButtonGroup bg = new ButtonGroup();
+        DefaultTableModel modelo = (DefaultTableModel) TablaCapacidades.getModel();
+        
+        for (int i = 0; i < TablaCapacidades.getRowCount(); i++) {
+            bg.add((JRadioButton) modelo.getValueAt(i, 2));
+            bg.add((JRadioButton) modelo.getValueAt(i, 3));
+            bg.add((JRadioButton) modelo.getValueAt(i, 4));
+            bg.add((JRadioButton) modelo.getValueAt(i, 5));
+            bg.add((JRadioButton) modelo.getValueAt(i, 6));
+        }
+        
+    }
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTable TablaCapacidades;
     private javax.swing.JButton btnAgregarFila;
+    private javax.swing.JButton btnGuardar;
     private javax.swing.JButton btnRemoverFila;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
@@ -197,4 +310,8 @@ public class FrmCapacidadesInformeFinalCurso extends javax.swing.JInternalFrame 
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTextArea txtComentario;
     // End of variables declaration//GEN-END:variables
+
+    
+
+    
 }
