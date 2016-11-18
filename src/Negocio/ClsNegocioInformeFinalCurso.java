@@ -34,6 +34,8 @@ public class ClsNegocioInformeFinalCurso implements ClsInterfaceInformeFinalCurs
             cst.setString("pnotaMasAlta",String.valueOf(InformeFinal.getNotaMasAlta()));
             cst.setString("pnotaPromedio",String.valueOf(InformeFinal.getNotaPromedio())); 
             cst.setString("pnotaMasBaja",String.valueOf(InformeFinal.getNotaMasBaja()));
+            cst.setString("plab", InformeFinal.getLab());
+            cst.setString("ptaller",InformeFinal.getTaller());
             cst.execute();
         } catch (SQLException ex) {
             ex.printStackTrace();
@@ -57,7 +59,14 @@ public class ClsNegocioInformeFinalCurso implements ClsInterfaceInformeFinalCurs
 
     @Override
     public void ModificarEstadoInformeFinal(String codigo, String estado) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        try {
+            cst = conexion.prepareCall("{call USP_EstadoPruebaEntrada_U(?,?)}");
+            cst.setString("pidPruebaEntrada", codigo);
+            cst.setString("pestadoPruebaEntrada", estado);
+            cst.execute();
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
     }
     
 }
