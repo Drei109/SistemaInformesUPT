@@ -161,6 +161,7 @@ public class FrmConsultaPruebaEntrada extends javax.swing.JInternalFrame {
 
     private void btnVerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVerActionPerformed
         abrirFrmInformePruebaEntrada(); 
+        this.dispose();
     }//GEN-LAST:event_btnVerActionPerformed
 
     private void abrirFrmInformePruebaEntrada(){

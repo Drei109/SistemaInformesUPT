@@ -33,6 +33,7 @@ public class FrmPrinicipal extends javax.swing.JFrame {
         mnuImprimir = new javax.swing.JMenu();
         imprimirInformeAceptado = new javax.swing.JMenuItem();
         mnuAyuda = new javax.swing.JMenu();
+        jMenu1 = new javax.swing.JMenu();
 
         jMenu3.setText("jMenu3");
 
@@ -100,6 +101,14 @@ public class FrmPrinicipal extends javax.swing.JFrame {
         mnuAyuda.setText("Ayuda");
         jMenuBar1.add(mnuAyuda);
 
+        jMenu1.setText("Salir");
+        jMenu1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jMenu1MouseClicked(evt);
+            }
+        });
+        jMenuBar1.add(jMenu1);
+
         setJMenuBar(jMenuBar1);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -145,6 +154,12 @@ public class FrmPrinicipal extends javax.swing.JFrame {
         imprimirReportes.setVisible(true);
     }//GEN-LAST:event_imprimirInformeAceptadoActionPerformed
 
+    private void jMenu1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenu1MouseClicked
+        this.dispose();
+        FrmLogin login = new FrmLogin();
+        login.setVisible(true);
+    }//GEN-LAST:event_jMenu1MouseClicked
+
     /**
      * @param args the command line arguments
      */
@@ -189,6 +204,7 @@ public class FrmPrinicipal extends javax.swing.JFrame {
     public static javax.swing.JDesktopPane escritorio;
     private javax.swing.JMenuItem imprimirInformeAceptado;
     private javax.swing.JMenuItem informePruebaEntrada;
+    private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu3;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem11;

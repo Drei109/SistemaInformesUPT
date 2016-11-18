@@ -168,6 +168,7 @@ public class FrmReportesFaltantes extends javax.swing.JInternalFrame {
 
     private void btnTerminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTerminarActionPerformed
         seleccionarTabla();
+        this.dispose();
     }//GEN-LAST:event_btnTerminarActionPerformed
 
     private void btnSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalirActionPerformed
@@ -257,7 +258,7 @@ public class FrmReportesFaltantes extends javax.swing.JInternalFrame {
                 this.dispose();
             }
             else if (tipoReporte.equals("Informe Final Curso")) {
-                FrmInformeFinalCurso info = new FrmInformeFinalCurso(campo,true, this.nivelUsuario);
+                FrmInformeFinalCurso info = new FrmInformeFinalCurso(campo,false, this.nivelUsuario);
                 FrmPrinicipal.escritorio.add(info);
                 info.setVisible(true);
                 this.dispose();

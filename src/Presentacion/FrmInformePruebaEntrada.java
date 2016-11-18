@@ -504,7 +504,12 @@ public class FrmInformePruebaEntrada extends javax.swing.JInternalFrame {
         evaluarNivel();
         DefaultTableModel modelo = (DefaultTableModel) tabla.getModel();
         tabla.setRowHeight(30);
-
+        if (guardarNuevo) {
+            
+        }
+        else{
+            calcularPorcentajes();
+        }
     }//GEN-LAST:event_formInternalFrameOpened
     
     private void evaluarNivel(){
@@ -544,11 +549,15 @@ public class FrmInformePruebaEntrada extends javax.swing.JInternalFrame {
             String estado = "Guardado";
             if (guardarNuevo) {
                 guardarInforme(estado);
+                FrmReportesFaltantes rptFaltantes = new FrmReportesFaltantes(nivelUsuario);
+                FrmPrinicipal.escritorio.add(rptFaltantes);
+                rptFaltantes.setVisible(true);
             }else{
                 if (tabla.getSelectedRow() != -1) {
                     medidasCorrectivas.set(tabla.getSelectedRow(), txtComentario.getText());
                 }
-                actualizarInforme();
+                actualizarInforme("Enviado");
+                abrirFormularioAnterior();
             }
             this.dispose();
         }
@@ -557,7 +566,7 @@ public class FrmInformePruebaEntrada extends javax.swing.JInternalFrame {
         }
     }//GEN-LAST:event_btnGuardarActionPerformed
 
-    private void actualizarInforme(){
+    private void actualizarInforme(String estado){
         ClsEntidadDetallePruebaEntrada entidadDetalle = new ClsEntidadDetallePruebaEntrada();
         
         ClsNegocioPruebaEntrada negocioPrueba = new ClsNegocioPruebaEntrada();
@@ -572,7 +581,7 @@ public class FrmInformePruebaEntrada extends javax.swing.JInternalFrame {
             
             //MODIFICAR PRUEBA DE ENTRADA
             entidadPrueba.setIdCargaAcademica(Integer.parseInt(idPlanEstudios));
-            entidadPrueba.setEstado("Guardado");
+            entidadPrueba.setEstado(estado);
             entidadPrueba.setEvaluados(Integer.parseInt(txtEvaluados.getText()));
 
             negocioPrueba.ModificarPruebaEntrada(datoPE[9],entidadPrueba);
@@ -675,8 +684,19 @@ public class FrmInformePruebaEntrada extends javax.swing.JInternalFrame {
 
     private void btnEnviarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEnviarActionPerformed
         if (calculadoPorcentajes) {
-            String estado = "Enviado";
-            guardarInforme(estado);
+            String estado = "Guardado";
+            if (guardarNuevo) {
+                guardarInforme(estado);
+                FrmReportesFaltantes rptFaltantes = new FrmReportesFaltantes(nivelUsuario);
+                FrmPrinicipal.escritorio.add(rptFaltantes);
+                rptFaltantes.setVisible(true);
+            }else{
+                if (tabla.getSelectedRow() != -1) {
+                    medidasCorrectivas.set(tabla.getSelectedRow(), txtComentario.getText());
+                }
+                actualizarInforme("Enviado");
+                abrirFormularioAnterior();
+            }
             this.dispose();
         }
         else{
@@ -760,27 +780,45 @@ public class FrmInformePruebaEntrada extends javax.swing.JInternalFrame {
     private void btnRechazarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRechazarActionPerformed
         ClsNegocioDetallePruebaEntrada negocioDetalle = new ClsNegocioDetallePruebaEntrada();
         ResultSet rs;
-        try {
-            rs = negocioDetalle.ObtenerIdPruebaEntrada(idPlanEstudios);
-            while (rs.next()) {
-                IDPruebaEntrada = rs.getString(1);
+        
+        int result = JOptionPane.showConfirmDialog(null, "Esta seguro de Rechazar el Informe.");
+        
+        if (result == 0) {
+            
+            try {
+                rs = negocioDetalle.ObtenerIdPruebaEntrada(idPlanEstudios);
+                while (rs.next()) {
+                    IDPruebaEntrada = rs.getString(1);
+                }
+                negocioDetalle.cst.close();
+                negocioDetalle.conexion.close();
+
+                String estado = "Rechazado";
+
+                ClsNegocioPruebaEntrada prueba = new ClsNegocioPruebaEntrada();
+                prueba.ModificarEstadoPruebaEntrada(IDPruebaEntrada, estado);
+
+                prueba.cst.close();
+                prueba.conexion.close();
+                
+                abrirFormularioAnterior();
+
+            } catch (Exception ex) {
+                JOptionPane.showMessageDialog(null, "No se pudo Modificar el Estado de la Prueba de Entrada.");
             }
-            negocioDetalle.cst.close();
-            negocioDetalle.conexion.close();
+        }
+        else{
             
-            String estado = "Rechazado";
-            
-            ClsNegocioPruebaEntrada prueba = new ClsNegocioPruebaEntrada();
-            prueba.ModificarEstadoPruebaEntrada(IDPruebaEntrada, estado);
-            
-            prueba.cst.close();
-            prueba.conexion.close();
-            
-        } catch (Exception ex) {
-            JOptionPane.showMessageDialog(null, "No se pudo Modificar el Estado de la Prueba de Entrada.");
         }
     }//GEN-LAST:event_btnRechazarActionPerformed
 
+    void abrirFormularioAnterior(){
+        this.dispose();
+        FrmConsultaPruebaEntrada consul = new FrmConsultaPruebaEntrada(nivelUsuario,datoPE[7]);
+        FrmPrinicipal.escritorio.add(consul);
+        consul.setVisible(true);
+    }
+    
     private void btnAceptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAceptarActionPerformed
         ClsNegocioDetallePruebaEntrada negocioDetalle = new ClsNegocioDetallePruebaEntrada();
         ResultSet rs;
@@ -799,6 +837,8 @@ public class FrmInformePruebaEntrada extends javax.swing.JInternalFrame {
             
             prueba.cst.close();
             prueba.conexion.close();
+            JOptionPane.showMessageDialog(null, "Informe Aprobado");
+            abrirFormularioAnterior();
             
         } catch (Exception ex) {
             JOptionPane.showMessageDialog(null, "No se pudo Modificar el Estado de la Prueba de Entrada.");
@@ -842,7 +882,9 @@ public class FrmInformePruebaEntrada extends javax.swing.JInternalFrame {
         txtAbandono.setText(datoPE[6]);
         cDocente = datoPE[7];
         txtDocente.setText(datoPE[8]);
-        
+        if (!guardarNuevo) {
+            txtEvaluados.setText(datoPE[10]);
+        }
         try {
             //Instanciar la clase NegocioUsuario
             ClsNegocioUsuario docente = new ClsNegocioUsuario();
