@@ -175,15 +175,15 @@ public class FrmConsultaPruebaEntrada extends javax.swing.JInternalFrame {
                 ClsNegocioPruebaEntrada negNegocioPruebaEntrada = new ClsNegocioPruebaEntrada();
                 ArrayList<String> pruebaEntrada = negNegocioPruebaEntrada.seleccionarPruebaEntrada(idPruebaEntrada);
                 campo = pruebaEntrada.toArray(new String[pruebaEntrada.size()]);
-                idPruebaEntradaMod = campo[0];
-                idCargaAcedemicaMod = campo[11];
+//                idPruebaEntradaMod = campo[0];
+//                idCargaAcedemicaMod = campo[11];
                 negNegocioPruebaEntrada.conexion.close();
 
             } catch (Exception e) {
                 e.printStackTrace();
             }
 
-            FrmInformePruebaEntrada info = new FrmInformePruebaEntrada(campo,false,nivelUsuario,idPruebaEntradaMod);
+            FrmInformePruebaEntrada info = new FrmInformePruebaEntrada(campo,false,nivelUsuario);
             FrmPrinicipal.escritorio.add(info);
             info.setVisible(true);
         }        

@@ -47,7 +47,6 @@ public class FrmInformePruebaEntrada extends javax.swing.JInternalFrame {
     boolean filaRemovida = false;
     boolean guardarNuevo = true;
     String nivelUsuario;
-    String idPruebaEntradaModifica;
     
     
     
@@ -57,12 +56,11 @@ public class FrmInformePruebaEntrada extends javax.swing.JInternalFrame {
         initComponents();
     }
        
-    public FrmInformePruebaEntrada(String[] datoPEF, boolean guardarNuevo,String nivelusu,String id){
+    public FrmInformePruebaEntrada(String[] datoPEF, boolean guardarNuevo,String nivelusu){
         initComponents();
         this.datoPE = datoPEF;
         this.guardarNuevo = guardarNuevo;
         this.nivelUsuario = nivelusu;
-        this.idPruebaEntradaModifica = id;
     }
     
     private void cargarTabla(){
