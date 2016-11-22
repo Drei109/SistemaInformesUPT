@@ -168,6 +168,7 @@ public class FrmReportesFaltantes extends javax.swing.JInternalFrame {
 
     private void btnTerminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTerminarActionPerformed
         seleccionarTabla();
+        this.dispose();
     }//GEN-LAST:event_btnTerminarActionPerformed
 
     private void btnSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalirActionPerformed
@@ -251,13 +252,13 @@ public class FrmReportesFaltantes extends javax.swing.JInternalFrame {
             }
             
             if (tipoReporte.equals("Prueba Entrada")) {
-                FrmInformePruebaEntrada info = new FrmInformePruebaEntrada(campo,true, this.nivelUsuario);
+                FrmInformePruebaEntrada info = new FrmInformePruebaEntrada(campo,true,nivelUsuario);
                 FrmPrinicipal.escritorio.add(info);
                 info.setVisible(true);
                 this.dispose();
             }
             else if (tipoReporte.equals("Informe Final Curso")) {
-                FrmInformeFinalCurso info = new FrmInformeFinalCurso(campo,true, this.nivelUsuario);
+                FrmInformeFinalCurso info = new FrmInformeFinalCurso(campo,false,nivelUsuario);
                 FrmPrinicipal.escritorio.add(info);
                 info.setVisible(true);
                 this.dispose();

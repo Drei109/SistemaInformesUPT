@@ -4,10 +4,12 @@ package Entidad;
  *
  * @author enzocv
  */
-public class ClsEntidadObservacionesInformeFinalCurso {
+public class ClsEntidadObservaFinalCurso {
     private int idObservaciones; /*INT(11) NOT NULL AUTO_INCREMENT,*/
     private String titulo; /*TEXT NOT NULL,*/
     private String subtitulo; /*TEXT NULL,*/
+    private int idinformefinalcurso;
+    private String descripcion;
 
     public int getIdObservaciones() {
         return idObservaciones;
@@ -31,5 +33,21 @@ public class ClsEntidadObservacionesInformeFinalCurso {
 
     public void setSubtitulo(String subtitulo) {
         this.subtitulo = subtitulo;
+    }
+
+    public int getIdinformefinalcurso() {
+        return idinformefinalcurso;
+    }
+
+    public void setIdinformefinalcurso(int idinformefinalcurso) {
+        this.idinformefinalcurso = idinformefinalcurso;
+    }
+
+    public String getDescripcion() {
+        return descripcion;
+    }
+
+    public void setDescripcion(String descripcion) {
+        this.descripcion = descripcion;
     }
 }

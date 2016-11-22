@@ -1,0 +1,813 @@
+﻿commit d0df5f54c7142a9c08b7eba7981c6c4f58854477
+
+Author: Enzo Catalan <enzocv96@gmail.com>
+
+Date:   Thu Nov 17 11:34:34 2016 -0500
+
+    
+arreglado el problema con los botones de enviar y guardar del informe de prueba de entrada
+
+
+
+commit 85a1022cd933cf5944c481d3cbbdb80c09d5808c
+
+Merge: 1d182f1 9d7d8ce
+
+Author: drei109 <drei.rar@gmail.com>
+
+Date:   Mon Nov 14 09:56:55 2016 -0500
+
+    
+Merge branch 'master' of https://github.com/Drei109/SistemaInformesUPT
+    
+merge with new form
+
+commit 9d7d8ce9cbdeaf62ddb1c8f4a7736f3b7000bb8d
+
+Author: Enzo Catalan <enzocv96@gmail.com>
+
+Date:   Mon Nov 14 09:56:49 2016 -0500
+
+    
+agregado metodo para agregar informe final del curso
+
+
+
+commit 1d182f1d6f30afd6b7f1be8305f3308750ad5ba5
+
+Merge: 822a2d3 531b4a2
+
+Author: drei109 <drei.rar@gmail.com>
+
+Date:   Mon Nov 14 09:13:39 2016 -0500
+
+    pri2
+
+
+
+commit 822a2d3f6cd42be7232fba489394a0b9c33ca7d5
+
+Author: drei109 <drei.rar@gmail.com>
+
+Date:   Mon Nov 14 09:12:37 2016 -0500
+
+    pri
+
+
+
+commit 531b4a2bffd8c737c76d4f9c0f50005bb93ed1af
+
+Merge: eaefe6a 5add429
+Author: Enzo Catalan <enzocv96@gmail.com>
+Date:   Mon Nov 14 09:11:15 2016 -0500
+
+    merge completo
+
+commit eaefe6aa6fbd9f8ac215df76bf5fdb24b547eddc
+Author: Enzo Catalan <enzocv96@gmail.com>
+Date:   Mon Nov 14 09:10:50 2016 -0500
+
+    agregado radio buttons en la tabla de capacidades
+
+commit 394011a8b36ae3e5bf937f4a695c24d815df0ba0
+Author: Enzo Catalan <enzocv96@gmail.com>
+Date:   Sun Nov 13 22:06:50 2016 -0500
+
+    agregada clase render para agregar un radiobutton a la tabla
+
+commit 5add4294ba463c18c245ddabc02aa2efcac4b8e4
+Author: drei109 <drei.rar@gmail.com>
+Date:   Sun Nov 13 20:35:00 2016 -0500
+
+    colors added to report
+
+commit ff35669e1bc80d76d15d8129fed09ac2110ff18f
+Merge: f665815 49a82a7
+Author: Enzo Catalan <enzocv96@gmail.com>
+Date:   Sun Nov 13 19:02:31 2016 -0500
+
+    merge completo
+
+commit f66581547930c6a4eaaad3b8877bbd2882d7816e
+Author: Enzo Catalan <enzocv96@gmail.com>
+Date:   Sun Nov 13 19:00:43 2016 -0500
+
+    agregada clase entidad para el informe final del curso
+
+commit 49a82a779d9b322a19c8e4e3432570484ef03a38
+Author: drei109 <drei.rar@gmail.com>
+Date:   Sun Nov 13 18:54:54 2016 -0500
+
+    frm imprimir reporte added
+
+commit 1977691ae43365618b9ee940582413d12c8653c3
+Merge: bf6fe2f bcc1906
+Author: drei109 <drei.rar@gmail.com>
+Date:   Sun Nov 13 16:43:07 2016 -0500
+
+    Merge branch 'master' of https://github.com/Drei109/SistemaInformesUPT
+    merger 3
+
+commit bf6fe2f911aff4f078a7906fd60f6936c99d34f2
+Author: drei109 <drei.rar@gmail.com>
+Date:   Sun Nov 13 16:43:01 2016 -0500
+
+    small ireport change
+
+commit bcc1906a400476de0bb3b536a6254f3afaec2641
+Author: Enzo Catalan <enzocv96@gmail.com>
+Date:   Sun Nov 13 16:41:42 2016 -0500
+
+    ocultados botones por nivel de usuario de los informes de prueba de entrada y de informe final de curso
+
+commit f1bc6035469056ef6d7903a754b1556b9b3575b7
+Merge: 8e14e60 526048a
+Author: Enzo Catalan <enzocv96@gmail.com>
+Date:   Sun Nov 13 16:15:14 2016 -0500
+
+    merge completo
+
+commit 8e14e6012d0f770ceb307440e9ce1ab85efe2069
+Author: Enzo Catalan <enzocv96@gmail.com>
+Date:   Sun Nov 13 16:14:14 2016 -0500
+
+    arreglado bugs informe final del curso
+
+commit 526048a4c36115b7e9b4ad41e2baa657d345940e
+Author: drei109 <drei.rar@gmail.com>
+Date:   Sun Nov 13 16:12:28 2016 -0500
+
+    report function added
+
+commit 00db70a333d1ad1698181b0025f00d6d8ef5933e
+Merge: 3f63526 58c1448
+Author: Enzo Catalan <enzocv96@gmail.com>
+Date:   Sun Nov 13 15:12:59 2016 -0500
+
+    merge completo
+
+commit 3f63526173f4a2ffdec5edb9447965ca8f8a9967
+Author: Enzo Catalan <enzocv96@gmail.com>
+Date:   Sun Nov 13 15:08:59 2016 -0500
+
+    agregado cambios
+
+commit 58c1448865826d338584350d4d37b7bd1a916948
+Author: drei109 <drei.rar@gmail.com>
+Date:   Sun Nov 13 15:07:35 2016 -0500
+
+    report function testing
+
+commit c29a3f9c94a3700d0737c251e8c496f4b3697297
+Author: drei109 <drei.rar@gmail.com>
+Date:   Sun Nov 13 14:38:12 2016 -0500
+
+    report finished
+
+commit 7ba795e3e2ec64f88568101d0b63439755bb4ac5
+Merge: 15741d3 b88157a
+Author: Enzo Catalan <enzocv96@gmail.com>
+Date:   Wed Nov 9 15:49:38 2016 -0500
+
+    merge completo
+
+commit 15741d39c26947117354d66c9dbe5490ecadbcea
+Author: Enzo Catalan <enzocv96@gmail.com>
+Date:   Wed Nov 9 15:48:26 2016 -0500
+
+    antes del merge
+
+commit b88157afc81bf146643bd40220800d6f49770845
+Merge: 19365f7 10f6879
+Author: drei109 <drei.rar@gmail.com>
+Date:   Wed Nov 9 15:46:38 2016 -0500
+
+    report modified - merged
+
+commit 19365f7b4c2be9a44f47bd259e5856f99e3d89fa
+Author: drei109 <drei.rar@gmail.com>
+Date:   Wed Nov 9 15:45:23 2016 -0500
+
+    report modified
+
+commit 10f68794de017e39efba93fbfd72a77ac1ac46c2
+Author: Enzo Catalan <enzocv96@gmail.com>
+Date:   Wed Nov 9 15:23:49 2016 -0500
+
+    modificado el formulario de Informe Final de Curso
+    modificado el formulario de informes faltantes.
+
+commit f77f8abe361eeedab79cbea03779663bc5d8c96e
+Merge: c65fa7c e29dd8b
+Author: drei109 <drei.rar@gmail.com>
+Date:   Wed Nov 9 11:58:23 2016 -0500
+
+    report merge
+
+commit c65fa7c943b2ccef06f46219c5baed11379f9998
+Author: drei109 <drei.rar@gmail.com>
+Date:   Wed Nov 9 11:55:50 2016 -0500
+
+    report changed
+
+commit e29dd8b241444e5c87dd3a94e489d3e685a9b071
+Merge: f87ef7b 0e794e9
+Author: Enzo Catalan <enzocv96@gmail.com>
+Date:   Wed Nov 9 11:54:13 2016 -0500
+
+    merge
+
+commit f87ef7ba14114dd10daebf11e9077b7eb6e2e319
+Author: Enzo Catalan <enzocv96@gmail.com>
+Date:   Mon Nov 7 15:49:54 2016 -0500
+
+    preparando cambios para merge
+
+commit 0e794e9a853440315dec2ba1109acf34dcac12e9
+Author: drei109 <drei.rar@gmail.com>
+Date:   Mon Nov 7 15:48:11 2016 -0500
+
+    report added
+
+commit 7201ed16f9110c6aff6f81e54bd4a58f6d7e6d1b
+Author: Enzo Catalan <enzocv96@gmail.com>
+Date:   Sat Nov 5 17:57:10 2016 -0500
+
+    modificada la tabla de porcentajes
+
+commit f744971b10efb1f83ed47eb863a0054d962ecd66
+Merge: 6ae6a53 5de3250
+Author: drei109 <drei.rar@gmail.com>
+Date:   Sat Nov 5 17:26:35 2016 -0500
+
+    Merge branch 'master' of https://github.com/Drei109/SistemaInformesUPT
+    necesary merge again
+
+commit 6ae6a53e2275e62d2f4eed7486420048dcad1d23
+Author: drei109 <drei.rar@gmail.com>
+Date:   Sat Nov 5 17:26:32 2016 -0500
+
+    ireport started
+
+commit 5de3250b42be2bc42b7afd8ae19d2f0ef9de82c3
+Merge: 309b1dc 3050fee
+Author: Enzo Catalan <enzocv96@gmail.com>
+Date:   Sat Nov 5 17:26:08 2016 -0500
+
+    merge completo
+
+commit 309b1dc8ce9207b5dc27de5e74da1d8f4d8d2fa6
+Author: Enzo Catalan <enzocv96@gmail.com>
+Date:   Sat Nov 5 17:15:50 2016 -0500
+
+    clase renderTabla agregada
+    clase para pintar las celdas de la tabla prueba de entrada agregada
+
+commit 3050feeb531ed5fee5125d99b9b66cae9cdd9cd5
+Author: drei109 <drei.rar@gmail.com>
+Date:   Sat Nov 5 15:41:05 2016 -0500
+
+    update dpa added
+
+commit ac685c8dbfc050a1f2e02c0c8645877e935e12ac
+Merge: 129b678 c99de8b
+Author: Enzo Catalan <enzocv96@gmail.com>
+Date:   Sat Nov 5 11:40:40 2016 -0500
+
+    merge completo
+
+commit 129b67893bbdf600783f82a50231b661b71b14a0
+Author: Enzo Catalan <enzocv96@gmail.com>
+Date:   Sat Nov 5 11:36:42 2016 -0500
+
+    agregados botones de Aceptar y Rechazar | formulario prueba de entrada
+
+commit c99de8b309cc2d72ec15d9b48d5f65f96f3dfe4e
+Author: drei109 <drei.rar@gmail.com>
+Date:   Sat Nov 5 11:35:13 2016 -0500
+
+    boolean var added
+
+commit ebea12f9d9e3bbe0c2821cdbd688a42862ddb8c0
+Merge: d060f7c ad181d6
+Author: Enzo Catalan <enzocv96@gmail.com>
+Date:   Sat Nov 5 11:03:38 2016 -0500
+
+    merge completo
+
+commit d060f7cca7f5818dac0460b1471eb5a8930f6c75
+Author: Enzo Catalan <enzocv96@gmail.com>
+Date:   Sat Nov 5 11:00:33 2016 -0500
+
+    agregadas concionales para los botones de la preba de entrada y agregado procedimiento para modificar el estado de la prueba
+
+commit ad181d6570cc755b1c7c7d8293eecc67c6303a1c
+Author: drei109 <drei.rar@gmail.com>
+Date:   Sat Nov 5 10:53:57 2016 -0500
+
+    medidas correctivas
+
+commit 6af1d41fc134a87c7ab67e88c65d5d026102ba83
+Merge: dd2d9b9 471be58
+Author: Enzo Catalan <enzocv96@gmail.com>
+Date:   Thu Nov 3 16:01:18 2016 -0500
+
+    merge completo
+
+commit dd2d9b92831a7475a85ea0148a1a5fa561a2bb72
+Author: Enzo Catalan <enzocv96@gmail.com>
+Date:   Thu Nov 3 15:58:08 2016 -0500
+
+    antes del merge
+
+commit 471be5803cf9e396346683e6e5bce1fb5e65e113
+Author: drei109 <drei.rar@gmail.com>
+Date:   Thu Nov 3 15:16:40 2016 -0500
+
+    detail bug fixed
+
+commit 18c481db94a0cea1c90ec7a8ffc76888ffd158d3
+Merge: 7d112fe 58c6638
+Author: Enzo Catalan <enzocv96@gmail.com>
+Date:   Tue Nov 1 21:48:31 2016 -0500
+
+    merge conflictos
+
+commit 7d112fe08c9d1d4f076347ed5425df6edb59f8e5
+Author: Enzo Catalan <enzocv96@gmail.com>
+Date:   Tue Nov 1 21:46:29 2016 -0500
+
+    modificado el .gitignore
+
+commit 58c66386cc93a98b27ca471e5b6d73f459881786
+Merge: 3673090 2edc375
+Author: drei109 <drei.rar@gmail.com>
+Date:   Tue Nov 1 21:44:37 2016 -0500
+
+    Merge branch 'master' of https://github.com/Drei109/SistemaInformesUPT
+    last merge
+    º
+
+commit 36730907dccea51a29aeb8ff7fb567f425ea209d
+Author: drei109 <drei.rar@gmail.com>
+Date:   Tue Nov 1 21:43:57 2016 -0500
+
+    detail
+
+commit 2edc3758af81e9551c94d48b64bca0dc547e296d
+Author: Enzo Catalan <enzocv96@gmail.com>
+Date:   Tue Nov 1 21:34:04 2016 -0500
+
+    plugin IRerport agregado
+
+commit 43724c57895e48b02b35b7aa2ac2d61c83ec069e
+Merge: 1024d74 824bedf
+Author: drei109 <drei.rar@gmail.com>
+Date:   Tue Nov 1 20:55:48 2016 -0500
+
+    see option added merge with colors
+
+commit 1024d7465ac3c1af50820a7a67689b686ec0a123
+Author: drei109 <drei.rar@gmail.com>
+Date:   Tue Nov 1 20:55:00 2016 -0500
+
+    see option added
+
+commit 824bedfd6564d7227713bd1538712f73742ecc64
+Author: Enzo Catalan <enzocv96@gmail.com>
+Date:   Tue Nov 1 20:54:36 2016 -0500
+
+    Agregada Clase para pintar columnas de la tabla prueba de entrada
+
+commit 80c47bd18a615aab4fb7c0d8d30e4a7f312f78a4
+Merge: 2e71850 724eac1
+Author: drei109 <drei.rar@gmail.com>
+Date:   Tue Nov 1 19:33:12 2016 -0500
+
+    Merge branch 'master' of https://github.com/Drei109/SistemaInformesUPT
+    
+    merge
+
+commit 2e718508dab31a742d625bd0fe7d7b5c975fdefe
+Author: drei109 <drei.rar@gmail.com>
+Date:   Tue Nov 1 19:33:07 2016 -0500
+
+    minor change
+
+commit 724eac1746fa1e513931e2ddd6a31f3f62a0f4d8
+Author: Enzo Catalan <enzocv96@gmail.com>
+Date:   Tue Nov 1 19:32:33 2016 -0500
+
+    validados campos del formulario prueba de entrada
+
+commit dd0cb52ae232f2c32167d96c93c0ebb0eb9fdbaa
+Author: drei109 <drei.rar@gmail.com>
+Date:   Tue Nov 1 18:53:53 2016 -0500
+
+    estado arreglado
+
+commit 813dd489f66f8a3e85691f8301e54c29e7a1e9c2
+Merge: b7e0008 2a993c7
+Author: Enzo Catalan <enzocv96@gmail.com>
+Date:   Tue Nov 1 18:22:13 2016 -0500
+
+    merge
+
+commit b7e000847c0fc717c4d604e61aa5d426bbdfc303
+Author: Enzo Catalan <enzocv96@gmail.com>
+Date:   Tue Nov 1 17:47:05 2016 -0500
+
+    campos validados
+
+commit 2a993c711b6ea00016137f5d5ae49558474f5508
+Merge: b98ce50 c2c96e1
+Author: drei109 <drei.rar@gmail.com>
+Date:   Tue Nov 1 17:18:15 2016 -0500
+
+    Merge branch 'master' of https://github.com/Drei109/SistemaInformesUPT
+    merge 3
+
+commit b98ce503252c4ed0923aa9e4226f0d5548087c4b
+Author: drei109 <drei.rar@gmail.com>
+Date:   Tue Nov 1 17:18:11 2016 -0500
+
+    fixed search bugs
+
+commit c2c96e11e7182544eb433976a4f32b97bd57add5
+Author: Enzo Catalan <enzocv96@gmail.com>
+Date:   Tue Nov 1 17:09:11 2016 -0500
+
+    bug arreglado
+    bug del metodo agregar del formulario Prueba de entrada arreglado
+
+commit b239e47e4d398ff9453eccd90222617a5ab89d74
+Merge: 097f7f7 4a4501a
+Author: drei109 <drei.rar@gmail.com>
+Date:   Tue Nov 1 16:51:44 2016 -0500
+
+    Merge branch 'master' of https://github.com/Drei109/SistemaInformesUPT
+    merge 2
+
+commit 097f7f7dfbdbf8821d730d74143123329e054b68
+Author: drei109 <drei.rar@gmail.com>
+Date:   Tue Nov 1 16:51:31 2016 -0500
+
+    added search filter
+
+commit 4a4501a2f46dd31ecadd8750e7b89a7aee4a8900
+Author: Enzo Catalan <enzocv96@gmail.com>
+Date:   Tue Nov 1 16:51:28 2016 -0500
+
+    terminado formulario de Prueba de entrada faltantes
+    se termino con el formulario Reportes Faltantes, ya carga los datos seleccionados en el informe de la prueba de entrada
+
+commit 78e0c0ebaa5bc5893dd9e4c01be3b808fc5c1fb0
+Author: Enzo Catalan <enzocv96@gmail.com>
+Date:   Tue Nov 1 15:01:27 2016 -0500
+
+    listado de los cursos por llenar completado
+
+commit 50ee8a41d0b84d69d1b3c89ed6b2a140e7782623
+Merge: ae4f896 c4ff79d
+Author: Enzo Catalan <enzocv96@gmail.com>
+Date:   Tue Nov 1 14:04:15 2016 -0500
+
+    merge completo
+
+commit ae4f8966fc150afa3e96bf3ec5c1444d704a591f
+Author: Enzo Catalan <enzocv96@gmail.com>
+Date:   Tue Nov 1 13:48:12 2016 -0500
+
+    cambios guardados antes del commit
+
+commit c4ff79d2f97f438478863d927de8342cec803143
+Author: drei109 <drei.rar@gmail.com>
+Date:   Tue Nov 1 13:40:41 2016 -0500
+
+    connections fixed
+
+commit 636c682b4d64b46d239a15f6e25240ff9ed34f1d
+Merge: 9808c0e aac345e
+Author: drei109 <drei.rar@gmail.com>
+Date:   Tue Nov 1 12:15:48 2016 -0500
+
+    search added merge
+
+commit 9808c0e47a6cf6bfd64a65164554c299187592e4
+Author: drei109 <drei.rar@gmail.com>
+Date:   Tue Nov 1 12:10:14 2016 -0500
+
+    search added
+
+commit aac345e88ef49f6b56306f29a795fde0f34ece44
+Author: Enzo Catalan <enzocv96@gmail.com>
+Date:   Tue Nov 1 12:09:12 2016 -0500
+
+    Agregado el formulario
+    Formulario para ver los cursos que no tienen un informe de Prueba de entrada
+
+commit f5135c37ffaf937998a1c8c84c04155f6323c87b
+Author: Enzo Catalan <enzocv96@gmail.com>
+Date:   Sun Oct 30 20:24:47 2016 -0500
+
+    agregado las medidas correctivas
+
+commit 705548ccf1d17f0bff714e2ac34a19565ba3f645
+Merge: 6183d1a 1c012e4
+Author: drei109 <drei.rar@gmail.com>
+Date:   Sun Oct 30 20:02:32 2016 -0500
+
+    connections changed 2
+
+commit 6183d1a62ff6ae2605abf11ad5816e2547f9129d
+Author: drei109 <drei.rar@gmail.com>
+Date:   Sun Oct 30 19:59:06 2016 -0500
+
+    connections changed
+
+commit 1c012e4409a08296f7c88f91cb696cb1c8b02892
+Author: Enzo Catalan <enzocv96@gmail.com>
+Date:   Sun Oct 30 19:56:02 2016 -0500
+
+    cerradas las conexiones de clase negocio detalle prueba de entrada
+
+commit d32aaeb1474c49050bdd0c11010c3731cc2c656a
+Author: Enzo Catalan <enzocv96@gmail.com>
+Date:   Sun Oct 30 19:06:46 2016 -0500
+
+    otro bug
+
+commit 360038ed6fbe52f4c5edbfb61ea1429a6b722214
+Author: drei109 <drei.rar@gmail.com>
+Date:   Sun Oct 30 18:48:54 2016 -0500
+
+    sp fixed
+
+commit d6e7d2f979c682ad111428d978f4151e69086873
+Merge: e670132 7057432
+Author: drei109 <drei.rar@gmail.com>
+Date:   Sun Oct 30 18:41:18 2016 -0500
+
+    Merge branch 'master' of https://github.com/Drei109/SistemaInformesUPT
+    
+    Complete merge
+
+commit e67013267e923ef1917d52eb644024dbbd0768d4
+Author: drei109 <drei.rar@gmail.com>
+Date:   Sun Oct 30 18:41:12 2016 -0500
+
+    dpa entity changed
+
+commit 7057432e9b3456a0f2cad6ec3036682414b76a70
+Author: Enzo Catalan <enzocv96@gmail.com>
+Date:   Sun Oct 30 18:40:39 2016 -0500
+
+    modificado Negocio y formulario de Prueba de entrada
+
+commit f157f2a5c52bc81ad8de6bdf4d983e544d8650b8
+Author: drei109 <drei.rar@gmail.com>
+Date:   Sun Oct 30 18:25:16 2016 -0500
+
+    pa entity changed
+
+commit 78acd13cca4f98ad850e75ab587778ff23246c48
+Author: Enzo Catalan <enzocv96@gmail.com>
+Date:   Sun Oct 30 18:12:14 2016 -0500
+
+    bug solucionado
+    conflicto a la hora de seleccionar un curso o el codigo solucionado
+
+commit ce3e419c31e7f1f24d6d8a935a88b8b8e6ddbd7e
+Author: drei109 <drei.rar@gmail.com>
+Date:   Sun Oct 30 17:57:05 2016 -0500
+
+    som db bugs fixed
+
+commit 9b8b8f9d26543543402f34aeefdb1220b67fc2fd
+Author: drei109 <drei.rar@gmail.com>
+Date:   Sun Oct 30 16:09:10 2016 -0500
+
+    last change
+
+commit 10b28a34b20b55098f54ac4845a77b7c2dd6feae
+Merge: 2242e8d 936d890
+Author: drei109 <drei.rar@gmail.com>
+Date:   Thu Oct 27 15:13:12 2016 -0500
+
+    a2
+
+commit 2242e8dd4e8ec9b033a610c7131b5251381c6c12
+Author: drei109 <drei.rar@gmail.com>
+Date:   Thu Oct 27 15:03:17 2016 -0500
+
+    a
+
+commit 936d890bcd252d2bcbe248a1a1c7e3967346c80d
+Author: Enzo Catalan <enzocv96@gmail.com>
+Date:   Thu Oct 27 14:18:41 2016 -0500
+
+    Porcentajes Agregados
+    Los porcentajes de la Tabla de Informe Prueba de Entrada ya se calculan(Mediante un item POPPUPMENU al hacer clic derecho sobre la tabla).
+
+commit 38342cb3bf7d0a66a4b3bff44dffdbe5edfdbc82
+Merge: 3abf71f 051b26d
+Author: drei109 <drei.rar@gmail.com>
+Date:   Wed Oct 26 22:51:21 2016 -0500
+
+    Merge branch 'master' of https://github.com/Drei109/SistemaInformesUPT
+    necessary merge
+
+commit 051b26d0b1d167f415ed2c9ee024425bd9fed21c
+Author: Enzo Catalan <enzocv96@gmail.com>
+Date:   Wed Oct 26 22:49:10 2016 -0500
+
+    Solucionado Bug
+    Se arreglo el bug de la Conexion con la CBD
+
+commit 3abf71f8150362220db0398561df23cc7bb44d45
+Author: drei109 <drei.rar@gmail.com>
+Date:   Wed Oct 26 22:48:45 2016 -0500
+
+    some things added
+
+commit 9eb811fbdc8c383607b3760693737d118bf08cf4
+Merge: 8458ed3 8535a2d
+Author: Enzo Catalan <enzocv96@gmail.com>
+Date:   Wed Oct 26 22:30:54 2016 -0500
+
+    commit para el merge trabajando con BD en la nuve
+
+commit 8458ed399460f61028bf0febad4424caa295d7de
+Author: Enzo Catalan <enzocv96@gmail.com>
+Date:   Wed Oct 26 22:28:24 2016 -0500
+
+    bug en la conexion con la CBD
+
+commit 8535a2dc41136a38f931b396427ec4e1d3afd8c5
+Author: drei109 <drei.rar@gmail.com>
+Date:   Wed Oct 26 22:27:39 2016 -0500
+
+    conexion error solved
+
+commit 8d6585df664e8678a0b6bd5d6bbdea34b53c0019
+Merge: 6502397 11e44c9
+Author: Enzo Catalan <enzocv96@gmail.com>
+Date:   Wed Oct 26 22:00:57 2016 -0500
+
+    merge completo
+
+commit 6502397ddf75939302d94b06114cb6549885379a
+Author: Enzo Catalan <enzocv96@gmail.com>
+Date:   Wed Oct 26 21:59:26 2016 -0500
+
+    antes del merge
+
+commit 11e44c9d495f3d080556acef41ee2892cb19313e
+Author: drei109 <drei.rar@gmail.com>
+Date:   Wed Oct 26 21:58:21 2016 -0500
+
+    Changed to CLOUD db
+
+commit f0cf2e53dacc7f81e5e4e8679d5bd69b0f23e5f9
+Author: Enzo Catalan <enzocv96@gmail.com>
+Date:   Wed Oct 26 20:27:13 2016 -0500
+
+    Resultos Bugs
+    Se resolvieron problemas en el boton Agregar
+
+commit d2c7fbfe965cbdb7b3f6ffa96c797b158998fecd
+Merge: 382385d de9f824
+Author: drei109 <drei.rar@gmail.com>
+Date:   Wed Oct 26 20:19:22 2016 -0500
+
+    Merge branch 'master' of https://github.com/Drei109/SistemaInformesUPT
+    Merge necesario
+
+commit de9f824ccb39defff5b7909fe02ec1de674412a5
+Author: Enzo Catalan <enzocv96@gmail.com>
+Date:   Wed Oct 26 20:17:05 2016 -0500
+
+    Boton Agregar Terminado
+    El boton Agregar del formulario de Prueba de entradas esta listo
+
+commit 382385df3e9259cbf7286c3f564bcf69d99215ab
+Merge: 8b69f90 f29a861
+Author: drei109 <drei.rar@gmail.com>
+Date:   Wed Oct 26 20:16:07 2016 -0500
+
+    Merge branch 'master' of https://github.com/Drei109/SistemaInformesUPT
+    
+    Merge
+
+commit 8b69f90631c67d90319e854d529e3fab3e9857d8
+Author: drei109 <drei.rar@gmail.com>
+Date:   Wed Oct 26 20:15:57 2016 -0500
+
+    consultaPruebaEntrada added
+
+commit f29a861b9ccd003b13b4c063fa527d94b47c0627
+Author: Enzo Catalan <enzocv96@gmail.com>
+Date:   Wed Oct 26 16:09:49 2016 -0500
+
+    agregado funcionalidad al boton AGREGAR
+
+commit 8abf18fd237b4858a99cc22f2e24a310f497c144
+Merge: a86d7f5 ad74830
+Author: Enzo Catalan <enzocv96@gmail.com>
+Date:   Wed Oct 26 14:02:59 2016 -0500
+
+    fixed bug
+
+commit a86d7f53eea65988507f5b6e22620c0fd3082869
+Author: Enzo Catalan <enzocv96@gmail.com>
+Date:   Wed Oct 26 13:53:27 2016 -0500
+
+    bug
+
+commit ad74830b03d7f3fcbf19974bb30fb9387243888d
+Author: drei109 <drei.rar@gmail.com>
+Date:   Wed Oct 26 13:52:04 2016 -0500
+
+    button added
+
+commit 21f95c24d6ab7f75e3cbad857c8e8963910cb71b
+Merge: 27113a3 344223e
+Author: drei109 <drei.rar@gmail.com>
+Date:   Wed Oct 26 13:50:06 2016 -0500
+
+    Form merged
+
+commit 27113a3e82d8361cda7ddd46547c843a43b66543
+Author: drei109 <drei.rar@gmail.com>
+Date:   Wed Oct 26 13:40:26 2016 -0500
+
+    Frm re-arreglado
+
+commit 344223ec5703e9fe648d9a38f7b35e29b0e146ac
+Merge: 8fc62e0 5b2d5c3
+Author: Enzo Catalan <enzocv96@gmail.com>
+Date:   Wed Oct 26 13:37:28 2016 -0500
+
+    boton enviar
+    se cambio el boton enviar por el de GUARDAR, resuelto conflicto en el merge
+
+commit 8fc62e00cea08b972a961d74200004c4e9b41286
+Author: Enzo Catalan <enzocv96@gmail.com>
+Date:   Wed Oct 26 13:30:41 2016 -0500
+
+    Agregado clases para Informe de Prueba de Entrada
+    Agregado clases para Detalle de Prueba de entrada y agregado metodos para el CRUD de las tablas.
+
+commit 5b2d5c3a33ac9ca0899499f78bbafdd6a4add327
+Author: drei109 <drei.rar@gmail.com>
+Date:   Wed Oct 26 13:26:43 2016 -0500
+
+    frmInformePruebaEntrada modificado
+
+commit f7fd9acb92cd9ae05dfeb9ea15e1bb1994d8bd54
+Author: Enzo Catalan <enzocv96@gmail.com>
+Date:   Tue Oct 25 08:39:33 2016 -0500
+
+    Carga de valores del Informe Prueba de Entrada terminado corregido el bug del combobox
+
+commit c189b695201c378f43d7ebd840e01f72e789e9cd
+Author: Enzo Catalan <enzocv96@gmail.com>
+Date:   Mon Oct 24 22:25:26 2016 -0500
+
+    Cargado de Datos del Formulario Prueba de Entrada (bug en cmbnombreCurso)
+
+commit 9a53d9850fbf00a54ee2de46fabf10be1cab0867
+Author: drei109 <drei.rar@gmail.com>
+Date:   Sun Oct 23 20:30:14 2016 -0500
+
+    v.0.04
+
+commit 659d31920e0108d41a7d411bf6f1c1b535a483d2
+Author: drei109 <drei.rar@gmail.com>
+Date:   Sun Oct 23 19:53:57 2016 -0500
+
+    v.0.004
+
+commit 53e6ea360afb9725410e29a37b54631aa20bc627
+Author: drei109 <drei.rar@gmail.com>
+Date:   Sun Oct 23 19:05:59 2016 -0500
+
+    v.0.03
+
+commit edebe67483a9830d27bd842daea1377debe42332
+Author: Enzo Catalan <enzocv96@gmail.com>
+Date:   Sun Oct 23 19:02:20 2016 -0500
+
+    changed
+
+commit 6a3b96ab7635a388c86a4eb5f8c99463b029e0dd
+Author: drei109 <drei.rar@gmail.com>
+Date:   Sun Oct 23 18:56:27 2016 -0500
+
+    v.0.02
+
+commit 522099ba989c4e09fd3ce661d13c110eb29ae8ac
+Author: drei109 <drei.rar@gmail.com>
+Date:   Sun Oct 23 18:47:37 2016 -0500
+
+    v.0.01

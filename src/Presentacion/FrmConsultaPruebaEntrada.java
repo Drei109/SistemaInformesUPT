@@ -23,6 +23,8 @@ public class FrmConsultaPruebaEntrada extends javax.swing.JInternalFrame {
     DefaultTableModel dtm = new DefaultTableModel();
     String nivelUsuario = "";
     String codDocente = "";
+    String idPruebaEntradaMod ;
+    String idCargaAcedemicaMod;
 //    public ArrayList<ClsNegocioPruebaEntrada> dato;
     
     public FrmConsultaPruebaEntrada(String nivelUsuario,String codDocente) {
@@ -161,17 +163,20 @@ public class FrmConsultaPruebaEntrada extends javax.swing.JInternalFrame {
 
     private void btnVerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVerActionPerformed
         abrirFrmInformePruebaEntrada(); 
+        this.dispose();
     }//GEN-LAST:event_btnVerActionPerformed
 
     private void abrirFrmInformePruebaEntrada(){
         String idPruebaEntrada = (String) tblBuscar.getValueAt(tblBuscar.getSelectedRow(), 0);
-        String campo[] = new String[10];
+        String campo[] = new String[11];
         if (tblBuscar.getSelectedRow() >= 0) {
             try {
                 
                 ClsNegocioPruebaEntrada negNegocioPruebaEntrada = new ClsNegocioPruebaEntrada();
                 ArrayList<String> pruebaEntrada = negNegocioPruebaEntrada.seleccionarPruebaEntrada(idPruebaEntrada);
                 campo = pruebaEntrada.toArray(new String[pruebaEntrada.size()]);
+//                idPruebaEntradaMod = campo[0];
+//                idCargaAcedemicaMod = campo[11];
                 negNegocioPruebaEntrada.conexion.close();
 
             } catch (Exception e) {
