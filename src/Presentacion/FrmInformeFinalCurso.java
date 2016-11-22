@@ -481,6 +481,11 @@ public class FrmInformeFinalCurso extends javax.swing.JInternalFrame {
         });
 
         btnObservaciones.setText("Observaciones");
+        btnObservaciones.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnObservacionesActionPerformed(evt);
+            }
+        });
 
         btnGuardar.setText("Guardar");
         btnGuardar.addActionListener(new java.awt.event.ActionListener() {
@@ -531,7 +536,7 @@ public class FrmInformeFinalCurso extends javax.swing.JInternalFrame {
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
-                .addContainerGap(9, Short.MAX_VALUE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnIndicaciones)
                     .addComponent(btnObservaciones)
@@ -663,6 +668,12 @@ public class FrmInformeFinalCurso extends javax.swing.JInternalFrame {
     private void btnEnviarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEnviarActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_btnEnviarActionPerformed
+
+    private void btnObservacionesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnObservacionesActionPerformed
+        FrmObservacionesInformeFinalCurso observa = new FrmObservacionesInformeFinalCurso();
+        FrmPrinicipal.escritorio.add(observa);
+        observa.setVisible(true);
+    }//GEN-LAST:event_btnObservacionesActionPerformed
 
     private void cargarDatos(){
         txtCodigoCurso.setText(datoIFC[0]);

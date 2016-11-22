@@ -124,6 +124,11 @@ public class FrmCapacidadesInformeFinalCurso extends javax.swing.JInternalFrame 
         btnAceptar.setText("Aceptar");
 
         btnSalir.setText("Salir");
+        btnSalir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSalirActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -232,6 +237,10 @@ public class FrmCapacidadesInformeFinalCurso extends javax.swing.JInternalFrame 
         
         
     }//GEN-LAST:event_btnGuardarActionPerformed
+
+    private void btnSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalirActionPerformed
+        this.dispose();
+    }//GEN-LAST:event_btnSalirActionPerformed
 
     private void agregarFila(int contador){
         DefaultTableModel modelo = (DefaultTableModel) TablaCapacidades.getModel();
@@ -373,7 +382,7 @@ public class FrmCapacidadesInformeFinalCurso extends javax.swing.JInternalFrame 
                 entiCapacidad.setIdinformefinalcurso(Integer.parseInt(IdInfoFinalCurso));
                 entiCapacidad.setDescripcion((String) TablaCapacidades.getValueAt(i, 1));
                 
-                String nada = "x";
+                String nada = "N";
                 String poco = "N";
                 String acep = "N";
                 String bueno = "N";
@@ -416,8 +425,11 @@ public class FrmCapacidadesInformeFinalCurso extends javax.swing.JInternalFrame 
                 
                 negoCapacidad.AgregarDetallePruebaEntrada(entiCapacidad);
             }
-            negoCapacidad.conexion.close();
+            JOptionPane.showMessageDialog(null,entiCapacidad.getIdnivelcapacidad());
             negoCapacidad.cst.close();
+            negoCapacidad.conexion.close();
+            
+            
             JOptionPane.showMessageDialog(null, "Guardado con exito.");
 
         } catch (Exception e) {

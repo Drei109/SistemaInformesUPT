@@ -39,7 +39,7 @@ public class ClsNegocioCapadidadInformeFinalCurso implements ClsInterfaceCapacid
         try {
             cst = conexion.prepareCall("{call USP_Capacidad_I(?,?,?)}");
             cst.setString("pdescripcion", CapacidadInformeFinal.getDescripcion());
-            cst.setString("pidnivelcapacidad", String.valueOf(CapacidadInformeFinal.getIdcapacidad()));
+            cst.setString("pidnivelcapacidad", String.valueOf(CapacidadInformeFinal.getIdnivelcapacidad()));
             cst.setString("pidinformefinalcurso", String.valueOf(CapacidadInformeFinal.getIdinformefinalcurso()));
             cst.execute();
         } catch (SQLException ex) {
