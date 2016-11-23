@@ -7,6 +7,7 @@ import java.sql.CallableStatement;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 /**
  *
@@ -54,7 +55,15 @@ public class ClsNegocioInformeFinalCurso implements ClsInterfaceInformeFinalCurs
 
     @Override
     public ResultSet ConsultaAvanzaInformeFinal(String criterio, String busqueda) throws Exception {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+         try {
+            cst = conexion.prepareCall("{call USP_BusquedaAvanzadaPruebaEntrada(?,?)}");
+            cst.setString("pcriterio", criterio);
+            cst.setString("pbusqueda", busqueda);
+            rs = cst.executeQuery();
+            return rs;
+        } catch (SQLException ex) {
+            throw ex;
+        }
     }
 
     @Override
@@ -81,6 +90,48 @@ public class ClsNegocioInformeFinalCurso implements ClsInterfaceInformeFinalCurs
             return rs;
         } catch (SQLException ex) {
             throw ex;
+        }
+    }
+
+    @Override
+    public ArrayList seleccionarInforCurso(String codinfo) {
+        ArrayList<String> infoCurso = new ArrayList<String>();
+        try {
+            cst = conexion.prepareCall("{call USP_InfoFinalPorId(?)}");
+            cst.setString("pidinfo", codinfo);
+            rs = cst.executeQuery();
+            
+            while (rs.next()) {//25
+                infoCurso.add(rs.getString(1));
+                infoCurso.add(rs.getString(2));
+                infoCurso.add(rs.getString(3));
+                infoCurso.add(rs.getString(4));
+                infoCurso.add(rs.getString(5));
+                infoCurso.add(rs.getString(6));
+                infoCurso.add(rs.getString(7));
+                infoCurso.add(rs.getString(8));
+                infoCurso.add(rs.getString(9));
+                infoCurso.add(rs.getString(10));
+                infoCurso.add(rs.getString(11));
+                infoCurso.add(rs.getString(12));
+                infoCurso.add(rs.getString(13));
+                infoCurso.add(rs.getString(14));
+                infoCurso.add(rs.getString(15));
+                infoCurso.add(rs.getString(16));
+                infoCurso.add(rs.getString(17));
+                infoCurso.add(rs.getString(18));
+                infoCurso.add(rs.getString(19));
+                infoCurso.add(rs.getString(20));
+                infoCurso.add(rs.getString(21));
+                infoCurso.add(rs.getString(22));
+                infoCurso.add(rs.getString(23));
+                infoCurso.add(rs.getString(24));
+                infoCurso.add(rs.getString(25));
+            }
+            return infoCurso;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
         }
     }
     
