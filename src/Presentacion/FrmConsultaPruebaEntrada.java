@@ -6,6 +6,7 @@
 package Presentacion;
 
 import Entidad.ClsEntidadPruebaCursosFaltantes;
+import Negocio.ClsNegocioInformeFinalCurso;
 import Negocio.ClsNegocioPruebaEntrada;
 import java.sql.ResultSet;
 import java.util.ArrayList;
@@ -53,6 +54,7 @@ public class FrmConsultaPruebaEntrada extends javax.swing.JInternalFrame {
         btnBuscar = new javax.swing.JButton();
         btnVer = new javax.swing.JButton();
         btnSalir = new javax.swing.JButton();
+        cmbTipoInforme = new javax.swing.JComboBox<>();
 
         jLabel1.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
         jLabel1.setText("CONSULTA PRUEBA ENTRADA");
@@ -97,6 +99,8 @@ public class FrmConsultaPruebaEntrada extends javax.swing.JInternalFrame {
             }
         });
 
+        cmbTipoInforme.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Prueba Entrada", "Informe Final" }));
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -120,7 +124,9 @@ public class FrmConsultaPruebaEntrada extends javax.swing.JInternalFrame {
                             .addComponent(txtBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 348, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(cmbCriterio, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(btnBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 166, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(btnBuscar, javax.swing.GroupLayout.DEFAULT_SIZE, 166, Short.MAX_VALUE)
+                            .addComponent(cmbTipoInforme, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 602, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addComponent(btnSalir, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -135,7 +141,8 @@ public class FrmConsultaPruebaEntrada extends javax.swing.JInternalFrame {
                 .addGap(39, 39, 39)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
-                    .addComponent(cmbCriterio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(cmbCriterio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(cmbTipoInforme, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
@@ -147,7 +154,7 @@ public class FrmConsultaPruebaEntrada extends javax.swing.JInternalFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnVer)
                     .addComponent(btnSalir))
-                .addGap(0, 17, Short.MAX_VALUE))
+                .addGap(0, 21, Short.MAX_VALUE))
         );
 
         pack();
@@ -215,6 +222,35 @@ public class FrmConsultaPruebaEntrada extends javax.swing.JInternalFrame {
     }
     
     private void buscarPruebaEntrada(String nivelUsuario,String codDocente){
+     String tipoInforme = cmbTipoInforme.getSelectedItem().toString();
+        if (tipoInforme.equals("Prueba Entrada")) {
+            pruebaEntrada(nivelUsuario, codDocente);
+        }
+        else if(tipoInforme.equals("Informe Final")){
+            
+        }
+    }
+    
+    private void definirTituloTabla(String nivelUsuario) {
+        
+        switch(nivelUsuario){
+        case "Usuario":
+            String titulosUsuario[] = {"ID","Cod Curso","Curso","Fecha","Estado"};
+            dtm.setColumnIdentifiers(titulosUsuario);
+            tblBuscar.setModel(dtm);
+            break;
+        case "Supervisor":
+        case "Administrador":
+            String titulosAdministrador[] = {"ID","Cod Docente","Nombre","Semestre","Cod Curso","Curso","Fecha","Estado"};
+            dtm.setColumnIdentifiers(titulosAdministrador);
+            tblBuscar.setModel(dtm);
+            break;
+        }
+        
+        
+    }
+    
+    private void pruebaEntrada(String nivelUsuario,String codDocente){
         ClsNegocioPruebaEntrada negPruebaEntrada = new ClsNegocioPruebaEntrada();
         
         String criterio = cmbCriterio.getSelectedItem().toString();
@@ -290,35 +326,94 @@ public class FrmConsultaPruebaEntrada extends javax.swing.JInternalFrame {
             } catch (Exception ex) {
             }
             break;
-        }       
-        
+        }
     }
     
-    private void definirTituloTabla(String nivelUsuario) {
+    private void informeFinal(String nivelUsuario,String codDocente){
+        ClsNegocioInformeFinalCurso negFinal = new ClsNegocioInformeFinalCurso();
         
+        String criterio = cmbCriterio.getSelectedItem().toString();
+//        JOptionPane.showMessageDialog(null, criterio);
+        String busqueda = txtBuscar.getText();
+             
         switch(nivelUsuario){
         case "Usuario":
-            String titulosUsuario[] = {"ID","Cod Curso","Curso","Fecha","Estado"};
-            dtm.setColumnIdentifiers(titulosUsuario);
-            tblBuscar.setModel(dtm);
+            try {
+            rs  =negFinal.ConsultaAvanzaInfoFinalUsuario(criterio, busqueda,codDocente);
+
+            boolean encuentra = false;
+            String Campo[] = new String[5];
+            int fila;
+            fila = dtm.getRowCount();
+            if (fila > 0) {
+                for (int i = 0; i < fila; i++) {
+                    dtm.removeRow(0);
+                }
+            }
+            while (rs.next()) {
+                Campo[0] = (String) rs.getString(1); 
+                Campo[1] = (String) rs.getString(2); 
+                Campo[2] = (String) rs.getString(3); 
+                Campo[3] = (String) rs.getString(4); 
+                Campo[4] = (String) rs.getString(5); 
+
+                dtm.addRow(Campo);
+                encuentra = true;
+            }
+
+            if (encuentra == false) {
+                JOptionPane.showMessageDialog(null,"No se encuentra.");
+            }
+            rs.close();
+            negFinal.conexion.close();
+            } catch (Exception ex) {
+            }
             break;
-        case "Supervisor":
+        case "Supervisor":            
         case "Administrador":
-            String titulosAdministrador[] = {"ID","Cod Docente","Nombre","Semestre","Cod Curso","Curso","Fecha","Estado"};
-            dtm.setColumnIdentifiers(titulosAdministrador);
-            tblBuscar.setModel(dtm);
+            try {
+//            rs  =negFinal.ConsultaAvanzaInformeFinal(criterio, busqueda);
+//
+//            boolean encuentra = false;
+//            String Campo[] = new String[8];
+//            int fila;
+//            fila = dtm.getRowCount();
+//            if (fila > 0) {
+//                for (int i = 0; i < fila; i++) {
+//                    dtm.removeRow(0);
+//                }
+//            }
+//            while (rs.next()) {
+//                Campo[0] = (String) rs.getString(1); 
+//                Campo[1] = (String) rs.getString(2); 
+//                Campo[2] = (String) rs.getString(3); 
+//                Campo[3] = (String) rs.getString(4); 
+//                Campo[4] = (String) rs.getString(5); 
+//                Campo[5] = (String) rs.getString(6); 
+//                Campo[6] = (String) rs.getString(7); 
+//                Campo[7] = (String) rs.getString(8); 
+//
+//                dtm.addRow(Campo);
+//                encuentra = true;
+//            }
+//
+//            if (encuentra == false) {
+//                JOptionPane.showMessageDialog(null,"No se encuentra.");
+//            }
+//            rs.close();
+//            negPruebaEntrada.conexion.close();
+            } catch (Exception ex) {
+            }
             break;
         }
-        
-        
     }
-    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnBuscar;
     private javax.swing.JButton btnSalir;
     private javax.swing.JButton btnVer;
     private javax.swing.JComboBox<String> cmbCriterio;
+    private javax.swing.JComboBox<String> cmbTipoInforme;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;

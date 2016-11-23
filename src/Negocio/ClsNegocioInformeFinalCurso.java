@@ -68,5 +68,20 @@ public class ClsNegocioInformeFinalCurso implements ClsInterfaceInformeFinalCurs
             ex.printStackTrace();
         }
     }
+
+    @Override
+    public ResultSet ConsultaAvanzaInfoFinalUsuario(String criterio, String busqueda, String codDocente) throws Exception {
+        ResultSet rs = null;
+        try {
+            cst = conexion.prepareCall("{call USP_BusquedaAvanzadaInfoFinalUsuario(?,?,?)}");
+            cst.setString("pcriterio", criterio);
+            cst.setString("pbusqueda", busqueda);
+            cst.setString("pcodDocente", codDocente);
+             rs = cst.executeQuery();
+            return rs;
+        } catch (SQLException ex) {
+            throw ex;
+        }
+    }
     
 }
