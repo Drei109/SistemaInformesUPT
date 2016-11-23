@@ -13,7 +13,10 @@ import javax.swing.JOptionPane;
 public class FrmInformeFinalCurso extends javax.swing.JInternalFrame {
 
     public String[] datoIFC = null;
-    boolean guardarNuevo = true;
+    boolean guardarNuevo = false;
+    boolean guardadoF = false;
+    boolean actualizaF = false;
+    boolean calculadoPorcentajes = false;
     public String nivelUsuario;
     String idCargaAcademica;
     
@@ -599,8 +602,21 @@ public class FrmInformeFinalCurso extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_txtNombreDocenteActionPerformed
 
     private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed
-        String opcion = "Guardado";
-        guardarDatos(opcion);
+        if (validarFormulario()) {
+            if (guardarNuevo) {
+                String opcion = "Guardado";
+                guardarDatos(opcion);
+                guardadoF = true;
+            }
+            else{
+                /*actualizas*/
+                actualizaF = true;
+            }
+        }
+        else{
+            JOptionPane.showMessageDialog(null, "Los datos ingresados son incorrectos");
+        }
+        
     }//GEN-LAST:event_btnGuardarActionPerformed
 
     private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
@@ -617,9 +633,17 @@ public class FrmInformeFinalCurso extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_formInternalFrameOpened
 
     private void btnIndicacionesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnIndicacionesActionPerformed
-        FrmCapacidadesInformeFinalCurso frmcapacidades = new FrmCapacidadesInformeFinalCurso();
-        FrmPrinicipal.escritorio.add(frmcapacidades);
-        frmcapacidades.setVisible(true);
+        if (guardadoF && guardarNuevo) {
+            FrmCapacidadesInformeFinalCurso frmcapacidades = new FrmCapacidadesInformeFinalCurso();
+            FrmPrinicipal.escritorio.add(frmcapacidades);
+            frmcapacidades.setVisible(true);
+        }
+        else if (actualizaF) {
+            /*construtor con parametros para actualizar las capacidades del informe*/
+        }
+        else{
+            JOptionPane.showMessageDialog(null, "Guarde o Envie antes de ingresar las observaciones");
+        }
     }//GEN-LAST:event_btnIndicacionesActionPerformed
 
     private void btnCalcularPorcentajesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCalcularPorcentajesActionPerformed
@@ -651,6 +675,8 @@ public class FrmInformeFinalCurso extends javax.swing.JInternalFrame {
             
                     txtPorcenAprobados.setText(""+ (aprobados * porcentajeAsisten)/asisten);
                     txtPorcenDesaprobados.setText(""+ (desaprobados * porcentajeAsisten)/asisten);
+                    
+                    calculadoPorcentajes = true;
                 }
                 else{
                     JOptionPane.showMessageDialog(null, "Cantidad de aprobados y desaprobados no coinciden");
@@ -666,13 +692,34 @@ public class FrmInformeFinalCurso extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_btnCalcularPorcentajesActionPerformed
 
     private void btnEnviarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEnviarActionPerformed
-        // TODO add your handling code here:
+        if (validarFormulario()) {
+            if (guardarNuevo) {
+                String opcion = "Enviado";
+                guardarDatos(opcion);
+                guardadoF = true;
+            }
+            else{
+                /*actualizas*/
+                actualizaF = true;
+            }
+        }
+        else{
+            JOptionPane.showMessageDialog(null, "Los datos ingresados son incorrectos");
+        }
     }//GEN-LAST:event_btnEnviarActionPerformed
 
     private void btnObservacionesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnObservacionesActionPerformed
-        FrmObservacionesInformeFinalCurso observa = new FrmObservacionesInformeFinalCurso();
-        FrmPrinicipal.escritorio.add(observa);
-        observa.setVisible(true);
+        if (guardadoF && guardarNuevo) {
+            FrmObservacionesInformeFinalCurso observa = new FrmObservacionesInformeFinalCurso();
+            FrmPrinicipal.escritorio.add(observa);
+            observa.setVisible(true);
+        }
+        else if (actualizaF) {
+            /*construtor con parametros para actualizar las observaciones del informe*/
+        }
+        else{
+            JOptionPane.showMessageDialog(null, "Guarde o Envie antes de ingresar las observaciones");
+        }
     }//GEN-LAST:event_btnObservacionesActionPerformed
 
     private void cargarDatos(){
@@ -760,6 +807,28 @@ public class FrmInformeFinalCurso extends javax.swing.JInternalFrame {
             docente.conexion.close();
         } catch (Exception e) {
         }
+    }
+    
+    private boolean validarFormulario(){
+        boolean top = false;
+        boolean chk = false;
+        boolean mid = false;
+        boolean result = false;
+        
+        if (!txtSecCurso.getText().equals("")) {
+            if (chkLabCurso.isSelected())    chk = true;
+            if (chkPractCurso.isSelected())  chk = true;
+            if (chkTallerCurso.isSelected()) chk = true;
+            if (chkTeoriaCurso.isSelected()) chk = true;
+            
+            if(chk) top = true;
+        }
+        
+        if(calculadoPorcentajes) mid = true;
+        
+        if (top && mid) result = true;
+        
+        return result;
     }
     
     // Variables declaration - do not modify//GEN-BEGIN:variables

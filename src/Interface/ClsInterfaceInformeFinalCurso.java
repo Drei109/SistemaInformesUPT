@@ -18,4 +18,6 @@ public interface ClsInterfaceInformeFinalCurso {
     
     void ModificarEstadoInformeFinal(String codigo, String estado);
     
+    public ResultSet ConsultaAvanzaInfoFinalUsuario(String criterio, String busqueda, String codDocente) throws Exception;
+    
 }
