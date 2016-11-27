@@ -1,62 +1,94 @@
-﻿commit d0df5f54c7142a9c08b7eba7981c6c4f58854477
+﻿commit c2013cc73375205887f9b35f67d99a1d8e025183
 
 Author: Enzo Catalan <enzocv96@gmail.com>
 
-Date:   Thu Nov 17 11:34:34 2016 -0500
+Date:   Wed Nov 23 15:06:29 2016 -0500
 
     
-arreglado el problema con los botones de enviar y guardar del informe de prueba de entrada
+ahora los datos se informe final ya se traen dependiendo del formulario de donde se esten abriendo
 
 
 
-commit 85a1022cd933cf5944c481d3cbbdb80c09d5808c
+commit 2f0a828b38f4f71cbd63a9fef20952d94fba57ea
 
-Merge: 1d182f1 9d7d8ce
+Author: Enzo Catalan <enzocv96@gmail.com>
 
-Author: drei109 <drei.rar@gmail.com>
-
-Date:   Mon Nov 14 09:56:55 2016 -0500
+Date:   Wed Nov 23 11:50:48 2016 -0500
 
     
-Merge branch 'master' of https://github.com/Drei109/SistemaInformesUPT
+validado informe final curso
+
+
+
+commit 285106812a30ff12c44e94068fc2512eb8a8d5f4
+
+Author: Enzo Catalan <enzocv96@gmail.com>
+
+Date:   Mon Nov 21 21:27:27 2016 -0500
+
     
-merge with new form
+agregado boton guardar para informe final de curso
+
+
+
+commit 19fad4726d069a75ebda6682b39a3ca731b162ca
+
+Author: Enzo Catalan <enzocv96@gmail.com>
+
+Date:   Thu Nov 17 20:55:23 2016 -0500
+
+    
+limpiado codigo despues del merge
+
+
+
+commit d4186d626e8d0849b7a2e1ebc18331690fef16c8
+
+Merge: 3d87c45 58f87ed
+Author: Enzo Catalan <enzocv96@gmail.com>
+Date:   Thu Nov 17 19:11:30 2016 -0500
+
+    ultimo merge completo
+
+commit 3d87c459d9805f6f8c881b9e775f9ff0d93e3192
+Author: Enzo Catalan <enzocv96@gmail.com>
+Date:   Thu Nov 17 19:05:02 2016 -0500
+
+    ultimos cambios arreglado bugs
+
+commit 58f87ed32044fb0db12146b32e664ce4d1afa61b
+Author: Enzo Catalan <enzocv96@gmail.com>
+Date:   Mon Nov 14 15:00:57 2016 -0500
+
+    modificado informe prueba entrada
+    boton de enviar y guardar modificados.
+
+commit 3a5abd18a8220ef717949ec649defe44d9b284df
+Author: Enzo Catalan <enzocv96@gmail.com>
+Date:   Mon Nov 14 11:53:07 2016 -0500
+
+    agregar capacidades del informe final en proceso
 
 commit 9d7d8ce9cbdeaf62ddb1c8f4a7736f3b7000bb8d
-
 Author: Enzo Catalan <enzocv96@gmail.com>
-
 Date:   Mon Nov 14 09:56:49 2016 -0500
 
-    
-agregado metodo para agregar informe final del curso
-
-
+    agregado metodo para agregar informe final del curso
 
 commit 1d182f1d6f30afd6b7f1be8305f3308750ad5ba5
-
 Merge: 822a2d3 531b4a2
-
 Author: drei109 <drei.rar@gmail.com>
-
 Date:   Mon Nov 14 09:13:39 2016 -0500
 
     pri2
 
-
-
 commit 822a2d3f6cd42be7232fba489394a0b9c33ca7d5
-
 Author: drei109 <drei.rar@gmail.com>
-
 Date:   Mon Nov 14 09:12:37 2016 -0500
 
     pri
 
-
-
 commit 531b4a2bffd8c737c76d4f9c0f50005bb93ed1af
-
 Merge: eaefe6a 5add429
 Author: Enzo Catalan <enzocv96@gmail.com>
 Date:   Mon Nov 14 09:11:15 2016 -0500
