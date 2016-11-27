@@ -260,7 +260,7 @@ public class FrmReportesFaltantes extends javax.swing.JInternalFrame {
             else if (tipoReporte.equals("Informe Final Curso")) {
 //                FrmInformeFinalCurso info = new FrmInformeFinalCurso(campo,true,nivelUsuario);
 //                FrmPrinicipal.escritorio.add(info);
-                FrmPrueba info = new FrmPrueba(campo,true,nivelUsuario);
+                FrmPrueba info = new FrmPrueba(campo,true,nivelUsuario,codDocente);
                 FrmPrinicipal.escritorio.add(info);
                 info.setVisible(true);
                 this.dispose();

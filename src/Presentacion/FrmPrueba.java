@@ -8,8 +8,12 @@ import Negocio.ClsNegocioInformeFinalCurso;
 import Negocio.ClsNegocioObservacionesInformeFinalCurso;
 import Negocio.ClsNegocioUsuario;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
@@ -27,6 +31,7 @@ public class FrmPrueba extends javax.swing.JInternalFrame {
     boolean calculadoPorcentajes = false;
     public String nivelUsuario;
     String idCargaAcademica;
+    public String codDocente;
     
     /*CAPACIDADES | VARIABLES*/
     int contador = 0;
@@ -58,11 +63,12 @@ public class FrmPrueba extends javax.swing.JInternalFrame {
         initComponents();
     }
     
-    public FrmPrueba(String[] datoRF, boolean guardarNuevo,String nivelusu){
+    public FrmPrueba(String[] datoRF, boolean guardarNuevo,String nivelusu,String codDocente){
         initComponents();
         this.datoIFC = datoRF;
         this.guardarNuevo = guardarNuevo;
         this.nivelUsuario = nivelusu;
+        this.codDocente = codDocente;
     }
 
     @SuppressWarnings("unchecked")
@@ -145,20 +151,18 @@ public class FrmPrueba extends javax.swing.JInternalFrame {
         txtCelularDocente = new javax.swing.JTextField();
         jPanel2 = new javax.swing.JPanel();
         jPanel9 = new javax.swing.JPanel();
-        btnRemoverFila = new javax.swing.JButton();
+        btnRemoverFilaCapacidades = new javax.swing.JButton();
         jScrollPane2 = new javax.swing.JScrollPane();
         TablaCapacidades = new javax.swing.JTable();
         jLabel4 = new javax.swing.JLabel();
-        btnAgregarFila = new javax.swing.JButton();
+        btnAgregarFilaCapacidades = new javax.swing.JButton();
         jPanel10 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         txtComentario = new javax.swing.JTextArea();
         jLabel30 = new javax.swing.JLabel();
         jPanel11 = new javax.swing.JPanel();
         btnSalirCapacidad = new javax.swing.JButton();
-        jButton1 = new javax.swing.JButton();
         btnGuardarCapacidad = new javax.swing.JButton();
-        btnEnviarCapacidad = new javax.swing.JButton();
         jPanel3 = new javax.swing.JPanel();
         titulo3 = new javax.swing.JLabel();
         jScrollPane3 = new javax.swing.JScrollPane();
@@ -185,7 +189,7 @@ public class FrmPrueba extends javax.swing.JInternalFrame {
         titulo7 = new javax.swing.JLabel();
         jPanel15 = new javax.swing.JPanel();
         btnGuardarObservaciones = new javax.swing.JButton();
-        btnEnviarObservaciones = new javax.swing.JButton();
+        btnSalirObservacion = new javax.swing.JButton();
         jScrollPane9 = new javax.swing.JScrollPane();
         txtObserva8 = new javax.swing.JTextArea();
         titulo8 = new javax.swing.JLabel();
@@ -247,7 +251,7 @@ public class FrmPrueba extends javax.swing.JInternalFrame {
             }
         });
 
-        btnCancelarInforme.setText("Cancelar");
+        btnCancelarInforme.setText("Salir");
         btnCancelarInforme.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnCancelarInformeActionPerformed(evt);
@@ -695,10 +699,10 @@ public class FrmPrueba extends javax.swing.JInternalFrame {
 
         jPanel9.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(51, 51, 255)));
 
-        btnRemoverFila.setText("Remover fila");
-        btnRemoverFila.addActionListener(new java.awt.event.ActionListener() {
+        btnRemoverFilaCapacidades.setText("Remover fila");
+        btnRemoverFilaCapacidades.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnRemoverFilaActionPerformed(evt);
+                btnRemoverFilaCapacidadesActionPerformed(evt);
             }
         });
 
@@ -722,10 +726,10 @@ public class FrmPrueba extends javax.swing.JInternalFrame {
 
         jLabel4.setText("Logros de Capacidades del Curso:");
 
-        btnAgregarFila.setText("Agregar fila");
-        btnAgregarFila.addActionListener(new java.awt.event.ActionListener() {
+        btnAgregarFilaCapacidades.setText("Agregar fila");
+        btnAgregarFilaCapacidades.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnAgregarFilaActionPerformed(evt);
+                btnAgregarFilaCapacidadesActionPerformed(evt);
             }
         });
 
@@ -741,9 +745,9 @@ public class FrmPrueba extends javax.swing.JInternalFrame {
                         .addComponent(jLabel4)
                         .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 718, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGroup(jPanel9Layout.createSequentialGroup()
-                            .addComponent(btnAgregarFila, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btnAgregarFilaCapacidades, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGap(18, 18, 18)
-                            .addComponent(btnRemoverFila, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(btnRemoverFilaCapacidades, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addContainerGap(27, Short.MAX_VALUE)))
         );
         jPanel9Layout.setVerticalGroup(
@@ -757,8 +761,8 @@ public class FrmPrueba extends javax.swing.JInternalFrame {
                     .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGap(18, 18, 18)
                     .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(btnRemoverFila)
-                        .addComponent(btnAgregarFila))
+                        .addComponent(btnRemoverFilaCapacidades)
+                        .addComponent(btnAgregarFilaCapacidades))
                     .addContainerGap()))
         );
 
@@ -800,8 +804,6 @@ public class FrmPrueba extends javax.swing.JInternalFrame {
             }
         });
 
-        jButton1.setText("jButton1");
-
         btnGuardarCapacidad.setText("Guardar");
         btnGuardarCapacidad.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -809,21 +811,15 @@ public class FrmPrueba extends javax.swing.JInternalFrame {
             }
         });
 
-        btnEnviarCapacidad.setText("Enviar");
-
         javax.swing.GroupLayout jPanel11Layout = new javax.swing.GroupLayout(jPanel11);
         jPanel11.setLayout(jPanel11Layout);
         jPanel11Layout.setHorizontalGroup(
             jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel11Layout.createSequentialGroup()
-                .addGap(27, 27, 27)
-                .addComponent(btnSalirCapacidad, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(36, 36, 36)
-                .addComponent(btnEnviarCapacidad, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(42, 42, 42)
+                .addGap(29, 29, 29)
                 .addComponent(btnGuardarCapacidad, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(43, 43, 43)
-                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(30, 30, 30)
+                .addComponent(btnSalirCapacidad, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel11Layout.setVerticalGroup(
@@ -832,9 +828,7 @@ public class FrmPrueba extends javax.swing.JInternalFrame {
                 .addGap(19, 19, 19)
                 .addGroup(jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnGuardarCapacidad)
-                    .addComponent(btnEnviarCapacidad)
-                    .addComponent(btnSalirCapacidad)
-                    .addComponent(jButton1))
+                    .addComponent(btnSalirCapacidad))
                 .addContainerGap(20, Short.MAX_VALUE))
         );
 
@@ -919,7 +913,12 @@ public class FrmPrueba extends javax.swing.JInternalFrame {
             }
         });
 
-        btnEnviarObservaciones.setText("Enviar");
+        btnSalirObservacion.setText("Salir");
+        btnSalirObservacion.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSalirObservacionActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel15Layout = new javax.swing.GroupLayout(jPanel15);
         jPanel15.setLayout(jPanel15Layout);
@@ -929,7 +928,7 @@ public class FrmPrueba extends javax.swing.JInternalFrame {
                 .addContainerGap()
                 .addComponent(btnGuardarObservaciones, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(btnEnviarObservaciones, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btnSalirObservacion, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel15Layout.setVerticalGroup(
@@ -938,8 +937,8 @@ public class FrmPrueba extends javax.swing.JInternalFrame {
                 .addContainerGap()
                 .addGroup(jPanel15Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnGuardarObservaciones)
-                    .addComponent(btnEnviarObservaciones))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(btnSalirObservacion))
+                .addContainerGap(34, Short.MAX_VALUE))
         );
 
         txtObserva8.setColumns(20);
@@ -1194,6 +1193,7 @@ public class FrmPrueba extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_txtNombreDocenteActionPerformed
 
     private void formInternalFrameOpened(javax.swing.event.InternalFrameEvent evt) {//GEN-FIRST:event_formInternalFrameOpened
+        cargarTabla();
         cargarDatos();
         if (nivelUsuario.equals("Usuario")) {
             btnAceptarInforme.setVisible(false);
@@ -1202,10 +1202,10 @@ public class FrmPrueba extends javax.swing.JInternalFrame {
         obtenerIdCargaAcademica();
     }//GEN-LAST:event_formInternalFrameOpened
 
-    private void btnRemoverFilaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRemoverFilaActionPerformed
+    private void btnRemoverFilaCapacidadesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRemoverFilaCapacidadesActionPerformed
         contador--;
         removerFila();
-    }//GEN-LAST:event_btnRemoverFilaActionPerformed
+    }//GEN-LAST:event_btnRemoverFilaCapacidadesActionPerformed
 
     private void TablaCapacidadesMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_TablaCapacidadesMousePressed
         if (TablaCapacidades.getSelectedRow()!= -1) {
@@ -1221,18 +1221,17 @@ public class FrmPrueba extends javax.swing.JInternalFrame {
         }
     }//GEN-LAST:event_TablaCapacidadesMousePressed
 
-    private void btnAgregarFilaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarFilaActionPerformed
+    private void btnAgregarFilaCapacidadesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarFilaCapacidadesActionPerformed
         contador++;
         agregarFila(contador);
-
-    }//GEN-LAST:event_btnAgregarFilaActionPerformed
+    }//GEN-LAST:event_btnAgregarFilaCapacidadesActionPerformed
 
     private void btnSalirCapacidadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalirCapacidadActionPerformed
         this.dispose();
     }//GEN-LAST:event_btnSalirCapacidadActionPerformed
 
     private void btnGuardarCapacidadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarCapacidadActionPerformed
-        if (guardadoF) {
+        if (guardarNuevo) {
             if (TablaCapacidades.getRowCount() > 0) {
                 if (calcularMarcadosNivelCapacidad()) {
                     agregarCapadicades();
@@ -1246,7 +1245,20 @@ public class FrmPrueba extends javax.swing.JInternalFrame {
             }
         }
         else{
-                JOptionPane.showMessageDialog(null, "Guarde El Informe Principal Antes.");
+            if (TablaCapacidades.getRowCount() > 0) {
+                if (calcularMarcadosNivelCapacidad()) {
+                    if (TablaCapacidades.getSelectedRow() != -1) {
+                        LogrosCapacidades.set(TablaCapacidades.getSelectedRow(), txtComentario.getText());
+                    }
+                    actualizarCapacidades();
+                }
+                else{
+                    JOptionPane.showMessageDialog(null, "Ingrese un nivel por cada Capacidad.");
+                }
+            }
+            else{
+                JOptionPane.showMessageDialog(null, "inserta datos en la Tabla");
+            }
         }
     }//GEN-LAST:event_btnGuardarCapacidadActionPerformed
 
@@ -1399,6 +1411,10 @@ public class FrmPrueba extends javax.swing.JInternalFrame {
         } catch (Exception e) {
         }
     }//GEN-LAST:event_btnRechazarInformeActionPerformed
+
+    private void btnSalirObservacionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalirObservacionActionPerformed
+        this.dispose();
+    }//GEN-LAST:event_btnSalirObservacionActionPerformed
 
     /*INFORME FINAL | METODOS*/
     private void guardarDatos(String opcion){
@@ -1554,7 +1570,7 @@ public class FrmPrueba extends javax.swing.JInternalFrame {
             if (hteoricas > 0)  chkTeoriaCursoInforme.setSelected(true);
             if (hpracticas > 0) chkPractCursoInforme.setSelected(true);
             
-            String aLab   = datoIFC[12].equals("No") ? "Si" : "No";
+            String aLab   = datoIFC[12].equals("Si") ? "Si" : "No";
             String aTalle = datoIFC[13].equals("Si") ? "Si" : "No";
             if (aLab.equals("Si"))   chkLabCursoInforme.setSelected(true);
             if (aTalle.equals("Si")) chkTallerCursoInforme.setSelected(true);
@@ -1576,8 +1592,85 @@ public class FrmPrueba extends javax.swing.JInternalFrame {
             txtNumNotaAlta.setText(datoIFC[21]);
             txtNumNotaPromedio.setText(datoIFC[22]);
             txtNumBaja.setText(datoIFC[23]);
+            
+            cargarDatosTabla();
         }
         
+    }
+    
+    private void cargarDatosTabla(){
+        
+        DefaultTableModel modelo = (DefaultTableModel) TablaCapacidades.getModel();
+        
+        ClsNegocioCapadidadInformeFinalCurso detalleInfoFinal = new ClsNegocioCapadidadInformeFinalCurso();
+        ArrayList<ClsEntidadCacidadInformeFinalCurso> detalle = detalleInfoFinal.seleccionarDetalleInfoFinal(IdInfoFinalCurso);
+        Iterator iterator = detalle.iterator();
+        
+        String campo[] = new String[7];
+        
+        while (iterator.hasNext()) {            
+            ClsEntidadCacidadInformeFinalCurso objDetalle = new ClsEntidadCacidadInformeFinalCurso();
+            objDetalle = (ClsEntidadCacidadInformeFinalCurso) iterator.next();
+            
+            
+            campo[0] = String.valueOf(objDetalle.getIdcapacidad());
+            campo[1] = objDetalle.getDescripcion();
+            
+            switch (objDetalle.getIdnivelcapacidad()) {
+                case 1:
+                    campo[2] = "X";
+                    campo[3] = "";
+                    campo[4] = "";
+                    campo[5] = "";
+                    campo[6] = "";
+                    break;
+                case 11:
+                    campo[2] = "";
+                    campo[3] = "X";
+                    campo[4] = "";
+                    campo[5] = "";
+                    campo[6] = "";
+                    break;
+                case 21:
+                    campo[2] = "";
+                    campo[3] = "";
+                    campo[4] = "X";
+                    campo[5] = "";
+                    campo[6] = "";
+                    break;
+                case 31:
+                    campo[2] = "";
+                    campo[3] = "";
+                    campo[4] = "";
+                    campo[5] = "X";
+                    campo[6] = "";
+                    break;
+                case 41:
+                    campo[2] = "";
+                    campo[3] = "";
+                    campo[4] = "";
+                    campo[5] = "";
+                    campo[6] = "X";
+                    break;
+                default:
+                    campo[2] = "";
+                    campo[3] = "";
+                    campo[4] = "";
+                    campo[5] = "";
+                    campo[6] = "";
+                    break;
+            }
+            
+            LogrosCapacidades.add(objDetalle.getMedidaCorectiva());
+            
+            modelo.addRow(campo);
+        }
+        try {
+            detalleInfoFinal.conexion.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(FrmInformePruebaEntrada.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        TablaCapacidades.setModel(modelo);
     }
 
     /*CAPACIDADES | METODOS*/
@@ -1642,9 +1735,14 @@ public class FrmPrueba extends javax.swing.JInternalFrame {
         try {
             ClsEntidadCacidadInformeFinalCurso entiCapacidad = new ClsEntidadCacidadInformeFinalCurso();
             ClsNegocioCapadidadInformeFinalCurso negoCapacidad =  new ClsNegocioCapadidadInformeFinalCurso();
+            
+            ArrayList<String> idinfo = negoCapacidad.obtenerInfoFinalDocente(codDocente,datoIFC[0]);
+            String id[] = idinfo.toArray(new String[idinfo.size()]);
+            
             for (int i = 0; i < filas; i++) {
-                entiCapacidad.setIdinformefinalcurso(Integer.parseInt(IdInfoFinalCurso));
+                entiCapacidad.setIdinformefinalcurso(Integer.parseInt(id[0]));
                 entiCapacidad.setDescripcion((String) TablaCapacidades.getValueAt(i, 1));
+                entiCapacidad.setMedidaCorectiva(LogrosCapacidades.get(i));
                 
                 String nada = "N";
                 String poco = "N";
@@ -1689,7 +1787,78 @@ public class FrmPrueba extends javax.swing.JInternalFrame {
                 
                 negoCapacidad.AgregarDetallePruebaEntrada(entiCapacidad);
             }
-            JOptionPane.showMessageDialog(null,entiCapacidad.getIdnivelcapacidad());
+            
+            negoCapacidad.cst.close();
+            negoCapacidad.conexion.close();
+            
+            
+            JOptionPane.showMessageDialog(null, "Guardado con exito.");
+
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "mensaje: "+e.getMessage());
+        }
+    }
+    
+    private void actualizarCapacidades(){
+        int filas = TablaCapacidades.getRowCount();
+        try {
+            ClsEntidadCacidadInformeFinalCurso entiCapacidad = new ClsEntidadCacidadInformeFinalCurso();
+            ClsNegocioCapadidadInformeFinalCurso negoCapacidad =  new ClsNegocioCapadidadInformeFinalCurso();
+            
+            ArrayList<String> idinfo = negoCapacidad.obtenerInfoFinalDocente(codDocente,datoIFC[0]);
+            String id[] = idinfo.toArray(new String[idinfo.size()]);
+            
+            negoCapacidad.EliminarDetallInfoFinalTodo(id[0]);
+            
+            for (int i = 0; i < filas; i++) {
+                entiCapacidad.setIdinformefinalcurso(Integer.parseInt(id[0]));
+                entiCapacidad.setDescripcion((String) TablaCapacidades.getValueAt(i, 1));
+                entiCapacidad.setMedidaCorectiva(LogrosCapacidades.get(i));
+                
+                String nada = "N";
+                String poco = "N";
+                String acep = "N";
+                String bueno = "N";
+                String muybien = "N";
+                //evaluar si las celdas esta vacias
+                if (!TablaCapacidades.getValueAt(i, 2).equals("")) {
+                    nada = ((String) TablaCapacidades.getValueAt(i, 2)).toLowerCase();
+                }
+                if (!TablaCapacidades.getValueAt(i, 3).equals("")) {
+                    poco = ((String) TablaCapacidades.getValueAt(i, 3)).toLowerCase();
+                }
+                if (!TablaCapacidades.getValueAt(i, 4).equals("")) {
+                    acep = ((String) TablaCapacidades.getValueAt(i, 4)).toLowerCase();
+                }
+                if (!TablaCapacidades.getValueAt(i, 5).equals("")) {
+                    bueno = ((String) TablaCapacidades.getValueAt(i, 5)).toLowerCase();
+                }
+                if (!TablaCapacidades.getValueAt(i, 6).equals("")) {
+                    muybien = ((String) TablaCapacidades.getValueAt(i, 6)).toLowerCase(); 
+                }
+
+
+                //evaluamos que celda esta marcada con una X    
+                //e ingresamos el codigo del nivel que corresponda
+                if (nada.equals("x")) {
+                    entiCapacidad.setIdnivelcapacidad(1);
+                }
+                else if (poco.equals("x")) {
+                    entiCapacidad.setIdnivelcapacidad(11);
+                }
+                else if (acep.equals("x")) {
+                    entiCapacidad.setIdnivelcapacidad(21);
+                }
+                else if (bueno.equals("x")) {
+                    entiCapacidad.setIdnivelcapacidad(31);
+                }
+                else if (muybien.equals("x")) {
+                    entiCapacidad.setIdnivelcapacidad(41);
+                }
+                
+                negoCapacidad.AgregarDetallePruebaEntrada(entiCapacidad);
+            }
+            
             negoCapacidad.cst.close();
             negoCapacidad.conexion.close();
             
@@ -1765,18 +1934,17 @@ public class FrmPrueba extends javax.swing.JInternalFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTable TablaCapacidades;
     private javax.swing.JButton btnAceptarInforme;
-    private javax.swing.JButton btnAgregarFila;
+    private javax.swing.JButton btnAgregarFilaCapacidades;
     private javax.swing.JButton btnCalcularPorcentajes;
     private javax.swing.JButton btnCancelarInforme;
-    private javax.swing.JButton btnEnviarCapacidad;
     private javax.swing.JButton btnEnviarInforme;
-    private javax.swing.JButton btnEnviarObservaciones;
     private javax.swing.JButton btnGuardarCapacidad;
     private javax.swing.JButton btnGuardarInforme;
     private javax.swing.JButton btnGuardarObservaciones;
     private javax.swing.JButton btnRechazarInforme;
-    private javax.swing.JButton btnRemoverFila;
+    private javax.swing.JButton btnRemoverFilaCapacidades;
     private javax.swing.JButton btnSalirCapacidad;
+    private javax.swing.JButton btnSalirObservacion;
     private javax.swing.JCheckBox chkCuestionarios;
     private javax.swing.JCheckBox chkExamenes;
     private javax.swing.JCheckBox chkForos;
@@ -1787,7 +1955,6 @@ public class FrmPrueba extends javax.swing.JInternalFrame {
     private javax.swing.JCheckBox chkTallerCursoInforme;
     private javax.swing.JCheckBox chkTareas;
     private javax.swing.JCheckBox chkTeoriaCursoInforme;
-    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
