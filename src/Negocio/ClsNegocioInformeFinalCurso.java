@@ -76,7 +76,7 @@ public class ClsNegocioInformeFinalCurso implements ClsInterfaceInformeFinalCurs
     @Override
     public ResultSet ConsultaAvanzaInformeFinal(String criterio, String busqueda) throws Exception {
          try {
-            cst = conexion.prepareCall("{call USP_BusquedaAvanzadaPruebaEntrada(?,?)}");
+            cst = conexion.prepareCall("{call USP_BusquedaAvanzadaInfoFinal(?,?)}");
             cst.setString("pcriterio", criterio);
             cst.setString("pbusqueda", busqueda);
             rs = cst.executeQuery();
@@ -89,9 +89,9 @@ public class ClsNegocioInformeFinalCurso implements ClsInterfaceInformeFinalCurs
     @Override
     public void ModificarEstadoInformeFinal(String codigo, String estado) {
         try {
-            cst = conexion.prepareCall("{call USP_EstadoPruebaEntrada_U(?,?)}");
-            cst.setString("pidPruebaEntrada", codigo);
-            cst.setString("pestadoPruebaEntrada", estado);
+            cst = conexion.prepareCall("{call USP_EstadoInfoFinalCuros_U(?,?)}");
+            cst.setString("pidInfoFinal", codigo);
+            cst.setString("pestadoInfoFinal", estado);
             cst.execute();
         } catch (SQLException ex) {
             ex.printStackTrace();

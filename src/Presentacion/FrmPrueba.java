@@ -234,8 +234,18 @@ public class FrmPrueba extends javax.swing.JInternalFrame {
         });
 
         btnAceptarInforme.setText("Aceptar");
+        btnAceptarInforme.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAceptarInformeActionPerformed(evt);
+            }
+        });
 
         btnRechazarInforme.setText("Rechazar");
+        btnRechazarInforme.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnRechazarInformeActionPerformed(evt);
+            }
+        });
 
         btnCancelarInforme.setText("Cancelar");
         btnCancelarInforme.addActionListener(new java.awt.event.ActionListener() {
@@ -302,6 +312,20 @@ public class FrmPrueba extends javax.swing.JInternalFrame {
 
         jLabel20.setText("N°");
 
+        txtPorcenCumpleSilabo.setEnabled(false);
+
+        txtPorcenPractiCalificada.setEnabled(false);
+
+        txtPorcenExpeLaboratorio.setEnabled(false);
+
+        txtPorcenTrabajoInvestiga.setEnabled(false);
+
+        txtPorcenMatriculados.setEnabled(false);
+
+        txtPorcenRetirados.setEnabled(false);
+
+        txtPorcenAbandono.setEnabled(false);
+
         jLabel21.setText("%");
 
         jLabel22.setText("Estudiantes que asisten:");
@@ -319,6 +343,12 @@ public class FrmPrueba extends javax.swing.JInternalFrame {
         jLabel28.setText("N°");
 
         jLabel29.setText("%");
+
+        txtPorcenAsisten.setEnabled(false);
+
+        txtPorcenAprobados.setEnabled(false);
+
+        txtPorcenDesaprobados.setEnabled(false);
 
         btnCalcularPorcentajes.setText("Calcular Porcentejes");
         btnCalcularPorcentajes.addActionListener(new java.awt.event.ActionListener() {
@@ -1070,7 +1100,7 @@ public class FrmPrueba extends javax.swing.JInternalFrame {
             }
             else{
                 /*actualizas*/
-                String opcion = "Enviado";
+                String opcion = "Guardado";
                 actualizarDatos(opcion);
                 actualizaF = true;
             }
@@ -1089,7 +1119,7 @@ public class FrmPrueba extends javax.swing.JInternalFrame {
                 guardadoF = true;
             }
             else{
-                /*actualizas*/
+                actualizarDatos("Enviado");
                 actualizaF = true;
             }
         }
@@ -1344,6 +1374,32 @@ public class FrmPrueba extends javax.swing.JInternalFrame {
         JOptionPane.showMessageDialog(null, "Operación Exitosa");
     }//GEN-LAST:event_btnGuardarObservacionesActionPerformed
 
+    private void btnAceptarInformeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAceptarInformeActionPerformed
+        ClsNegocioInformeFinalCurso negoIFC = new ClsNegocioInformeFinalCurso();
+        ResultSet rs ;
+        try {
+            String estado = "Aprobado";
+            negoIFC.ModificarEstadoInformeFinal(IdInfoFinalCurso, estado);
+            negoIFC.cst.close();
+            negoIFC.conexion.close();
+            JOptionPane.showMessageDialog(null, "El Informe se Aprobo con exito");
+        } catch (Exception e) {
+        }
+    }//GEN-LAST:event_btnAceptarInformeActionPerformed
+
+    private void btnRechazarInformeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRechazarInformeActionPerformed
+        ClsNegocioInformeFinalCurso negoIFC = new ClsNegocioInformeFinalCurso();
+        ResultSet rs ;
+        try {
+            String estado = "Rechazado";
+            negoIFC.ModificarEstadoInformeFinal(IdInfoFinalCurso, estado);
+            negoIFC.cst.close();
+            negoIFC.conexion.close();
+            JOptionPane.showMessageDialog(null, "El Informe se Aprobo con exito");
+        } catch (Exception e) {
+        }
+    }//GEN-LAST:event_btnRechazarInformeActionPerformed
+
     /*INFORME FINAL | METODOS*/
     private void guardarDatos(String opcion){
         
@@ -1388,7 +1444,6 @@ public class FrmPrueba extends javax.swing.JInternalFrame {
         ClsEntidadInformeFinalCurso entiInfoFinalCurso = new ClsEntidadInformeFinalCurso();
         ClsNegocioInformeFinalCurso negoInfoFinalCurso = new ClsNegocioInformeFinalCurso();
             
-            
         try {
             entiInfoFinalCurso.setIdCargaAcademica(Integer.parseInt(idCargaAcademica));
             entiInfoFinalCurso.setEstadoInformeFinalCurso(opcion);
@@ -1414,7 +1469,7 @@ public class FrmPrueba extends javax.swing.JInternalFrame {
             entiInfoFinalCurso.setLab(lab);
             entiInfoFinalCurso.setTaller(talle);
             
-            negoInfoFinalCurso.ModificarInformeFinal(datoIFC[0], entiInfoFinalCurso);
+            negoInfoFinalCurso.ModificarInformeFinal(IdInfoFinalCurso, entiInfoFinalCurso);
             negoInfoFinalCurso.cst.close();
             negoInfoFinalCurso.conexion.close();
             JOptionPane.showMessageDialog(null, "Operación Exitosa.");
@@ -1490,7 +1545,6 @@ public class FrmPrueba extends javax.swing.JInternalFrame {
             txtCelularDocente.setText(datoIFC[10]);
         }
         else{
-            JOptionPane.showMessageDialog(null, "Si entra");
             txtCodigoCurso.setText(datoIFC[0]);
             txtNombreCurso.setText(datoIFC[1]);
             

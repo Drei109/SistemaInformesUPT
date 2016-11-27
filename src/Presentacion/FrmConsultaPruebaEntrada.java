@@ -212,6 +212,7 @@ public class FrmConsultaPruebaEntrada extends javax.swing.JInternalFrame {
 //                FrmPrinicipal.escritorio.add(info);
                 FrmPrueba info = new FrmPrueba(campo,false,nivelUsuario);
                 FrmPrinicipal.escritorio.add(info);
+                info.IdInfoFinalCurso = idPruebaEntrada;
                 info.setVisible(true);
             }
         }        
