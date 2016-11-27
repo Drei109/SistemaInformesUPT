@@ -45,7 +45,27 @@ public class ClsNegocioInformeFinalCurso implements ClsInterfaceInformeFinalCurs
 
     @Override
     public void ModificarInformeFinal(String codigo, ClsEntidadInformeFinalCurso InformeFinal) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        try {
+            cst = conexion.prepareCall("{call USP_InformeFinalCurso_U(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)}");
+            cst.setString("pidinformefinalcurso",codigo);
+            cst.setString("pidCargaAcademica",String.valueOf(InformeFinal.getIdCargaAcademica()));
+            cst.setString("pestadoInformeFinalCurso", InformeFinal.getEstadoInformeFinalCurso()); 
+            cst.setString("pcumpliSilabo", String.valueOf(InformeFinal.getCumpliSilabo()));
+            cst.setString("ppractiRealizadas", String.valueOf(InformeFinal.getPractiRealizadas()));
+            cst.setString("plaboratoRealizadas",String.valueOf(InformeFinal.getLaboratoRealizadas())); 
+            cst.setString("pproyectoRealizado", String.valueOf(InformeFinal.getProyectoRealizado()));
+            cst.setString("pestudianteAsiste", String.valueOf(InformeFinal.getEstudianteAsiste()));
+            cst.setString("pestudienteAproado",String.valueOf(InformeFinal.getEstudienteAproado())); 
+            cst.setString("pestudianteDesaprobado",String.valueOf(InformeFinal.getEstudianteDesaprobado()));
+            cst.setString("pnotaMasAlta",String.valueOf(InformeFinal.getNotaMasAlta()));
+            cst.setString("pnotaPromedio",String.valueOf(InformeFinal.getNotaPromedio())); 
+            cst.setString("pnotaMasBaja",String.valueOf(InformeFinal.getNotaMasBaja()));
+            cst.setString("plab", InformeFinal.getLab());
+            cst.setString("ptaller",InformeFinal.getTaller());
+            cst.execute();
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
     }
 
     @Override
