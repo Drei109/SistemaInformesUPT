@@ -14,5 +14,10 @@ import java.util.ArrayList;
  */
 public interface ClsInterfaceObservacionesInformeFinal {
     public ArrayList ListarObservaciones(); 
+    
     void AgregarPruebaEntrada(ClsEntidadObservaFinalCurso Observaciones);
+    
+    void EliminarObservaInfoFinalTodo(String codigo);
+    
+    public ArrayList ListarObservacionesID(String codigo);
 }

@@ -4,6 +4,7 @@ import Entidad.ClsEntidadCacidadInformeFinalCurso;
 import Entidad.ClsEntidadInformeFinalCurso;
 import Entidad.ClsEntidadObservaFinalCurso;
 import Negocio.ClsNegocioCapadidadInformeFinalCurso;
+import Negocio.ClsNegocioDetallePruebaEntrada;
 import Negocio.ClsNegocioInformeFinalCurso;
 import Negocio.ClsNegocioObservacionesInformeFinalCurso;
 import Negocio.ClsNegocioUsuario;
@@ -1195,6 +1196,7 @@ public class FrmPrueba extends javax.swing.JInternalFrame {
     private void formInternalFrameOpened(javax.swing.event.InternalFrameEvent evt) {//GEN-FIRST:event_formInternalFrameOpened
         cargarTabla();
         cargarDatos();
+        cargarTitulosObservaciones();
         if (nivelUsuario.equals("Usuario")) {
             btnAceptarInforme.setVisible(false);
             btnRechazarInforme.setVisible(false);
@@ -1244,7 +1246,7 @@ public class FrmPrueba extends javax.swing.JInternalFrame {
                 JOptionPane.showMessageDialog(null, "inserta datos en la Tabla");
             }
         }
-        else{
+        else if(guardadoF){
             if (TablaCapacidades.getRowCount() > 0) {
                 if (calcularMarcadosNivelCapacidad()) {
                     if (TablaCapacidades.getSelectedRow() != -1) {
@@ -1260,132 +1262,58 @@ public class FrmPrueba extends javax.swing.JInternalFrame {
                 JOptionPane.showMessageDialog(null, "inserta datos en la Tabla");
             }
         }
+        else{
+            JOptionPane.showMessageDialog(null, "Guarde el Informe Principal antes.");
+        }
     }//GEN-LAST:event_btnGuardarCapacidadActionPerformed
 
     private void btnGuardarObservacionesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarObservacionesActionPerformed
-        try {
-            cargarIDsInfoFinalCurso();
-            recogerDatos();
-
-            ClsEntidadObservaFinalCurso entiObserva = new ClsEntidadObservaFinalCurso();
-            ClsNegocioObservacionesInformeFinalCurso negoObserva = new ClsNegocioObservacionesInformeFinalCurso();
-
-            //primera observacion
-            entiObserva.setIdObservaciones(idObservacion[0]);
-            entiObserva.setIdinformefinalcurso(Integer.parseInt(IdInfoFinalCurso));
-            entiObserva.setDescripcion(observa1);
-
-            negoObserva.AgregarPruebaEntrada(entiObserva);
-            negoObserva.cst.close();
-            negoObserva.conexion.close();
-            //
-            ClsEntidadObservaFinalCurso entiObserva2 = new ClsEntidadObservaFinalCurso();
-            ClsNegocioObservacionesInformeFinalCurso negoObserva2 = new ClsNegocioObservacionesInformeFinalCurso();
-
-            //segunda observacion
-            entiObserva2.setIdObservaciones(idObservacion[1]);
-            entiObserva2.setIdinformefinalcurso(Integer.parseInt(IdInfoFinalCurso));
-            entiObserva2.setDescripcion(observa2);
-
-            negoObserva2.AgregarPruebaEntrada(entiObserva2);
-            negoObserva2.cst.close();
-            negoObserva2.conexion.close();
-            //
-            //
-            ClsEntidadObservaFinalCurso entiObserva3 = new ClsEntidadObservaFinalCurso();
-            ClsNegocioObservacionesInformeFinalCurso negoObserva3 = new ClsNegocioObservacionesInformeFinalCurso();
-
-            //tercera observacion
-            entiObserva3.setIdObservaciones(idObservacion[2]);
-            entiObserva3.setIdinformefinalcurso(Integer.parseInt(IdInfoFinalCurso));
-            entiObserva3.setDescripcion(observa3);
-
-            negoObserva3.AgregarPruebaEntrada(entiObserva3);
-            negoObserva3.cst.close();
-            negoObserva3.conexion.close();
-            //
-            //
-            ClsEntidadObservaFinalCurso entiObserva4 = new ClsEntidadObservaFinalCurso();
-            ClsNegocioObservacionesInformeFinalCurso negoObserva4 = new ClsNegocioObservacionesInformeFinalCurso();
-
-            //cuarta observacion
-            entiObserva4.setIdObservaciones(idObservacion[3]);
-            entiObserva4.setIdinformefinalcurso(Integer.parseInt(IdInfoFinalCurso));
-            entiObserva4.setDescripcion(material+","+foros+","+cuestionarios+","+examenes+","+tareas+","+ppt);
-
-            negoObserva4.AgregarPruebaEntrada(entiObserva4);
-            negoObserva4.cst.close();
-            negoObserva4.conexion.close();
-            //
-            //
-            ClsEntidadObservaFinalCurso entiObserva5 = new ClsEntidadObservaFinalCurso();
-            ClsNegocioObservacionesInformeFinalCurso negoObserva5 = new ClsNegocioObservacionesInformeFinalCurso();
-
-            //quinta observacion
-            entiObserva5.setIdObservaciones(idObservacion[4]);
-            entiObserva5.setIdinformefinalcurso(Integer.parseInt(IdInfoFinalCurso));
-            entiObserva5.setDescripcion(observa5);
-
-            negoObserva5.AgregarPruebaEntrada(entiObserva5);
-            negoObserva5.cst.close();
-            negoObserva5.conexion.close();
-            //
-            //
-            ClsEntidadObservaFinalCurso entiObserva6 = new ClsEntidadObservaFinalCurso();
-            ClsNegocioObservacionesInformeFinalCurso negoObserva6 = new ClsNegocioObservacionesInformeFinalCurso();
-
-            //sexta observacion
-            entiObserva6.setIdObservaciones(idObservacion[5]);
-            entiObserva6.setIdinformefinalcurso(Integer.parseInt(IdInfoFinalCurso));
-            entiObserva6.setDescripcion(observa6);
-
-            negoObserva6.AgregarPruebaEntrada(entiObserva6);
-            negoObserva6.cst.close();
-            negoObserva6.conexion.close();
-            //
-            //
-            ClsEntidadObservaFinalCurso entiObserva7 = new ClsEntidadObservaFinalCurso();
-            ClsNegocioObservacionesInformeFinalCurso negoObserva7 = new ClsNegocioObservacionesInformeFinalCurso();
-
-            //septima observacion
-            entiObserva7.setIdObservaciones(idObservacion[6]);
-            entiObserva7.setIdinformefinalcurso(Integer.parseInt(IdInfoFinalCurso));
-            entiObserva7.setDescripcion(observa7);
-
-            negoObserva7.AgregarPruebaEntrada(entiObserva7);
-            negoObserva7.cst.close();
-            negoObserva7.conexion.close();
-            //
-            ClsEntidadObservaFinalCurso entiObserva8 = new ClsEntidadObservaFinalCurso();
-            ClsNegocioObservacionesInformeFinalCurso negoObserva8 = new ClsNegocioObservacionesInformeFinalCurso();
-
-            //octava observacion
-            entiObserva8.setIdObservaciones(idObservacion[7]);
-            entiObserva8.setIdinformefinalcurso(Integer.parseInt(IdInfoFinalCurso));
-            entiObserva8.setDescripcion(observa8);
-
-            negoObserva8.AgregarPruebaEntrada(entiObserva8);
-            negoObserva8.cst.close();
-            negoObserva8.conexion.close();
-            //
-            ClsEntidadObservaFinalCurso entiObserva9 = new ClsEntidadObservaFinalCurso();
-            ClsNegocioObservacionesInformeFinalCurso negoObserva9 = new ClsNegocioObservacionesInformeFinalCurso();
-
-            //novena observacion
-            entiObserva9.setIdObservaciones(idObservacion[8]);
-            entiObserva9.setIdinformefinalcurso(Integer.parseInt(IdInfoFinalCurso));
-            entiObserva9.setDescripcion(observa9);
-
-            negoObserva9.AgregarPruebaEntrada(entiObserva9);
-            negoObserva9.cst.close();
-            negoObserva9.conexion.close();
-
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, "Error: " + e.getMessage());
+        
+        if (guardarNuevo) {
+            if (validarCajas() && validarCHK()) {
+                agregarObservaciones();
+            }else{
+                JOptionPane.showMessageDialog(null, "Faltan Datos");
+            }
         }
-        JOptionPane.showMessageDialog(null, "Operación Exitosa");
+        else if (guardadoF) {
+            if (validarCajas() && validarCHK()) {
+                actualizarObservaciones();
+            }else{
+                JOptionPane.showMessageDialog(null, "Faltan Datos");
+            }
+        }
+        else{
+            JOptionPane.showMessageDialog(null, "Guarde el Informe Principal antes"); 
+        }
+        
     }//GEN-LAST:event_btnGuardarObservacionesActionPerformed
 
+    private boolean validarCajas(){
+        boolean aprobado = false;
+        if (!txtObserva1.getText().equals("") && !txtObserva2.getText().equals("") && 
+            !txtObserva3.getText().equals("") && !txtObserva5.getText().equals("") &&
+            !txtObserva6.getText().equals("") && !txtObserva7.getText().equals("") &&
+            !txtObserva8.getText().equals("") && !txtObserva9.getText().equals("") ) {
+            aprobado = true;
+        }
+        
+        return aprobado;
+    }
+    
+    private boolean validarCHK(){
+        boolean aprobado = false;
+        
+        if (chkMaterial.isSelected())           aprobado = true;
+        if (chkForos.isSelected())              aprobado = true;
+        if (chkCuestionarios.isSelected())      aprobado = true;
+        if (chkExamenes.isSelected())           aprobado = true;
+        if (chkTareas.isSelected())             aprobado = true;
+        if (chkPresentaciones.isSelected())     aprobado = true;
+        
+        return aprobado;
+    }
+    
     private void btnAceptarInformeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAceptarInformeActionPerformed
         ClsNegocioInformeFinalCurso negoIFC = new ClsNegocioInformeFinalCurso();
         ResultSet rs ;
@@ -1594,6 +1522,7 @@ public class FrmPrueba extends javax.swing.JInternalFrame {
             txtNumBaja.setText(datoIFC[23]);
             
             cargarDatosTabla();
+            cargarDatosObservaciones();
         }
         
     }
@@ -1928,6 +1857,332 @@ public class FrmPrueba extends javax.swing.JInternalFrame {
             }
             informe.conexion.close();
         } catch (Exception e) {
+        }
+    }
+    
+    private void agregarObservaciones(){
+        try {
+            cargarIDsInfoFinalCurso();
+            recogerDatos();
+
+            ClsEntidadObservaFinalCurso entiObserva = new ClsEntidadObservaFinalCurso();
+            ClsNegocioObservacionesInformeFinalCurso negoObserva = new ClsNegocioObservacionesInformeFinalCurso();
+
+            //primera observacion
+            entiObserva.setIdObservaciones(idObservacion[0]);
+            entiObserva.setIdinformefinalcurso(Integer.parseInt(IdInfoFinalCurso));
+            entiObserva.setDescripcion(observa1);
+
+            negoObserva.AgregarPruebaEntrada(entiObserva);
+            negoObserva.cst.close();
+            negoObserva.conexion.close();
+            //
+            ClsEntidadObservaFinalCurso entiObserva2 = new ClsEntidadObservaFinalCurso();
+            ClsNegocioObservacionesInformeFinalCurso negoObserva2 = new ClsNegocioObservacionesInformeFinalCurso();
+
+            //segunda observacion
+            entiObserva2.setIdObservaciones(idObservacion[1]);
+            entiObserva2.setIdinformefinalcurso(Integer.parseInt(IdInfoFinalCurso));
+            entiObserva2.setDescripcion(observa2);
+
+            negoObserva2.AgregarPruebaEntrada(entiObserva2);
+            negoObserva2.cst.close();
+            negoObserva2.conexion.close();
+            //
+            //
+            ClsEntidadObservaFinalCurso entiObserva3 = new ClsEntidadObservaFinalCurso();
+            ClsNegocioObservacionesInformeFinalCurso negoObserva3 = new ClsNegocioObservacionesInformeFinalCurso();
+
+            //tercera observacion
+            entiObserva3.setIdObservaciones(idObservacion[2]);
+            entiObserva3.setIdinformefinalcurso(Integer.parseInt(IdInfoFinalCurso));
+            entiObserva3.setDescripcion(observa3);
+
+            negoObserva3.AgregarPruebaEntrada(entiObserva3);
+            negoObserva3.cst.close();
+            negoObserva3.conexion.close();
+            //
+            //
+            ClsEntidadObservaFinalCurso entiObserva4 = new ClsEntidadObservaFinalCurso();
+            ClsNegocioObservacionesInformeFinalCurso negoObserva4 = new ClsNegocioObservacionesInformeFinalCurso();
+
+            //cuarta observacion
+            entiObserva4.setIdObservaciones(idObservacion[3]);
+            entiObserva4.setIdinformefinalcurso(Integer.parseInt(IdInfoFinalCurso));
+            entiObserva4.setDescripcion(material+","+foros+","+cuestionarios+","+examenes+","+tareas+","+ppt);
+
+            negoObserva4.AgregarPruebaEntrada(entiObserva4);
+            negoObserva4.cst.close();
+            negoObserva4.conexion.close();
+            //
+            //
+            ClsEntidadObservaFinalCurso entiObserva5 = new ClsEntidadObservaFinalCurso();
+            ClsNegocioObservacionesInformeFinalCurso negoObserva5 = new ClsNegocioObservacionesInformeFinalCurso();
+
+            //quinta observacion
+            entiObserva5.setIdObservaciones(idObservacion[4]);
+            entiObserva5.setIdinformefinalcurso(Integer.parseInt(IdInfoFinalCurso));
+            entiObserva5.setDescripcion(observa5);
+
+            negoObserva5.AgregarPruebaEntrada(entiObserva5);
+            negoObserva5.cst.close();
+            negoObserva5.conexion.close();
+            //
+            //
+            ClsEntidadObservaFinalCurso entiObserva6 = new ClsEntidadObservaFinalCurso();
+            ClsNegocioObservacionesInformeFinalCurso negoObserva6 = new ClsNegocioObservacionesInformeFinalCurso();
+
+            //sexta observacion
+            entiObserva6.setIdObservaciones(idObservacion[5]);
+            entiObserva6.setIdinformefinalcurso(Integer.parseInt(IdInfoFinalCurso));
+            entiObserva6.setDescripcion(observa6);
+
+            negoObserva6.AgregarPruebaEntrada(entiObserva6);
+            negoObserva6.cst.close();
+            negoObserva6.conexion.close();
+            //
+            //
+            ClsEntidadObservaFinalCurso entiObserva7 = new ClsEntidadObservaFinalCurso();
+            ClsNegocioObservacionesInformeFinalCurso negoObserva7 = new ClsNegocioObservacionesInformeFinalCurso();
+
+            //septima observacion
+            entiObserva7.setIdObservaciones(idObservacion[6]);
+            entiObserva7.setIdinformefinalcurso(Integer.parseInt(IdInfoFinalCurso));
+            entiObserva7.setDescripcion(observa7);
+
+            negoObserva7.AgregarPruebaEntrada(entiObserva7);
+            negoObserva7.cst.close();
+            negoObserva7.conexion.close();
+            //
+            ClsEntidadObservaFinalCurso entiObserva8 = new ClsEntidadObservaFinalCurso();
+            ClsNegocioObservacionesInformeFinalCurso negoObserva8 = new ClsNegocioObservacionesInformeFinalCurso();
+
+            //octava observacion
+            entiObserva8.setIdObservaciones(idObservacion[7]);
+            entiObserva8.setIdinformefinalcurso(Integer.parseInt(IdInfoFinalCurso));
+            entiObserva8.setDescripcion(observa8);
+
+            negoObserva8.AgregarPruebaEntrada(entiObserva8);
+            negoObserva8.cst.close();
+            negoObserva8.conexion.close();
+            //
+            ClsEntidadObservaFinalCurso entiObserva9 = new ClsEntidadObservaFinalCurso();
+            ClsNegocioObservacionesInformeFinalCurso negoObserva9 = new ClsNegocioObservacionesInformeFinalCurso();
+
+            //novena observacion
+            entiObserva9.setIdObservaciones(idObservacion[8]);
+            entiObserva9.setIdinformefinalcurso(Integer.parseInt(IdInfoFinalCurso));
+            entiObserva9.setDescripcion(observa9);
+
+            negoObserva9.AgregarPruebaEntrada(entiObserva9);
+            negoObserva9.cst.close();
+            negoObserva9.conexion.close();
+
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Error: " + e.getMessage());
+        }
+        JOptionPane.showMessageDialog(null, "Operación Exitosa");
+    }
+    
+    private void actualizarObservaciones(){
+        try {
+//            cargarIDsInfoFinalCurso();
+            recogerDatos();
+            
+            ClsEntidadObservaFinalCurso entiObserva = new ClsEntidadObservaFinalCurso();
+            ClsNegocioObservacionesInformeFinalCurso negoObserva = new ClsNegocioObservacionesInformeFinalCurso();
+
+            negoObserva.EliminarObservaInfoFinalTodo(IdInfoFinalCurso);
+            
+            //primera observacion
+            entiObserva.setIdObservaciones(idObservacion[0]);
+            entiObserva.setIdinformefinalcurso(Integer.parseInt(IdInfoFinalCurso));
+            entiObserva.setDescripcion(observa1);
+
+            negoObserva.AgregarPruebaEntrada(entiObserva);
+            negoObserva.cst.close();
+            negoObserva.conexion.close();
+            //
+            ClsEntidadObservaFinalCurso entiObserva2 = new ClsEntidadObservaFinalCurso();
+            ClsNegocioObservacionesInformeFinalCurso negoObserva2 = new ClsNegocioObservacionesInformeFinalCurso();
+
+            //segunda observacion
+            entiObserva2.setIdObservaciones(idObservacion[1]);
+            entiObserva2.setIdinformefinalcurso(Integer.parseInt(IdInfoFinalCurso));
+            entiObserva2.setDescripcion(observa2);
+
+            negoObserva2.AgregarPruebaEntrada(entiObserva2);
+            negoObserva2.cst.close();
+            negoObserva2.conexion.close();
+            //
+            //
+            ClsEntidadObservaFinalCurso entiObserva3 = new ClsEntidadObservaFinalCurso();
+            ClsNegocioObservacionesInformeFinalCurso negoObserva3 = new ClsNegocioObservacionesInformeFinalCurso();
+
+            //tercera observacion
+            entiObserva3.setIdObservaciones(idObservacion[2]);
+            entiObserva3.setIdinformefinalcurso(Integer.parseInt(IdInfoFinalCurso));
+            entiObserva3.setDescripcion(observa3);
+
+            negoObserva3.AgregarPruebaEntrada(entiObserva3);
+            negoObserva3.cst.close();
+            negoObserva3.conexion.close();
+            //
+            //
+            ClsEntidadObservaFinalCurso entiObserva4 = new ClsEntidadObservaFinalCurso();
+            ClsNegocioObservacionesInformeFinalCurso negoObserva4 = new ClsNegocioObservacionesInformeFinalCurso();
+
+            //cuarta observacion
+            entiObserva4.setIdObservaciones(idObservacion[3]);
+            entiObserva4.setIdinformefinalcurso(Integer.parseInt(IdInfoFinalCurso));
+            entiObserva4.setDescripcion(material+","+foros+","+cuestionarios+","+examenes+","+tareas+","+ppt);
+
+            negoObserva4.AgregarPruebaEntrada(entiObserva4);
+            negoObserva4.cst.close();
+            negoObserva4.conexion.close();
+            //
+            //
+            ClsEntidadObservaFinalCurso entiObserva5 = new ClsEntidadObservaFinalCurso();
+            ClsNegocioObservacionesInformeFinalCurso negoObserva5 = new ClsNegocioObservacionesInformeFinalCurso();
+
+            //quinta observacion
+            entiObserva5.setIdObservaciones(idObservacion[4]);
+            entiObserva5.setIdinformefinalcurso(Integer.parseInt(IdInfoFinalCurso));
+            entiObserva5.setDescripcion(observa5);
+
+            negoObserva5.AgregarPruebaEntrada(entiObserva5);
+            negoObserva5.cst.close();
+            negoObserva5.conexion.close();
+            //
+            //
+            ClsEntidadObservaFinalCurso entiObserva6 = new ClsEntidadObservaFinalCurso();
+            ClsNegocioObservacionesInformeFinalCurso negoObserva6 = new ClsNegocioObservacionesInformeFinalCurso();
+
+            //sexta observacion
+            entiObserva6.setIdObservaciones(idObservacion[5]);
+            entiObserva6.setIdinformefinalcurso(Integer.parseInt(IdInfoFinalCurso));
+            entiObserva6.setDescripcion(observa6);
+
+            negoObserva6.AgregarPruebaEntrada(entiObserva6);
+            negoObserva6.cst.close();
+            negoObserva6.conexion.close();
+            //
+            //
+            ClsEntidadObservaFinalCurso entiObserva7 = new ClsEntidadObservaFinalCurso();
+            ClsNegocioObservacionesInformeFinalCurso negoObserva7 = new ClsNegocioObservacionesInformeFinalCurso();
+
+            //septima observacion
+            entiObserva7.setIdObservaciones(idObservacion[6]);
+            entiObserva7.setIdinformefinalcurso(Integer.parseInt(IdInfoFinalCurso));
+            entiObserva7.setDescripcion(observa7);
+
+            negoObserva7.AgregarPruebaEntrada(entiObserva7);
+            negoObserva7.cst.close();
+            negoObserva7.conexion.close();
+            //
+            ClsEntidadObservaFinalCurso entiObserva8 = new ClsEntidadObservaFinalCurso();
+            ClsNegocioObservacionesInformeFinalCurso negoObserva8 = new ClsNegocioObservacionesInformeFinalCurso();
+
+            //octava observacion
+            entiObserva8.setIdObservaciones(idObservacion[7]);
+            entiObserva8.setIdinformefinalcurso(Integer.parseInt(IdInfoFinalCurso));
+            entiObserva8.setDescripcion(observa8);
+
+            negoObserva8.AgregarPruebaEntrada(entiObserva8);
+            negoObserva8.cst.close();
+            negoObserva8.conexion.close();
+            //
+            ClsEntidadObservaFinalCurso entiObserva9 = new ClsEntidadObservaFinalCurso();
+            ClsNegocioObservacionesInformeFinalCurso negoObserva9 = new ClsNegocioObservacionesInformeFinalCurso();
+
+            //novena observacion
+            entiObserva9.setIdObservaciones(idObservacion[8]);
+            entiObserva9.setIdinformefinalcurso(Integer.parseInt(IdInfoFinalCurso));
+            entiObserva9.setDescripcion(observa9);
+
+            negoObserva9.AgregarPruebaEntrada(entiObserva9);
+            negoObserva9.cst.close();
+            negoObserva9.conexion.close();
+
+            JOptionPane.showMessageDialog(null, "Operación Exitosa");
+            
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Error: " + e.getMessage());
+        }
+    }
+    
+    private void cargarDatosObservaciones(){
+        try {
+            ClsNegocioObservacionesInformeFinalCurso negNegocioDetaInfo = new ClsNegocioObservacionesInformeFinalCurso();
+            ArrayList<String> idinfo = negNegocioDetaInfo.ListarObservacionesID(IdInfoFinalCurso);
+            String datos[] = idinfo.toArray(new String[idinfo.size()]);
+            
+            for (int i = 0; i < 1; i++) {
+                txtObserva1.setText(datos[i]);
+                txtObserva2.setText(datos[i + 1]);
+                txtObserva3.setText(datos[i + 2]);
+                
+                String chkDatos = datos[i + 3];
+                String chk[] = chkDatos.split(",");
+
+                for(String opcion : chk){
+                    switch (opcion) {
+                        case "Material del Curso":
+                            chkMaterial.setSelected(true);
+                            break;
+                        case "Foros":
+                            chkForos.setSelected(true);
+                            break;
+                        case "Cuestionarios":
+                            chkCuestionarios.setSelected(true);
+                            break;
+                        case "Examenes Virtuales":
+                            chkExamenes.setSelected(true);
+                            break;
+                        case "Tareas Encargadas":
+                            chkTareas.setSelected(true);
+                            break;
+                        case "Presentaciones":
+                            chkPresentaciones.setSelected(true);
+                            break;
+                        default:
+                            break;
+                    }
+                }
+                
+                txtObserva5.setText(datos[i + 4]);
+                txtObserva6.setText(datos[i + 5]);
+                txtObserva7.setText(datos[i + 6]);
+                txtObserva8.setText(datos[i + 7]);
+                txtObserva9.setText(datos[i + 8]);
+            }
+            
+            
+        } catch (Exception e) {
+        }
+    }
+    
+    private void cargarTitulosObservaciones(){
+        try {
+            ClsNegocioObservacionesInformeFinalCurso negoObserva = new ClsNegocioObservacionesInformeFinalCurso();
+            
+            ArrayList<ClsEntidadObservaFinalCurso> datos = negoObserva.ListarObservaciones();
+            
+            idObservacion = new int[datos.size()];
+            tituloObservacion = new String[datos.size()];
+            subTituloObservacion = new String[datos.size()];
+            int i = 0;
+            for (ClsEntidadObservaFinalCurso dato : datos) {
+                idObservacion[i] = dato.getIdObservaciones();
+                tituloObservacion[i] = dato.getTitulo();
+                subTituloObservacion[i] = dato.getSubtitulo();
+                i++;
+            }
+            llenarTitulos(tituloObservacion);
+            
+            negoObserva.conexion.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(FrmObservacionesInformeFinalCurso.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
     

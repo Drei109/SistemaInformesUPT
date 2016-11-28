@@ -59,5 +59,36 @@ public class ClsNegocioObservacionesInformeFinalCurso implements ClsInterfaceObs
             ex.printStackTrace();
         }
     }
+
+    @Override
+    public void EliminarObservaInfoFinalTodo(String codigo) {
+        try {
+            cst = conexion.prepareCall("{call USP_ObservacionesInfoFinal_D_Todos(?)}");
+            cst.setString("pidInfoFinal",codigo);
+            
+            cst.execute();
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+    }
+
+    @Override
+    public ArrayList ListarObservacionesID(String codigo) {
+        ArrayList<String> observaDatos = new ArrayList<String>();
+        try {
+            cst = conexion.prepareCall("{call USP_DetalleObservaciones_Id(?)}");
+            cst.setString("pidinformefinalcurso", codigo);
+            rs = cst.executeQuery();
+            
+            while (rs.next()) {
+                observaDatos.add(rs.getString(1));
+            }
+            return observaDatos;
+            
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
     
 }

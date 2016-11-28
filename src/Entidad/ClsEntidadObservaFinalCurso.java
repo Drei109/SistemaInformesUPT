@@ -10,6 +10,8 @@ public class ClsEntidadObservaFinalCurso {
     private String subtitulo; /*TEXT NULL,*/
     private int idinformefinalcurso;
     private String descripcion;
+    private int idDetalleObservaciones;
+    
 
     public int getIdObservaciones() {
         return idObservaciones;
@@ -49,5 +51,13 @@ public class ClsEntidadObservaFinalCurso {
 
     public void setDescripcion(String descripcion) {
         this.descripcion = descripcion;
+    }
+
+    public int getIdDetalleObservaciones() {
+        return idDetalleObservaciones;
+    }
+
+    public void setIdDetalleObservaciones(int idDetalleObservaciones) {
+        this.idDetalleObservaciones = idDetalleObservaciones;
     }
 }
