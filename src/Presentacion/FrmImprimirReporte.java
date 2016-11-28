@@ -6,6 +6,7 @@
 package Presentacion;
 
 import Conexion.ClsConexion;
+import Negocio.ClsNegocioInformeFinalCurso;
 import Negocio.ClsNegocioPruebaEntrada;
 import java.sql.Connection;
 import java.sql.ResultSet;
@@ -70,12 +71,14 @@ public class FrmImprimirReporte extends javax.swing.JInternalFrame {
     private void buscarPruebaEntrada(String nivelUsuario,String codDocente){
         int tipoInforme = cmbTipoInforme.getSelectedIndex();
         
+        String criterio = cmbCriterio.getSelectedItem().toString();
+        String busqueda = txtBuscar.getText();
+        
         switch(tipoInforme){
             case 0:
                 ClsNegocioPruebaEntrada negPruebaEntrada = new ClsNegocioPruebaEntrada();
         
-                String criterio = cmbCriterio.getSelectedItem().toString();
-                String busqueda = txtBuscar.getText();
+                
 
                 switch(nivelUsuario){
                 case "Usuario":
@@ -148,6 +151,80 @@ public class FrmImprimirReporte extends javax.swing.JInternalFrame {
                     break;
                 }      
                 break;
+            case 1:
+                ClsNegocioInformeFinalCurso negInformeFinalCurso = new ClsNegocioInformeFinalCurso();
+        
+                switch(nivelUsuario){
+                case "Usuario":
+                    try {
+                    rs  =negInformeFinalCurso.ConsultaInformeUsuario(criterio, busqueda,codDocente);
+
+                    boolean encuentra = false;
+                    String Campo[] = new String[5];
+                    int fila;
+                    fila = dtm.getRowCount();
+                    if (fila > 0) {
+                        for (int i = 0; i < fila; i++) {
+                            dtm.removeRow(0);
+                        }
+                    }
+                    while (rs.next()) {
+                        Campo[0] = (String) rs.getString(1); 
+                        Campo[1] = (String) rs.getString(2); 
+                        Campo[2] = (String) rs.getString(3); 
+                        Campo[3] = (String) rs.getString(4); 
+                        Campo[4] = (String) rs.getString(5); 
+
+                        dtm.addRow(Campo);
+                        encuentra = true;
+                    }
+
+                    if (encuentra == false) {
+                        JOptionPane.showMessageDialog(null,"No se encuentra .");
+                    }
+                    rs.close();
+                    negInformeFinalCurso.conexion.close();
+                    } catch (Exception ex) {
+                    }
+                    break;
+                case "Supervisor":            
+                case "Administrador":
+                    try {
+                    rs  =negInformeFinalCurso.ConsultaInformeAdministrador(criterio, busqueda);
+
+                    boolean encuentra = false;
+                    String Campo[] = new String[8];
+                    int fila;
+                    fila = dtm.getRowCount();
+                    if (fila > 0) {
+                        for (int i = 0; i < fila; i++) {
+                            dtm.removeRow(0);
+                        }
+                    }
+                    while (rs.next()) {
+                        Campo[0] = (String) rs.getString(1); 
+                        Campo[1] = (String) rs.getString(2); 
+                        Campo[2] = (String) rs.getString(3); 
+                        Campo[3] = (String) rs.getString(4); 
+                        Campo[4] = (String) rs.getString(5); 
+                        Campo[5] = (String) rs.getString(6); 
+                        Campo[6] = (String) rs.getString(7); 
+                        Campo[7] = (String) rs.getString(8); 
+
+                        dtm.addRow(Campo);
+                        encuentra = true;
+                    }
+
+                    if (encuentra == false) {
+                        JOptionPane.showMessageDialog(null,"No se encuentra.");
+                    }
+                    rs.close();
+                    negInformeFinalCurso.conexion.close();
+                    } catch (Exception ex) {
+                    }
+                    break;
+                }      
+                break;
         }
     }
     
@@ -189,6 +266,26 @@ public class FrmImprimirReporte extends javax.swing.JInternalFrame {
                     view.setTitle("Reporte Prueba Entrada");
                     view.setVisible(true);
                     cnx.close();
+                } catch (JRException | SQLException ex) {
+                    Logger.getLogger(FrmInformePruebaEntrada.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                break;
+            case 1:
+                Map p2 = new HashMap();
+                
+                p2.put("ID", Integer.parseInt(idReporte));
+
+                Connection cnx2 = new ClsConexion().getConnection();
+
+                try {           
+                    JasperReport report;
+                    JasperPrint print;
+                    report = JasperCompileManager.compileReport("../SistemaInformesUPT/src/Reportes/RptInformeFinalCurso.jrxml");
+                    print = JasperFillManager.fillReport(report,p2,cnx2);
+                    JasperViewer view = new JasperViewer(print,false);
+                    view.setTitle("Reporte Informe Final");
+                    view.setVisible(true);
+                    cnx2.close();
                 } catch (JRException | SQLException ex) {
                     Logger.getLogger(FrmInformePruebaEntrada.class.getName()).log(Level.SEVERE, null, ex);
                 }
@@ -262,7 +359,7 @@ public class FrmImprimirReporte extends javax.swing.JInternalFrame {
         ));
         jScrollPane1.setViewportView(tblBuscar);
 
-        cmbTipoInforme.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Prueba de entrada", "Portafolio", "Informe Final" }));
+        cmbTipoInforme.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Prueba de entrada", "Informe Final", "Portafolio" }));
 
         jLabel4.setText("Tipo de Informe :");
 

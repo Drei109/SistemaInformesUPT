@@ -40,26 +40,11 @@
           <SubComponents>
             <MenuItem class="javax.swing.JMenuItem" name="consultaPruebaEntrada">
               <Properties>
-                <Property name="text" type="java.lang.String" value="Consulta informe prueba de entrada"/>
+                <Property name="text" type="java.lang.String" value="Consulta informes"/>
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="consultaPruebaEntradaActionPerformed"/>
               </Events>
-            </MenuItem>
-            <MenuItem class="javax.swing.JMenuItem" name="consultaFinalCurso">
-              <Properties>
-                <Property name="text" type="java.lang.String" value="Consulta informe final de curso"/>
-              </Properties>
-            </MenuItem>
-            <MenuItem class="javax.swing.JMenuItem" name="consultaFinalCursoDoc">
-              <Properties>
-                <Property name="text" type="java.lang.String" value="Consulta informe final de curso - doc"/>
-              </Properties>
-            </MenuItem>
-            <MenuItem class="javax.swing.JMenuItem" name="consultaPortafolio">
-              <Properties>
-                <Property name="text" type="java.lang.String" value="Consulta portafolio"/>
-              </Properties>
             </MenuItem>
           </SubComponents>
         </Menu>

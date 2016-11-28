@@ -22,4 +22,8 @@ public interface ClsInterfaceInformeFinalCurso {
     
     public ArrayList seleccionarInforCurso(String codPruebaEntrada);
     
+    public ResultSet ConsultaInformeAdministrador(String criterio, String busqueda) throws Exception;
+    
+    public ResultSet ConsultaInformeUsuario(String criterio, String busqueda, String codDocente) throws Exception;
+    
 }

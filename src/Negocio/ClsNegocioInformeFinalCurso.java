@@ -154,5 +154,33 @@ public class ClsNegocioInformeFinalCurso implements ClsInterfaceInformeFinalCurs
             return null;
         }
     }
+
+    @Override
+    public ResultSet ConsultaInformeAdministrador(String criterio, String busqueda) throws Exception {
+        try {
+            cst = conexion.prepareCall("{call USP_FinalInformesAdmin(?,?)}");
+            cst.setString("pcriterio", criterio);
+            cst.setString("pbusqueda", busqueda);
+            rs = cst.executeQuery();
+            return rs;
+        } catch (SQLException ex) {
+            throw ex;
+        }
+    }
+
+    @Override
+    public ResultSet ConsultaInformeUsuario(String criterio, String busqueda, String codDocente) throws Exception {
+        ResultSet rs = null;
+        try {
+            cst = conexion.prepareCall("{call USP_FinalInformesUsuario(?,?,?)}");
+            cst.setString("pcriterio", criterio);
+            cst.setString("pbusqueda", busqueda);
+            cst.setString("pcodDocente", codDocente);
+             rs = cst.executeQuery();
+            return rs;
+        } catch (SQLException ex) {
+            throw ex;
+        }
+    }
     
 }
