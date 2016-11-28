@@ -10,6 +10,7 @@ public class ClsEntidadCacidadInformeFinalCurso {
     private String descripcion; /*TEXT NOT NULL,*/
     private int idnivelcapacidad; /*INT(11) NOT NULL,*/
     private int idinformefinalcurso; /*INT(11) NULL DEFAULT NULL,*/
+    private String medidaCorectiva;
     
     public int getIdcapacidad() {
         return idcapacidad;
@@ -41,6 +42,14 @@ public class ClsEntidadCacidadInformeFinalCurso {
 
     public void setIdinformefinalcurso(int idinformefinalcurso) {
         this.idinformefinalcurso = idinformefinalcurso;
+    }
+
+    public String getMedidaCorectiva() {
+        return medidaCorectiva;
+    }
+
+    public void setMedidaCorectiva(String medidaCorectiva) {
+        this.medidaCorectiva = medidaCorectiva;
     }
     
 }
