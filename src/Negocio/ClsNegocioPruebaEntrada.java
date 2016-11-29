@@ -192,5 +192,36 @@ public class ClsNegocioPruebaEntrada implements ClsInterfacePruebaEntrada{
             throw ex;
         }
     }
+
+    @Override
+    public ArrayList verInformesTotales(String busqueda) {
+        ArrayList<ClsEntidadPruebaCursosFaltantes> infoTotales = new ArrayList<ClsEntidadPruebaCursosFaltantes>();
+        
+        try {
+            CallableStatement cst = conexion.prepareCall("{call USP_ListaTotalInformes(?)}");
+            cst.setString("pbusqueda", busqueda);
+            rs = cst.executeQuery();
+            
+            
+            while (rs.next()) {
+                ClsEntidadPruebaCursosFaltantes pru = new ClsEntidadPruebaCursosFaltantes();
+
+                pru.setCargaAcademica(rs.getString("idCargaAcademica"));
+                pru.setCodigoDocente(rs.getString("codDocente"));
+                pru.setNombreDocente(rs.getString("nombreDocente"));
+                pru.setIdCurso(rs.getString("idCurso"));
+                pru.setNombreCurso(rs.getString("nombre"));
+                pru.setFechaPrueba(rs.getString("fechainformefinalcurso"));
+                pru.setEstadoPrueba(rs.getString("estadoInformeFinalCurso"));
+                infoTotales.add(pru);
+            }
+            
+            
+            return infoTotales;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
     
 }

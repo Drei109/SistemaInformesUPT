@@ -28,4 +28,6 @@ public interface ClsInterfacePruebaEntrada {
     public ArrayList seleccionarPruebaEntrada(String codPruebaEntrada); 
     
     void ModificarEstadoPruebaEntrada(String codigo, String estado);
+    
+    public ArrayList verInformesTotales(String busqueda);
 }

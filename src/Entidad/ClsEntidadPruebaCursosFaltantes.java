@@ -17,6 +17,33 @@ public class ClsEntidadPruebaCursosFaltantes {
     private String nombreDocente;
     private String emailDocente;
     private String celuDocente;
+    private String estadoPrueba;
+    private String cargaAcademica;
+    private String fechaPrueba;
+
+    public String getFechaPrueba() {
+        return fechaPrueba;
+    }
+
+    public void setFechaPrueba(String fechaPrueba) {
+        this.fechaPrueba = fechaPrueba;
+    }
+
+    public String getEstadoPrueba() {
+        return estadoPrueba;
+    }
+    
+    public void setEstadoPrueba(String estadoPrueba) {
+        this.estadoPrueba = estadoPrueba;
+    }
+
+    public String getCargaAcademica() {
+        return cargaAcademica;
+    }
+
+    public void setCargaAcademica(String cargaAcademica) {
+        this.cargaAcademica = cargaAcademica;
+    }    
     
     public String getIdCurso() {
         return idCurso;

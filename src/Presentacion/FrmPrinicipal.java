@@ -11,7 +11,7 @@ public class FrmPrinicipal extends javax.swing.JFrame {
     public String nivelUsuario;
    
     public FrmPrinicipal() {
-        initComponents();
+        initComponents();        
     }
 
     
@@ -27,6 +27,7 @@ public class FrmPrinicipal extends javax.swing.JFrame {
         informePruebaEntrada = new javax.swing.JMenuItem();
         mnuConsultas = new javax.swing.JMenu();
         consultaPruebaEntrada = new javax.swing.JMenuItem();
+        mnuControlInformes = new javax.swing.JMenuItem();
         mnuImprimir = new javax.swing.JMenu();
         imprimirInformeAceptado = new javax.swing.JMenuItem();
         mnuAyuda = new javax.swing.JMenu();
@@ -38,6 +39,11 @@ public class FrmPrinicipal extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("INFORMES");
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowOpened(java.awt.event.WindowEvent evt) {
+                formWindowOpened(evt);
+            }
+        });
 
         javax.swing.GroupLayout escritorioLayout = new javax.swing.GroupLayout(escritorio);
         escritorio.setLayout(escritorioLayout);
@@ -71,6 +77,14 @@ public class FrmPrinicipal extends javax.swing.JFrame {
             }
         });
         mnuConsultas.add(consultaPruebaEntrada);
+
+        mnuControlInformes.setText("Control informes");
+        mnuControlInformes.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mnuControlInformesActionPerformed(evt);
+            }
+        });
+        mnuConsultas.add(mnuControlInformes);
 
         jMenuBar1.add(mnuConsultas);
 
@@ -148,6 +162,18 @@ public class FrmPrinicipal extends javax.swing.JFrame {
         consultaInformePrueabaEntrada.setVisible(true);
     }//GEN-LAST:event_consultaPruebaEntradaActionPerformed
 
+    private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
+        if (nivelUsuario.equals("Usuario")) {
+            mnuControlInformes.setVisible(false);
+        }
+    }//GEN-LAST:event_formWindowOpened
+
+    private void mnuControlInformesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnuControlInformesActionPerformed
+        FrmControlInformes controlReportes = new FrmControlInformes(nivelUsuario,codigoDocente);
+        escritorio.add(controlReportes);
+        controlReportes.setVisible(true);
+    }//GEN-LAST:event_mnuControlInformesActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -195,6 +221,7 @@ public class FrmPrinicipal extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItem11;
     private javax.swing.JMenu mnuAyuda;
     private javax.swing.JMenu mnuConsultas;
+    private javax.swing.JMenuItem mnuControlInformes;
     private javax.swing.JMenu mnuImprimir;
     private javax.swing.JMenu mnuInformes;
     // End of variables declaration//GEN-END:variables
