@@ -5,16 +5,29 @@
  */
 package Presentacion;
 
+import Conexion.ClsConexion;
 import Entidad.ClsEntidadPruebaCursosFaltantes;
 import Negocio.ClsNegocioPruebaEntrada;
+import java.sql.Connection;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Iterator;
+import java.util.Map;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.RowFilter;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
 import javax.swing.table.TableRowSorter;
+import net.sf.jasperreports.engine.JRException;
+import net.sf.jasperreports.engine.JasperCompileManager;
+import net.sf.jasperreports.engine.JasperFillManager;
+import net.sf.jasperreports.engine.JasperPrint;
+import net.sf.jasperreports.engine.JasperReport;
+import net.sf.jasperreports.view.JasperViewer;
 
 /**
  *
@@ -35,6 +48,10 @@ public class FrmControlInformes extends javax.swing.JInternalFrame {
         this.codDocente = codDocente;
         this.nivelUsuario = nivelUsuario;
         definirTituloTabla(nivelUsuario);
+        
+        btngroup.add(rbtnPie);
+        btngroup.add(rbtnBarras);
+        rbtnPie.setSelected(true);
     }
 
     
@@ -42,6 +59,7 @@ public class FrmControlInformes extends javax.swing.JInternalFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        btngroup = new javax.swing.ButtonGroup();
         jLabel4 = new javax.swing.JLabel();
         cmbTipoInforme = new javax.swing.JComboBox<>();
         btnBuscar = new javax.swing.JButton();
@@ -52,6 +70,9 @@ public class FrmControlInformes extends javax.swing.JInternalFrame {
         btnReporte = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
+        rbtnPie = new javax.swing.JRadioButton();
+        rbtnBarras = new javax.swing.JRadioButton();
+        jLabel3 = new javax.swing.JLabel();
 
         jLabel4.setText("Tipo de Informe :");
 
@@ -100,7 +121,7 @@ public class FrmControlInformes extends javax.swing.JInternalFrame {
             }
         });
 
-        btnReporte.setText("Ver reporte");
+        btnReporte.setText("Imprimir Reporte");
         btnReporte.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnReporteActionPerformed(evt);
@@ -113,38 +134,53 @@ public class FrmControlInformes extends javax.swing.JInternalFrame {
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText("CONTROL INFORMES");
 
+        rbtnPie.setText("Pie");
+
+        rbtnBarras.setText("Barras");
+
+        jLabel3.setText("Tipo de reporte:");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(22, 22, 22)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel4)
-                            .addComponent(jLabel2))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(txtBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 327, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(cmbTipoInforme, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(444, 444, 444)
-                        .addComponent(btnBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 158, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap(22, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(btnReporte, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btnSalir, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 856, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(26, Short.MAX_VALUE))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addContainerGap()
+                                .addComponent(btnBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 177, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                                .addGap(22, 22, 22)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel4)
+                                    .addComponent(jLabel2))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(txtBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 327, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(cmbTipoInforme, javax.swing.GroupLayout.PREFERRED_SIZE, 515, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(0, 0, Short.MAX_VALUE)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(jLabel3)
+                                        .addGap(18, 18, 18)
+                                        .addComponent(rbtnPie)
+                                        .addGap(28, 28, 28)
+                                        .addComponent(rbtnBarras)
+                                        .addGap(41, 41, 41)
+                                        .addComponent(btnReporte, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                        .addComponent(btnSalir, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 856, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(0, 0, Short.MAX_VALUE)))))
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -165,7 +201,10 @@ public class FrmControlInformes extends javax.swing.JInternalFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnReporte)
-                    .addComponent(btnSalir))
+                    .addComponent(btnSalir)
+                    .addComponent(rbtnPie)
+                    .addComponent(rbtnBarras)
+                    .addComponent(jLabel3))
                 .addGap(12, 12, 12))
         );
 
@@ -245,12 +284,79 @@ public class FrmControlInformes extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_btnSalirActionPerformed
 
     private void btnReporteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnReporteActionPerformed
-//        if (tblBuscar.getSelectedRow()==-1) {
-//            JOptionPane.showMessageDialog(null,"Seleccione una fila");
-//        } else {
-//            String idReporte = (String) tblBuscar.getValueAt(tblBuscar.getSelectedRow(), 0);
-//            hacerReporte(idReporte);
-//        }
+//        Prueba Entrada
+//        Informe Final Curso
+//        Portafolio
+        String tipoInforme = (String) cmbTipoInforme.getSelectedItem();
+        
+        switch(tipoInforme){
+            case "Prueba Entrada":
+                if (rbtnPie.isSelected()) {
+                    Map p = new HashMap();                
+                    Connection cnx = new ClsConexion().getConnection();
+                    try {           
+                        JasperReport report;
+                        JasperPrint print;
+                        report = JasperCompileManager.compileReport("../SistemaInformesUPT/src/Reportes/RptControlInformePruebaEntrada.jrxml");
+                        print = JasperFillManager.fillReport(report,p,cnx);
+                        JasperViewer view = new JasperViewer(print,false);
+                        view.setTitle("Reporte Prueba Entrada");
+                        view.setVisible(true);
+                        cnx.close();
+                    } catch (JRException | SQLException ex) {
+                        Logger.getLogger(FrmInformePruebaEntrada.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                } else {
+                    Map p = new HashMap();                
+                    Connection cnx = new ClsConexion().getConnection();
+                    try {           
+                        JasperReport report;
+                        JasperPrint print;
+                        report = JasperCompileManager.compileReport("../SistemaInformesUPT/src/Reportes/RptControlInformesPruebaEntradaBarras.jrxml");
+                        print = JasperFillManager.fillReport(report,p,cnx);
+                        JasperViewer view = new JasperViewer(print,false);
+                        view.setTitle("Reporte Prueba Entrada");
+                        view.setVisible(true);
+                        cnx.close();
+                    } catch (JRException | SQLException ex) {
+                        Logger.getLogger(FrmInformePruebaEntrada.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                }                
+                break;
+            case "Informe Final Curso":
+                if (rbtnPie.isSelected()) {
+                    Map p = new HashMap();                
+                    Connection cnx = new ClsConexion().getConnection();
+                    try {           
+                        JasperReport report;
+                        JasperPrint print;
+                        report = JasperCompileManager.compileReport("../SistemaInformesUPT/src/Reportes/RptControlInformeFinal.jrxml");
+                        print = JasperFillManager.fillReport(report,p,cnx);
+                        JasperViewer view = new JasperViewer(print,false);
+                        view.setTitle("Reporte Prueba Entrada");
+                        view.setVisible(true);
+                        cnx.close();
+                    } catch (JRException | SQLException ex) {
+                        Logger.getLogger(FrmInformePruebaEntrada.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                } else {
+                    Map p = new HashMap();                
+                    Connection cnx = new ClsConexion().getConnection();
+                    try {           
+                        JasperReport report;
+                        JasperPrint print;
+                        report = JasperCompileManager.compileReport("../SistemaInformesUPT/src/Reportes/RptControlInformeFinalBarras.jrxml");
+                        print = JasperFillManager.fillReport(report,p,cnx);
+                        JasperViewer view = new JasperViewer(print,false);
+                        view.setTitle("Reporte Prueba Entrada");
+                        view.setVisible(true);
+                        cnx.close();
+                    } catch (JRException | SQLException ex) {
+                        Logger.getLogger(FrmInformePruebaEntrada.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                }
+            case "Portafolio":
+        }
     }//GEN-LAST:event_btnReporteActionPerformed
 
     private void cmbTipoInformeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbTipoInformeActionPerformed
@@ -270,11 +376,15 @@ public class FrmControlInformes extends javax.swing.JInternalFrame {
     private javax.swing.JButton btnBuscar;
     private javax.swing.JButton btnReporte;
     private javax.swing.JButton btnSalir;
+    private javax.swing.ButtonGroup btngroup;
     private javax.swing.JComboBox<String> cmbTipoInforme;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JRadioButton rbtnBarras;
+    private javax.swing.JRadioButton rbtnPie;
     private javax.swing.JTable tblBuscar;
     private javax.swing.JTextField txtBuscar;
     // End of variables declaration//GEN-END:variables
