@@ -223,5 +223,17 @@ public class ClsNegocioPruebaEntrada implements ClsInterfacePruebaEntrada{
             return null;
         }
     }
+
+    @Override
+    public ResultSet verInformesTotalesGraficos(String busqueda) throws Exception {
+        try {
+            cst = conexion.prepareCall("{call USP_ListaTotalInformesGrafico(?)}");            
+            cst.setString("pbusqueda", busqueda);
+            rs = cst.executeQuery();
+            return rs;
+        } catch (SQLException ex) {
+            throw ex;
+        }
+    }
     
 }

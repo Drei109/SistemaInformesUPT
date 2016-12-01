@@ -30,4 +30,6 @@ public interface ClsInterfacePruebaEntrada {
     void ModificarEstadoPruebaEntrada(String codigo, String estado);
     
     public ArrayList verInformesTotales(String busqueda);
+    
+    public ResultSet verInformesTotalesGraficos(String busqueda) throws Exception;
 }
