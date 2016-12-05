@@ -32,4 +32,8 @@ public interface ClsInterfacePruebaEntrada {
     public ArrayList verInformesTotales(String busqueda);
     
     public ResultSet verInformesTotalesGraficos(String busqueda) throws Exception;
+    
+    public ArrayList verInformesTotalesDocente(String busqueda,String codDocente);
+    
+    public ResultSet verInformesTotalesGraficosPorDocente(String busqueda,String codDocente) throws Exception;
 }

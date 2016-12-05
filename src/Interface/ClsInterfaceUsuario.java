@@ -18,4 +18,5 @@ public interface ClsInterfaceUsuario {
     public ResultSet obtenerDatosPruebaEntrada(String codDocente, String idCurso)throws Exception;
     
     public ResultSet obtenerCursosDocente(String pcodDocente)throws Exception;
+    
 }

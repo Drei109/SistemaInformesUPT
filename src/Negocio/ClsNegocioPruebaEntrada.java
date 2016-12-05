@@ -235,5 +235,50 @@ public class ClsNegocioPruebaEntrada implements ClsInterfacePruebaEntrada{
             throw ex;
         }
     }
+
+    @Override
+    public ArrayList verInformesTotalesDocente(String busqueda, String codDocente) {
+        ArrayList<ClsEntidadPruebaCursosFaltantes> infoTotalesDoc = new ArrayList<ClsEntidadPruebaCursosFaltantes>();
+        
+        try {
+            cst = conexion.prepareCall("{call USP_ListaTotalInformesPorDocente(?,?)}");
+            cst.setString("pbusqueda", busqueda);
+            cst.setString("pcodDoc", codDocente);
+            rs = cst.executeQuery();
+            
+            
+            while (rs.next()) {
+                ClsEntidadPruebaCursosFaltantes pru = new ClsEntidadPruebaCursosFaltantes();
+
+                pru.setCargaAcademica(rs.getString("idCargaAcademica"));
+                pru.setCodigoDocente(rs.getString("codDocente"));
+                pru.setNombreDocente(rs.getString("nombreDocente"));
+                pru.setIdCurso(rs.getString("idCurso"));
+                pru.setNombreCurso(rs.getString("nombre"));
+                pru.setFechaPrueba(rs.getString("fechainformefinalcurso"));
+                pru.setEstadoPrueba(rs.getString("estadoInformeFinalCurso"));
+                infoTotalesDoc.add(pru);
+            }
+            
+            
+            return infoTotalesDoc;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+    @Override
+    public ResultSet verInformesTotalesGraficosPorDocente(String busqueda, String codDocente) throws Exception {
+        try {
+            cst = conexion.prepareCall("{call USP_ListaTotalInformesGraficoPorDocente(?,?)}");            
+            cst.setString("pbusqueda", busqueda);
+            cst.setString("pcodDoc", codDocente);
+            rs = cst.executeQuery();
+            return rs;
+        } catch (SQLException ex) {
+            throw ex;
+        }
+    }
     
 }
