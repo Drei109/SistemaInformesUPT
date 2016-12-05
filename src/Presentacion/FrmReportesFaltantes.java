@@ -100,7 +100,7 @@ public class FrmReportesFaltantes extends javax.swing.JInternalFrame {
         jLabel3.setForeground(new java.awt.Color(47, 119, 236));
         jLabel3.setText("Tipo de Reporte:");
 
-        cmbTipoReporte.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Informe Final Curso", "Prueba Entrada" }));
+        cmbTipoReporte.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Informe Final Curso", "Prueba Entrada", "Portafolio" }));
 
         btnListarTabla.setText("Listar Tabla");
         btnListarTabla.addActionListener(new java.awt.event.ActionListener() {
@@ -261,6 +261,14 @@ public class FrmReportesFaltantes extends javax.swing.JInternalFrame {
 //                FrmInformeFinalCurso info = new FrmInformeFinalCurso(campo,true,nivelUsuario);
 //                FrmPrinicipal.escritorio.add(info);
                 FrmPrueba info = new FrmPrueba(campo,true,nivelUsuario,codDocente);
+                FrmPrinicipal.escritorio.add(info);
+                info.setVisible(true);
+                this.dispose();
+            }
+            else if (tipoReporte.equals("Portafolio")) {
+//                FrmInformeFinalCurso info = new FrmInformeFinalCurso(campo,true,nivelUsuario);
+//                FrmPrinicipal.escritorio.add(info);
+                FrmPortafolio info = new FrmPortafolio(campo,true,nivelUsuario,codDocente);
                 FrmPrinicipal.escritorio.add(info);
                 info.setVisible(true);
                 this.dispose();
