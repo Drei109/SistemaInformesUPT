@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="report name" pageWidth="595" pageHeight="842" columnWidth="535" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="pcodDoc" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[SELECT  CASE pe.estadoPruebaEntrada
+          WHEN "Guardado" THEN "SIN COMPLETAR"
+          WHEN "Observado" THEN "SIN COMPLETAR"
+          WHEN "Enviado" THEN "FALTA APROBAR"
+          WHEN "Aprobado" THEN "COMPLETADO"
+          ELSE "SIN COMPLETAR"
+        END AS estadoInformeFinalCurso,
+        COUNT(CASE pe.estadoPruebaEntrada
+          WHEN "Guardado" THEN "SIN COMPLETAR"
+          WHEN "Observado" THEN "SIN COMPLETAR"
+          WHEN "Enviado" THEN "FALTA APROBAR"
+          WHEN "Aprobado" THEN "COMPLETADO"
+          ELSE "SIN COMPLETAR"
+        END) AS total
+      FROM cargaacademica ca
+      INNER JOIN curso c
+      ON ca.idCurso = c.idCurso
+      LEFT JOIN pruebaentrada pe
+      on ca.idCargaAcademica = pe.idCargaAcademica
+      INNER JOIN docente d
+      ON ca.codDocente = d.codDocente
+      INNER JOIN semestre s
+      ON ca.idSemestre = s.idSemestre
+      WHERE s.estadoSemestre="Activo" and ca.codDocente = $P{pcodDoc}
+      GROUP BY estadoInformeFinalCurso
+      ORDER BY d.nombreDocente;]]>
+	</queryString>
+	<field name="estadoInformeFinalCurso" class="java.lang.String"/>
+	<field name="total" class="java.lang.Long"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="79" splitType="Stretch"/>
+	</title>
+	<pageHeader>
+		<band splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band splitType="Stretch"/>
+	</columnHeader>
+	<detail>
+		<band splitType="Stretch"/>
+	</detail>
+	<columnFooter>
+		<band splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band splitType="Stretch"/>
+	</pageFooter>
+	<summary>
+		<band height="318" splitType="Stretch">
+			<barChart>
+				<chart>
+					<reportElement x="32" y="22" width="483" height="279"/>
+					<chartTitle/>
+					<chartSubtitle/>
+					<chartLegend/>
+				</chart>
+				<categoryDataset>
+					<categorySeries>
+						<seriesExpression><![CDATA[$F{estadoInformeFinalCurso}]]></seriesExpression>
+						<categoryExpression><![CDATA[$F{estadoInformeFinalCurso}]]></categoryExpression>
+						<valueExpression><![CDATA[$F{total}]]></valueExpression>
+					</categorySeries>
+				</categoryDataset>
+				<barPlot>
+					<plot/>
+					<itemLabel color="#000000" backgroundColor="#FFFFFF"/>
+					<categoryAxisFormat>
+						<axisFormat>
+							<labelFont/>
+							<tickLabelFont/>
+						</axisFormat>
+					</categoryAxisFormat>
+					<valueAxisFormat>
+						<axisFormat>
+							<labelFont/>
+							<tickLabelFont/>
+						</axisFormat>
+					</valueAxisFormat>
+				</barPlot>
+			</barChart>
+		</band>
+	</summary>
+</jasperReport>
