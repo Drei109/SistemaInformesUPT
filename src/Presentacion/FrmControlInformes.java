@@ -349,6 +349,37 @@ public class FrmControlInformes extends javax.swing.JInternalFrame {
                     }
                 }
             case "Portafolio":
+                if (rbtnPie.isSelected()) {
+                    Map p = new HashMap();                
+                    Connection cnx = new ClsConexion().getConnection();
+                    try {           
+                        JasperReport report;
+                        JasperPrint print;
+                        report = JasperCompileManager.compileReport("../SistemaInformesUPT/src/Reportes/RptControlPortafolioPie.jrxml");
+                        print = JasperFillManager.fillReport(report,p,cnx);
+                        JasperViewer view = new JasperViewer(print,false);
+                        view.setTitle("Reporte Prueba Entrada");
+                        view.setVisible(true);
+                        cnx.close();
+                    } catch (JRException | SQLException ex) {
+                        Logger.getLogger(FrmInformePruebaEntrada.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                } else {
+                    Map p = new HashMap();                
+                    Connection cnx = new ClsConexion().getConnection();
+                    try {           
+                        JasperReport report;
+                        JasperPrint print;
+                        report = JasperCompileManager.compileReport("../SistemaInformesUPT/src/Reportes/RptControlPortafolioBarras.jrxml");
+                        print = JasperFillManager.fillReport(report,p,cnx);
+                        JasperViewer view = new JasperViewer(print,false);
+                        view.setTitle("Reporte Prueba Entrada");
+                        view.setVisible(true);
+                        cnx.close();
+                    } catch (JRException | SQLException ex) {
+                        Logger.getLogger(FrmInformePruebaEntrada.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                }
         }
     }//GEN-LAST:event_btnReporteActionPerformed
 
