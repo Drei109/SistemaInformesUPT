@@ -15,8 +15,12 @@ import Negocio.ClsNegocioUsuario;
 import static com.sun.org.apache.xpath.internal.axes.HasPositionalPredChecker.check;
 import java.awt.Component;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableCellRenderer;
@@ -31,13 +35,15 @@ import static sun.nio.ch.IOStatus.check;
 public class FrmPortafolio extends javax.swing.JInternalFrame {
 
     public String[] datoIFC = null;
-    boolean guardarNuevo = false;
+    boolean guardarNuevo;
     boolean guardadoF = false;
     boolean actualizaF = false;
     boolean calculadoPorcentajes = false;
     public String nivelUsuario;
     String idCargaAcademica;
     public String codDocente;
+    
+    String IdPortafolio = "";
     
     DefaultTableModel modelDocente = new DefaultTableModel(){
         @Override
@@ -146,9 +152,6 @@ public class FrmPortafolio extends javax.swing.JInternalFrame {
         btnRemoverFilaEstudiante = new javax.swing.JButton();
         jPanel6 = new javax.swing.JPanel();
         guardarDetalles = new javax.swing.JButton();
-        btnEnviarInforme1 = new javax.swing.JButton();
-        btnAceptarInforme1 = new javax.swing.JButton();
-        btnRechazarInforme1 = new javax.swing.JButton();
         btnCancelarInforme1 = new javax.swing.JButton();
         jLabel6 = new javax.swing.JLabel();
         txtRevisadoPor = new javax.swing.JTextField();
@@ -585,27 +588,6 @@ public class FrmPortafolio extends javax.swing.JInternalFrame {
             }
         });
 
-        btnEnviarInforme1.setText("Enviar");
-        btnEnviarInforme1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnEnviarInforme1ActionPerformed(evt);
-            }
-        });
-
-        btnAceptarInforme1.setText("Aceptar");
-        btnAceptarInforme1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnAceptarInforme1ActionPerformed(evt);
-            }
-        });
-
-        btnRechazarInforme1.setText("Rechazar");
-        btnRechazarInforme1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnRechazarInforme1ActionPerformed(evt);
-            }
-        });
-
         btnCancelarInforme1.setText("Salir");
         btnCancelarInforme1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -617,30 +599,21 @@ public class FrmPortafolio extends javax.swing.JInternalFrame {
         jPanel6.setLayout(jPanel6Layout);
         jPanel6Layout.setHorizontalGroup(
             jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel6Layout.createSequentialGroup()
-                .addGap(75, 75, 75)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel6Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(guardarDetalles, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(btnEnviarInforme1, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(btnAceptarInforme1, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(btnRechazarInforme1, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnCancelarInforme1, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(93, 93, 93))
+                .addGap(22, 22, 22))
         );
         jPanel6Layout.setVerticalGroup(
             jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel6Layout.createSequentialGroup()
-                .addContainerGap()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel6Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(guardarDetalles)
-                    .addComponent(btnEnviarInforme1)
-                    .addComponent(btnAceptarInforme1)
-                    .addComponent(btnRechazarInforme1)
                     .addComponent(btnCancelarInforme1))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
         );
 
         jLabel6.setText("Revisador Por :");
@@ -658,7 +631,7 @@ public class FrmPortafolio extends javax.swing.JInternalFrame {
                         .addComponent(txtRevisadoPor)
                         .addContainerGap())
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
-                        .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                        .addComponent(jPanel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addContainerGap())
                     .addGroup(jPanel4Layout.createSequentialGroup()
                         .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -708,9 +681,9 @@ public class FrmPortafolio extends javax.swing.JInternalFrame {
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel6)
                     .addComponent(txtRevisadoPor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 20, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                .addContainerGap(29, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Material", jPanel4);
@@ -764,6 +737,9 @@ public class FrmPortafolio extends javax.swing.JInternalFrame {
         modelDocente.addRow(new Object[]{"Registro de Notas", Boolean.FALSE,Boolean.FALSE,0});
         modelDocente.addRow(new Object[]{"Fichas de Sustentación", Boolean.FALSE,Boolean.FALSE,0});
         tablaDocente.setRowHeight(25);
+        
+        
+        
     }
     
     private void cargarDatosTablaEstudiante(){
@@ -806,7 +782,7 @@ public class FrmPortafolio extends javax.swing.JInternalFrame {
             else{
                 /*actualizas*/
                 String opcion = "Guardado";
-//                actualizarDatos(opcion);
+                actualizarDatos(opcion);
                 actualizaF = true;
             }
         }
@@ -815,47 +791,62 @@ public class FrmPortafolio extends javax.swing.JInternalFrame {
         }
     }//GEN-LAST:event_btnGuardarInformeActionPerformed
 
+    private void actualizarDatos(String opcion){
+        ClsEntidadPortafolio entiPortafolio = new ClsEntidadPortafolio();
+        ClsNegocioPortafolio negoPortafolio = new ClsNegocioPortafolio();
+            
+        try {            
+            entiPortafolio.setEstudianteAsisten(Integer.parseInt(txtNumAsisten.getText()));
+            entiPortafolio.setEstudianteAprobado(Integer.parseInt(txtNumAprobados.getText()));
+            entiPortafolio.setEstudianteDesaprobado(Integer.parseInt(txtNumDesaprobados.getText()));
+            entiPortafolio.setEstadoPortafolio(opcion);
+            
+            negoPortafolio.ModificarPortafolio(IdPortafolio, entiPortafolio);
+            negoPortafolio.cst.close();
+            negoPortafolio.conexion.close();
+            JOptionPane.showMessageDialog(null, "Operación Exitosa.");
+        } catch (Exception e) {
+        }
+    }
+    
     private void btnEnviarInformeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEnviarInformeActionPerformed
-//        if (validarFormulario()) {
-//            if (guardarNuevo) {
-//                String opcion = "Enviado";
-//                guardarDatos(opcion);
-//                guardadoF = true;
-//            }
-//            else{
-//                actualizarDatos("Enviado");
-//                actualizaF = true;
-//            }
-//        }
-//        else{
-//            JOptionPane.showMessageDialog(null, "Los datos ingresados son incorrectos");
-//        }
+        
+        if (guardarNuevo) {
+            String opcion = "Enviado";
+            guardarDatos(opcion);
+            guardadoF = true;
+        }
+        else{
+            actualizarDatos("Enviado");
+            actualizaF = true;
+        }
+        
     }//GEN-LAST:event_btnEnviarInformeActionPerformed
 
     private void btnAceptarInformeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAceptarInformeActionPerformed
-//        ClsNegocioInformeFinalCurso negoIFC = new ClsNegocioInformeFinalCurso();
-//        ResultSet rs ;
-//        try {
-//            String estado = "Aprobado";
-//            negoIFC.ModificarEstadoInformeFinal(IdInfoFinalCurso, estado);
-//            negoIFC.cst.close();
-//            negoIFC.conexion.close();
-//            JOptionPane.showMessageDialog(null, "El Informe se Aprobo con exito");
-//        } catch (Exception e) {
-//        }
+        ClsNegocioPortafolio negoPorta = new ClsNegocioPortafolio();
+        ResultSet rs ;
+        try {
+            String estado = "Aprobado";
+            negoPorta.ModificarEstadoPortafolio(IdPortafolio, estado);
+            negoPorta.cst.close();
+            negoPorta.conexion.close();
+            JOptionPane.showMessageDialog(null, "El Informe se Aprobo con exito");
+        } catch (Exception e) {
+        }
     }//GEN-LAST:event_btnAceptarInformeActionPerformed
 
     private void btnRechazarInformeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRechazarInformeActionPerformed
-//        ClsNegocioInformeFinalCurso negoIFC = new ClsNegocioInformeFinalCurso();
-//        ResultSet rs ;
-//        try {
-//            String estado = "Rechazado";
-//            negoIFC.ModificarEstadoInformeFinal(IdInfoFinalCurso, estado);
-//            negoIFC.cst.close();
-//            negoIFC.conexion.close();
-//            JOptionPane.showMessageDialog(null, "El Informe se Aprobo con exito");
-//        } catch (Exception e) {
-//        }
+        ClsNegocioPortafolio negoPorta = new ClsNegocioPortafolio();
+        ResultSet rs ;
+        try {
+            String estado = "Observado";
+            negoPorta.ModificarEstadoPortafolio(IdPortafolio, estado);
+            negoPorta.cst.close();
+            negoPorta.conexion.close();
+            JOptionPane.showMessageDialog(null, "El Informe se rechazó con exito");
+        } catch (Exception e) {
+        }
     }//GEN-LAST:event_btnRechazarInformeActionPerformed
 
     private void btnCancelarInformeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarInformeActionPerformed
@@ -903,41 +894,69 @@ public class FrmPortafolio extends javax.swing.JInternalFrame {
                 JOptionPane.showMessageDialog(null, "inserta datos en la Tabla");
             }
         }
-//        else if(guardadoF){
-//            if (TablaCapacidades.getRowCount() > 0) {
-//                if (calcularMarcadosNivelCapacidad()) {
-//                    if (TablaCapacidades.getSelectedRow() != -1) {
-//                        LogrosCapacidades.set(TablaCapacidades.getSelectedRow(), txtComentario.getText());
-//                    }
-//                    actualizarCapacidades();
-//                }
-//                else{
-//                    JOptionPane.showMessageDialog(null, "Ingrese un nivel por cada Capacidad.");
-//                }
-//            }
-//            else{
-//                JOptionPane.showMessageDialog(null, "inserta datos en la Tabla");
-//            }
-//        }
+        else if(actualizaF){
+            if (tablaEstudiante.getRowCount() > 0) {
+                actualizarMaterialDocente();                
+            }
+            else{
+                JOptionPane.showMessageDialog(null, "inserta datos en la Tabla");
+            }
+        }
         else{
             JOptionPane.showMessageDialog(null, "Guarde el Informe Principal antes.");
         }
     }//GEN-LAST:event_guardarDetallesActionPerformed
+    
+    private void actualizarMaterialDocente(){
+        int filas = tablaDocente.getRowCount();
+        int filas2 = tablaEstudiante.getRowCount();
+        
+        try {
+            ClsEntidadPortafolioMaterialDocente entiMaterialDocente = new ClsEntidadPortafolioMaterialDocente();
+            ClsNegocioPortafolioMaterialDocente negoMaterialDocente =  new ClsNegocioPortafolioMaterialDocente();
+            
+            ClsEntidadPortafolioMaterialEstudiante entiMaterialEstudiante = new ClsEntidadPortafolioMaterialEstudiante();
+            ClsNegocioPortafolioMaterialEstudiante negoMaterialEstudiante =  new ClsNegocioPortafolioMaterialEstudiante();
+            
+            ArrayList<String> idinfo = negoMaterialDocente.obtenerInfoFinalDocente(codDocente,datoIFC[0]);
+            String id[] = idinfo.toArray(new String[idinfo.size()]);
+            
+            negoMaterialDocente.EliminarDetallePortafolioMaterialDocente(id[0]);
+            negoMaterialEstudiante.EliminarDetallePortafolioMaterialEstudiante(id[0]);
+            
+            for (int i = 0; i < filas; i++) {
+                entiMaterialDocente.setIdPortafolio(Integer.parseInt(id[0]));
+                entiMaterialDocente.setMaterial((String) tablaDocente.getValueAt(i, 0));
+                entiMaterialDocente.setDigital((boolean) tablaDocente.getValueAt(i, 1));
+                entiMaterialDocente.setImpreso((boolean) tablaDocente.getValueAt(i, 2));
+                entiMaterialDocente.setCantidad((int) tablaDocente.getValueAt(i, 3));
+                negoMaterialDocente.AgregarDetallePortafolioMaterialDocente(entiMaterialDocente);
+            }
+            
+            negoMaterialDocente.cst.close();
+            negoMaterialDocente.conexion.close();
+            
+            for (int i = 0; i < filas2; i++) {
+                entiMaterialEstudiante.setIdPortafolio(Integer.parseInt(id[0]));
+                entiMaterialEstudiante.setMaterial((String) tablaEstudiante.getValueAt(i, 0));
+                entiMaterialEstudiante.setDigital((boolean) tablaEstudiante.getValueAt(i, 1));
+                entiMaterialEstudiante.setImpreso((boolean) tablaEstudiante.getValueAt(i, 2));
+                entiMaterialEstudiante.setCantidad((int) tablaEstudiante.getValueAt(i, 3));
+                negoMaterialEstudiante.AgregarDetallePortafolioMaterialEstudiante(entiMaterialEstudiante);
+            }
+            
+            negoMaterialEstudiante.cst.close();
+            negoMaterialEstudiante.conexion.close();
+            
+            JOptionPane.showMessageDialog(null, "Guardado con exito.");
 
-    private void btnEnviarInforme1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEnviarInforme1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnEnviarInforme1ActionPerformed
-
-    private void btnAceptarInforme1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAceptarInforme1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnAceptarInforme1ActionPerformed
-
-    private void btnRechazarInforme1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRechazarInforme1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnRechazarInforme1ActionPerformed
-
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "mensaje: "+e.getMessage());
+        }
+    }
+    
     private void btnCancelarInforme1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarInforme1ActionPerformed
-        // TODO add your handling code here:
+        this.dispose();
     }//GEN-LAST:event_btnCancelarInforme1ActionPerformed
 
     private void btnCalcularPorcentajesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCalcularPorcentajesActionPerformed
@@ -1053,20 +1072,117 @@ public class FrmPortafolio extends javax.swing.JInternalFrame {
             txtCodigoCurso.setText(datoIFC[0]);
             txtNombreCurso.setText(datoIFC[1]);                       
                        
-            txtDocente.setText(datoIFC[8]);        
+            txtDocente.setText(datoIFC[2]);        
             
-            txtNumMatriculados.setText(datoIFC[4]);
-            txtNumRetirados.setText(datoIFC[5]);
-            txtNumAbandono.setText(datoIFC[6]);
-            txtNumAsisten.setText(datoIFC[18]);
-            txtNumAprobados.setText(datoIFC[19]);
-            txtNumDesaprobados.setText(datoIFC[20]);
-            
-//            cargarDatosTabla();
+            txtNumMatriculados.setText(datoIFC[3]);
+            txtNumRetirados.setText(datoIFC[4]);
+            txtNumAbandono.setText(datoIFC[5]);
+            txtNumAsisten.setText(datoIFC[6]);
+            txtNumAprobados.setText(datoIFC[7]);
+            txtNumDesaprobados.setText(datoIFC[8]);
+            txtRevisadoPor.setText(datoIFC[9]);
+            cargarDatosTablaDocenteActualizar();
+            cargarDatosTablaEstudianteActualizar();
 //            cargarDatosObservaciones();
         }
         
     }
+    
+    private void cargarDatosTablaEstudianteActualizar(){
+        
+        DefaultTableModel modelo = (DefaultTableModel) tablaEstudiante.getModel();
+        
+        int filas = modelo.getRowCount();
+        for (int i = filas - 1; i >= 0; i--) {
+            modelo.removeRow(i);
+        }
+        
+        ClsNegocioPortafolioMaterialEstudiante detalleInfoFinal = new ClsNegocioPortafolioMaterialEstudiante();
+        
+        ArrayList<ClsEntidadPortafolioMaterialEstudiante> detalle = detalleInfoFinal.seleccionarPortafolioMaterialEstudiante(IdPortafolio);        
+        Iterator iterator = detalle.iterator();
+
+        Object campo[] = new Object[4];
+        
+        
+
+        while (iterator.hasNext()) {            
+            ClsEntidadPortafolioMaterialEstudiante objDetalle;
+            objDetalle = (ClsEntidadPortafolioMaterialEstudiante) iterator.next();
+
+
+            campo[0] = String.valueOf(objDetalle.getMaterial());
+            if(objDetalle.isDigital()){
+                campo[1] = Boolean.TRUE;
+            }else{
+                campo[1] = Boolean.FALSE;
+            }
+            if(objDetalle.isImpreso()){
+                campo[2] = Boolean.TRUE;
+            }else{
+                campo[2] = Boolean.FALSE;
+            }
+            campo[3] = objDetalle.getCantidad();
+
+            modelo.addRow(campo);
+        }
+        try {
+            detalleInfoFinal.conexion.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(FrmPortafolio.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        tablaEstudiante.setModel(modelo);
+    
+    }
+    
+    private void cargarDatosTablaDocenteActualizar(){
+        
+        DefaultTableModel modelo = (DefaultTableModel) tablaDocente.getModel();
+        
+        int filas = modelo.getRowCount();
+        for (int i = filas - 1; i >= 0; i--) {
+            modelo.removeRow(i);
+        }
+        
+        ClsNegocioPortafolioMaterialDocente detalleInfoFinal = new ClsNegocioPortafolioMaterialDocente();
+        
+        ArrayList<ClsEntidadPortafolioMaterialDocente> detalle = detalleInfoFinal.seleccionarPortafolioMaterialDocente(IdPortafolio);        
+        Iterator iterator = detalle.iterator();
+
+        Object campo[] = new Object[4];
+        
+        
+
+        while (iterator.hasNext()) {            
+            ClsEntidadPortafolioMaterialDocente objDetalle;
+            objDetalle = (ClsEntidadPortafolioMaterialDocente) iterator.next();
+
+
+            campo[0] = String.valueOf(objDetalle.getMaterial());
+            if(objDetalle.isDigital()){
+                campo[1] = Boolean.TRUE;
+            }else{
+                campo[1] = Boolean.FALSE;
+            }
+            if(objDetalle.isImpreso()){
+                campo[2] = Boolean.TRUE;
+            }else{
+                campo[2] = Boolean.FALSE;
+            }
+            campo[3] = objDetalle.getCantidad();
+
+            modelo.addRow(campo);
+        }
+        try {
+            detalleInfoFinal.conexion.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(FrmPortafolio.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        tablaDocente.setModel(modelo);
+    
+    }
+    
+    
     
     private void guardarDatos(String opcion){
         
@@ -1137,17 +1253,14 @@ public class FrmPortafolio extends javax.swing.JInternalFrame {
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAceptarInforme;
-    private javax.swing.JButton btnAceptarInforme1;
     private javax.swing.JButton btnAgregarFilaCapacidades;
     private javax.swing.JButton btnAgregarFilaEstudiante;
     private javax.swing.JButton btnCalcularPorcentajes;
     private javax.swing.JButton btnCancelarInforme;
     private javax.swing.JButton btnCancelarInforme1;
     private javax.swing.JButton btnEnviarInforme;
-    private javax.swing.JButton btnEnviarInforme1;
     private javax.swing.JButton btnGuardarInforme;
     private javax.swing.JButton btnRechazarInforme;
-    private javax.swing.JButton btnRechazarInforme1;
     private javax.swing.JButton btnRemoverFilaCapacidades;
     private javax.swing.JButton btnRemoverFilaEstudiante;
     private javax.swing.JButton guardarDetalles;

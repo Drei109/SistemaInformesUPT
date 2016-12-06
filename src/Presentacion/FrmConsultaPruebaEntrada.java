@@ -7,6 +7,7 @@ package Presentacion;
 
 import Entidad.ClsEntidadPruebaCursosFaltantes;
 import Negocio.ClsNegocioInformeFinalCurso;
+import Negocio.ClsNegocioPortafolio;
 import Negocio.ClsNegocioPruebaEntrada;
 import java.sql.ResultSet;
 import java.util.ArrayList;
@@ -100,7 +101,7 @@ public class FrmConsultaPruebaEntrada extends javax.swing.JInternalFrame {
             }
         });
 
-        cmbTipoInforme.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Prueba Entrada", "Informe Final" }));
+        cmbTipoInforme.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Prueba Entrada", "Informe Final", "Portafolio" }));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -175,14 +176,14 @@ public class FrmConsultaPruebaEntrada extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_btnVerActionPerformed
 
     private void abrirFrmInformePruebaEntrada(){
-        String idPruebaEntrada = (String) tblBuscar.getValueAt(tblBuscar.getSelectedRow(), 0);
+        String idInforme = (String) tblBuscar.getValueAt(tblBuscar.getSelectedRow(), 0);
         String campo[] = new String[25];
         if (tblBuscar.getSelectedRow() >= 0) {
             if (cmbTipoInforme.getSelectedItem().toString().equals("Prueba Entrada")) {
                 try {
 
                     ClsNegocioPruebaEntrada negNegocioPruebaEntrada = new ClsNegocioPruebaEntrada();
-                    ArrayList<String> pruebaEntrada = negNegocioPruebaEntrada.seleccionarPruebaEntrada(idPruebaEntrada);
+                    ArrayList<String> pruebaEntrada = negNegocioPruebaEntrada.seleccionarPruebaEntrada(idInforme);
                     campo = pruebaEntrada.toArray(new String[pruebaEntrada.size()]);
     //                idPruebaEntradaMod = campo[0];
     //                idCargaAcedemicaMod = campo[11];
@@ -199,7 +200,7 @@ public class FrmConsultaPruebaEntrada extends javax.swing.JInternalFrame {
             else if (cmbTipoInforme.getSelectedItem().toString().equals("Informe Final")) {
                 try {
                     ClsNegocioInformeFinalCurso negoInfo = new ClsNegocioInformeFinalCurso();
-                    ArrayList<String> informe = negoInfo.seleccionarInforCurso(idPruebaEntrada);
+                    ArrayList<String> informe = negoInfo.seleccionarInforCurso(idInforme);
                     campo = informe.toArray(new String[informe.size()]);
     //                idPruebaEntradaMod = campo[0];
     //                idCargaAcedemicaMod = campo[11];
@@ -213,7 +214,23 @@ public class FrmConsultaPruebaEntrada extends javax.swing.JInternalFrame {
 //                FrmPrinicipal.escritorio.add(info);
                 FrmPrueba info = new FrmPrueba(campo,false,nivelUsuario,codDocente);
                 FrmPrinicipal.escritorio.add(info);
-                info.IdInfoFinalCurso = idPruebaEntrada;
+                info.IdInfoFinalCurso = idInforme;
+                info.setVisible(true);
+            }
+            else if (cmbTipoInforme.getSelectedItem().toString().equals("Portafolio")) {
+                try {
+                    ClsNegocioPortafolio negoPorta = new ClsNegocioPortafolio();
+                    ArrayList<String> informe = negoPorta.seleccionarInfoPortafolio(idInforme);
+                    campo = informe.toArray(new String[informe.size()]);
+                    negoPorta.conexion.close();
+
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+
+                FrmPortafolio info = new FrmPortafolio(campo,false,nivelUsuario,codDocente);
+                FrmPrinicipal.escritorio.add(info);
+                info.IdPortafolio = idInforme;
                 info.setVisible(true);
             }
         }        
@@ -251,6 +268,9 @@ public class FrmConsultaPruebaEntrada extends javax.swing.JInternalFrame {
         }
         else if(tipoInforme.equals("Informe Final")){
             informeFinal(nivelUsuario, codDocente);
+        }
+        else if(tipoInforme.equals("Portafolio")){
+            portafolio(nivelUsuario, codDocente);
         }
     }
     
@@ -425,6 +445,84 @@ public class FrmConsultaPruebaEntrada extends javax.swing.JInternalFrame {
             }
             rs.close();
             negFinal.conexion.close();
+            } catch (Exception ex) {
+            }
+            break;
+        }
+    }
+    
+    private void portafolio(String nivelUsuario,String codDocente){
+        ClsNegocioPortafolio negPortafolio = new ClsNegocioPortafolio();
+        
+        String criterio = cmbCriterio.getSelectedItem().toString();
+        String busqueda = txtBuscar.getText();
+             
+        switch(nivelUsuario){
+        case "Usuario":
+            try {
+            rs  =negPortafolio.ConsultaAvanzaPortafolioUsuario(criterio, busqueda,codDocente);
+
+            boolean encuentra = false;
+            String Campo[] = new String[5];
+            int fila;
+            fila = dtm.getRowCount();
+            if (fila > 0) {
+                for (int i = 0; i < fila; i++) {
+                    dtm.removeRow(0);
+                }
+            }
+            while (rs.next()) {
+                Campo[0] = (String) rs.getString(1); 
+                Campo[1] = (String) rs.getString(2); 
+                Campo[2] = (String) rs.getString(3); 
+                Campo[3] = (String) rs.getString(4); 
+                Campo[4] = (String) rs.getString(5); 
+
+                dtm.addRow(Campo);
+                encuentra = true;
+            }
+
+            if (encuentra == false) {
+                JOptionPane.showMessageDialog(null,"No se encuentra.");
+            }
+            rs.close();
+            negPortafolio.conexion.close();
+            } catch (Exception ex) {
+            }
+            break;
+        case "Supervisor":            
+        case "Administrador":
+            try {
+            rs  =negPortafolio.ConsultaAvanzaPortafolioAdministrador(criterio, busqueda);
+
+            boolean encuentra = false;
+            String Campo[] = new String[8];
+            int fila;
+            fila = dtm.getRowCount();
+            if (fila > 0) {
+                for (int i = 0; i < fila; i++) {
+                    dtm.removeRow(0);
+                }
+            }
+            while (rs.next()) {
+                Campo[0] = (String) rs.getString(1); 
+                Campo[1] = (String) rs.getString(2); 
+                Campo[2] = (String) rs.getString(3); 
+                Campo[3] = (String) rs.getString(4); 
+                Campo[4] = (String) rs.getString(5); 
+                Campo[5] = (String) rs.getString(6); 
+                Campo[6] = (String) rs.getString(7); 
+                Campo[7] = (String) rs.getString(8); 
+
+                dtm.addRow(Campo);
+                encuentra = true;
+            }
+
+            if (encuentra == false) {
+                JOptionPane.showMessageDialog(null,"No se encuentra.");
+            }
+            rs.close();
+            negPortafolio.conexion.close();
             } catch (Exception ex) {
             }
             break;

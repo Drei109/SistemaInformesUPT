@@ -76,12 +76,39 @@ public class ClsNegocioPortafolioMaterialDocente implements ClsInterfacePortafol
 
     @Override
     public void EliminarDetallePortafolioMaterialDocente(String codigo) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+         try {
+            cst = conexion.prepareCall("{call USP_DetallePortafolioDocente_D_ALL(?)}");
+            cst.setString("pidPortafolio",codigo);
+            
+            cst.execute();
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
     }
 
     @Override
-    public ArrayList seleccionarPortafolioMaterialDocente(String codInfoFinal) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public ArrayList seleccionarPortafolioMaterialDocente(String codPortafolio) {
+        ArrayList<ClsEntidadPortafolioMaterialDocente> detallePortaMaterialDocente = new ArrayList<ClsEntidadPortafolioMaterialDocente>();
+        try{
+            cst = conexion.prepareCall("{call USP_MaterialDocentePorID(?)}");
+            cst.setString("pidInfoFinal", codPortafolio);
+            rs = cst.executeQuery();
+            while (rs.next()) {                
+                ClsEntidadPortafolioMaterialDocente detalle =  new ClsEntidadPortafolioMaterialDocente();
+                detalle.setIdDetallePortafolioMaterialDocente(Integer.parseInt(rs.getString(1)));
+                detalle.setMaterial(rs.getString(2));
+                detalle.setDigital(Integer.parseInt(rs.getString(3)) > 0);
+                detalle.setImpreso(Integer.parseInt(rs.getString(4)) > 0);
+                detalle.setCantidad(Integer.parseInt(rs.getString(5)));
+                detalle.setIdPortafolio(Integer.parseInt(rs.getString(6)));
+                
+                detallePortaMaterialDocente.add(detalle);
+            }
+            return detallePortaMaterialDocente;
+        }
+        catch(Exception ex){
+            return null;
+        }
     }
     
     

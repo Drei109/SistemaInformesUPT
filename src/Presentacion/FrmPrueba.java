@@ -1331,11 +1331,11 @@ public class FrmPrueba extends javax.swing.JInternalFrame {
         ClsNegocioInformeFinalCurso negoIFC = new ClsNegocioInformeFinalCurso();
         ResultSet rs ;
         try {
-            String estado = "Rechazado";
+            String estado = "Observado";
             negoIFC.ModificarEstadoInformeFinal(IdInfoFinalCurso, estado);
             negoIFC.cst.close();
             negoIFC.conexion.close();
-            JOptionPane.showMessageDialog(null, "El Informe se Aprobo con exito");
+            JOptionPane.showMessageDialog(null, "El Informe se observó con exito");
         } catch (Exception e) {
         }
     }//GEN-LAST:event_btnRechazarInformeActionPerformed

@@ -61,12 +61,39 @@ public class ClsNegocioPortafolioMaterialEstudiante implements ClsInterfacePorta
 
     @Override
     public void EliminarDetallePortafolioMaterialEstudiante(String codigo) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        try {
+            cst = conexion.prepareCall("{call USP_DetallePortafolioEstudiante_D_ALL(?)}");
+            cst.setString("pidPortafolio",codigo);
+            
+            cst.execute();
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
     }
 
     @Override
     public ArrayList seleccionarPortafolioMaterialEstudiante(String codInfoFinal) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        ArrayList<ClsEntidadPortafolioMaterialEstudiante> detallePortaMaterialEstudiante = new ArrayList<ClsEntidadPortafolioMaterialEstudiante>();
+        try{
+            cst = conexion.prepareCall("{call USP_MaterialEstudiantePorID(?)}");
+            cst.setString("pidInfoFinal", codInfoFinal);
+            rs = cst.executeQuery();
+            while (rs.next()) {                
+                ClsEntidadPortafolioMaterialEstudiante detalle =  new ClsEntidadPortafolioMaterialEstudiante();
+                detalle.setIdDetallePortafolioMaterialEstudiante(Integer.parseInt(rs.getString(1)));
+                detalle.setMaterial(rs.getString(2));
+                detalle.setDigital(Integer.parseInt(rs.getString(3)) > 0);
+                detalle.setImpreso(Integer.parseInt(rs.getString(4)) > 0);
+                detalle.setCantidad(Integer.parseInt(rs.getString(5)));
+                detalle.setIdPortafolio(Integer.parseInt(rs.getString(6)));
+                
+                detallePortaMaterialEstudiante.add(detalle);
+            }
+            return detallePortaMaterialEstudiante;
+        }
+        catch(Exception ex){
+            return null;
+        }
     }
     
     

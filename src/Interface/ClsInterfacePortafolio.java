@@ -7,6 +7,7 @@ package Interface;
 
 import Entidad.ClsEntidadPortafolio;
 import java.sql.ResultSet;
+import java.util.ArrayList;
 
 /**
  *
@@ -19,13 +20,13 @@ public interface ClsInterfacePortafolio {
     
     void EliminarPortafolio(String codigo);
     
-    public ResultSet ConsultaAvanzaPortafolio(String criterio, String busqueda) throws Exception;
-    
     void ModificarEstadoPortafolio(String codigo, String estado);
+    
+    public ResultSet ConsultaAvanzaPortafolioAdministrador(String criterio, String busqueda) throws Exception;
     
     public ResultSet ConsultaAvanzaPortafolioUsuario(String criterio, String busqueda, String codDocente) throws Exception;
     
-//    public ArrayList seleccionarInforCurso(String codPruebaEntrada);
+    public ArrayList seleccionarInfoPortafolio(String codPortafolio);
     
     public ResultSet ConsultaInformeAdministrador(String criterio, String busqueda) throws Exception;
     
