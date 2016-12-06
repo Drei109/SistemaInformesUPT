@@ -59,7 +59,7 @@ public class FrmControlInformesDocente extends javax.swing.JInternalFrame {
         try {
             ClsNegocioPruebaEntrada datos = new ClsNegocioPruebaEntrada();
 //                    String busqueda = cmbTipoReporte.getSelectedItem().toString();
-            dato = datos.verInformesTotales((String) cmbTipoInforme.getSelectedItem());//ArrayList
+            dato = datos.verInformesTotalesDocente((String) cmbTipoInforme.getSelectedItem(),codDocente);//ArrayList
 
             Iterator iterator = dato.iterator();
 
@@ -281,11 +281,12 @@ public class FrmControlInformesDocente extends javax.swing.JInternalFrame {
             case "Prueba Entrada":
             if (rbtnPie.isSelected()) {
                 Map p = new HashMap();
+                p.put("pcodDoc", codDocente);
                 Connection cnx = new ClsConexion().getConnection();
                 try {
                     JasperReport report;
                     JasperPrint print;
-                    report = JasperCompileManager.compileReport("../SistemaInformesUPT/src/Reportes/RptControlInformePruebaEntrada.jrxml");
+                    report = JasperCompileManager.compileReport("../SistemaInformesUPT/src/Reportes/RptControlCursoInformePruebaEntrada.jrxml");
                     print = JasperFillManager.fillReport(report,p,cnx);
                     JasperViewer view = new JasperViewer(print,false);
                     view.setTitle("Reporte Prueba Entrada");
@@ -300,7 +301,7 @@ public class FrmControlInformesDocente extends javax.swing.JInternalFrame {
                 try {
                     JasperReport report;
                     JasperPrint print;
-                    report = JasperCompileManager.compileReport("../SistemaInformesUPT/src/Reportes/RptControlInformesPruebaEntradaBarras.jrxml");
+                    report = JasperCompileManager.compileReport("../SistemaInformesUPT/src/Reportes/RptControlCursoInformePruebaEntradaBarras.jrxml");
                     print = JasperFillManager.fillReport(report,p,cnx);
                     JasperViewer view = new JasperViewer(print,false);
                     view.setTitle("Reporte Prueba Entrada");
@@ -314,11 +315,12 @@ public class FrmControlInformesDocente extends javax.swing.JInternalFrame {
             case "Informe Final Curso":
             if (rbtnPie.isSelected()) {
                 Map p = new HashMap();
+                p.put("pcodDoc", codDocente);
                 Connection cnx = new ClsConexion().getConnection();
                 try {
                     JasperReport report;
                     JasperPrint print;
-                    report = JasperCompileManager.compileReport("../SistemaInformesUPT/src/Reportes/RptControlInformeFinal.jrxml");
+                    report = JasperCompileManager.compileReport("../SistemaInformesUPT/src/Reportes/RptControlCursoInfoFinalPie.jrxml");
                     print = JasperFillManager.fillReport(report,p,cnx);
                     JasperViewer view = new JasperViewer(print,false);
                     view.setTitle("Reporte Prueba Entrada");
@@ -333,7 +335,7 @@ public class FrmControlInformesDocente extends javax.swing.JInternalFrame {
                 try {
                     JasperReport report;
                     JasperPrint print;
-                    report = JasperCompileManager.compileReport("../SistemaInformesUPT/src/Reportes/RptControlInformeFinalBarras.jrxml");
+                    report = JasperCompileManager.compileReport("../SistemaInformesUPT/src/Reportes/RptControlCursoInfoFinalBarras.jrxml");
                     print = JasperFillManager.fillReport(report,p,cnx);
                     JasperViewer view = new JasperViewer(print,false);
                     view.setTitle("Reporte Prueba Entrada");
@@ -344,6 +346,38 @@ public class FrmControlInformesDocente extends javax.swing.JInternalFrame {
                 }
             }
             case "Portafolio":
+                if (rbtnPie.isSelected()) {
+                Map p = new HashMap();
+                p.put("pcodDoc", codDocente);
+                Connection cnx = new ClsConexion().getConnection();
+                try {
+                    JasperReport report;
+                    JasperPrint print;
+                    report = JasperCompileManager.compileReport("../SistemaInformesUPT/src/Reportes/RptControlCursoPortafolioPie.jrxml");
+                    print = JasperFillManager.fillReport(report,p,cnx);
+                    JasperViewer view = new JasperViewer(print,false);
+                    view.setTitle("Reporte Prueba Entrada");
+                    view.setVisible(true);
+                    cnx.close();
+                } catch (JRException | SQLException ex) {
+                    Logger.getLogger(FrmInformePruebaEntrada.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            } else {
+                Map p = new HashMap();
+                Connection cnx = new ClsConexion().getConnection();
+                try {
+                    JasperReport report;
+                    JasperPrint print;
+                    report = JasperCompileManager.compileReport("../SistemaInformesUPT/src/Reportes/RptControlCursoPortafolioBarras.jrxml");
+                    print = JasperFillManager.fillReport(report,p,cnx);
+                    JasperViewer view = new JasperViewer(print,false);
+                    view.setTitle("Reporte Prueba Entrada");
+                    view.setVisible(true);
+                    cnx.close();
+                } catch (JRException | SQLException ex) {
+                    Logger.getLogger(FrmInformePruebaEntrada.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
         }
     }//GEN-LAST:event_btnReporteActionPerformed
 
