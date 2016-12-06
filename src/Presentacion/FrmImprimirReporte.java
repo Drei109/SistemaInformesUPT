@@ -7,6 +7,7 @@ package Presentacion;
 
 import Conexion.ClsConexion;
 import Negocio.ClsNegocioInformeFinalCurso;
+import Negocio.ClsNegocioPortafolio;
 import Negocio.ClsNegocioPruebaEntrada;
 import java.sql.Connection;
 import java.sql.ResultSet;
@@ -225,6 +226,80 @@ public class FrmImprimirReporte extends javax.swing.JInternalFrame {
                     break;
                 }      
                 break;
+            case 2:
+                ClsNegocioPortafolio negPortafolio = new ClsNegocioPortafolio();
+        
+                switch(nivelUsuario){
+                case "Usuario":
+                    try {
+                    rs  =negPortafolio.ConsultaInformeUsuario(criterio, busqueda,codDocente);
+
+                    boolean encuentra = false;
+                    String Campo[] = new String[5];
+                    int fila;
+                    fila = dtm.getRowCount();
+                    if (fila > 0) {
+                        for (int i = 0; i < fila; i++) {
+                            dtm.removeRow(0);
+                        }
+                    }
+                    while (rs.next()) {
+                        Campo[0] = (String) rs.getString(1); 
+                        Campo[1] = (String) rs.getString(2); 
+                        Campo[2] = (String) rs.getString(3); 
+                        Campo[3] = (String) rs.getString(4); 
+                        Campo[4] = (String) rs.getString(5); 
+
+                        dtm.addRow(Campo);
+                        encuentra = true;
+                    }
+
+                    if (encuentra == false) {
+                        JOptionPane.showMessageDialog(null,"No se encuentra .");
+                    }
+                    rs.close();
+                    negPortafolio.conexion.close();
+                    } catch (Exception ex) {
+                    }
+                    break;
+                case "Supervisor":            
+                case "Administrador":
+                    try {
+                    rs  =negPortafolio.ConsultaInformeAdministrador(criterio, busqueda);
+
+                    boolean encuentra = false;
+                    String Campo[] = new String[8];
+                    int fila;
+                    fila = dtm.getRowCount();
+                    if (fila > 0) {
+                        for (int i = 0; i < fila; i++) {
+                            dtm.removeRow(0);
+                        }
+                    }
+                    while (rs.next()) {
+                        Campo[0] = (String) rs.getString(1); 
+                        Campo[1] = (String) rs.getString(2); 
+                        Campo[2] = (String) rs.getString(3); 
+                        Campo[3] = (String) rs.getString(4); 
+                        Campo[4] = (String) rs.getString(5); 
+                        Campo[5] = (String) rs.getString(6); 
+                        Campo[6] = (String) rs.getString(7); 
+                        Campo[7] = (String) rs.getString(8); 
+
+                        dtm.addRow(Campo);
+                        encuentra = true;
+                    }
+
+                    if (encuentra == false) {
+                        JOptionPane.showMessageDialog(null,"No se encuentra.");
+                    }
+                    rs.close();
+                    negPortafolio.conexion.close();
+                    } catch (Exception ex) {
+                    }
+                    break;
+                }      
+                break;
         }
     }
     
@@ -286,6 +361,26 @@ public class FrmImprimirReporte extends javax.swing.JInternalFrame {
                     view.setTitle("Reporte Informe Final");
                     view.setVisible(true);
                     cnx2.close();
+                } catch (JRException | SQLException ex) {
+                    Logger.getLogger(FrmInformePruebaEntrada.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                break;
+            case 2:
+                Map p3 = new HashMap();
+                
+                p3.put("ID", Integer.parseInt(idReporte));
+
+                Connection cnx3 = new ClsConexion().getConnection();
+
+                try {           
+                    JasperReport report;
+                    JasperPrint print;
+                    report = JasperCompileManager.compileReport("../SistemaInformesUPT/src/Reportes/RptPortafolio.jrxml");
+                    print = JasperFillManager.fillReport(report,p3,cnx3);
+                    JasperViewer view = new JasperViewer(print,false);
+                    view.setTitle("Reporte Informe Final");
+                    view.setVisible(true);
+                    cnx3.close();
                 } catch (JRException | SQLException ex) {
                     Logger.getLogger(FrmInformePruebaEntrada.class.getName()).log(Level.SEVERE, null, ex);
                 }

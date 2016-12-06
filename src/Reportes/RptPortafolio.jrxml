@@ -2,7 +2,7 @@
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="report name" pageWidth="595" pageHeight="842" columnWidth="535" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20">
 	<property name="ireport.zoom" value="1.0"/>
 	<property name="ireport.x" value="0"/>
-	<property name="ireport.y" value="265"/>
+	<property name="ireport.y" value="781"/>
 	<style name="table">
 		<box>
 			<pen lineWidth="1.0" lineColor="#000000"/>
@@ -447,10 +447,53 @@
 			</staticText>
 		</band>
 	</pageHeader>
-	<lastPageFooter>
-		<band height="179">
+	<summary>
+		<band height="743" splitType="Stretch">
+			<staticText>
+				<reportElement style="table" x="13" y="692" width="104" height="32"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="10" isBold="false"/>
+				</textElement>
+				<text><![CDATA[Entregado por:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="CH" x="117" y="672" width="195" height="20" forecolor="#FFFFFF"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="10" isBold="false"/>
+				</textElement>
+				<text><![CDATA[Nombres y Apellidos]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="CH" x="312" y="672" width="104" height="20" forecolor="#FFFFFF"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="10" isBold="false"/>
+				</textElement>
+				<text><![CDATA[Fecha de Entrega]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="CH" x="416" y="672" width="125" height="20" forecolor="#FFFFFF"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="10" isBold="false"/>
+				</textElement>
+				<text><![CDATA[Firma]]></text>
+			</staticText>
+			<textField>
+				<reportElement style="table" mode="Transparent" x="117" y="692" width="195" height="32"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{nombreDocente}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement style="table" mode="Transparent" x="312" y="692" width="104" height="32"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression class="java.sql.Timestamp"><![CDATA[$F{fechaPortafolio}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement style="table" mode="Transparent" x="416" y="692" width="125" height="32"/>
+				<textElement/>
+				<text><![CDATA[]]></text>
+			</staticText>
 			<componentElement>
-				<reportElement key="table 2" style="table 2" x="13" y="100" width="528" height="51"/>
+				<reportElement key="table 2" style="table 2" x="13" y="64" width="528" height="51"/>
 				<jr:table xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd">
 					<datasetRun subDataset="New Dataset 1">
 						<datasetParameter name="ID2">
@@ -536,65 +579,18 @@
 				</jr:table>
 			</componentElement>
 			<staticText>
-				<reportElement x="13" y="50" width="528" height="20"/>
+				<reportElement x="13" y="14" width="528" height="20"/>
 				<textElement verticalAlignment="Middle">
 					<font size="10" isBold="true"/>
 				</textElement>
 				<text><![CDATA[Material que el docente prepara y entrega a los estudiantes durante la ejecución de los cursos:]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="13" y="70" width="528" height="20"/>
+				<reportElement x="13" y="34" width="528" height="20"/>
 				<textElement verticalAlignment="Middle">
 					<font size="10" isBold="false"/>
 				</textElement>
 				<text><![CDATA[El material deberá estar asociado a los resultados del aprendizaje definidos en la planificación del curso,]]></text>
-			</staticText>
-		</band>
-	</lastPageFooter>
-	<summary>
-		<band height="81" splitType="Stretch">
-			<staticText>
-				<reportElement style="table" x="13" y="25" width="104" height="32"/>
-				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font size="10" isBold="false"/>
-				</textElement>
-				<text><![CDATA[Entregado por:]]></text>
-			</staticText>
-			<staticText>
-				<reportElement style="CH" x="117" y="5" width="195" height="20" forecolor="#FFFFFF"/>
-				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font size="10" isBold="false"/>
-				</textElement>
-				<text><![CDATA[Nombres y Apellidos]]></text>
-			</staticText>
-			<staticText>
-				<reportElement style="CH" x="312" y="5" width="104" height="20" forecolor="#FFFFFF"/>
-				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font size="10" isBold="false"/>
-				</textElement>
-				<text><![CDATA[Fecha de Entrega]]></text>
-			</staticText>
-			<staticText>
-				<reportElement style="CH" x="416" y="5" width="125" height="20" forecolor="#FFFFFF"/>
-				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font size="10" isBold="false"/>
-				</textElement>
-				<text><![CDATA[Firma]]></text>
-			</staticText>
-			<textField>
-				<reportElement style="table" mode="Transparent" x="117" y="25" width="195" height="32"/>
-				<textElement verticalAlignment="Middle"/>
-				<textFieldExpression class="java.lang.String"><![CDATA[$F{nombreDocente}]]></textFieldExpression>
-			</textField>
-			<textField>
-				<reportElement style="table" mode="Transparent" x="312" y="25" width="104" height="32"/>
-				<textElement textAlignment="Center" verticalAlignment="Middle"/>
-				<textFieldExpression class="java.sql.Timestamp"><![CDATA[$F{fechaPortafolio}]]></textFieldExpression>
-			</textField>
-			<staticText>
-				<reportElement style="table" mode="Transparent" x="416" y="25" width="125" height="32"/>
-				<textElement/>
-				<text><![CDATA[]]></text>
 			</staticText>
 		</band>
 	</summary>

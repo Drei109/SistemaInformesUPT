@@ -103,12 +103,30 @@ public class ClsNegocioPortafolio implements ClsInterfacePortafolio {
 
     @Override
     public ResultSet ConsultaInformeAdministrador(String criterio, String busqueda) throws Exception {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        try {
+            cst = conexion.prepareCall("{call USP_ReportePortafolioAdmin(?,?)}");
+            cst.setString("pcriterio", criterio);
+            cst.setString("pbusqueda", busqueda);
+            rs = cst.executeQuery();
+            return rs;
+        } catch (SQLException ex) {
+            throw ex;
+        }
     }
 
     @Override
     public ResultSet ConsultaInformeUsuario(String criterio, String busqueda, String codDocente) throws Exception {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        ResultSet rs = null;
+        try {
+            cst = conexion.prepareCall("{call USP_ReportePortafolioUsuario(?,?,?)}");
+            cst.setString("pcriterio", criterio);
+            cst.setString("pbusqueda", busqueda);
+            cst.setString("pcodDocente", codDocente);
+             rs = cst.executeQuery();
+            return rs;
+        } catch (SQLException ex) {
+            throw ex;
+        }
     }
 
     @Override
