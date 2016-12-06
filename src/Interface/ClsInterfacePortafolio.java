@@ -22,6 +22,8 @@ public interface ClsInterfacePortafolio {
     
     void ModificarEstadoPortafolio(String codigo, String estado);
     
+    void ModificarRececpcionadoPorPortafolio(String codigo, String recepcionado);
+    
     public ResultSet ConsultaAvanzaPortafolioAdministrador(String criterio, String busqueda) throws Exception;
     
     public ResultSet ConsultaAvanzaPortafolioUsuario(String criterio, String busqueda, String codDocente) throws Exception;

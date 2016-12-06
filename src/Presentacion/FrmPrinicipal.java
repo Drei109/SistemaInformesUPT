@@ -157,7 +157,7 @@ public class FrmPrinicipal extends javax.swing.JFrame {
 
     private void consultaPruebaEntradaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_consultaPruebaEntradaActionPerformed
         FrmConsultaPruebaEntrada consultaInformePrueabaEntrada = new FrmConsultaPruebaEntrada(nivelUsuario,codigoDocente);
-        //        consultaInformePrueabaEntrada.cDocente = codigoDocente;
+//        consultaInformePrueabaEntrada.cDocente = codigoDocente;
         escritorio.add(consultaInformePrueabaEntrada);
         consultaInformePrueabaEntrada.setVisible(true);
     }//GEN-LAST:event_consultaPruebaEntradaActionPerformed

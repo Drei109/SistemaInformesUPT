@@ -138,5 +138,18 @@ public class ClsNegocioPortafolio implements ClsInterfacePortafolio {
             return null;
         }
     }
+
+    @Override
+    public void ModificarRececpcionadoPorPortafolio(String codigo, String recepcionado) {
+        try {
+            cst = conexion.prepareCall("{call USP_Portafolio_U_RecepcionadoPor(?,?)}");
+            cst.setString("pidPortafolio",codigo);
+            cst.setString("precepcioadoPor",recepcionado);
+            
+            cst.execute();
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+    }
     
 }

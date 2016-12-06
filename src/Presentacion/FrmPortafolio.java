@@ -618,6 +618,8 @@ public class FrmPortafolio extends javax.swing.JInternalFrame {
 
         jLabel6.setText("Revisador Por :");
 
+        txtRevisadoPor.setEnabled(false);
+
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
         jPanel4Layout.setHorizontalGroup(
@@ -778,6 +780,7 @@ public class FrmPortafolio extends javax.swing.JInternalFrame {
                 String opcion = "Guardado";
                 guardarDatos(opcion);
                 guardadoF = true;
+                guardarNuevo = false;
             }
             else{
                 /*actualizas*/
@@ -829,6 +832,9 @@ public class FrmPortafolio extends javax.swing.JInternalFrame {
         try {
             String estado = "Aprobado";
             negoPorta.ModificarEstadoPortafolio(IdPortafolio, estado);
+            JOptionPane.showMessageDialog(null, IdPortafolio);
+            JOptionPane.showMessageDialog(null, codDocente);
+            negoPorta.ModificarRececpcionadoPorPortafolio(IdPortafolio, codDocente);
             negoPorta.cst.close();
             negoPorta.conexion.close();
             JOptionPane.showMessageDialog(null, "El Informe se Aprobo con exito");
@@ -841,7 +847,7 @@ public class FrmPortafolio extends javax.swing.JInternalFrame {
         ResultSet rs ;
         try {
             String estado = "Observado";
-            negoPorta.ModificarEstadoPortafolio(IdPortafolio, estado);
+            negoPorta.ModificarEstadoPortafolio(IdPortafolio, estado);            
             negoPorta.cst.close();
             negoPorta.conexion.close();
             JOptionPane.showMessageDialog(null, "El Informe se rechazó con exito");

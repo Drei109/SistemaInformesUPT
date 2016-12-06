@@ -28,6 +28,7 @@ public class FrmConsultaPruebaEntrada extends javax.swing.JInternalFrame {
     String idPruebaEntradaMod ;
     String idCargaAcedemicaMod;
 //    public ArrayList<ClsNegocioPruebaEntrada> dato;
+//    String cDocente;
     
     public FrmConsultaPruebaEntrada(String nivelUsuario,String codDocente) {
         initComponents();
