@@ -36,6 +36,7 @@ public class FrmPortafolio extends javax.swing.JInternalFrame {
 
     public String[] datoIFC = null;
     boolean guardarNuevo;
+    boolean cabeceraGuardada = false;
     boolean guardadoF = false;
     boolean actualizaF = false;
     boolean calculadoPorcentajes = false;
@@ -781,6 +782,7 @@ public class FrmPortafolio extends javax.swing.JInternalFrame {
                 guardarDatos(opcion);
                 guardadoF = true;
                 guardarNuevo = false;
+                cabeceraGuardada = true;
             }
             else{
                 /*actualizas*/
@@ -892,7 +894,7 @@ public class FrmPortafolio extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_formInternalFrameOpened
 
     private void guardarDetallesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_guardarDetallesActionPerformed
-        if (guardarNuevo) {
+        if (cabeceraGuardada) {
             if (tablaDocente.getRowCount() > 0) {
                 agregarCapacidades();                
             }
