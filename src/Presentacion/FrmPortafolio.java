@@ -34,7 +34,7 @@ import static sun.nio.ch.IOStatus.check;
  */
 public class FrmPortafolio extends javax.swing.JInternalFrame {
 
-    public String[] datoIFC = null;
+    public String[] datoPorta = null;
     boolean guardarNuevo;
     boolean cabeceraGuardada = false;
     boolean guardadoF = false;
@@ -85,7 +85,7 @@ public class FrmPortafolio extends javax.swing.JInternalFrame {
         cargarDatosTablaDocente();
         cargarDatosTablaEstudiante();
         
-        this.datoIFC = datoRF;
+        this.datoPorta = datoRF;
         this.guardarNuevo = guardarNuevo;
         this.nivelUsuario = nivelusu;
         this.codDocente = codDocente;
@@ -926,7 +926,7 @@ public class FrmPortafolio extends javax.swing.JInternalFrame {
             ClsEntidadPortafolioMaterialEstudiante entiMaterialEstudiante = new ClsEntidadPortafolioMaterialEstudiante();
             ClsNegocioPortafolioMaterialEstudiante negoMaterialEstudiante =  new ClsNegocioPortafolioMaterialEstudiante();
             
-            ArrayList<String> idinfo = negoMaterialDocente.obtenerInfoFinalDocente(codDocente,datoIFC[0]);
+            ArrayList<String> idinfo = negoMaterialDocente.obtenerInfoFinalDocente(codDocente,datoPorta[0]);
             String id[] = idinfo.toArray(new String[idinfo.size()]);
             
             negoMaterialDocente.EliminarDetallePortafolioMaterialDocente(id[0]);
@@ -1029,7 +1029,7 @@ public class FrmPortafolio extends javax.swing.JInternalFrame {
             ClsNegocioUsuario docente = new ClsNegocioUsuario();
             
             //Obtiene el resultado de la consulta hecha a la BD
-            ResultSet rsDocente = docente.obtenerDatosPruebaEntrada(datoIFC[7], datoIFC[0]);
+            ResultSet rsDocente = docente.obtenerDatosPruebaEntrada(datoPorta[7], datoPorta[0]);
             
             //itera los valores hechas en la consulta
             while (rsDocente.next()) {
@@ -1064,31 +1064,31 @@ public class FrmPortafolio extends javax.swing.JInternalFrame {
     
     private void cargarDatos(){
         if (guardarNuevo) {
-            txtCodigoCurso.setText(datoIFC[0]);
-            txtNombreCurso.setText(datoIFC[1]);
+            txtCodigoCurso.setText(datoPorta[0]);
+            txtNombreCurso.setText(datoPorta[1]);
 
             
-            txtNumMatriculados.setText(datoIFC[4]);
-            txtNumRetirados.setText(datoIFC[5]);
-            txtNumAbandono.setText(datoIFC[6]); 
+            txtNumMatriculados.setText(datoPorta[4]);
+            txtNumRetirados.setText(datoPorta[5]);
+            txtNumAbandono.setText(datoPorta[6]); 
 
-            String codigoDcoente = datoIFC[7];
+            String codigoDcoente = datoPorta[7];
 
-            txtDocente.setText(datoIFC[8]);            
+            txtDocente.setText(datoPorta[8]);            
         }
         else{
-            txtCodigoCurso.setText(datoIFC[0]);
-            txtNombreCurso.setText(datoIFC[1]);                       
+            txtCodigoCurso.setText(datoPorta[0]);
+            txtNombreCurso.setText(datoPorta[1]);                       
                        
-            txtDocente.setText(datoIFC[2]);        
+            txtDocente.setText(datoPorta[2]);        
             
-            txtNumMatriculados.setText(datoIFC[3]);
-            txtNumRetirados.setText(datoIFC[4]);
-            txtNumAbandono.setText(datoIFC[5]);
-            txtNumAsisten.setText(datoIFC[6]);
-            txtNumAprobados.setText(datoIFC[7]);
-            txtNumDesaprobados.setText(datoIFC[8]);
-            txtRevisadoPor.setText(datoIFC[9]);
+            txtNumMatriculados.setText(datoPorta[3]);
+            txtNumRetirados.setText(datoPorta[4]);
+            txtNumAbandono.setText(datoPorta[5]);
+            txtNumAsisten.setText(datoPorta[6]);
+            txtNumAprobados.setText(datoPorta[7]);
+            txtNumDesaprobados.setText(datoPorta[8]);
+            txtRevisadoPor.setText(datoPorta[9]);
             cargarDatosTablaDocenteActualizar();
             cargarDatosTablaEstudianteActualizar();
 //            cargarDatosObservaciones();
@@ -1224,7 +1224,7 @@ public class FrmPortafolio extends javax.swing.JInternalFrame {
             ClsEntidadPortafolioMaterialEstudiante entiMaterialEstudiante = new ClsEntidadPortafolioMaterialEstudiante();
             ClsNegocioPortafolioMaterialEstudiante negoMaterialEstudiante =  new ClsNegocioPortafolioMaterialEstudiante();
             
-            ArrayList<String> idinfo = negoMaterialDocente.obtenerInfoFinalDocente(codDocente,datoIFC[0]);
+            ArrayList<String> idinfo = negoMaterialDocente.obtenerInfoFinalDocente(codDocente,datoPorta[0]);
             String id[] = idinfo.toArray(new String[idinfo.size()]);
             
             for (int i = 0; i < filas; i++) {

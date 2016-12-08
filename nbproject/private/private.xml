@@ -16,19 +16,6 @@
         </file>
     </editor-bookmarks>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
-        <group>
-            <file>file:/C:/Users/Drei/Documents/NetBeansProjects/SistemaInformesUPT/src/Presentacion/FrmPrueba.java</file>
-            <file>file:/C:/Users/Drei/Documents/NetBeansProjects/SistemaInformesUPT/src/Presentacion/FrmLogin.java</file>
-            <file>file:/C:/Users/Drei/Documents/NetBeansProjects/SistemaInformesUPT/src/Negocio/ClsNegocioPortafolio.java</file>
-            <file>file:/C:/Users/Drei/Documents/NetBeansProjects/SistemaInformesUPT/src/Negocio/ClsNegocioPruebaEntrada.java</file>
-            <file>file:/C:/Users/Drei/Documents/NetBeansProjects/SistemaInformesUPT/src/Presentacion/FrmControlInformesDocente.java</file>
-            <file>file:/C:/Users/Drei/Documents/NetBeansProjects/SistemaInformesUPT/src/Presentacion/FrmPrinicipal.java</file>
-            <file>file:/C:/Users/Drei/Documents/NetBeansProjects/SistemaInformesUPT/src/Presentacion/FrmConsultaPruebaEntrada.java</file>
-            <file>file:/C:/Users/Drei/Documents/NetBeansProjects/SistemaInformesUPT/src/Presentacion/FrmImprimirReporte.java</file>
-            <file>file:/C:/Users/Drei/Documents/NetBeansProjects/SistemaInformesUPT/src/Presentacion/FrmControlInformes.java</file>
-            <file>file:/C:/Users/Drei/Documents/NetBeansProjects/SistemaInformesUPT/src/Negocio/ClsNegocioInformeFinalCurso.java</file>
-            <file>file:/C:/Users/Drei/Documents/NetBeansProjects/SistemaInformesUPT/src/Presentacion/FrmPortafolio.java</file>
-
-        </group>
+        <group/>
     </open-files>
 </project-private>
