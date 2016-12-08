@@ -14,6 +14,15 @@ public class ClsEntidadPortafolio {
     private int estudianteDesaprobado;
     private String recepcioadoPor;
     private String estadoPortafolio;
+    private int idUnidad;
+
+    public int getIdUnidad() {
+        return idUnidad;
+    }
+
+    public void setIdUnidad(int idUnidad) {
+        this.idUnidad = idUnidad;
+    }
 
     public String getRecepcioadoPor() {
         return recepcioadoPor;

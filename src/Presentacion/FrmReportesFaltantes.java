@@ -186,7 +186,7 @@ public class FrmReportesFaltantes extends javax.swing.JInternalFrame {
             String titulos[] = {"Id Curso",
                             "Nombre del Curso",
                             "Nombre del Docente",
-                            "Unidad por hacer"};
+                            "Unidad por hacer","idUnidad"};
             try {
                 ClsNegocioPruebaEntrada datos = new ClsNegocioPruebaEntrada();
                 String busqueda = cmbTipoReporte.getSelectedItem().toString();
@@ -196,7 +196,7 @@ public class FrmReportesFaltantes extends javax.swing.JInternalFrame {
 
                 DefaultTableModel modeloTabla = new DefaultTableModel(null, titulos);
 
-                String campo[] = new String[4];
+                String campo[] = new String[5];
                 String nombreUnidad = "";
 
                 while (iterator.hasNext()) {
@@ -225,11 +225,12 @@ public class FrmReportesFaltantes extends javax.swing.JInternalFrame {
                     }
                     
                     campo[3] = nombreUnidad;
+                    campo[4] = String.valueOf(objenti.getIdUnidad());
 
                     modeloTabla.addRow(campo);
                 }
                 tablaF.setModel(modeloTabla);
-
+                tablaF.removeColumn(tablaF.getColumnModel().getColumn(4));
                 datos.conexion.close();
 
             } catch (Exception e) {
@@ -272,7 +273,7 @@ public class FrmReportesFaltantes extends javax.swing.JInternalFrame {
     }
     
     void seleccionarTabla(){
-        String campo[] = new String[11];
+        String campo[] = new String[14];
         String tipoReporte = cmbTipoReporte.getSelectedItem().toString();
         if (tablaF.getSelectedRow() >= 0) {
             try {
@@ -297,6 +298,11 @@ public class FrmReportesFaltantes extends javax.swing.JInternalFrame {
                         campo[8] = String.valueOf(objenti.getNombreDocente());
                         campo[9] = objenti.getEmailDocente();
                         campo[10]= objenti.getCeluDocente();
+                        if(tipoReporte.equals("Portafolio")){
+                            campo[11] = (String) tablaF.getValueAt(filaS,3);
+                            campo[12] = (String) tablaF.getModel().getValueAt(filaS,4);
+                            campo[13] = objenti.getCargaAcademica();
+                        }
                         break;
                     }
 
