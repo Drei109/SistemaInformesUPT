@@ -213,7 +213,6 @@ public class FrmReportesFaltantes extends javax.swing.JInternalFrame {
         } catch (Exception e) {
             e.printStackTrace();
         }
-        
     }
     
     void seleccionarTabla(){
