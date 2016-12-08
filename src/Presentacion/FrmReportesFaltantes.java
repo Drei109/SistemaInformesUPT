@@ -263,7 +263,6 @@ public class FrmReportesFaltantes extends javax.swing.JInternalFrame {
                     modeloTabla.addRow(campo);
                 }
                 tablaF.setModel(modeloTabla);
-
                 datos.conexion.close();
 
             } catch (Exception e) {

@@ -25,6 +25,7 @@ public class FrmPrinicipal extends javax.swing.JFrame {
         jMenuBar1 = new javax.swing.JMenuBar();
         mnuInformes = new javax.swing.JMenu();
         informePruebaEntrada = new javax.swing.JMenuItem();
+        mnuUnidad = new javax.swing.JMenu();
         mnuConsultas = new javax.swing.JMenu();
         consultaPruebaEntrada = new javax.swing.JMenuItem();
         mnuControlInformes = new javax.swing.JMenuItem();
@@ -32,7 +33,7 @@ public class FrmPrinicipal extends javax.swing.JFrame {
         mnuImprimir = new javax.swing.JMenu();
         imprimirInformeAceptado = new javax.swing.JMenuItem();
         mnuAyuda = new javax.swing.JMenu();
-        jMenu1 = new javax.swing.JMenu();
+        mnuSalir = new javax.swing.JMenu();
 
         jMenu3.setText("jMenu3");
 
@@ -68,6 +69,14 @@ public class FrmPrinicipal extends javax.swing.JFrame {
         mnuInformes.add(informePruebaEntrada);
 
         jMenuBar1.add(mnuInformes);
+
+        mnuUnidad.setText("Unidad");
+        mnuUnidad.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                mnuUnidadMouseClicked(evt);
+            }
+        });
+        jMenuBar1.add(mnuUnidad);
 
         mnuConsultas.setText("Consultas");
 
@@ -112,13 +121,13 @@ public class FrmPrinicipal extends javax.swing.JFrame {
         mnuAyuda.setText("Ayuda");
         jMenuBar1.add(mnuAyuda);
 
-        jMenu1.setText("Salir");
-        jMenu1.addMouseListener(new java.awt.event.MouseAdapter() {
+        mnuSalir.setText("Salir");
+        mnuSalir.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jMenu1MouseClicked(evt);
+                mnuSalirMouseClicked(evt);
             }
         });
-        jMenuBar1.add(jMenu1);
+        jMenuBar1.add(mnuSalir);
 
         setJMenuBar(jMenuBar1);
 
@@ -158,11 +167,11 @@ public class FrmPrinicipal extends javax.swing.JFrame {
         imprimirReportes.setVisible(true);
     }//GEN-LAST:event_imprimirInformeAceptadoActionPerformed
 
-    private void jMenu1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenu1MouseClicked
+    private void mnuSalirMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_mnuSalirMouseClicked
         this.dispose();
         FrmLogin login = new FrmLogin();
         login.setVisible(true);
-    }//GEN-LAST:event_jMenu1MouseClicked
+    }//GEN-LAST:event_mnuSalirMouseClicked
 
     private void consultaPruebaEntradaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_consultaPruebaEntradaActionPerformed
         FrmConsultaPruebaEntrada consultaInformePrueabaEntrada = new FrmConsultaPruebaEntrada(nivelUsuario,codigoDocente);
@@ -174,6 +183,7 @@ public class FrmPrinicipal extends javax.swing.JFrame {
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
         if (nivelUsuario.equals("Usuario")) {
             mnuControlInformes.setVisible(false);
+            mnuUnidad.setVisible(false);
         }
         if (nivelUsuario.equals("Administrador") || nivelUsuario.equals("Supervisor")) {
             mnuControlInformesDocente.setVisible(false);
@@ -191,6 +201,12 @@ public class FrmPrinicipal extends javax.swing.JFrame {
         escritorio.add(controlReportesDoc);
         controlReportesDoc.setVisible(true);
     }//GEN-LAST:event_mnuControlInformesDocenteActionPerformed
+
+    private void mnuUnidadMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_mnuUnidadMouseClicked
+        FrmUnidad uni = new FrmUnidad();
+        escritorio.add(uni);
+        uni.setVisible(true);
+    }//GEN-LAST:event_mnuUnidadMouseClicked
 
     /**
      * @param args the command line arguments
@@ -233,7 +249,6 @@ public class FrmPrinicipal extends javax.swing.JFrame {
     public static javax.swing.JDesktopPane escritorio;
     private javax.swing.JMenuItem imprimirInformeAceptado;
     private javax.swing.JMenuItem informePruebaEntrada;
-    private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu3;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem11;
@@ -243,5 +258,7 @@ public class FrmPrinicipal extends javax.swing.JFrame {
     private javax.swing.JMenuItem mnuControlInformesDocente;
     private javax.swing.JMenu mnuImprimir;
     private javax.swing.JMenu mnuInformes;
+    private javax.swing.JMenu mnuSalir;
+    private javax.swing.JMenu mnuUnidad;
     // End of variables declaration//GEN-END:variables
 }
