@@ -34,7 +34,7 @@ import static sun.nio.ch.IOStatus.check;
  */
 public class FrmPortafolio extends javax.swing.JInternalFrame {
 
-    public String[] datoIFC = null;
+    public String[] datoPorta = null;
     boolean guardarNuevo;
     boolean cabeceraGuardada = false;
     boolean guardadoF = false;
@@ -85,7 +85,7 @@ public class FrmPortafolio extends javax.swing.JInternalFrame {
         cargarDatosTablaDocente();
         cargarDatosTablaEstudiante();
         
-        this.datoIFC = datoRF;
+        this.datoPorta = datoRF;
         this.guardarNuevo = guardarNuevo;
         this.nivelUsuario = nivelusu;
         this.codDocente = codDocente;
@@ -140,6 +140,7 @@ public class FrmPortafolio extends javax.swing.JInternalFrame {
         btnCancelarInforme = new javax.swing.JButton();
         btnGuardarInforme = new javax.swing.JButton();
         btnEnviarInforme = new javax.swing.JButton();
+        txtUnidad = new javax.swing.JLabel();
         jPanel4 = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
         tablaDocente = new javax.swing.JTable();
@@ -440,6 +441,10 @@ public class FrmPortafolio extends javax.swing.JInternalFrame {
                 .addContainerGap())
         );
 
+        txtUnidad.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
+        txtUnidad.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        txtUnidad.setText("UNIDAD");
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
@@ -465,7 +470,8 @@ public class FrmPortafolio extends javax.swing.JInternalFrame {
                                     .addComponent(txtDocente)
                                     .addComponent(txtNombreCurso)))
                             .addComponent(lblSemestre, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                            .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(txtUnidad, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addContainerGap()
                         .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
@@ -478,7 +484,9 @@ public class FrmPortafolio extends javax.swing.JInternalFrame {
                 .addComponent(jLabel1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(lblSemestre)
-                .addGap(31, 31, 31)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(txtUnidad)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 37, Short.MAX_VALUE)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel5)
                     .addComponent(txtCodigoCurso, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -494,7 +502,7 @@ public class FrmPortafolio extends javax.swing.JInternalFrame {
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(42, 42, 42)
                 .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(76, Short.MAX_VALUE))
+                .addGap(48, 48, 48))
         );
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
@@ -926,7 +934,7 @@ public class FrmPortafolio extends javax.swing.JInternalFrame {
             ClsEntidadPortafolioMaterialEstudiante entiMaterialEstudiante = new ClsEntidadPortafolioMaterialEstudiante();
             ClsNegocioPortafolioMaterialEstudiante negoMaterialEstudiante =  new ClsNegocioPortafolioMaterialEstudiante();
             
-            ArrayList<String> idinfo = negoMaterialDocente.obtenerInfoFinalDocente(codDocente,datoIFC[0]);
+            ArrayList<String> idinfo = negoMaterialDocente.obtenerInfoFinalDocente(codDocente,datoPorta[0],Integer.parseInt(datoPorta[11]));
             String id[] = idinfo.toArray(new String[idinfo.size()]);
             
             negoMaterialDocente.EliminarDetallePortafolioMaterialDocente(id[0]);
@@ -1029,7 +1037,7 @@ public class FrmPortafolio extends javax.swing.JInternalFrame {
             ClsNegocioUsuario docente = new ClsNegocioUsuario();
             
             //Obtiene el resultado de la consulta hecha a la BD
-            ResultSet rsDocente = docente.obtenerDatosPruebaEntrada(datoIFC[7], datoIFC[0]);
+            ResultSet rsDocente = docente.obtenerDatosPruebaEntrada(datoPorta[7], datoPorta[0]);
             
             //itera los valores hechas en la consulta
             while (rsDocente.next()) {
@@ -1064,31 +1072,33 @@ public class FrmPortafolio extends javax.swing.JInternalFrame {
     
     private void cargarDatos(){
         if (guardarNuevo) {
-            txtCodigoCurso.setText(datoIFC[0]);
-            txtNombreCurso.setText(datoIFC[1]);
+            txtCodigoCurso.setText(datoPorta[0]);
+            txtNombreCurso.setText(datoPorta[1]);
 
             
-            txtNumMatriculados.setText(datoIFC[4]);
-            txtNumRetirados.setText(datoIFC[5]);
-            txtNumAbandono.setText(datoIFC[6]); 
+            txtNumMatriculados.setText(datoPorta[4]);
+            txtNumRetirados.setText(datoPorta[5]);
+            txtNumAbandono.setText(datoPorta[6]); 
 
-            String codigoDcoente = datoIFC[7];
+            String codigoDcoente = datoPorta[7];
 
-            txtDocente.setText(datoIFC[8]);            
+            txtDocente.setText(datoPorta[8]);
+            txtUnidad.setText(datoPorta[11]);
         }
         else{
-            txtCodigoCurso.setText(datoIFC[0]);
-            txtNombreCurso.setText(datoIFC[1]);                       
+            txtCodigoCurso.setText(datoPorta[0]);
+            txtNombreCurso.setText(datoPorta[1]);                       
                        
-            txtDocente.setText(datoIFC[2]);        
+            txtDocente.setText(datoPorta[2]);        
             
-            txtNumMatriculados.setText(datoIFC[3]);
-            txtNumRetirados.setText(datoIFC[4]);
-            txtNumAbandono.setText(datoIFC[5]);
-            txtNumAsisten.setText(datoIFC[6]);
-            txtNumAprobados.setText(datoIFC[7]);
-            txtNumDesaprobados.setText(datoIFC[8]);
-            txtRevisadoPor.setText(datoIFC[9]);
+            txtNumMatriculados.setText(datoPorta[3]);
+            txtNumRetirados.setText(datoPorta[4]);
+            txtNumAbandono.setText(datoPorta[5]);
+            txtNumAsisten.setText(datoPorta[6]);
+            txtNumAprobados.setText(datoPorta[7]);
+            txtNumDesaprobados.setText(datoPorta[8]);
+            txtRevisadoPor.setText(datoPorta[9]);
+            txtUnidad.setText("UNIDAD " + datoPorta[11]);
             cargarDatosTablaDocenteActualizar();
             cargarDatosTablaEstudianteActualizar();
 //            cargarDatosObservaciones();
@@ -1205,6 +1215,7 @@ public class FrmPortafolio extends javax.swing.JInternalFrame {
             entiPortafolio.setEstudianteAprobado(Integer.parseInt(txtNumAprobados.getText()));
             entiPortafolio.setEstudianteDesaprobado(Integer.parseInt(txtNumAbandono.getText()));
             entiPortafolio.setRecepcioadoPor(txtRevisadoPor.getText());
+            entiPortafolio.setIdUnidad(Integer.parseInt(datoPorta[12])+1);
                         
             negPortafolio.AgregarPortafolio(entiPortafolio);
             negPortafolio.cst.close();
@@ -1224,7 +1235,9 @@ public class FrmPortafolio extends javax.swing.JInternalFrame {
             ClsEntidadPortafolioMaterialEstudiante entiMaterialEstudiante = new ClsEntidadPortafolioMaterialEstudiante();
             ClsNegocioPortafolioMaterialEstudiante negoMaterialEstudiante =  new ClsNegocioPortafolioMaterialEstudiante();
             
-            ArrayList<String> idinfo = negoMaterialDocente.obtenerInfoFinalDocente(codDocente,datoIFC[0]);
+            JOptionPane.showMessageDialog(null,codDocente + " " + datoPorta[0] + " " + Integer.parseInt(datoPorta[12])+1);
+            
+            ArrayList<String> idinfo = negoMaterialDocente.obtenerInfoFinalDocente(codDocente,datoPorta[0],Integer.parseInt(datoPorta[12])+1);
             String id[] = idinfo.toArray(new String[idinfo.size()]);
             
             for (int i = 0; i < filas; i++) {
@@ -1317,5 +1330,6 @@ public class FrmPortafolio extends javax.swing.JInternalFrame {
     private javax.swing.JTextField txtPorcenMatriculados;
     private javax.swing.JTextField txtPorcenRetirados;
     private javax.swing.JTextField txtRevisadoPor;
+    private javax.swing.JLabel txtUnidad;
     // End of variables declaration//GEN-END:variables
 }

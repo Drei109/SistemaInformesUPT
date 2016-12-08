@@ -49,13 +49,14 @@ public class ClsNegocioPortafolioMaterialDocente implements ClsInterfacePortafol
     }
 
     @Override
-    public ArrayList obtenerInfoFinalDocente(String codDoc, String idCurso) {
+    public ArrayList obtenerInfoFinalDocente(String codDoc, String idCurso, Integer idUnidad) {
         ArrayList<String> idInfo = new ArrayList<String>();
         
         try {
-            cst = conexion.prepareCall("{call USP_ObtenerIdIPortafolio(?,?)}");
+            cst = conexion.prepareCall("{call USP_ObtenerIdIPortafolio(?,?,?)}");
             cst.setString("pcoddoc", codDoc);
             cst.setString("pidCurso", idCurso);
+            cst.setInt("pidUnidad", idUnidad);
             rs = cst.executeQuery();
             
             while (rs.next()) {//

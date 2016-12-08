@@ -180,43 +180,100 @@ public class FrmReportesFaltantes extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_btnListarTablaActionPerformed
     
     void listarTabla(){
-        String titulos[] = {"Id Curso",
+        
+        String tipoInforme = (String) cmbTipoReporte.getSelectedItem();
+        if ("Portafolio".equals(tipoInforme)) {
+            String titulos[] = {"Id Curso",
+                            "Nombre del Curso",
+                            "Nombre del Docente",
+                            "Unidad por hacer","idUnidad"};
+            try {
+                ClsNegocioPruebaEntrada datos = new ClsNegocioPruebaEntrada();
+                String busqueda = cmbTipoReporte.getSelectedItem().toString();
+                dato = datos.hacerInformePruebaFaltante(codDocente,busqueda);//ArrayList
+
+                Iterator iterator = dato.iterator();
+
+                DefaultTableModel modeloTabla = new DefaultTableModel(null, titulos);
+
+                String campo[] = new String[5];
+                String nombreUnidad = "";
+
+                while (iterator.hasNext()) {
+                    ClsEntidadPruebaCursosFaltantes objenti = new ClsEntidadPruebaCursosFaltantes();
+
+                    objenti = (ClsEntidadPruebaCursosFaltantes) iterator.next();
+
+                    campo[0] = objenti.getIdCurso();
+                    campo[1] = objenti.getNombreCurso();
+                    campo[2] = objenti.getNombreDocente();
+                    
+//                    
+//                    if(objenti.getIdUnidad() != null){
+//                        nombreUnidad = "Unidad I";
+//                    }
+                    switch(objenti.getIdUnidad()){
+                        case 0:
+                            nombreUnidad = "Unidad I";
+                            break;
+                        case 1:
+                            nombreUnidad = "Unidad II";
+                            break;
+                        case 2:
+                            nombreUnidad = "Unidad III";
+                            break;
+                    }
+                    
+                    campo[3] = nombreUnidad;
+                    campo[4] = String.valueOf(objenti.getIdUnidad());
+
+                    modeloTabla.addRow(campo);
+                }
+                tablaF.setModel(modeloTabla);
+                tablaF.removeColumn(tablaF.getColumnModel().getColumn(4));
+                datos.conexion.close();
+
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        } else {
+            String titulos[] = {"Id Curso",
                             "Nombre del Curso",
                             "Nombre del Docente"};
         
-        try {
-            ClsNegocioPruebaEntrada datos = new ClsNegocioPruebaEntrada();
-            String busqueda = cmbTipoReporte.getSelectedItem().toString();
-            dato = datos.hacerInformePruebaFaltante(codDocente,busqueda);//ArrayList
+            try {
+                ClsNegocioPruebaEntrada datos = new ClsNegocioPruebaEntrada();
+                String busqueda = cmbTipoReporte.getSelectedItem().toString();
+                dato = datos.hacerInformePruebaFaltante(codDocente,busqueda);//ArrayList
 
-            Iterator iterator = dato.iterator();
+                Iterator iterator = dato.iterator();
 
-            DefaultTableModel modeloTabla = new DefaultTableModel(null, titulos);
+                DefaultTableModel modeloTabla = new DefaultTableModel(null, titulos);
 
-            String campo[] = new String[3];
+                String campo[] = new String[3];
 
-            while (iterator.hasNext()) {
-                ClsEntidadPruebaCursosFaltantes objenti = new ClsEntidadPruebaCursosFaltantes();
+                while (iterator.hasNext()) {
+                    ClsEntidadPruebaCursosFaltantes objenti = new ClsEntidadPruebaCursosFaltantes();
 
-                objenti = (ClsEntidadPruebaCursosFaltantes) iterator.next();
+                    objenti = (ClsEntidadPruebaCursosFaltantes) iterator.next();
 
-                campo[0] = objenti.getIdCurso();
-                campo[1] = objenti.getNombreCurso();
-                campo[2] = objenti.getNombreDocente();
+                    campo[0] = objenti.getIdCurso();
+                    campo[1] = objenti.getNombreCurso();
+                    campo[2] = objenti.getNombreDocente();
 
-                modeloTabla.addRow(campo);
+                    modeloTabla.addRow(campo);
+                }
+                tablaF.setModel(modeloTabla);
+                datos.conexion.close();
+
+            } catch (Exception e) {
+                e.printStackTrace();
             }
-            tablaF.setModel(modeloTabla);
-
-            datos.conexion.close();
-            
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+        }       
     }
     
     void seleccionarTabla(){
-        String campo[] = new String[11];
+        String campo[] = new String[14];
         String tipoReporte = cmbTipoReporte.getSelectedItem().toString();
         if (tablaF.getSelectedRow() >= 0) {
             try {
@@ -241,6 +298,11 @@ public class FrmReportesFaltantes extends javax.swing.JInternalFrame {
                         campo[8] = String.valueOf(objenti.getNombreDocente());
                         campo[9] = objenti.getEmailDocente();
                         campo[10]= objenti.getCeluDocente();
+                        if(tipoReporte.equals("Portafolio")){
+                            campo[11] = (String) tablaF.getValueAt(filaS,3);
+                            campo[12] = (String) tablaF.getModel().getValueAt(filaS,4);
+                            campo[13] = objenti.getCargaAcademica();
+                        }
                         break;
                     }
 

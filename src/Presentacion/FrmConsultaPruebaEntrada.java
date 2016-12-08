@@ -34,7 +34,7 @@ public class FrmConsultaPruebaEntrada extends javax.swing.JInternalFrame {
         initComponents();
         this.codDocente = codDocente;
         this.nivelUsuario = nivelUsuario;
-        definirTituloTabla(nivelUsuario);
+//        definirTituloTabla(nivelUsuario);
         cargarCombo(nivelUsuario);
         buscarPruebaEntrada(nivelUsuario,codDocente);
     }
@@ -46,6 +46,7 @@ public class FrmConsultaPruebaEntrada extends javax.swing.JInternalFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jToggleButton1 = new javax.swing.JToggleButton();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         txtBuscar = new javax.swing.JTextField();
@@ -57,6 +58,8 @@ public class FrmConsultaPruebaEntrada extends javax.swing.JInternalFrame {
         btnVer = new javax.swing.JButton();
         btnSalir = new javax.swing.JButton();
         cmbTipoInforme = new javax.swing.JComboBox<>();
+
+        jToggleButton1.setText("jToggleButton1");
 
         jLabel1.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -113,28 +116,30 @@ public class FrmConsultaPruebaEntrada extends javax.swing.JInternalFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                        .addComponent(jLabel2)
-                                        .addGap(29, 29, 29))
-                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                        .addComponent(jLabel3)
-                                        .addGap(28, 28, 28)))
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(txtBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 348, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(cmbCriterio, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(btnBuscar, javax.swing.GroupLayout.DEFAULT_SIZE, 166, Short.MAX_VALUE)
-                                    .addComponent(cmbTipoInforme, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 602, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(layout.createSequentialGroup()
                                 .addComponent(btnSalir, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(18, 18, 18)
-                                .addComponent(btnVer, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(0, 15, Short.MAX_VALUE)))
+                                .addComponent(btnVer, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addGroup(layout.createSequentialGroup()
+                                    .addGap(8, 8, 8)
+                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                            .addComponent(jLabel2)
+                                            .addGap(29, 29, 29))
+                                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                            .addComponent(jLabel3)
+                                            .addGap(28, 28, 28)))
+                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(cmbCriterio, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(txtBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 556, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                        .addComponent(btnBuscar, javax.swing.GroupLayout.DEFAULT_SIZE, 166, Short.MAX_VALUE)
+                                        .addComponent(cmbTipoInforme, 0, 166, Short.MAX_VALUE)))
+                                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 841, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(0, 10, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -168,6 +173,7 @@ public class FrmConsultaPruebaEntrada extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_btnSalirActionPerformed
 
     private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
+        definirTituloTabla(nivelUsuario);
         buscarPruebaEntrada(nivelUsuario,codDocente);        
     }//GEN-LAST:event_btnBuscarActionPerformed
 
@@ -276,17 +282,27 @@ public class FrmConsultaPruebaEntrada extends javax.swing.JInternalFrame {
     }
     
     private void definirTituloTabla(String nivelUsuario) {
-        
+        String tipoInforme = cmbTipoInforme.getSelectedItem().toString();
         switch(nivelUsuario){
         case "Usuario":
-            String titulosUsuario[] = {"ID","Cod Curso","Curso","Fecha","Estado"};
-            dtm.setColumnIdentifiers(titulosUsuario);
+            if (tipoInforme.equals("Portafolio")) {
+                String titulosUsuario[] = {"ID","Cod Curso","Curso","Fecha","Estado","Unidad"};
+                dtm.setColumnIdentifiers(titulosUsuario);
+            } else {
+                String titulosUsuario[] = {"ID","Cod Curso","Curso","Fecha","Estado"};
+                dtm.setColumnIdentifiers(titulosUsuario);
+            }            
             tblBuscar.setModel(dtm);
             break;
         case "Supervisor":
         case "Administrador":
+            if (tipoInforme.equals("Portafolio")) {
+                String titulosUsuario[] = {"ID","Cod Docente","Nombre","Semestre","Cod Curso","Curso","Fecha","Estado","Unidad"};
+                dtm.setColumnIdentifiers(titulosUsuario);
+            } else {
             String titulosAdministrador[] = {"ID","Cod Docente","Nombre","Semestre","Cod Curso","Curso","Fecha","Estado"};
             dtm.setColumnIdentifiers(titulosAdministrador);
+            }
             tblBuscar.setModel(dtm);
             break;
         }
@@ -464,7 +480,7 @@ public class FrmConsultaPruebaEntrada extends javax.swing.JInternalFrame {
             rs  =negPortafolio.ConsultaAvanzaPortafolioUsuario(criterio, busqueda,codDocente);
 
             boolean encuentra = false;
-            String Campo[] = new String[5];
+            String Campo[] = new String[6];
             int fila;
             fila = dtm.getRowCount();
             if (fila > 0) {
@@ -478,6 +494,7 @@ public class FrmConsultaPruebaEntrada extends javax.swing.JInternalFrame {
                 Campo[2] = (String) rs.getString(3); 
                 Campo[3] = (String) rs.getString(4); 
                 Campo[4] = (String) rs.getString(5); 
+                Campo[5] = (String) rs.getString(6); 
 
                 dtm.addRow(Campo);
                 encuentra = true;
@@ -497,7 +514,7 @@ public class FrmConsultaPruebaEntrada extends javax.swing.JInternalFrame {
             rs  =negPortafolio.ConsultaAvanzaPortafolioAdministrador(criterio, busqueda);
 
             boolean encuentra = false;
-            String Campo[] = new String[8];
+            String Campo[] = new String[9];
             int fila;
             fila = dtm.getRowCount();
             if (fila > 0) {
@@ -514,6 +531,7 @@ public class FrmConsultaPruebaEntrada extends javax.swing.JInternalFrame {
                 Campo[5] = (String) rs.getString(6); 
                 Campo[6] = (String) rs.getString(7); 
                 Campo[7] = (String) rs.getString(8); 
+                Campo[8] = (String) rs.getString(9); 
 
                 dtm.addRow(Campo);
                 encuentra = true;
@@ -540,6 +558,7 @@ public class FrmConsultaPruebaEntrada extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JToggleButton jToggleButton1;
     private javax.swing.JTable tblBuscar;
     private javax.swing.JTextField txtBuscar;
     // End of variables declaration//GEN-END:variables

@@ -27,13 +27,14 @@ public class ClsNegocioPortafolio implements ClsInterfacePortafolio {
     @Override
     public void AgregarPortafolio(ClsEntidadPortafolio InformeFinal) {
         try {
-            cst = conexion.prepareCall("{call USP_Portafolio_I(?,?,?,?,?,?)}");
+            cst = conexion.prepareCall("{call USP_Portafolio_I(?,?,?,?,?,?,?)}");
             cst.setString("pidCargaAcademica", String.valueOf(InformeFinal.getIdCargaAcademica()));
             cst.setString("pestadoPortafolio", String.valueOf(InformeFinal.getEstadoPortafolio()));            
             cst.setString("pestudianteAsiste", String.valueOf(InformeFinal.getEstudianteAsisten()));            
             cst.setString("pestudienteAproado", String.valueOf(InformeFinal.getEstudianteAprobado()));            
             cst.setString("pestudianteDesaprobado", String.valueOf(InformeFinal.getEstudianteDesaprobado()));            
-            cst.setString("precepcioadoPor", String.valueOf(InformeFinal.getRecepcioadoPor()));            
+            cst.setString("precepcioadoPor", String.valueOf(InformeFinal.getRecepcioadoPor()));         
+            cst.setString("pidUnidad", String.valueOf(InformeFinal.getIdUnidad()));         
             cst.execute();
         } catch (SQLException ex) {
             ex.printStackTrace();
@@ -135,6 +136,7 @@ public class ClsNegocioPortafolio implements ClsInterfacePortafolio {
         try {
             cst = conexion.prepareCall("{call USP_PortafolioPorId(?)}");
             cst.setString("pidinfo", codPortafolio);
+            
             rs = cst.executeQuery();
             
             while (rs.next()) {//25
@@ -149,6 +151,7 @@ public class ClsNegocioPortafolio implements ClsInterfacePortafolio {
                 infoCurso.add(rs.getString(9));
                 infoCurso.add(rs.getString(10));
                 infoCurso.add(rs.getString(11));
+                infoCurso.add(rs.getString(12));
             }
             return infoCurso;
         } catch (Exception e) {

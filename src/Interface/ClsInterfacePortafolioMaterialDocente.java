@@ -20,7 +20,7 @@ public interface ClsInterfacePortafolioMaterialDocente {
     
     void ModificarPortafolioMaterialDocente(String codigo,ClsEntidadPortafolioMaterialDocente CapacidadPortafoliDocente);
     
-    public ArrayList obtenerInfoFinalDocente(String codDoc,String idCurso); 
+    public ArrayList obtenerInfoFinalDocente(String codDoc,String idCurso,Integer idUnidad); 
     
     void ModificarEstadoInfoFinal(String codigo, String estado);
     

@@ -20,6 +20,24 @@ public class ClsEntidadPruebaCursosFaltantes {
     private String estadoPrueba;
     private String cargaAcademica;
     private String fechaPrueba;
+    private int idUnidad;
+    private String descripcionUnidad;
+
+    public String getDescripcionUnidad() {
+        return descripcionUnidad;
+    }
+
+    public void setDescripcionUnidad(String descripcionUnidad) {
+        this.descripcionUnidad = descripcionUnidad;
+    }
+
+    public int getIdUnidad() {
+        return idUnidad;
+    }
+
+    public void setIdUnidad(int idUnidad) {
+        this.idUnidad = idUnidad;
+    }
 
     public String getFechaPrueba() {
         return fechaPrueba;
