@@ -32,6 +32,7 @@ public class FrmPrinicipal extends javax.swing.JFrame {
         mnuControlInformesDocente = new javax.swing.JMenuItem();
         mnuImprimir = new javax.swing.JMenu();
         imprimirInformeAceptado = new javax.swing.JMenuItem();
+        imprimirInformeCiclos = new javax.swing.JMenuItem();
         mnuAyuda = new javax.swing.JMenu();
         mnuSalir = new javax.swing.JMenu();
 
@@ -116,6 +117,14 @@ public class FrmPrinicipal extends javax.swing.JFrame {
         });
         mnuImprimir.add(imprimirInformeAceptado);
 
+        imprimirInformeCiclos.setText("Imprimir Informe por Ciclos");
+        imprimirInformeCiclos.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                imprimirInformeCiclosActionPerformed(evt);
+            }
+        });
+        mnuImprimir.add(imprimirInformeCiclos);
+
         jMenuBar1.add(mnuImprimir);
 
         mnuAyuda.setText("Ayuda");
@@ -184,6 +193,7 @@ public class FrmPrinicipal extends javax.swing.JFrame {
         if (nivelUsuario.equals("Usuario")) {
             mnuControlInformes.setVisible(false);
             mnuUnidad.setVisible(false);
+            imprimirInformeCiclos.setVisible(false);
         }
         if (nivelUsuario.equals("Administrador") || nivelUsuario.equals("Supervisor")) {
             mnuControlInformesDocente.setVisible(false);
@@ -207,6 +217,12 @@ public class FrmPrinicipal extends javax.swing.JFrame {
         escritorio.add(uni);
         uni.setVisible(true);
     }//GEN-LAST:event_mnuUnidadMouseClicked
+
+    private void imprimirInformeCiclosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_imprimirInformeCiclosActionPerformed
+        FrmReporteInformesCiclos repo = new FrmReporteInformesCiclos();
+        escritorio.add(repo);
+        repo.setVisible(true);
+    }//GEN-LAST:event_imprimirInformeCiclosActionPerformed
 
     /**
      * @param args the command line arguments
@@ -248,6 +264,7 @@ public class FrmPrinicipal extends javax.swing.JFrame {
     private javax.swing.JMenuItem consultaPruebaEntrada;
     public static javax.swing.JDesktopPane escritorio;
     private javax.swing.JMenuItem imprimirInformeAceptado;
+    private javax.swing.JMenuItem imprimirInformeCiclos;
     private javax.swing.JMenuItem informePruebaEntrada;
     private javax.swing.JMenu jMenu3;
     private javax.swing.JMenuBar jMenuBar1;
