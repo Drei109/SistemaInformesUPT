@@ -9,6 +9,7 @@ import Entidad.ClsEntidadPruebaCursosFaltantes;
 import Negocio.ClsNegocioInformeFinalCurso;
 import Negocio.ClsNegocioPortafolio;
 import Negocio.ClsNegocioPruebaEntrada;
+import java.awt.event.ItemEvent;
 import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -79,7 +80,7 @@ public class FrmConsultaPruebaEntrada extends javax.swing.JInternalFrame {
                 {null, null, null, null}
             },
             new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
+                "Id", "Cod Curso", "Curso", "Docente"
             }
         ));
         jScrollPane1.setViewportView(tblBuscar);
@@ -106,6 +107,16 @@ public class FrmConsultaPruebaEntrada extends javax.swing.JInternalFrame {
         });
 
         cmbTipoInforme.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Prueba Entrada", "Informe Final", "Portafolio" }));
+        cmbTipoInforme.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                cmbTipoInformeItemStateChanged(evt);
+            }
+        });
+        cmbTipoInforme.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cmbTipoInformeActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -182,6 +193,28 @@ public class FrmConsultaPruebaEntrada extends javax.swing.JInternalFrame {
         this.dispose();
     }//GEN-LAST:event_btnVerActionPerformed
 
+    private void cmbTipoInformeItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cmbTipoInformeItemStateChanged
+        String tipoInforme = cmbTipoInforme.getSelectedItem().toString();
+        if (evt.getStateChange() == ItemEvent.SELECTED) {
+            if (tipoInforme.equals("Portafolio")) {
+                cmbCriterio.addItem("Unidad");
+            }
+        } else if(evt.getStateChange() == ItemEvent.DESELECTED){
+            if (!tipoInforme.equals("Portafolio")) {
+                cmbCriterio.removeItem("Unidad");
+            }
+        }
+    }//GEN-LAST:event_cmbTipoInformeItemStateChanged
+
+    private void cmbTipoInformeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbTipoInformeActionPerformed
+//        String tipoInforme = cmbTipoInforme.getSelectedItem().toString();
+//        if (tipoInforme.equals("Portafolio")) {
+//            cmbCriterio.addItem("Unidad");
+//        }else{
+//            cmbCriterio.removeItem("Unidad");
+//        }
+    }//GEN-LAST:event_cmbTipoInformeActionPerformed
+
     private void abrirFrmInformePruebaEntrada(){
         String idInforme = (String) tblBuscar.getValueAt(tblBuscar.getSelectedRow(), 0);
         String campo[] = new String[25];
@@ -244,6 +277,7 @@ public class FrmConsultaPruebaEntrada extends javax.swing.JInternalFrame {
     }
     
     private void cargarCombo(String nivelUsuario){
+        String tipoInforme = cmbTipoInforme.getSelectedItem().toString();
         switch(nivelUsuario){
         case "Usuario":
             cmbCriterio.removeAllItems();

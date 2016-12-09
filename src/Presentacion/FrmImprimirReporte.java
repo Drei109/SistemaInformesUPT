@@ -9,6 +9,7 @@ import Conexion.ClsConexion;
 import Negocio.ClsNegocioInformeFinalCurso;
 import Negocio.ClsNegocioPortafolio;
 import Negocio.ClsNegocioPruebaEntrada;
+import java.awt.event.ItemEvent;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -40,7 +41,7 @@ public class FrmImprimirReporte extends javax.swing.JInternalFrame {
         initComponents();
         this.codDocente = codDocente;
         this.nivelUsuario = nivelUsuario;
-        definirTituloTabla(nivelUsuario);
+//        definirTituloTabla(nivelUsuario);
         cargarCombo(nivelUsuario);
         buscarPruebaEntrada(nivelUsuario,codDocente);
     }
@@ -235,7 +236,7 @@ public class FrmImprimirReporte extends javax.swing.JInternalFrame {
                     rs  =negPortafolio.ConsultaInformeUsuario(criterio, busqueda,codDocente);
 
                     boolean encuentra = false;
-                    String Campo[] = new String[5];
+                    String Campo[] = new String[6];
                     int fila;
                     fila = dtm.getRowCount();
                     if (fila > 0) {
@@ -249,6 +250,7 @@ public class FrmImprimirReporte extends javax.swing.JInternalFrame {
                         Campo[2] = (String) rs.getString(3); 
                         Campo[3] = (String) rs.getString(4); 
                         Campo[4] = (String) rs.getString(5); 
+                        Campo[5] = (String) rs.getString(6); 
 
                         dtm.addRow(Campo);
                         encuentra = true;
@@ -268,7 +270,7 @@ public class FrmImprimirReporte extends javax.swing.JInternalFrame {
                     rs  =negPortafolio.ConsultaInformeAdministrador(criterio, busqueda);
 
                     boolean encuentra = false;
-                    String Campo[] = new String[8];
+                    String Campo[] = new String[9];
                     int fila;
                     fila = dtm.getRowCount();
                     if (fila > 0) {
@@ -285,6 +287,7 @@ public class FrmImprimirReporte extends javax.swing.JInternalFrame {
                         Campo[5] = (String) rs.getString(6); 
                         Campo[6] = (String) rs.getString(7); 
                         Campo[7] = (String) rs.getString(8); 
+                        Campo[8] = (String) rs.getString(9); 
 
                         dtm.addRow(Campo);
                         encuentra = true;
@@ -304,17 +307,27 @@ public class FrmImprimirReporte extends javax.swing.JInternalFrame {
     }
     
     private void definirTituloTabla(String nivelUsuario) {
-        
+        String tipoInforme = cmbTipoInforme.getSelectedItem().toString();
         switch(nivelUsuario){
         case "Usuario":
-            String titulosUsuario[] = {"ID","Cod Curso","Curso","Fecha","Estado"};
-            dtm.setColumnIdentifiers(titulosUsuario);
+            if (tipoInforme.equals("Portafolio")) {
+                String titulosUsuario[] = {"ID","Cod Curso","Curso","Fecha","Estado","Unidad"};
+                dtm.setColumnIdentifiers(titulosUsuario);
+            }else{
+                String titulosUsuario[] = {"ID","Cod Curso","Curso","Fecha","Estado"};
+                dtm.setColumnIdentifiers(titulosUsuario);
+            }
             tblBuscar.setModel(dtm);
             break;
         case "Supervisor":
         case "Administrador":
-            String titulosAdministrador[] = {"ID","Cod Docente","Nombre","Semestre","Cod Curso","Curso","Fecha","Estado"};
-            dtm.setColumnIdentifiers(titulosAdministrador);
+            if (tipoInforme.equals("Portafolio")) {
+                String titulosUsuario[] = {"ID","Cod Docente","Nombre","Semestre","Cod Curso","Curso","Fecha","Estado","Unidad"};
+                dtm.setColumnIdentifiers(titulosUsuario);
+            }else{
+                String titulosAdministrador[] = {"ID","Cod Docente","Nombre","Semestre","Cod Curso","Curso","Fecha","Estado"};
+                dtm.setColumnIdentifiers(titulosAdministrador);
+            }
             tblBuscar.setModel(dtm);
             break;
         }
@@ -449,12 +462,17 @@ public class FrmImprimirReporte extends javax.swing.JInternalFrame {
                 {null, null, null, null}
             },
             new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
+                "Id", "Cod Docente", "Cod Curso", "Curso"
             }
         ));
         jScrollPane1.setViewportView(tblBuscar);
 
         cmbTipoInforme.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Prueba de entrada", "Informe Final", "Portafolio" }));
+        cmbTipoInforme.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                cmbTipoInformeItemStateChanged(evt);
+            }
+        });
 
         jLabel4.setText("Tipo de Informe :");
 
@@ -523,6 +541,7 @@ public class FrmImprimirReporte extends javax.swing.JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
+        definirTituloTabla(nivelUsuario);
         buscarPruebaEntrada(nivelUsuario,codDocente);
     }//GEN-LAST:event_btnBuscarActionPerformed
 
@@ -538,6 +557,19 @@ public class FrmImprimirReporte extends javax.swing.JInternalFrame {
     private void btnSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalirActionPerformed
         this.dispose();
     }//GEN-LAST:event_btnSalirActionPerformed
+
+    private void cmbTipoInformeItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cmbTipoInformeItemStateChanged
+        String tipoInforme = cmbTipoInforme.getSelectedItem().toString();
+        if (evt.getStateChange() == ItemEvent.SELECTED) {
+            if (tipoInforme.equals("Portafolio")) {
+                cmbCriterio.addItem("Unidad");
+            }
+        } else if(evt.getStateChange() == ItemEvent.DESELECTED){
+            if (!tipoInforme.equals("Portafolio")) {
+                cmbCriterio.removeItem("Unidad");
+            }
+        }
+    }//GEN-LAST:event_cmbTipoInformeItemStateChanged
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
