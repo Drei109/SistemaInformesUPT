@@ -803,7 +803,7 @@ public class FrmInformePruebaEntrada extends javax.swing.JInternalFrame {
                 negocioDetalle.cst.close();
                 negocioDetalle.conexion.close();
 
-                String estado = "Rechazado";
+                String estado = "Observado";
 
                 ClsNegocioPruebaEntrada prueba = new ClsNegocioPruebaEntrada();
                 prueba.ModificarEstadoPruebaEntrada(IDPruebaEntrada, estado);

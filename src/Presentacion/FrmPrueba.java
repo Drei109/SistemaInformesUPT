@@ -1194,6 +1194,7 @@ public class FrmPrueba extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_txtNombreDocenteActionPerformed
 
     private void formInternalFrameOpened(javax.swing.event.InternalFrameEvent evt) {//GEN-FIRST:event_formInternalFrameOpened
+        txtSecCurso.setText("A");
         cargarTabla();
         cargarDatos();
         cargarTitulosObservaciones();
