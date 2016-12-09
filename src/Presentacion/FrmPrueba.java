@@ -1246,7 +1246,7 @@ public class FrmPrueba extends javax.swing.JInternalFrame {
                 JOptionPane.showMessageDialog(null, "inserta datos en la Tabla");
             }
         }
-        else if(guardadoF){
+        else if(actualizaF){
             if (TablaCapacidades.getRowCount() > 0) {
                 if (calcularMarcadosNivelCapacidad()) {
                     if (TablaCapacidades.getSelectedRow() != -1) {
@@ -1276,7 +1276,7 @@ public class FrmPrueba extends javax.swing.JInternalFrame {
                 JOptionPane.showMessageDialog(null, "Faltan Datos");
             }
         }
-        else if (guardadoF) {
+        else if (actualizaF) {
             if (validarCajas() && validarCHK()) {
                 actualizarObservaciones();
             }else{
