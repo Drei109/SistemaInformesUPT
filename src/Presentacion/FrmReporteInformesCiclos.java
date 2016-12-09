@@ -157,22 +157,22 @@ public class FrmReporteInformesCiclos extends javax.swing.JInternalFrame {
                 }
                 break;
             case 2:
-//                Map p3 = new HashMap();
-//
-//                Connection cnx3 = new ClsConexion().getConnection();
-//
-//                try {           
-//                    JasperReport report;
-//                    JasperPrint print;
-//                    report = JasperCompileManager.compileReport("../SistemaInformesUPT/src/Reportes/RptPortafolio.jrxml");
-//                    print = JasperFillManager.fillReport(report,p3,cnx3);
-//                    JasperViewer view = new JasperViewer(print,false);
-//                    view.setTitle("REPORTE POR CICLOS");
-//                    view.setVisible(true);
-//                    cnx3.close();
-//                } catch (JRException | SQLException ex) {
-//                    Logger.getLogger(FrmInformePruebaEntrada.class.getName()).log(Level.SEVERE, null, ex);
-//                }
+                Map p3 = new HashMap();
+
+                Connection cnx3 = new ClsConexion().getConnection();
+
+                try {           
+                    JasperReport report;
+                    JasperPrint print;
+                    report = JasperCompileManager.compileReport("../SistemaInformesUPT/src/Reportes/RptPortafolioCiclos.jrxml");
+                    print = JasperFillManager.fillReport(report,p3,cnx3);
+                    JasperViewer view = new JasperViewer(print,false);
+                    view.setTitle("REPORTE POR CICLOS");
+                    view.setVisible(true);
+                    cnx3.close();
+                } catch (JRException | SQLException ex) {
+                    Logger.getLogger(FrmInformePruebaEntrada.class.getName()).log(Level.SEVERE, null, ex);
+                }
                 break;
         }
     }
