@@ -226,8 +226,10 @@ public class FrmReportesFaltantes extends javax.swing.JInternalFrame {
                     
                     campo[3] = nombreUnidad;
                     campo[4] = String.valueOf(objenti.getIdUnidad());
-
-                    modeloTabla.addRow(campo);
+                    
+                    if(objenti.getIdUnidad() < Integer.parseInt(objenti.getCuentaCarga())){
+                        modeloTabla.addRow(campo);                        
+                    }
                 }
                 tablaF.setModel(modeloTabla);
                 tablaF.removeColumn(tablaF.getColumnModel().getColumn(4));

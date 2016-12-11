@@ -22,6 +22,15 @@ public class ClsEntidadPruebaCursosFaltantes {
     private String fechaPrueba;
     private int idUnidad;
     private String descripcionUnidad;
+    private String cuentaCarga;
+
+    public String getCuentaCarga() {
+        return cuentaCarga;
+    }
+
+    public void setCuentaCarga(String cuentaCarga) {
+        this.cuentaCarga = cuentaCarga;
+    }
 
     public String getDescripcionUnidad() {
         return descripcionUnidad;
