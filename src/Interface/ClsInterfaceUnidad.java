@@ -17,4 +17,6 @@ public interface ClsInterfaceUnidad {
     public ArrayList seleccionarUnidad(String codigoUnidad); 
     
     public ArrayList seleccionarTodasLasUnidad(); 
+    
+    public String unidadActiva();
 }

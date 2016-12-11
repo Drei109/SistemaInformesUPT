@@ -7,6 +7,7 @@ import java.sql.CallableStatement;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 
 /**
@@ -101,6 +102,24 @@ public class ClsNegocioUnidad implements ClsInterfaceUnidad{
             }
             
             return datosUnidad;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+    @Override
+    public String unidadActiva() {
+        String unidadActiva = "";
+        try {
+            Statement stmt = conexion.createStatement() ;
+            String query = "SELECT descripcionUnidad FROM unidad WHERE estadoUnidad = 'Activo' LIMIT 1;" ;
+            rs = stmt.executeQuery(query) ;
+            while (rs.next()) {
+                unidadActiva = rs.getString(1);                
+            }
+            
+            return unidadActiva;
         } catch (Exception e) {
             e.printStackTrace();
             return null;

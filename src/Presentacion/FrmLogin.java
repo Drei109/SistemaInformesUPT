@@ -1,5 +1,6 @@
 package Presentacion;
 
+import Negocio.ClsNegocioUnidad;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import Negocio.ClsNegocioUsuario;
@@ -126,6 +127,8 @@ public class FrmLogin extends javax.swing.JFrame {
         pass = txtContrasena.getText();
         codDocente = usu;
         ClsNegocioUsuario usuario = new ClsNegocioUsuario();
+        ClsNegocioUnidad negoUni = new ClsNegocioUnidad();
+        String unidadActiva = negoUni.unidadActiva();
         
         try {
             rs = usuario.LoginUsuario(usu, pass);
@@ -140,6 +143,8 @@ public class FrmLogin extends javax.swing.JFrame {
                         FrmPrinicipal principal = new FrmPrinicipal();
                         principal.setExtendedState(JFrame.MAXIMIZED_BOTH); 
                         principal.nivelUsuario= rs.getString(4);
+                        principal.nombreDocente= rs.getString(6);
+                        principal.unidadActiva= unidadActiva;
 //                        principal.setUndecorated(true);
                         principal.setVisible(true);
                         principal.show();
@@ -172,6 +177,10 @@ public class FrmLogin extends javax.swing.JFrame {
             }
             rs.close();
             usuario.conexion.close();
+            negoUni.conexion.close();
+            
+            
+            
         } catch (Exception ex) {            
         }
         

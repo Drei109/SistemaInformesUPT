@@ -8,10 +8,13 @@ import javax.swing.JOptionPane;
 public class FrmPrinicipal extends javax.swing.JFrame {
 
     public String codigoDocente;
+    public String nombreDocente;
     public String nivelUsuario;
+    public String unidadActiva;
    
     public FrmPrinicipal() {
         initComponents();        
+        
     }
 
     
@@ -22,6 +25,9 @@ public class FrmPrinicipal extends javax.swing.JFrame {
         jMenu3 = new javax.swing.JMenu();
         jMenuItem11 = new javax.swing.JMenuItem();
         escritorio = new javax.swing.JDesktopPane();
+        txtUnidad = new javax.swing.JLabel();
+        jLabel1 = new javax.swing.JLabel();
+        txtDocente = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
         mnuInformes = new javax.swing.JMenu();
         informePruebaEntrada = new javax.swing.JMenuItem();
@@ -52,12 +58,18 @@ public class FrmPrinicipal extends javax.swing.JFrame {
         escritorio.setLayout(escritorioLayout);
         escritorioLayout.setHorizontalGroup(
             escritorioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 884, Short.MAX_VALUE)
+            .addGap(0, 0, Short.MAX_VALUE)
         );
         escritorioLayout.setVerticalGroup(
             escritorioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 579, Short.MAX_VALUE)
+            .addGap(0, 560, Short.MAX_VALUE)
         );
+
+        txtUnidad.setText("Unidad");
+
+        jLabel1.setText("Unidad activa:");
+
+        txtDocente.setText("Docente");
 
         mnuInformes.setText("Informes");
 
@@ -145,14 +157,28 @@ public class FrmPrinicipal extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(escritorio)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(escritorio))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(19, 19, 19)
+                        .addComponent(txtDocente)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 677, Short.MAX_VALUE)
+                        .addComponent(jLabel1)
+                        .addGap(18, 18, 18)
+                        .addComponent(txtUnidad, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap()
+            .addGroup(layout.createSequentialGroup()
+                .addGap(6, 6, 6)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(txtUnidad)
+                    .addComponent(jLabel1)
+                    .addComponent(txtDocente))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(escritorio)
                 .addContainerGap())
         );
@@ -190,6 +216,8 @@ public class FrmPrinicipal extends javax.swing.JFrame {
     }//GEN-LAST:event_consultaPruebaEntradaActionPerformed
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
+        txtUnidad.setText(unidadActiva);
+        txtDocente.setText(nombreDocente);
         if (nivelUsuario.equals("Usuario")) {
             mnuControlInformes.setVisible(false);
             mnuUnidad.setVisible(false);
@@ -266,6 +294,7 @@ public class FrmPrinicipal extends javax.swing.JFrame {
     private javax.swing.JMenuItem imprimirInformeAceptado;
     private javax.swing.JMenuItem imprimirInformeCiclos;
     private javax.swing.JMenuItem informePruebaEntrada;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JMenu jMenu3;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem11;
@@ -277,5 +306,7 @@ public class FrmPrinicipal extends javax.swing.JFrame {
     private javax.swing.JMenu mnuInformes;
     private javax.swing.JMenu mnuSalir;
     private javax.swing.JMenu mnuUnidad;
+    private javax.swing.JLabel txtDocente;
+    private javax.swing.JLabel txtUnidad;
     // End of variables declaration//GEN-END:variables
 }
