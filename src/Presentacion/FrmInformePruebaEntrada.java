@@ -803,6 +803,8 @@ public class FrmInformePruebaEntrada extends javax.swing.JInternalFrame {
         
         if (result == 0) {
             
+            String motivo = JOptionPane.showInputDialog(null,"Motivo de Rechazo",JOptionPane.QUESTION_MESSAGE);
+            
             try {
                 rs = negocioDetalle.ObtenerIdPruebaEntrada(idPlanEstudios);
                 while (rs.next()) {
@@ -814,7 +816,7 @@ public class FrmInformePruebaEntrada extends javax.swing.JInternalFrame {
                 String estado = "Observado";
 
                 ClsNegocioPruebaEntrada prueba = new ClsNegocioPruebaEntrada();
-                prueba.ModificarEstadoPruebaEntrada(IDPruebaEntrada, estado);
+                prueba.ModificarEstadoPruebaEntrada(IDPruebaEntrada, estado, motivo);
 
                 prueba.cst.close();
                 prueba.conexion.close();
@@ -851,7 +853,7 @@ public class FrmInformePruebaEntrada extends javax.swing.JInternalFrame {
             String estado = "Aprobado";
             
             ClsNegocioPruebaEntrada prueba = new ClsNegocioPruebaEntrada();
-            prueba.ModificarEstadoPruebaEntrada(IDPruebaEntrada, estado);
+            prueba.ModificarEstadoPruebaEntrada(IDPruebaEntrada, estado,"Correcto");
             
             prueba.cst.close();
             prueba.conexion.close();
@@ -900,7 +902,7 @@ public class FrmInformePruebaEntrada extends javax.swing.JInternalFrame {
         txtAbandono.setText(datoPE[6]);
         cDocente = datoPE[7];
         txtDocente.setText(datoPE[8]);
-        txtSeccion.setText(datoPE[11]);
+//        txtSeccion.setText(datoPE[11]);
         if (!guardarNuevo) {
             txtEvaluados.setText(datoPE[10]);
         }
