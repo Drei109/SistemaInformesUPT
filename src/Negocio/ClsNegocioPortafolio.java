@@ -75,11 +75,12 @@ public class ClsNegocioPortafolio implements ClsInterfacePortafolio {
     }
 
     @Override
-    public void ModificarEstadoPortafolio(String codigo, String estado) {
+    public void ModificarEstadoPortafolio(String codigo, String estado, String motivo) {
         try {
-            cst = conexion.prepareCall("{call USP_Portafolio_U_Estado(?,?)}");
+            cst = conexion.prepareCall("{call USP_Portafolio_U_Estado(?,?,?)}");
             cst.setString("pidPortafolio",codigo);
             cst.setString("pestadoPortafolio",estado);
+            cst.setString("pmotivo",motivo);
             
             cst.execute();
         } catch (SQLException ex) {

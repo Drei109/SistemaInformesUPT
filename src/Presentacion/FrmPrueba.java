@@ -1320,7 +1320,7 @@ public class FrmPrueba extends javax.swing.JInternalFrame {
         ResultSet rs ;
         try {
             String estado = "Aprobado";
-            negoIFC.ModificarEstadoInformeFinal(IdInfoFinalCurso, estado);
+            negoIFC.ModificarEstadoInformeFinal(IdInfoFinalCurso, estado, "Correcto");
             negoIFC.cst.close();
             negoIFC.conexion.close();
             JOptionPane.showMessageDialog(null, "El Informe se Aprobo con exito");
@@ -1331,9 +1331,10 @@ public class FrmPrueba extends javax.swing.JInternalFrame {
     private void btnRechazarInformeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRechazarInformeActionPerformed
         ClsNegocioInformeFinalCurso negoIFC = new ClsNegocioInformeFinalCurso();
         ResultSet rs ;
+        String motivo = JOptionPane.showInputDialog(null,"Motivo de Rechazo",JOptionPane.QUESTION_MESSAGE);
         try {
             String estado = "Observado";
-            negoIFC.ModificarEstadoInformeFinal(IdInfoFinalCurso, estado);
+            negoIFC.ModificarEstadoInformeFinal(IdInfoFinalCurso, estado, motivo);
             negoIFC.cst.close();
             negoIFC.conexion.close();
             JOptionPane.showMessageDialog(null, "El Informe se observó con exito");

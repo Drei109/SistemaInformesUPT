@@ -21,6 +21,7 @@ public class ClsEntidadInformeFinalCurso {
     private int notaMasBaja; /*INT(5) NOT NULL,*/
     private String lab;
     private String taller;
+    private String motivo;
 
     public int getIdinformefinalcurso() {
         return idinformefinalcurso;
@@ -148,5 +149,13 @@ public class ClsEntidadInformeFinalCurso {
 
     public void setTaller(String taller) {
         this.taller = taller;
+    }
+
+    public String getMotivo() {
+        return motivo;
+    }
+
+    public void setMotivo(String motivo) {
+        this.motivo = motivo;
     }
 }

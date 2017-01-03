@@ -854,7 +854,7 @@ public class FrmPortafolio extends javax.swing.JInternalFrame {
         ResultSet rs ;
         try {
             String estado = "Aprobado";
-            negoPorta.ModificarEstadoPortafolio(IdPortafolio, estado);
+            negoPorta.ModificarEstadoPortafolio(IdPortafolio, estado, "Correcto");
             JOptionPane.showMessageDialog(null, IdPortafolio);
             JOptionPane.showMessageDialog(null, codDocente);
             negoPorta.ModificarRececpcionadoPorPortafolio(IdPortafolio, codDocente);
@@ -868,9 +868,11 @@ public class FrmPortafolio extends javax.swing.JInternalFrame {
     private void btnRechazarInformeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRechazarInformeActionPerformed
         ClsNegocioPortafolio negoPorta = new ClsNegocioPortafolio();
         ResultSet rs ;
+        String motivo = JOptionPane.showInputDialog(null,"Motivo de Rechazo",JOptionPane.QUESTION_MESSAGE);
+        
         try {
             String estado = "Observado";
-            negoPorta.ModificarEstadoPortafolio(IdPortafolio, estado);            
+            negoPorta.ModificarEstadoPortafolio(IdPortafolio, estado, motivo);            
             negoPorta.cst.close();
             negoPorta.conexion.close();
             JOptionPane.showMessageDialog(null, "El Informe se rechazó con exito");

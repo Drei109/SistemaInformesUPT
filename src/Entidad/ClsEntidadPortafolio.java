@@ -15,6 +15,7 @@ public class ClsEntidadPortafolio {
     private String recepcioadoPor;
     private String estadoPortafolio;
     private int idUnidad;
+    private String motivo;
 
     public int getIdUnidad() {
         return idUnidad;
@@ -86,6 +87,14 @@ public class ClsEntidadPortafolio {
 
     public void setEstadoPortafolio(String estadoPortafolio) {
         this.estadoPortafolio = estadoPortafolio;
+    }
+
+    public String getMotivo() {
+        return motivo;
+    }
+
+    public void setMotivo(String motivo) {
+        this.motivo = motivo;
     }
     
     
