@@ -23,6 +23,15 @@ public class ClsEntidadPruebaCursosFaltantes {
     private int idUnidad;
     private String descripcionUnidad;
     private String cuentaCarga;
+    private String seccion;
+
+    public String getSeccion() {
+        return seccion;
+    }
+
+    public void setSeccion(String seccion) {
+        this.seccion = seccion;
+    }
 
     public String getCuentaCarga() {
         return cuentaCarga;

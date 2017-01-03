@@ -98,6 +98,7 @@ public class ClsNegocioPruebaEntrada implements ClsInterfacePruebaEntrada{
                 pru.setNombreDocente(rs.getString("nombreDocente"));
                 pru.setEmailDocente(rs.getString("emailDocente"));
                 pru.setCeluDocente(rs.getString("celularDocente"));
+                pru.setSeccion(rs.getString("seccion"));
                 if (busqueda.equals("Portafolio")) {
                     pru.setIdUnidad(rs.getInt("idUnidad"));
                     pru.setDescripcionUnidad(rs.getString("descripcionUnidad"));
