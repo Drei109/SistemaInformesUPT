@@ -141,6 +141,8 @@ public class FrmPortafolio extends javax.swing.JInternalFrame {
         btnGuardarInforme = new javax.swing.JButton();
         btnEnviarInforme = new javax.swing.JButton();
         txtUnidad = new javax.swing.JLabel();
+        jLabel10 = new javax.swing.JLabel();
+        txtSeccion = new javax.swing.JTextField();
         jPanel4 = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
         tablaDocente = new javax.swing.JTable();
@@ -445,6 +447,12 @@ public class FrmPortafolio extends javax.swing.JInternalFrame {
         txtUnidad.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         txtUnidad.setText("UNIDAD");
 
+        jLabel10.setText("Sección :");
+
+        txtSeccion.setEditable(false);
+        txtSeccion.setBackground(new java.awt.Color(248, 248, 248));
+        txtSeccion.setEnabled(false);
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
@@ -466,7 +474,10 @@ public class FrmPortafolio extends javax.swing.JInternalFrame {
                                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(jPanel2Layout.createSequentialGroup()
                                         .addComponent(txtCodigoCurso, javax.swing.GroupLayout.PREFERRED_SIZE, 188, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(0, 0, Short.MAX_VALUE))
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(jLabel10)
+                                        .addGap(46, 46, 46)
+                                        .addComponent(txtSeccion, javax.swing.GroupLayout.PREFERRED_SIZE, 188, javax.swing.GroupLayout.PREFERRED_SIZE))
                                     .addComponent(txtDocente)
                                     .addComponent(txtNombreCurso)))
                             .addComponent(lblSemestre, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -486,10 +497,12 @@ public class FrmPortafolio extends javax.swing.JInternalFrame {
                 .addComponent(lblSemestre)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(txtUnidad)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 37, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 42, Short.MAX_VALUE)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel5)
-                    .addComponent(txtCodigoCurso, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtCodigoCurso, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel10)
+                    .addComponent(txtSeccion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4)
@@ -934,7 +947,7 @@ public class FrmPortafolio extends javax.swing.JInternalFrame {
             ClsEntidadPortafolioMaterialEstudiante entiMaterialEstudiante = new ClsEntidadPortafolioMaterialEstudiante();
             ClsNegocioPortafolioMaterialEstudiante negoMaterialEstudiante =  new ClsNegocioPortafolioMaterialEstudiante();
             
-            ArrayList<String> idinfo = negoMaterialDocente.obtenerInfoFinalDocente(codDocente,datoPorta[0],Integer.parseInt(datoPorta[11]));
+            ArrayList<String> idinfo = negoMaterialDocente.obtenerInfoFinalDocente(codDocente,datoPorta[0],Integer.parseInt(datoPorta[12]));
             String id[] = idinfo.toArray(new String[idinfo.size()]);
             
             negoMaterialDocente.EliminarDetallePortafolioMaterialDocente(id[0]);
@@ -1083,7 +1096,8 @@ public class FrmPortafolio extends javax.swing.JInternalFrame {
             String codigoDcoente = datoPorta[7];
 
             txtDocente.setText(datoPorta[8]);
-            txtUnidad.setText(datoPorta[11]);
+            txtSeccion.setText(datoPorta[11]);
+            txtUnidad.setText(datoPorta[12]);
         }
         else{
             txtCodigoCurso.setText(datoPorta[0]);
@@ -1098,7 +1112,8 @@ public class FrmPortafolio extends javax.swing.JInternalFrame {
             txtNumAprobados.setText(datoPorta[7]);
             txtNumDesaprobados.setText(datoPorta[8]);
             txtRevisadoPor.setText(datoPorta[9]);
-            txtUnidad.setText("UNIDAD " + datoPorta[11]);
+            txtSeccion.setText(datoPorta[11]);
+            txtUnidad.setText("UNIDAD " + datoPorta[12]);
             cargarDatosTablaDocenteActualizar();
             cargarDatosTablaEstudianteActualizar();
 //            cargarDatosObservaciones();
@@ -1215,7 +1230,7 @@ public class FrmPortafolio extends javax.swing.JInternalFrame {
             entiPortafolio.setEstudianteAprobado(Integer.parseInt(txtNumAprobados.getText()));
             entiPortafolio.setEstudianteDesaprobado(Integer.parseInt(txtNumAbandono.getText()));
             entiPortafolio.setRecepcioadoPor(txtRevisadoPor.getText());
-            entiPortafolio.setIdUnidad(Integer.parseInt(datoPorta[12])+1);
+            entiPortafolio.setIdUnidad(Integer.parseInt(datoPorta[13])+1);
                         
             negPortafolio.AgregarPortafolio(entiPortafolio);
             negPortafolio.cst.close();
@@ -1235,9 +1250,9 @@ public class FrmPortafolio extends javax.swing.JInternalFrame {
             ClsEntidadPortafolioMaterialEstudiante entiMaterialEstudiante = new ClsEntidadPortafolioMaterialEstudiante();
             ClsNegocioPortafolioMaterialEstudiante negoMaterialEstudiante =  new ClsNegocioPortafolioMaterialEstudiante();
             
-            JOptionPane.showMessageDialog(null,codDocente + " " + datoPorta[0] + " " + Integer.parseInt(datoPorta[12])+1);
+            JOptionPane.showMessageDialog(null,codDocente + " " + datoPorta[0] + " " + Integer.parseInt(datoPorta[13])+1);
             
-            ArrayList<String> idinfo = negoMaterialDocente.obtenerInfoFinalDocente(codDocente,datoPorta[0],Integer.parseInt(datoPorta[12])+1);
+            ArrayList<String> idinfo = negoMaterialDocente.obtenerInfoFinalDocente(codDocente,datoPorta[0],Integer.parseInt(datoPorta[13])+1);
             String id[] = idinfo.toArray(new String[idinfo.size()]);
             
             for (int i = 0; i < filas; i++) {
@@ -1286,6 +1301,7 @@ public class FrmPortafolio extends javax.swing.JInternalFrame {
     private javax.swing.JButton btnRemoverFilaEstudiante;
     private javax.swing.JButton guardarDetalles;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
@@ -1330,6 +1346,7 @@ public class FrmPortafolio extends javax.swing.JInternalFrame {
     private javax.swing.JTextField txtPorcenMatriculados;
     private javax.swing.JTextField txtPorcenRetirados;
     private javax.swing.JTextField txtRevisadoPor;
+    private javax.swing.JTextField txtSeccion;
     private javax.swing.JLabel txtUnidad;
     // End of variables declaration//GEN-END:variables
 }

@@ -38,13 +38,14 @@ public class FrmReportesFaltantes extends javax.swing.JInternalFrame {
         jLabel1 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         tablaF = new javax.swing.JTable();
-        jLabel2 = new javax.swing.JLabel();
         btnTerminar = new javax.swing.JButton();
         btnSalir = new javax.swing.JButton();
         jLabel3 = new javax.swing.JLabel();
         cmbTipoReporte = new javax.swing.JComboBox<>();
         btnListarTabla = new javax.swing.JButton();
 
+        setIconifiable(true);
+        setTitle("Reportes faltantes");
         addInternalFrameListener(new javax.swing.event.InternalFrameListener() {
             public void internalFrameActivated(javax.swing.event.InternalFrameEvent evt) {
             }
@@ -65,7 +66,8 @@ public class FrmReportesFaltantes extends javax.swing.JInternalFrame {
 
         jLabel1.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(47, 119, 236));
-        jLabel1.setText("Reportes Restantes");
+        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel1.setText("REPORTES FALTANTES");
 
         tablaF.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -79,9 +81,6 @@ public class FrmReportesFaltantes extends javax.swing.JInternalFrame {
             }
         ));
         jScrollPane1.setViewportView(tablaF);
-
-        jLabel2.setForeground(new java.awt.Color(47, 119, 236));
-        jLabel2.setText("Lista de tus Reportes:");
 
         btnTerminar.setText("Terminar");
         btnTerminar.addActionListener(new java.awt.event.ActionListener() {
@@ -97,10 +96,9 @@ public class FrmReportesFaltantes extends javax.swing.JInternalFrame {
             }
         });
 
-        jLabel3.setForeground(new java.awt.Color(47, 119, 236));
         jLabel3.setText("Tipo de Reporte:");
 
-        cmbTipoReporte.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Informe Final Curso", "Prueba Entrada", "Portafolio" }));
+        cmbTipoReporte.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Prueba Entrada", "Informe Final Curso", "Portafolio" }));
 
         btnListarTabla.setText("Listar Tabla");
         btnListarTabla.addActionListener(new java.awt.event.ActionListener() {
@@ -113,49 +111,46 @@ public class FrmReportesFaltantes extends javax.swing.JInternalFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jLabel1)
-                .addGap(201, 201, 201))
             .addGroup(layout.createSequentialGroup()
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 510, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btnTerminar, javax.swing.GroupLayout.PREFERRED_SIZE, 198, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btnSalir, javax.swing.GroupLayout.PREFERRED_SIZE, 198, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
+                        .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(btnTerminar)
-                                .addGap(18, 18, 18)
-                                .addComponent(btnSalir, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(btnListarTabla))
-                            .addComponent(jLabel2))
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jScrollPane1)
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jLabel3)
-                                .addGap(25, 25, 25))
-                            .addComponent(cmbTipoReporte, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(21, Short.MAX_VALUE))
+                                .addGap(18, 18, 18)
+                                .addComponent(cmbTipoReporte, javax.swing.GroupLayout.PREFERRED_SIZE, 198, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(btnListarTabla, javax.swing.GroupLayout.PREFERRED_SIZE, 198, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(0, 209, Short.MAX_VALUE)))))
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel1)
-                .addGap(18, 18, 18)
+                .addGap(31, 31, 31)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel2)
-                    .addComponent(jLabel3))
+                    .addComponent(jLabel3)
+                    .addComponent(btnListarTabla)
+                    .addComponent(cmbTipoReporte, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnTerminar)
-                    .addComponent(btnSalir)
-                    .addComponent(cmbTipoReporte, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnListarTabla))
-                .addGap(18, 18, 18)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(18, Short.MAX_VALUE))
+                    .addComponent(btnSalir))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
@@ -186,7 +181,7 @@ public class FrmReportesFaltantes extends javax.swing.JInternalFrame {
             String titulos[] = {"Id Curso",
                             "Nombre del Curso",
                             "Nombre del Docente",
-                            "Unidad por hacer","idUnidad"};
+                            "Unidad por hacer","idUnidad","Sección"};
             try {
                 ClsNegocioPruebaEntrada datos = new ClsNegocioPruebaEntrada();
                 String busqueda = cmbTipoReporte.getSelectedItem().toString();
@@ -196,7 +191,7 @@ public class FrmReportesFaltantes extends javax.swing.JInternalFrame {
 
                 DefaultTableModel modeloTabla = new DefaultTableModel(null, titulos);
 
-                String campo[] = new String[5];
+                String campo[] = new String[6];
                 String nombreUnidad = "";
 
                 while (iterator.hasNext()) {
@@ -226,6 +221,7 @@ public class FrmReportesFaltantes extends javax.swing.JInternalFrame {
                     
                     campo[3] = nombreUnidad;
                     campo[4] = String.valueOf(objenti.getIdUnidad());
+                    campo[5] = objenti.getSeccion();
                     
                     if(objenti.getIdUnidad() < Integer.parseInt(objenti.getCuentaCarga())){
                         modeloTabla.addRow(campo);                        
@@ -241,7 +237,8 @@ public class FrmReportesFaltantes extends javax.swing.JInternalFrame {
         } else {
             String titulos[] = {"Id Curso",
                             "Nombre del Curso",
-                            "Nombre del Docente"};
+                            "Nombre del Docente",
+                            "Sección"};
         
             try {
                 ClsNegocioPruebaEntrada datos = new ClsNegocioPruebaEntrada();
@@ -252,7 +249,7 @@ public class FrmReportesFaltantes extends javax.swing.JInternalFrame {
 
                 DefaultTableModel modeloTabla = new DefaultTableModel(null, titulos);
 
-                String campo[] = new String[3];
+                String campo[] = new String[4];
 
                 while (iterator.hasNext()) {
                     ClsEntidadPruebaCursosFaltantes objenti = new ClsEntidadPruebaCursosFaltantes();
@@ -262,6 +259,7 @@ public class FrmReportesFaltantes extends javax.swing.JInternalFrame {
                     campo[0] = objenti.getIdCurso();
                     campo[1] = objenti.getNombreCurso();
                     campo[2] = objenti.getNombreDocente();
+                    campo[3] = objenti.getSeccion();
 
                     modeloTabla.addRow(campo);
                 }
@@ -275,7 +273,7 @@ public class FrmReportesFaltantes extends javax.swing.JInternalFrame {
     }
     
     void seleccionarTabla(){
-        String campo[] = new String[14];
+        String campo[] = new String[15];
         String tipoReporte = cmbTipoReporte.getSelectedItem().toString();
         if (tablaF.getSelectedRow() >= 0) {
             try {
@@ -300,10 +298,11 @@ public class FrmReportesFaltantes extends javax.swing.JInternalFrame {
                         campo[8] = String.valueOf(objenti.getNombreDocente());
                         campo[9] = objenti.getEmailDocente();
                         campo[10]= objenti.getCeluDocente();
+                        campo[11]= objenti.getSeccion();
                         if(tipoReporte.equals("Portafolio")){
-                            campo[11] = (String) tablaF.getValueAt(filaS,3);
-                            campo[12] = (String) tablaF.getModel().getValueAt(filaS,4);
-                            campo[13] = objenti.getCargaAcademica();
+                            campo[12] = (String) tablaF.getValueAt(filaS,3);
+                            campo[13] = (String) tablaF.getModel().getValueAt(filaS,4);
+                            campo[14] = objenti.getCargaAcademica();
                         }
                         break;
                     }
@@ -351,7 +350,6 @@ public class FrmReportesFaltantes extends javax.swing.JInternalFrame {
     private javax.swing.JButton btnTerminar;
     private javax.swing.JComboBox<String> cmbTipoReporte;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JScrollPane jScrollPane1;
     public static javax.swing.JTable tablaF;

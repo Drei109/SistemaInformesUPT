@@ -1194,7 +1194,7 @@ public class FrmPrueba extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_txtNombreDocenteActionPerformed
 
     private void formInternalFrameOpened(javax.swing.event.InternalFrameEvent evt) {//GEN-FIRST:event_formInternalFrameOpened
-        txtSecCurso.setText("A");
+
         cargarTabla();
         cargarDatos();
         cargarTitulosObservaciones();
@@ -1488,6 +1488,8 @@ public class FrmPrueba extends javax.swing.JInternalFrame {
             txtNombreDocente.setText(datoIFC[8]);
             txtEmailDocente.setText(datoIFC[9]); 
             txtCelularDocente.setText(datoIFC[10]);
+            
+            txtSecCurso.setText(datoIFC[11]);
         }
         else{
             txtCodigoCurso.setText(datoIFC[0]);
@@ -1507,6 +1509,8 @@ public class FrmPrueba extends javax.swing.JInternalFrame {
             txtNombreDocente.setText(datoIFC[8]);
             txtEmailDocente.setText(datoIFC[10]);
             txtCelularDocente.setText(datoIFC[9]);
+            
+            txtSecCurso.setText(datoIFC[11]);
             
             txtNumCumpliSilabo.setText(datoIFC[14]);
             txtNumPractiCalificada.setText(datoIFC[15]);
