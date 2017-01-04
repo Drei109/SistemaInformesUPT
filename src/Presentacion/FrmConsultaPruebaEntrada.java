@@ -325,6 +325,8 @@ public class FrmConsultaPruebaEntrada extends javax.swing.JInternalFrame {
                 dtm.setColumnIdentifiers(titulosUsuario);
             } else {
                 String titulosUsuario[] = {"ID","Cod Curso","Curso","Fecha","Estado","Sección"};
+//                String titulosUsuario[] = {"ID","Cod Curso","Curso","Fecha","Estado","Motivo"};
+
                 dtm.setColumnIdentifiers(titulosUsuario);
             }            
             tblBuscar.setModel(dtm);
@@ -336,6 +338,7 @@ public class FrmConsultaPruebaEntrada extends javax.swing.JInternalFrame {
                 dtm.setColumnIdentifiers(titulosUsuario);
             } else {
             String titulosAdministrador[] = {"ID","Cod Docente","Nombre","Semestre","Cod Curso","Curso","Fecha","Estado","Sección"};
+//            String titulosAdministrador[] = {"ID","Cod Docente","Nombre","Semestre","Cod Curso","Curso","Fecha","Estado","Motivo"};
             dtm.setColumnIdentifiers(titulosAdministrador);
             }
             tblBuscar.setModel(dtm);
@@ -373,7 +376,6 @@ public class FrmConsultaPruebaEntrada extends javax.swing.JInternalFrame {
                 Campo[3] = (String) rs.getString(4); 
                 Campo[4] = (String) rs.getString(5); 
                 Campo[5] = (String) rs.getString(6); 
-
                 dtm.addRow(Campo);
                 encuentra = true;
             }
@@ -410,7 +412,6 @@ public class FrmConsultaPruebaEntrada extends javax.swing.JInternalFrame {
                 Campo[6] = (String) rs.getString(7); 
                 Campo[7] = (String) rs.getString(8); 
                 Campo[8] = (String) rs.getString(9); 
-
                 dtm.addRow(Campo);
                 encuentra = true;
             }

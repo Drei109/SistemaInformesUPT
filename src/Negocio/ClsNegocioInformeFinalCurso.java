@@ -87,11 +87,12 @@ public class ClsNegocioInformeFinalCurso implements ClsInterfaceInformeFinalCurs
     }
 
     @Override
-    public void ModificarEstadoInformeFinal(String codigo, String estado) {
+    public void ModificarEstadoInformeFinal(String codigo, String estado, String motivo) {
         try {
-            cst = conexion.prepareCall("{call USP_EstadoInfoFinalCuros_U(?,?)}");
+            cst = conexion.prepareCall("{call USP_EstadoInfoFinalCuros_U(?,?,?)}");
             cst.setString("pidInfoFinal", codigo);
             cst.setString("pestadoInfoFinal", estado);
+            cst.setString("pmotivo", motivo);
             cst.execute();
         } catch (SQLException ex) {
             ex.printStackTrace();

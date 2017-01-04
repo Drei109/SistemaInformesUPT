@@ -16,7 +16,7 @@ public interface ClsInterfaceInformeFinalCurso {
     
     public ResultSet ConsultaAvanzaInformeFinal(String criterio, String busqueda) throws Exception;
     
-    void ModificarEstadoInformeFinal(String codigo, String estado);
+    void ModificarEstadoInformeFinal(String codigo, String estado, String motivo);
     
     public ResultSet ConsultaAvanzaInfoFinalUsuario(String criterio, String busqueda, String codDocente) throws Exception;
     

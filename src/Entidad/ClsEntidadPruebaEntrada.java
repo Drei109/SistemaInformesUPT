@@ -13,6 +13,7 @@ public class ClsEntidadPruebaEntrada {
     private String fechaPruebaEntrada;
     private int evaluados;
     private String estado;
+    private String motivo;
 
     public String getEstado() {
         return estado;
@@ -54,6 +55,14 @@ public class ClsEntidadPruebaEntrada {
 
     public void setEvaluados(int evaluados) {
         this.evaluados = evaluados;
+    }
+
+    public String getMotivo() {
+        return motivo;
+    }
+
+    public void setMotivo(String motivo) {
+        this.motivo = motivo;
     }
     
 }

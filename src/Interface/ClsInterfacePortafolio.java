@@ -20,7 +20,7 @@ public interface ClsInterfacePortafolio {
     
     void EliminarPortafolio(String codigo);
     
-    void ModificarEstadoPortafolio(String codigo, String estado);
+    void ModificarEstadoPortafolio(String codigo, String estado, String motivo);
     
     void ModificarRececpcionadoPorPortafolio(String codigo, String recepcionado);
     

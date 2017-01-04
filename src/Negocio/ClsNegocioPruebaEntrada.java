@@ -162,11 +162,12 @@ public class ClsNegocioPruebaEntrada implements ClsInterfacePruebaEntrada{
     }
 
     @Override
-    public void ModificarEstadoPruebaEntrada(String codigo, String estado) {
+    public void ModificarEstadoPruebaEntrada(String codigo, String estado, String motivo) {
         try {
-            cst = conexion.prepareCall("{call USP_EstadoPruebaEntrada_U(?,?)}");
+            cst = conexion.prepareCall("{call USP_EstadoPruebaEntrada_U(?,?,?)}");
             cst.setString("pidPruebaEntrada", codigo);
             cst.setString("pestadoPruebaEntrada", estado);
+            cst.setString("pmotivo", motivo);
             cst.execute();
         } catch (SQLException ex) {
             ex.printStackTrace();
