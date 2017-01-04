@@ -156,8 +156,9 @@ public class FrmConsultaPruebaEntrada extends javax.swing.JInternalFrame {
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
                 .addComponent(jLabel1)
-                .addGap(39, 39, 39)
+                .addGap(28, 28, 28)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
                     .addComponent(cmbCriterio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -173,7 +174,7 @@ public class FrmConsultaPruebaEntrada extends javax.swing.JInternalFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnVer)
                     .addComponent(btnSalir))
-                .addGap(0, 21, Short.MAX_VALUE))
+                .addGap(0, 17, Short.MAX_VALUE))
         );
 
         pack();
@@ -320,10 +321,12 @@ public class FrmConsultaPruebaEntrada extends javax.swing.JInternalFrame {
         switch(nivelUsuario){
         case "Usuario":
             if (tipoInforme.equals("Portafolio")) {
-                String titulosUsuario[] = {"ID","Cod Curso","Curso","Fecha","Estado","Unidad","Motivo"};
+                
+                String titulosUsuario[] = {"ID","Cod Curso","Curso","Fecha","Estado","Unidad","Sección","Motivo"};
                 dtm.setColumnIdentifiers(titulosUsuario);
             } else {
-                String titulosUsuario[] = {"ID","Cod Curso","Curso","Fecha","Estado","Motivo"};
+                String titulosUsuario[] = {"ID","Cod Curso","Curso","Fecha","Estado","Sección","Motivo"};
+
                 dtm.setColumnIdentifiers(titulosUsuario);
             }            
             tblBuscar.setModel(dtm);
@@ -331,10 +334,11 @@ public class FrmConsultaPruebaEntrada extends javax.swing.JInternalFrame {
         case "Supervisor":
         case "Administrador":
             if (tipoInforme.equals("Portafolio")) {
-                String titulosUsuario[] = {"ID","Cod Docente","Nombre","Semestre","Cod Curso","Curso","Fecha","Estado","Unidad","Motivo"};
+                String titulosUsuario[] = {"ID","Cod Docente","Nombre","Semestre","Cod Curso","Curso","Fecha","Estado","Unidad","Sección","Motivo"};
                 dtm.setColumnIdentifiers(titulosUsuario);
             } else {
-            String titulosAdministrador[] = {"ID","Cod Docente","Nombre","Semestre","Cod Curso","Curso","Fecha","Estado","Motivo"};
+            String titulosAdministrador[] = {"ID","Cod Docente","Nombre","Semestre","Cod Curso","Curso","Fecha","Estado","Sección"};
+//            String titulosAdministrador[] = {"ID","Cod Docente","Nombre","Semestre","Cod Curso","Curso","Fecha","Estado","Motivo"};
             dtm.setColumnIdentifiers(titulosAdministrador);
             }
             tblBuscar.setModel(dtm);
@@ -372,7 +376,6 @@ public class FrmConsultaPruebaEntrada extends javax.swing.JInternalFrame {
                 Campo[3] = (String) rs.getString(4); 
                 Campo[4] = (String) rs.getString(5); 
                 Campo[5] = (String) rs.getString(6); 
-                
                 dtm.addRow(Campo);
                 encuentra = true;
             }
@@ -409,7 +412,6 @@ public class FrmConsultaPruebaEntrada extends javax.swing.JInternalFrame {
                 Campo[6] = (String) rs.getString(7); 
                 Campo[7] = (String) rs.getString(8); 
                 Campo[8] = (String) rs.getString(9); 
-                
                 dtm.addRow(Campo);
                 encuentra = true;
             }
@@ -490,7 +492,7 @@ public class FrmConsultaPruebaEntrada extends javax.swing.JInternalFrame {
                 Campo[6] = (String) rs.getString(7); 
                 Campo[7] = (String) rs.getString(8); 
                 Campo[8] = (String) rs.getString(9); 
-                
+                    
                 dtm.addRow(Campo);
                 encuentra = true;
             }
@@ -533,7 +535,7 @@ public class FrmConsultaPruebaEntrada extends javax.swing.JInternalFrame {
                 Campo[3] = (String) rs.getString(4); 
                 Campo[4] = (String) rs.getString(5); 
                 Campo[5] = (String) rs.getString(6); 
-                Campo[6] = (String) rs.getString(7);
+                Campo[6] = (String) rs.getString(7); 
                 
                 dtm.addRow(Campo);
                 encuentra = true;

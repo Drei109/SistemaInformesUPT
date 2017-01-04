@@ -222,6 +222,7 @@ public class ClsNegocioPruebaEntrada implements ClsInterfacePruebaEntrada{
                 pru.setNombreCurso(rs.getString("nombre"));
                 pru.setFechaPrueba(rs.getString("fechainformefinalcurso"));
                 pru.setEstadoPrueba(rs.getString("estadoInformeFinalCurso"));
+                pru.setSeccion(rs.getString("seccion"));
                 infoTotales.add(pru);
             }
             
@@ -266,6 +267,7 @@ public class ClsNegocioPruebaEntrada implements ClsInterfacePruebaEntrada{
                 pru.setNombreCurso(rs.getString("nombre"));
                 pru.setFechaPrueba(rs.getString("fechainformefinalcurso"));
                 pru.setEstadoPrueba(rs.getString("estadoInformeFinalCurso"));
+                pru.setSeccion(rs.getString("seccion"));
                 infoTotalesDoc.add(pru);
             }
             
