@@ -337,8 +337,7 @@ public class FrmConsultaPruebaEntrada extends javax.swing.JInternalFrame {
                 String titulosUsuario[] = {"ID","Cod Docente","Nombre","Semestre","Cod Curso","Curso","Fecha","Estado","Unidad","Sección","Motivo"};
                 dtm.setColumnIdentifiers(titulosUsuario);
             } else {
-            String titulosAdministrador[] = {"ID","Cod Docente","Nombre","Semestre","Cod Curso","Curso","Fecha","Estado","Sección"};
-//            String titulosAdministrador[] = {"ID","Cod Docente","Nombre","Semestre","Cod Curso","Curso","Fecha","Estado","Motivo"};
+            String titulosAdministrador[] = {"ID","Cod Docente","Nombre","Semestre","Cod Curso","Curso","Fecha","Estado","Sección","Motivo"};
             dtm.setColumnIdentifiers(titulosAdministrador);
             }
             tblBuscar.setModel(dtm);
@@ -361,7 +360,7 @@ public class FrmConsultaPruebaEntrada extends javax.swing.JInternalFrame {
             rs  =negPruebaEntrada.ConsultaAvanzaPruebaEntradaUsuario(criterio, busqueda,codDocente);
 
             boolean encuentra = false;
-            String Campo[] = new String[6];
+            String Campo[] = new String[7];
             int fila;
             fila = dtm.getRowCount();
             if (fila > 0) {
@@ -376,6 +375,7 @@ public class FrmConsultaPruebaEntrada extends javax.swing.JInternalFrame {
                 Campo[3] = (String) rs.getString(4); 
                 Campo[4] = (String) rs.getString(5); 
                 Campo[5] = (String) rs.getString(6); 
+                Campo[6] = (String) rs.getString(7); 
                 dtm.addRow(Campo);
                 encuentra = true;
             }
@@ -394,7 +394,7 @@ public class FrmConsultaPruebaEntrada extends javax.swing.JInternalFrame {
             rs  =negPruebaEntrada.ConsultaAvanzaPruebaEntrada(criterio, busqueda);
 
             boolean encuentra = false;
-            String Campo[] = new String[9];
+            String Campo[] = new String[10];
             int fila;
             fila = dtm.getRowCount();
             if (fila > 0) {
@@ -412,6 +412,7 @@ public class FrmConsultaPruebaEntrada extends javax.swing.JInternalFrame {
                 Campo[6] = (String) rs.getString(7); 
                 Campo[7] = (String) rs.getString(8); 
                 Campo[8] = (String) rs.getString(9); 
+                Campo[9] = (String) rs.getString(10); 
                 dtm.addRow(Campo);
                 encuentra = true;
             }
@@ -440,7 +441,7 @@ public class FrmConsultaPruebaEntrada extends javax.swing.JInternalFrame {
             rs  = negFinal.ConsultaAvanzaInfoFinalUsuario(criterio, busqueda,codDocente);
 
             boolean encuentra = false;
-            String Campo[] = new String[6];
+            String Campo[] = new String[7];
             int fila;
             fila = dtm.getRowCount();
             if (fila > 0) {
@@ -455,6 +456,7 @@ public class FrmConsultaPruebaEntrada extends javax.swing.JInternalFrame {
                 Campo[3] = (String) rs.getString(4); 
                 Campo[4] = (String) rs.getString(5); 
                 Campo[5] = (String) rs.getString(6); 
+                Campo[6] = (String) rs.getString(7); 
                 
                 dtm.addRow(Campo);
                 encuentra = true;
@@ -474,7 +476,7 @@ public class FrmConsultaPruebaEntrada extends javax.swing.JInternalFrame {
             rs  =negFinal.ConsultaAvanzaInformeFinal(criterio, busqueda);
 
             boolean encuentra = false;
-            String Campo[] = new String[9];
+            String Campo[] = new String[10];
             int fila;
             fila = dtm.getRowCount();
             if (fila > 0) {
@@ -492,6 +494,7 @@ public class FrmConsultaPruebaEntrada extends javax.swing.JInternalFrame {
                 Campo[6] = (String) rs.getString(7); 
                 Campo[7] = (String) rs.getString(8); 
                 Campo[8] = (String) rs.getString(9); 
+                Campo[9] = (String) rs.getString(10); 
                     
                 dtm.addRow(Campo);
                 encuentra = true;
@@ -520,7 +523,7 @@ public class FrmConsultaPruebaEntrada extends javax.swing.JInternalFrame {
             rs  =negPortafolio.ConsultaAvanzaPortafolioUsuario(criterio, busqueda,codDocente);
 
             boolean encuentra = false;
-            String Campo[] = new String[7];
+            String Campo[] = new String[8];
             int fila;
             fila = dtm.getRowCount();
             if (fila > 0) {
@@ -536,6 +539,7 @@ public class FrmConsultaPruebaEntrada extends javax.swing.JInternalFrame {
                 Campo[4] = (String) rs.getString(5); 
                 Campo[5] = (String) rs.getString(6); 
                 Campo[6] = (String) rs.getString(7); 
+                Campo[7] = (String) rs.getString(8); 
                 
                 dtm.addRow(Campo);
                 encuentra = true;
@@ -555,7 +559,7 @@ public class FrmConsultaPruebaEntrada extends javax.swing.JInternalFrame {
             rs  =negPortafolio.ConsultaAvanzaPortafolioAdministrador(criterio, busqueda);
 
             boolean encuentra = false;
-            String Campo[] = new String[10];
+            String Campo[] = new String[11];
             int fila;
             fila = dtm.getRowCount();
             if (fila > 0) {
@@ -574,6 +578,7 @@ public class FrmConsultaPruebaEntrada extends javax.swing.JInternalFrame {
                 Campo[7] = (String) rs.getString(8); 
                 Campo[8] = (String) rs.getString(9); 
                 Campo[9] = (String) rs.getString(10); 
+                Campo[10] = (String) rs.getString(11); 
                 
                 dtm.addRow(Campo);
                 encuentra = true;
