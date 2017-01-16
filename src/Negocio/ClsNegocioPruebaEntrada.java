@@ -223,6 +223,9 @@ public class ClsNegocioPruebaEntrada implements ClsInterfacePruebaEntrada{
                 pru.setFechaPrueba(rs.getString("fechainformefinalcurso"));
                 pru.setEstadoPrueba(rs.getString("estadoInformeFinalCurso"));
                 pru.setSeccion(rs.getString("seccion"));
+                if (busqueda.equals("Portafolio")) {
+                    pru.setDescripcionUnidad(rs.getString("descripcionUnidad"));
+                }                
                 infoTotales.add(pru);
             }
             
