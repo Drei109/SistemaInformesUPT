@@ -39,6 +39,9 @@ public class FrmPrinicipal extends javax.swing.JFrame {
         mnuImprimir = new javax.swing.JMenu();
         imprimirInformeAceptado = new javax.swing.JMenuItem();
         imprimirInformeCiclos = new javax.swing.JMenuItem();
+        jMenu1 = new javax.swing.JMenu();
+        jMenuItem1 = new javax.swing.JMenuItem();
+        jMenuItem2 = new javax.swing.JMenuItem();
         mnuAyuda = new javax.swing.JMenu();
         mnuSalir = new javax.swing.JMenu();
 
@@ -138,6 +141,26 @@ public class FrmPrinicipal extends javax.swing.JFrame {
         mnuImprimir.add(imprimirInformeCiclos);
 
         jMenuBar1.add(mnuImprimir);
+
+        jMenu1.setText("Mantenimiento");
+
+        jMenuItem1.setText("Cursos");
+        jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem1ActionPerformed(evt);
+            }
+        });
+        jMenu1.add(jMenuItem1);
+
+        jMenuItem2.setText("Docente");
+        jMenuItem2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem2ActionPerformed(evt);
+            }
+        });
+        jMenu1.add(jMenuItem2);
+
+        jMenuBar1.add(jMenu1);
 
         mnuAyuda.setText("Ayuda");
         jMenuBar1.add(mnuAyuda);
@@ -252,6 +275,18 @@ public class FrmPrinicipal extends javax.swing.JFrame {
         repo.setVisible(true);
     }//GEN-LAST:event_imprimirInformeCiclosActionPerformed
 
+    private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
+        FrmCRUDCursos form = new FrmCRUDCursos();
+        escritorio.add(form);
+        form.setVisible(true);
+    }//GEN-LAST:event_jMenuItem1ActionPerformed
+
+    private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
+        FrmCRUDDocente form = new FrmCRUDDocente();
+        escritorio.add(form);
+        form.setVisible(true);
+    }//GEN-LAST:event_jMenuItem2ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -295,9 +330,12 @@ public class FrmPrinicipal extends javax.swing.JFrame {
     private javax.swing.JMenuItem imprimirInformeCiclos;
     private javax.swing.JMenuItem informePruebaEntrada;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu3;
     private javax.swing.JMenuBar jMenuBar1;
+    private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jMenuItem11;
+    private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JMenu mnuAyuda;
     private javax.swing.JMenu mnuConsultas;
     private javax.swing.JMenuItem mnuControlInformes;
