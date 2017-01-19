@@ -8,8 +8,16 @@ package Presentacion;
 import Entidad.ClsEntidadDocente;
 import Negocio.ClsNegocioDocente;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
+import javax.swing.RowFilter;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableModel;
+import javax.swing.table.TableRowSorter;
+
 
 /**
  *
@@ -17,13 +25,16 @@ import java.util.logging.Logger;
  */
 public class FrmCRUDDocente extends javax.swing.JInternalFrame {
 
-    /**
-     * Creates new form FrmCursos
-     */
+    private TableRowSorter<TableModel> rowSorter;
+    boolean esNuevo = true;
+    
     public FrmCRUDDocente() {
         initComponents();
         cargarCodDocente();        
         txtCodDocente.setEnabled(false);
+        activarTextos(false);
+        cargarTabla();
+        activarBotones(true, false, false);
     }
 
     /**
@@ -45,13 +56,14 @@ public class FrmCRUDDocente extends javax.swing.JInternalFrame {
         txtGradoDoc = new javax.swing.JTextField();
         jLabel6 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        tblDocente = new javax.swing.JTable();
         btnGuardar = new javax.swing.JButton();
         btnEliminar = new javax.swing.JButton();
         btnLimpiar = new javax.swing.JButton();
         btnModificar = new javax.swing.JButton();
-        jButton5 = new javax.swing.JButton();
-        jTextField1 = new javax.swing.JTextField();
+        btnBuscar = new javax.swing.JButton();
+        txtBuscar = new javax.swing.JTextField();
+        btnSalir = new javax.swing.JButton();
 
         jLabel1.setText("Código :");
 
@@ -67,7 +79,7 @@ public class FrmCRUDDocente extends javax.swing.JInternalFrame {
         jLabel6.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel6.setText("CONTROL DE DOCENTE");
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        tblDocente.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -78,9 +90,14 @@ public class FrmCRUDDocente extends javax.swing.JInternalFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
-        jScrollPane1.setViewportView(jTable1);
+        tblDocente.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tblDocenteMouseClicked(evt);
+            }
+        });
+        jScrollPane1.setViewportView(tblDocente);
 
-        btnGuardar.setText("Guardar");
+        btnGuardar.setText("Nuevo");
         btnGuardar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnGuardarActionPerformed(evt);
@@ -88,58 +105,87 @@ public class FrmCRUDDocente extends javax.swing.JInternalFrame {
         });
 
         btnEliminar.setText("Eliminar");
+        btnEliminar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEliminarActionPerformed(evt);
+            }
+        });
 
         btnLimpiar.setText("Limpiar");
+        btnLimpiar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnLimpiarActionPerformed(evt);
+            }
+        });
 
         btnModificar.setText("Modificar");
+        btnModificar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnModificarActionPerformed(evt);
+            }
+        });
 
-        jButton5.setText("Buscar");
+        btnBuscar.setText("Buscar");
+        btnBuscar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnBuscarActionPerformed(evt);
+            }
+        });
+
+        btnSalir.setText("Salir");
+        btnSalir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSalirActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
+                .addGap(41, 41, 41)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 481, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                        .addGap(38, 38, 38)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel1)
+                            .addComponent(jLabel2)
+                            .addComponent(jLabel3)
+                            .addComponent(jLabel4))
+                        .addGap(41, 41, 41)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(btnGuardar, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jScrollPane1)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel1)
-                                    .addComponent(jLabel2)
-                                    .addComponent(jLabel3)
-                                    .addComponent(jLabel4))
-                                .addGap(41, 41, 41)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(txtCodDocente, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(txtEmailDoc)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(txtCelularDoc, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addGroup(layout.createSequentialGroup()
-                                                .addGap(84, 84, 84)
-                                                .addComponent(txtGradoDoc, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                            .addComponent(jLabel5)))
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addGap(35, 35, 35)
-                                        .addComponent(btnEliminar, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(18, 18, 18)
-                                        .addComponent(btnModificar, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(18, 18, 18)
-                                        .addComponent(btnLimpiar, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addComponent(txtNombreDoc)))
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(jTextField1)))))
-                .addContainerGap(46, Short.MAX_VALUE))
+                                .addComponent(txtCelularDoc, javax.swing.GroupLayout.PREFERRED_SIZE, 187, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(50, 50, 50)
+                                .addComponent(jLabel5)
+                                .addGap(42, 42, 42)
+                                .addComponent(txtGradoDoc, javax.swing.GroupLayout.PREFERRED_SIZE, 186, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(txtEmailDoc)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addComponent(btnModificar, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(33, 33, 33)
+                                .addComponent(btnLimpiar, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(1, 1, 1))
+                            .addComponent(txtNombreDoc)
+                            .addComponent(txtCodDocente, javax.swing.GroupLayout.PREFERRED_SIZE, 187, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(42, 42, 42))
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(btnSalir, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 585, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 585, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                        .addComponent(btnGuardar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(btnBuscar, javax.swing.GroupLayout.DEFAULT_SIZE, 122, Short.MAX_VALUE))
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                        .addComponent(txtBuscar)
+                                        .addGroup(layout.createSequentialGroup()
+                                            .addComponent(btnEliminar, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addGap(313, 313, 313))))))
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -172,17 +218,92 @@ public class FrmCRUDDocente extends javax.swing.JInternalFrame {
                     .addComponent(btnLimpiar))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton5)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(btnBuscar)
+                    .addComponent(txtBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 294, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(29, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 16, Short.MAX_VALUE)
+                .addComponent(btnSalir)
+                .addContainerGap())
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed
+        if (esNuevo) {
+            activarTextos(true);
+            activarBotones(true, false, false);
+            limpiar();
+            cargarCodDocente();
+            btnGuardar.setText("Guardar");
+            esNuevo = false;            
+        } else {
+            if (txtNombreDoc.getText().equals("")) {
+                JOptionPane.showMessageDialog(null, "Complete el campo de nombre antes de guardar");
+            } else {
+                ClsNegocioDocente negoDoc = new ClsNegocioDocente();
+                ClsEntidadDocente entDoc = new ClsEntidadDocente();
+                entDoc.setCodDocente(txtCodDocente.getText());
+                entDoc.setNombreDocente(txtNombreDoc.getText());
+                entDoc.setEmailDocente(txtEmailDoc.getText());
+                entDoc.setCelularDocente(txtCelularDoc.getText());
+                entDoc.setGradoDocente(txtGradoDoc.getText());
+                negoDoc.AgregarDocente(entDoc);
+                limpiar();
+                activarTextos(false);
+                activarBotones(true, false, false);
+                cargarCodDocente();
+                cargarTabla();
+                btnGuardar.setText("Nuevo");
+                esNuevo = true;  
+            }
+        }
+    }//GEN-LAST:event_btnGuardarActionPerformed
+
+    private void btnSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalirActionPerformed
+        this.dispose();
+    }//GEN-LAST:event_btnSalirActionPerformed
+
+    private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
+        rowSorter = new TableRowSorter<>(tblDocente.getModel());
+        tblDocente.setRowSorter(rowSorter);
+        String text = txtBuscar.getText();
+        if (text.trim().length() == 0) {
+           rowSorter.setRowFilter(null);
+        } else {
+           rowSorter.setRowFilter(RowFilter.regexFilter("(?i)" + text));
+        }
+    }//GEN-LAST:event_btnBuscarActionPerformed
+
+    private void tblDocenteMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblDocenteMouseClicked
+        esNuevo = true;
+        btnGuardar.setText("Nuevo");
+        
+        int fila = tblDocente.getSelectedRow();
+        txtCodDocente.setText((String) tblDocente.getValueAt(fila, 0));
+        txtNombreDoc.setText((String) tblDocente.getValueAt(fila, 1));
+        txtEmailDoc.setText((String) tblDocente.getValueAt(fila, 2));
+        txtCelularDoc.setText((String) tblDocente.getValueAt(fila, 3));
+        txtGradoDoc.setText((String) tblDocente.getValueAt(fila, 4));
+        activarBotones(true, true, true);
+        activarTextos(true);
+       
+    }//GEN-LAST:event_tblDocenteMouseClicked
+
+    private void btnLimpiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLimpiarActionPerformed
+        limpiar();
+    }//GEN-LAST:event_btnLimpiarActionPerformed
+
+    private void btnEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarActionPerformed
+        ClsNegocioDocente negoDoc = new ClsNegocioDocente();
+        negoDoc.EliminarDocente(txtCodDocente.getText());
+        cargarTabla();
+        limpiar();
+        activarTextos(false);
+    }//GEN-LAST:event_btnEliminarActionPerformed
+
+    private void btnModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnModificarActionPerformed
         ClsNegocioDocente negoDoc = new ClsNegocioDocente();
         ClsEntidadDocente entDoc = new ClsEntidadDocente();
         entDoc.setCodDocente(txtCodDocente.getText());
@@ -190,18 +311,23 @@ public class FrmCRUDDocente extends javax.swing.JInternalFrame {
         entDoc.setEmailDocente(txtEmailDoc.getText());
         entDoc.setCelularDocente(txtCelularDoc.getText());
         entDoc.setGradoDocente(txtGradoDoc.getText());
-        negoDoc.AgregarDocente(entDoc);
+        negoDoc.ModificarDocente(entDoc);
         limpiar();
+        activarTextos(false);
         cargarCodDocente();
-    }//GEN-LAST:event_btnGuardarActionPerformed
+        cargarTabla();
+        btnGuardar.setText("Nuevo");
+        esNuevo = true;  
+    }//GEN-LAST:event_btnModificarActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnBuscar;
     private javax.swing.JButton btnEliminar;
     private javax.swing.JButton btnGuardar;
     private javax.swing.JButton btnLimpiar;
     private javax.swing.JButton btnModificar;
-    private javax.swing.JButton jButton5;
+    private javax.swing.JButton btnSalir;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -209,8 +335,8 @@ public class FrmCRUDDocente extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
-    private javax.swing.JTextField jTextField1;
+    private javax.swing.JTable tblDocente;
+    private javax.swing.JTextField txtBuscar;
     private javax.swing.JTextField txtCelularDoc;
     private javax.swing.JTextField txtCodDocente;
     private javax.swing.JTextField txtEmailDoc;
@@ -234,5 +360,56 @@ public class FrmCRUDDocente extends javax.swing.JInternalFrame {
         txtEmailDoc.setText("");
         txtGradoDoc.setText("");
         txtNombreDoc.setText("");
+//        txtBuscar.setText("");
+//        cargarTabla();
+        cargarCodDocente();
     }
+
+    private void cargarTabla() {
+        String columnas[] = {"Código","Nombre","Email","Celular","Grado"};
+        ArrayList<ClsNegocioDocente> dato = null;
+        try {
+            ClsNegocioDocente datos = new ClsNegocioDocente();
+            dato = datos.MostrarDocentes();
+            Iterator iterator = dato.iterator();
+            DefaultTableModel modeloTabla = new DefaultTableModel(null, columnas);
+            modeloTabla.setRowCount(0);
+            String campo[] = new String[5];
+            
+            while (iterator.hasNext()) {
+                ClsEntidadDocente objenti = new ClsEntidadDocente();
+
+                objenti = (ClsEntidadDocente) iterator.next();
+
+                campo[0] = objenti.getCodDocente();
+                campo[1] = objenti.getNombreDocente();
+                campo[2] = objenti.getEmailDocente();
+                campo[3] = objenti.getCelularDocente();
+                campo[4] = objenti.getGradoDocente();
+                modeloTabla.addRow(campo);
+            }
+            
+            tblDocente.setModel(modeloTabla);
+            modeloTabla.fireTableDataChanged();
+            datos.conexion.close();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }    
+    }
+    
+    private void activarBotones(boolean nuevoEstado, boolean modificarEstado, boolean eliminarEstado){
+        btnGuardar.setEnabled(nuevoEstado);
+        btnModificar.setEnabled(modificarEstado);
+        btnEliminar.setEnabled(eliminarEstado);
+    }
+
+    private void activarTextos(boolean estado) {
+        txtNombreDoc.setEnabled(estado);
+        txtGradoDoc.setEnabled(estado);
+        txtEmailDoc.setEnabled(estado);
+        txtCelularDoc.setEnabled(estado);
+    }
+
+
 }

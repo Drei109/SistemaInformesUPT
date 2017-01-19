@@ -12,6 +12,7 @@ import java.sql.CallableStatement;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 /**
  *
@@ -59,7 +60,7 @@ public class ClsNegocioDocente implements ClsInterfaceDocente{
     }
 
     @Override
-    public void ModificarDocente(String codigo, ClsEntidadDocente Docente) {
+    public void ModificarDocente(ClsEntidadDocente Docente) {
         try {
             cst = conexion.prepareCall("{call USP_Docente_U(?,?,?,?,?)}");
             cst.setString("pcodDocente", Docente.getCodDocente());
@@ -81,6 +82,34 @@ public class ClsNegocioDocente implements ClsInterfaceDocente{
             cst.execute();
         } catch (SQLException ex) {
             ex.printStackTrace();
+        }
+    }
+
+    @Override
+    public ArrayList MostrarDocentes() {
+        ArrayList<ClsEntidadDocente> infoDocente = new ArrayList<ClsEntidadDocente>();
+        
+        try {
+            CallableStatement cst = conexion.prepareCall("{call USP_Docente_S()}");
+            rs = cst.executeQuery();
+            
+            
+            while (rs.next()) {
+                ClsEntidadDocente entDoc = new ClsEntidadDocente();
+
+                entDoc.setCodDocente(rs.getString("codDocente"));       
+                entDoc.setNombreDocente(rs.getString("nombreDocente"));       
+                entDoc.setEmailDocente(rs.getString("emailDocente"));       
+                entDoc.setCelularDocente(rs.getString("celularDocente"));       
+                entDoc.setGradoDocente(rs.getString("gradoDocente"));       
+                infoDocente.add(entDoc);
+            }
+            
+            
+            return infoDocente;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
         }
     }
     
