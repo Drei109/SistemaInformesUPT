@@ -39,9 +39,11 @@ public class FrmPrinicipal extends javax.swing.JFrame {
         mnuImprimir = new javax.swing.JMenu();
         imprimirInformeAceptado = new javax.swing.JMenuItem();
         imprimirInformeCiclos = new javax.swing.JMenuItem();
+        mnuMante = new javax.swing.JMenu();
+        jMenuItem1 = new javax.swing.JMenuItem();
+        jMenuItem2 = new javax.swing.JMenuItem();
         mnuAyuda = new javax.swing.JMenu();
         mnuSalir = new javax.swing.JMenu();
-        jMenu1 = new javax.swing.JMenu();
 
         jMenu3.setText("jMenu3");
 
@@ -140,6 +142,26 @@ public class FrmPrinicipal extends javax.swing.JFrame {
 
         jMenuBar1.add(mnuImprimir);
 
+        mnuMante.setText("Mantenimiento");
+
+        jMenuItem1.setText("Cursos");
+        jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem1ActionPerformed(evt);
+            }
+        });
+        mnuMante.add(jMenuItem1);
+
+        jMenuItem2.setText("Docente");
+        jMenuItem2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem2ActionPerformed(evt);
+            }
+        });
+        mnuMante.add(jMenuItem2);
+
+        jMenuBar1.add(mnuMante);
+
         mnuAyuda.setText("Ayuda");
         jMenuBar1.add(mnuAyuda);
 
@@ -150,14 +172,6 @@ public class FrmPrinicipal extends javax.swing.JFrame {
             }
         });
         jMenuBar1.add(mnuSalir);
-
-        jMenu1.setText("MCursos");
-        jMenu1.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jMenu1MouseClicked(evt);
-            }
-        });
-        jMenuBar1.add(jMenu1);
 
         setJMenuBar(jMenuBar1);
 
@@ -229,6 +243,7 @@ public class FrmPrinicipal extends javax.swing.JFrame {
             mnuControlInformes.setVisible(false);
             mnuUnidad.setVisible(false);
             imprimirInformeCiclos.setVisible(false);
+            mnuMante.setVisible(false);
         }
         if (nivelUsuario.equals("Administrador") || nivelUsuario.equals("Supervisor")) {
             mnuControlInformesDocente.setVisible(false);
@@ -254,16 +269,24 @@ public class FrmPrinicipal extends javax.swing.JFrame {
     }//GEN-LAST:event_mnuUnidadMouseClicked
 
     private void imprimirInformeCiclosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_imprimirInformeCiclosActionPerformed
-        FrmReporteInformesCiclos repo = new FrmReporteInformesCiclos();
-        escritorio.add(repo);
-        repo.setVisible(true);
+//        FrmReporteInformesCiclos repo = new FrmReporteInformesCiclos();
+//        escritorio.add(repo);
+//        repo.setVisible(true);
     }//GEN-LAST:event_imprimirInformeCiclosActionPerformed
 
-    private void jMenu1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenu1MouseClicked
-        FrmCRUDCursos cur = new FrmCRUDCursos();
-        escritorio.add(cur);
-        cur.setVisible(true);
-    }//GEN-LAST:event_jMenu1MouseClicked
+
+    private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
+        FrmCRUDCursos form = new FrmCRUDCursos();
+        escritorio.add(form);
+        form.setVisible(true);
+    }//GEN-LAST:event_jMenuItem1ActionPerformed
+
+    private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
+        FrmCRUDDocente form = new FrmCRUDDocente();
+        escritorio.add(form);
+        form.setVisible(true);
+    }//GEN-LAST:event_jMenuItem2ActionPerformed
+
 
     /**
      * @param args the command line arguments
@@ -308,16 +331,18 @@ public class FrmPrinicipal extends javax.swing.JFrame {
     private javax.swing.JMenuItem imprimirInformeCiclos;
     private javax.swing.JMenuItem informePruebaEntrada;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu3;
     private javax.swing.JMenuBar jMenuBar1;
+    private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jMenuItem11;
+    private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JMenu mnuAyuda;
     private javax.swing.JMenu mnuConsultas;
     private javax.swing.JMenuItem mnuControlInformes;
     private javax.swing.JMenuItem mnuControlInformesDocente;
     private javax.swing.JMenu mnuImprimir;
     private javax.swing.JMenu mnuInformes;
+    private javax.swing.JMenu mnuMante;
     private javax.swing.JMenu mnuSalir;
     private javax.swing.JMenu mnuUnidad;
     private javax.swing.JLabel txtDocente;
