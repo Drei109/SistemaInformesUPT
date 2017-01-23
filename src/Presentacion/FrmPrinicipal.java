@@ -41,6 +41,7 @@ public class FrmPrinicipal extends javax.swing.JFrame {
         imprimirInformeCiclos = new javax.swing.JMenuItem();
         mnuAyuda = new javax.swing.JMenu();
         mnuSalir = new javax.swing.JMenu();
+        jMenu1 = new javax.swing.JMenu();
 
         jMenu3.setText("jMenu3");
 
@@ -150,6 +151,14 @@ public class FrmPrinicipal extends javax.swing.JFrame {
         });
         jMenuBar1.add(mnuSalir);
 
+        jMenu1.setText("MCursos");
+        jMenu1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jMenu1MouseClicked(evt);
+            }
+        });
+        jMenuBar1.add(jMenu1);
+
         setJMenuBar(jMenuBar1);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -157,14 +166,12 @@ public class FrmPrinicipal extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(escritorio)
                     .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(escritorio))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(19, 19, 19)
                         .addComponent(txtDocente)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 677, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 690, Short.MAX_VALUE)
                         .addComponent(jLabel1)
                         .addGap(18, 18, 18)
                         .addComponent(txtUnidad, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)))
@@ -252,6 +259,12 @@ public class FrmPrinicipal extends javax.swing.JFrame {
         repo.setVisible(true);
     }//GEN-LAST:event_imprimirInformeCiclosActionPerformed
 
+    private void jMenu1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenu1MouseClicked
+        FrmCRUDCursos cur = new FrmCRUDCursos();
+        escritorio.add(cur);
+        cur.setVisible(true);
+    }//GEN-LAST:event_jMenu1MouseClicked
+
     /**
      * @param args the command line arguments
      */
@@ -295,6 +308,7 @@ public class FrmPrinicipal extends javax.swing.JFrame {
     private javax.swing.JMenuItem imprimirInformeCiclos;
     private javax.swing.JMenuItem informePruebaEntrada;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu3;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem11;
