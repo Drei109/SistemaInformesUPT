@@ -23,4 +23,6 @@ public interface ClsInterfaceDocente {
     void EliminarDocente(String codigo);
     
     public ArrayList MostrarDocentes();
+    
+    public ClsEntidadDocente MostrarDatosDocente(String codigo);
 }
