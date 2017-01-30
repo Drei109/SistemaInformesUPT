@@ -42,6 +42,7 @@ public class FrmPrinicipal extends javax.swing.JFrame {
         mnuMante = new javax.swing.JMenu();
         jMenuItem1 = new javax.swing.JMenuItem();
         jMenuItem2 = new javax.swing.JMenuItem();
+        jMenuItem3 = new javax.swing.JMenuItem();
         mnuAyuda = new javax.swing.JMenu();
         mnuSalir = new javax.swing.JMenu();
 
@@ -159,6 +160,14 @@ public class FrmPrinicipal extends javax.swing.JFrame {
             }
         });
         mnuMante.add(jMenuItem2);
+
+        jMenuItem3.setText("Semestre");
+        jMenuItem3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem3ActionPerformed(evt);
+            }
+        });
+        mnuMante.add(jMenuItem3);
 
         jMenuBar1.add(mnuMante);
 
@@ -287,6 +296,12 @@ public class FrmPrinicipal extends javax.swing.JFrame {
         form.setVisible(true);
     }//GEN-LAST:event_jMenuItem2ActionPerformed
 
+    private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
+        FrmCRUDSemestre form = new FrmCRUDSemestre();
+        escritorio.add(form);
+        form.setVisible(true);
+    }//GEN-LAST:event_jMenuItem3ActionPerformed
+
 
     /**
      * @param args the command line arguments
@@ -336,6 +351,7 @@ public class FrmPrinicipal extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jMenuItem11;
     private javax.swing.JMenuItem jMenuItem2;
+    private javax.swing.JMenuItem jMenuItem3;
     private javax.swing.JMenu mnuAyuda;
     private javax.swing.JMenu mnuConsultas;
     private javax.swing.JMenuItem mnuControlInformes;
