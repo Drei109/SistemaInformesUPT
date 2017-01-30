@@ -20,7 +20,7 @@ public class ClsConexion {
            ds.setServerName("localhost"); //ip,nombre,domino
            ds.setPort(3306);
            ds.setDatabaseName("sistemasupt");
-           cnxmysql = ds.getConnection("root","");          
+           cnxmysql = ds.getConnection("root","root123");          
            
        } catch (Exception e) {
            JOptionPane.showMessageDialog(null,"Error de conexión a la BD");
