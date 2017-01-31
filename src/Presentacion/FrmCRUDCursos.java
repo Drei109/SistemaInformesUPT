@@ -10,10 +10,13 @@ import Negocio.ClsNegocioCurso;
 import java.util.ArrayList;
 import java.util.Iterator;
 import javax.swing.JOptionPane;
+import javax.swing.RowFilter;
 import javax.swing.SpinnerDateModel;
 import javax.swing.SpinnerModel;
 import javax.swing.SpinnerNumberModel;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableModel;
+import javax.swing.table.TableRowSorter;
 
 /**
  *
@@ -24,6 +27,7 @@ public class FrmCRUDCursos extends javax.swing.JInternalFrame {
     
     public ArrayList<ClsNegocioCurso> dato = null;
     SpinnerNumberModel  modelSpn = null;
+    private TableRowSorter<TableModel> rowSorter;
     
     public FrmCRUDCursos() {
         initComponents();
@@ -64,7 +68,10 @@ public class FrmCRUDCursos extends javax.swing.JInternalFrame {
         btnLimpiar = new javax.swing.JButton();
         btnSalir = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
-        tableCursos = new javax.swing.JTable();
+        tablaCursos = new javax.swing.JTable();
+        jPanel3 = new javax.swing.JPanel();
+        txtBuscar = new javax.swing.JTextField();
+        btnBuscar = new javax.swing.JButton();
 
         addInternalFrameListener(new javax.swing.event.InternalFrameListener() {
             public void internalFrameActivated(javax.swing.event.InternalFrameEvent evt) {
@@ -267,7 +274,7 @@ public class FrmCRUDCursos extends javax.swing.JInternalFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        tableCursos.setModel(new javax.swing.table.DefaultTableModel(
+        tablaCursos.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -278,38 +285,75 @@ public class FrmCRUDCursos extends javax.swing.JInternalFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
-        tableCursos.addMouseListener(new java.awt.event.MouseAdapter() {
+        tablaCursos.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                tableCursosMouseClicked(evt);
+                tablaCursosMouseClicked(evt);
             }
         });
-        jScrollPane1.setViewportView(tableCursos);
+        jScrollPane1.setViewportView(tablaCursos);
+
+        jPanel3.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 102, 255)));
+
+        btnBuscar.setText("Buscar");
+        btnBuscar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnBuscarActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
+        jPanel3.setLayout(jPanel3Layout);
+        jPanel3Layout.setHorizontalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 0, Short.MAX_VALUE)
+            .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel3Layout.createSequentialGroup()
+                    .addGap(5, 5, 5)
+                    .addComponent(btnBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 29, Short.MAX_VALUE)
+                    .addComponent(txtBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 434, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGap(5, 5, 5)))
+        );
+        jPanel3Layout.setVerticalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 40, Short.MAX_VALUE)
+            .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel3Layout.createSequentialGroup()
+                    .addGap(2, 2, 2)
+                    .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(btnBuscar)
+                        .addComponent(txtBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+        );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jPanel2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jScrollPane1))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
+                .addGap(12, 12, 12)
                 .addComponent(jLabel1)
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(37, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 107, Short.MAX_VALUE)
+                .addGap(14, 14, 14))
         );
 
         pack();
@@ -372,15 +416,15 @@ public class FrmCRUDCursos extends javax.swing.JInternalFrame {
         }
     }//GEN-LAST:event_btnGuardarActionPerformed
 
-    private void tableCursosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tableCursosMouseClicked
+    private void tablaCursosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tablaCursosMouseClicked
         agregarDatosCajas();
-    }//GEN-LAST:event_tableCursosMouseClicked
+    }//GEN-LAST:event_tablaCursosMouseClicked
 
     private void btnActualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnActualizarActionPerformed
-        if(tableCursos.getSelectedRow() >= 0){
+        if(tablaCursos.getSelectedRow() >= 0){
             if (!txtIdCurso.getText().equals("")) {
                 //guardar datos ingresados en el formulario
-                String idCurso = (String) tableCursos.getValueAt(tableCursos.getSelectedRow(), 0);
+                String idCurso = (String) tablaCursos.getValueAt(tablaCursos.getSelectedRow(), 0);
                 String nombreCurso = txtNombreCurso.getText();
                 int hTeoricas =  Integer.parseInt(spnHTeoricas.getValue().toString());
                 int hPracticas =  Integer.parseInt(spnHPracticas.getValue().toString());
@@ -430,10 +474,10 @@ public class FrmCRUDCursos extends javax.swing.JInternalFrame {
 
     private void btnEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarActionPerformed
         
-        if(tableCursos.getSelectedRow() >= 0){
+        if(tablaCursos.getSelectedRow() >= 0){
             if (!txtIdCurso.getText().equals("")) {
                 //guardar datos ingresados en el formulario
-                String idCurso = (String) tableCursos.getValueAt(tableCursos.getSelectedRow(), 0);
+                String idCurso = (String) tablaCursos.getValueAt(tablaCursos.getSelectedRow(), 0);
                 
                 int reply = JOptionPane.showConfirmDialog(null,
                                           "¿Esta seguro que quiere eliminar el curso: "+idCurso+" ?",
@@ -469,6 +513,17 @@ public class FrmCRUDCursos extends javax.swing.JInternalFrame {
             JOptionPane.showMessageDialog(null, "Seleccione una fila de la tabla.");
         }
     }//GEN-LAST:event_btnEliminarActionPerformed
+
+    private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
+        rowSorter = new TableRowSorter<>(tablaCursos.getModel());
+        tablaCursos.setRowSorter(rowSorter);
+        String text = txtBuscar.getText();
+        if (text.trim().length() == 0) {
+            rowSorter.setRowFilter(null);
+        } else {
+            rowSorter.setRowFilter(RowFilter.regexFilter("(?i)" + text));
+        }
+    }//GEN-LAST:event_btnBuscarActionPerformed
 
     private void habilitarBotonesNuevo(){
         //habilitar botones cuando se quiera guardar un curso nuevo
@@ -524,7 +579,7 @@ public class FrmCRUDCursos extends javax.swing.JInternalFrame {
                 
                 modeloTabla.addRow(campo);
             }
-            tableCursos.setModel(modeloTabla);
+            tablaCursos.setModel(modeloTabla);
 
             datos.conexion.close();
             
@@ -537,12 +592,12 @@ public class FrmCRUDCursos extends javax.swing.JInternalFrame {
     //metodo para cuando se de clic en una celda cuanquiera de la tabla.
     void agregarDatosCajas(){
         txtIdCurso.setEnabled(false);
-        txtIdCurso.setText( (String) tableCursos.getValueAt(tableCursos.getSelectedRow(), 0) );
-        txtNombreCurso.setText( (String) tableCursos.getValueAt(tableCursos.getSelectedRow(), 1) );
+        txtIdCurso.setText( (String) tablaCursos.getValueAt(tablaCursos.getSelectedRow(), 0) );
+        txtNombreCurso.setText( (String) tablaCursos.getValueAt(tablaCursos.getSelectedRow(), 1) );
         
-        String value1 = (String) tableCursos.getValueAt(tableCursos.getSelectedRow(), 2);
-        String value2 = (String) tableCursos.getValueAt(tableCursos.getSelectedRow(), 3);
-        String value3 = (String) tableCursos.getValueAt(tableCursos.getSelectedRow(), 5);
+        String value1 = (String) tablaCursos.getValueAt(tablaCursos.getSelectedRow(), 2);
+        String value2 = (String) tablaCursos.getValueAt(tablaCursos.getSelectedRow(), 3);
+        String value3 = (String) tablaCursos.getValueAt(tablaCursos.getSelectedRow(), 5);
         
 //        modelSpn = new SpinnerNumberModel(Integer.parseInt(value),0,5,1);
 
@@ -550,9 +605,9 @@ public class FrmCRUDCursos extends javax.swing.JInternalFrame {
         spnHPracticas.setValue( Integer.parseInt(value2) );
         spnCreditos.setValue( Integer.parseInt(value3) );
 
-        cmbCiclo.setSelectedItem( tableCursos.getValueAt(tableCursos.getSelectedRow(), 6) );
-        cmbTipoCurso.setSelectedItem( tableCursos.getValueAt(tableCursos.getSelectedRow(), 7) );
-        txtPreRequisito.setText( (String) tableCursos.getValueAt(tableCursos.getSelectedRow(), 8) );
+        cmbCiclo.setSelectedItem( tablaCursos.getValueAt(tablaCursos.getSelectedRow(), 6) );
+        cmbTipoCurso.setSelectedItem( tablaCursos.getValueAt(tablaCursos.getSelectedRow(), 7) );
+        txtPreRequisito.setText( (String) tablaCursos.getValueAt(tablaCursos.getSelectedRow(), 8) );
         
         //activar boton de actualizar datos
         btnActualizar.setEnabled(true);
@@ -575,6 +630,7 @@ public class FrmCRUDCursos extends javax.swing.JInternalFrame {
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnActualizar;
+    private javax.swing.JButton btnBuscar;
     private javax.swing.JButton btnEliminar;
     private javax.swing.JButton btnGuardar;
     private javax.swing.JButton btnLimpiar;
@@ -593,11 +649,13 @@ public class FrmCRUDCursos extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
+    private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JSpinner spnCreditos;
     private javax.swing.JSpinner spnHPracticas;
     private javax.swing.JSpinner spnHTeoricas;
-    private javax.swing.JTable tableCursos;
+    private javax.swing.JTable tablaCursos;
+    private javax.swing.JTextField txtBuscar;
     private javax.swing.JTextField txtIdCurso;
     private javax.swing.JTextField txtNombreCurso;
     private javax.swing.JTextField txtPreRequisito;

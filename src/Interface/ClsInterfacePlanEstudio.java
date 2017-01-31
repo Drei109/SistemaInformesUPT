@@ -21,5 +21,5 @@ public interface ClsInterfacePlanEstudio {
     
     public ArrayList MostrarPlanEstudios();
     
-    public ClsEntidadPlanEstudio MostrarDatosClsEntidadPlanEstudio(String idPlanEstudio);
+    public ClsEntidadPlanEstudio MostrarDatosPlanEstudio(String idPlanEstudio);
 }

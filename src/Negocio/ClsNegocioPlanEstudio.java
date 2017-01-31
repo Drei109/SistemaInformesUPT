@@ -84,7 +84,7 @@ public class ClsNegocioPlanEstudio implements ClsInterfacePlanEstudio{
     }
 
     @Override
-    public ClsEntidadPlanEstudio MostrarDatosClsEntidadPlanEstudio(String idPlanEstudio) {
+    public ClsEntidadPlanEstudio MostrarDatosPlanEstudio(String idPlanEstudio) {
         ClsEntidadPlanEstudio entPlanEstudio = new ClsEntidadPlanEstudio();
         
         try {
@@ -95,7 +95,7 @@ public class ClsNegocioPlanEstudio implements ClsInterfacePlanEstudio{
             
             while (rs.next()) {
                 entPlanEstudio.setIdPlanEstudio(Integer.parseInt(rs.getString("idPlanEstudio")));        
-                entPlanEstudio.setNombrePlanEstudio(rs.getString("pnombrePlanEstudio"));   
+                entPlanEstudio.setNombrePlanEstudio(rs.getString("nombrePlanEstudio"));   
             }
             
             return entPlanEstudio;
