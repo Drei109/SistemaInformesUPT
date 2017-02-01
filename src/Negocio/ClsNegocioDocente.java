@@ -139,6 +139,34 @@ public class ClsNegocioDocente implements ClsInterfaceDocente{
         
         
     }
+
+    @Override
+    public ArrayList MostrarDocentesSinUsuario() {
+        ArrayList<ClsEntidadDocente> infoDocente = new ArrayList<ClsEntidadDocente>();
+        
+        try {
+            CallableStatement cst = conexion.prepareCall("{call USP_Docente_Faltantes()}");
+            rs = cst.executeQuery();
+            
+            
+            while (rs.next()) {
+                ClsEntidadDocente entDoc = new ClsEntidadDocente();
+
+                entDoc.setCodDocente(rs.getString("codDocente"));       
+                entDoc.setNombreDocente(rs.getString("nombreDocente"));       
+                entDoc.setEmailDocente(rs.getString("emailDocente"));       
+                entDoc.setCelularDocente(rs.getString("celularDocente"));       
+                entDoc.setGradoDocente(rs.getString("gradoDocente"));       
+                infoDocente.add(entDoc);
+            }
+            
+            
+            return infoDocente;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
     
     
     

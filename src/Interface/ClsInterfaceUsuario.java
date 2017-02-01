@@ -19,4 +19,20 @@ public interface ClsInterfaceUsuario {
     
     public ResultSet obtenerCursosDocente(String pcodDocente)throws Exception;
     
+    // CRUD
+    
+    String ObtenerID();
+    
+    void AgregarUsuario(ClsEntidadUsuario Usuario);
+    
+    void ModificarUsuario(ClsEntidadUsuario Usuario);
+    
+    void EliminarUsuario(String codigo);
+    
+    public ArrayList MostrarUsuarios();
+    
+    public ClsEntidadUsuario MostrarDatosUsuario(String codigo);
+    
+    
+    
 }
