@@ -24,5 +24,7 @@ public interface ClsInterfaceDocente {
     
     public ArrayList MostrarDocentes();
     
+    public ArrayList MostrarDocentesSinUsuario();
+    
     public ClsEntidadDocente MostrarDatosDocente(String codigo);
 }
