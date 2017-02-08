@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="report name" pageWidth="595" pageHeight="842" columnWidth="535" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20">
-	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.zoom" value="1.4641000000000006"/>
 	<property name="ireport.x" value="0"/>
-	<property name="ireport.y" value="358"/>
+	<property name="ireport.y" value="99"/>
 	<style name="table">
 		<box>
 			<pen lineWidth="1.0" lineColor="#000000"/>
@@ -137,7 +137,7 @@ WHERE p.idPortafolio = $P{ID4};]]>
 		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
 	</parameter>
 	<queryString>
-		<![CDATA[SELECT p.idPortafolio, ca.codDocente, d.nombreDocente ,s.nombreSemestre, ca.idCurso, c.nombre, p.fechaPortafolio, p.estadoPortafolio, p.recepcioadoPor, s.nombreSemestre, ca.alumnosMatriculados, ca.alumnosRetirados, ca.alumnosAbandono,p.estudianteAsisten,p.estudianteAprobado, p.estudianteDesaprobado, u.descripcionUnidad
+		<![CDATA[SELECT p.idPortafolio, ca.codDocente, d.nombreDocente ,s.nombreSemestre, ca.idCurso, c.nombre, p.fechaPortafolio, p.estadoPortafolio, p.recepcioadoPor, s.nombreSemestre, ca.alumnosMatriculados, ca.alumnosRetirados, ca.alumnosAbandono,p.estudianteAsisten,p.estudianteAprobado, p.estudianteDesaprobado, u.descripcionUnidad, ca.seccion
 		FROM portafolio p
 		LEFT JOIN cargaacademica ca
 		ON p.idCargaAcademica= ca.idCargaAcademica
@@ -167,6 +167,7 @@ WHERE p.idPortafolio = $P{ID4};]]>
 	<field name="estudianteAprobado" class="java.lang.Integer"/>
 	<field name="estudianteDesaprobado" class="java.lang.Integer"/>
 	<field name="descripcionUnidad" class="java.lang.String"/>
+	<field name="seccion" class="java.lang.String"/>
 	<background>
 		<band splitType="Stretch"/>
 	</background>
@@ -212,14 +213,14 @@ WHERE p.idPortafolio = $P{ID4};]]>
 				<text><![CDATA[Nombre del Curso :]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="13" y="60" width="104" height="20"/>
+				<reportElement x="13" y="80" width="104" height="20"/>
 				<textElement verticalAlignment="Middle">
 					<font size="10" isBold="false"/>
 				</textElement>
 				<text><![CDATA[Docente :]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="13" y="80" width="104" height="20"/>
+				<reportElement x="13" y="100" width="104" height="20"/>
 				<textElement verticalAlignment="Middle">
 					<font size="10" isBold="false"/>
 				</textElement>
@@ -299,12 +300,12 @@ WHERE p.idPortafolio = $P{ID4};]]>
 				<textFieldExpression class="java.lang.String"><![CDATA[$F{nombre}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="117" y="60" width="269" height="20"/>
+				<reportElement x="117" y="80" width="269" height="20"/>
 				<textElement verticalAlignment="Middle"/>
 				<textFieldExpression class="java.lang.String"><![CDATA[$F{nombreDocente}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="117" y="80" width="152" height="20"/>
+				<reportElement x="117" y="100" width="152" height="20"/>
 				<textElement verticalAlignment="Middle"/>
 				<textFieldExpression class="java.lang.String"><![CDATA[$F{nombreSemestre}]]></textFieldExpression>
 			</textField>
@@ -375,6 +376,18 @@ WHERE p.idPortafolio = $P{ID4};]]>
 				</textElement>
 				<text><![CDATA[Resumen del curso para la unidad :]]></text>
 			</staticText>
+			<staticText>
+				<reportElement x="13" y="60" width="104" height="20"/>
+				<textElement verticalAlignment="Middle">
+					<font size="10" isBold="false"/>
+				</textElement>
+				<text><![CDATA[Sección :]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="117" y="60" width="152" height="20"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{seccion}]]></textFieldExpression>
+			</textField>
 		</band>
 	</pageHeader>
 	<summary>
@@ -616,7 +629,7 @@ WHERE p.idPortafolio = $P{ID4};]]>
 			</staticText>
 			<componentElement>
 				<reportElement style="table 1" positionType="Float" x="117" y="326" width="195" height="32"/>
-				<jr:list xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd">
+				<jr:list xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd" printOrder="Vertical">
 					<datasetRun subDataset="New Dataset 3">
 						<datasetParameter name="ID4">
 							<datasetParameterExpression><![CDATA[$P{ID}]]></datasetParameterExpression>

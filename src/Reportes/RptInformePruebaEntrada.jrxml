@@ -2,7 +2,7 @@
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="report name" pageWidth="700" pageHeight="1000" columnWidth="660" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20">
 	<property name="ireport.zoom" value="1.1000000000000019"/>
 	<property name="ireport.x" value="0"/>
-	<property name="ireport.y" value="343"/>
+	<property name="ireport.y" value="48"/>
 	<style name="table">
 		<box>
 			<pen lineWidth="1.0" lineColor="#000000"/>
@@ -181,7 +181,7 @@
 			<defaultValueExpression><![CDATA[]]></defaultValueExpression>
 		</parameter>
 		<queryString>
-			<![CDATA[SELECT c.idCurso,c.nombre,c.horasTeoricas,c.horasPracticas
+			<![CDATA[SELECT c.idCurso,c.nombre,c.horasTeoricas,c.horasPracticas, ca.seccion
 FROM pruebaEntrada pe 
 INNER JOIN cargaAcademica ca ON
 pe.idCargaAcademica = ca.idCargaAcademica 
@@ -189,18 +189,11 @@ INNER JOIN curso c ON
 c.idCurso = ca.idCurso
 WHERE pe.idPruebaEntrada = $P{idPe2};]]>
 		</queryString>
-		<field name="idCurso" class="java.lang.String">
-			<fieldDescription><![CDATA[]]></fieldDescription>
-		</field>
-		<field name="nombre" class="java.lang.String">
-			<fieldDescription><![CDATA[]]></fieldDescription>
-		</field>
-		<field name="horasTeoricas" class="java.lang.Integer">
-			<fieldDescription><![CDATA[]]></fieldDescription>
-		</field>
-		<field name="horasPracticas" class="java.lang.Integer">
-			<fieldDescription><![CDATA[]]></fieldDescription>
-		</field>
+		<field name="idCurso" class="java.lang.String"/>
+		<field name="nombre" class="java.lang.String"/>
+		<field name="horasTeoricas" class="java.lang.Integer"/>
+		<field name="horasPracticas" class="java.lang.Integer"/>
+		<field name="seccion" class="java.lang.String"/>
 	</subDataset>
 	<parameter name="ID" class="java.lang.String">
 		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
@@ -540,8 +533,8 @@ WHERE pe.idPruebaEntrada = $P{ID};]]>
 							<datasetParameterExpression><![CDATA[$P{ID}]]></datasetParameterExpression>
 						</datasetParameter>
 					</datasetRun>
-					<jr:columnGroup width="630">
-						<jr:columnGroup width="630">
+					<jr:columnGroup width="629">
+						<jr:columnGroup width="629">
 							<jr:columnHeader style="CH" height="25" rowSpan="1">
 								<box>
 									<pen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
@@ -559,7 +552,7 @@ WHERE pe.idPruebaEntrada = $P{ID};]]>
 								</staticText>
 							</jr:columnHeader>
 							<jr:column width="90">
-								<jr:columnHeader style="CH" height="23" rowSpan="1">
+								<jr:columnHeader style="CH" height="30" rowSpan="1">
 									<box>
 										<pen lineWidth="1.0"/>
 										<topPen lineWidth="1.0"/>
@@ -581,8 +574,8 @@ WHERE pe.idPruebaEntrada = $P{ID};]]>
 									</textField>
 								</jr:detailCell>
 							</jr:column>
-							<jr:column width="360">
-								<jr:columnHeader style="CH" height="23" rowSpan="1">
+							<jr:column width="269">
+								<jr:columnHeader style="CH" height="30" rowSpan="1">
 									<box>
 										<pen lineWidth="1.0"/>
 										<topPen lineWidth="1.0"/>
@@ -591,21 +584,40 @@ WHERE pe.idPruebaEntrada = $P{ID};]]>
 										<rightPen lineWidth="1.0"/>
 									</box>
 									<staticText>
-										<reportElement x="0" y="5" width="354" height="16" forecolor="#FFFFFF" backcolor="#000000"/>
+										<reportElement x="0" y="5" width="269" height="16" forecolor="#FFFFFF" backcolor="#000000"/>
 										<textElement textAlignment="Center"/>
 										<text><![CDATA[Nombre]]></text>
 									</staticText>
 								</jr:columnHeader>
 								<jr:detailCell style="table_TD" height="30" rowSpan="1">
 									<textField>
-										<reportElement x="0" y="5" width="354" height="21"/>
+										<reportElement x="0" y="5" width="269" height="21"/>
 										<textElement textAlignment="Center"/>
 										<textFieldExpression class="java.lang.String"><![CDATA[$F{nombre}]]></textFieldExpression>
 									</textField>
 								</jr:detailCell>
 							</jr:column>
 							<jr:column width="90">
-								<jr:columnHeader style="CH" height="23" rowSpan="1">
+								<jr:tableHeader height="0" rowSpan="1"/>
+								<jr:tableFooter height="0" rowSpan="1"/>
+								<jr:columnHeader style="CH" height="30" rowSpan="1">
+									<staticText>
+										<reportElement x="0" y="0" width="90" height="30" forecolor="#FFFFFF" backcolor="#000000"/>
+										<textElement textAlignment="Center" verticalAlignment="Middle"/>
+										<text><![CDATA[Sección]]></text>
+									</staticText>
+								</jr:columnHeader>
+								<jr:columnFooter height="0" rowSpan="1"/>
+								<jr:detailCell height="30" rowSpan="1">
+									<textField>
+										<reportElement x="0" y="5" width="90" height="20"/>
+										<textElement textAlignment="Center" verticalAlignment="Top"/>
+										<textFieldExpression class="java.lang.String"><![CDATA[$F{seccion}]]></textFieldExpression>
+									</textField>
+								</jr:detailCell>
+							</jr:column>
+							<jr:column width="90">
+								<jr:columnHeader style="CH" height="30" rowSpan="1">
 									<box>
 										<pen lineWidth="1.0"/>
 										<topPen lineWidth="1.0"/>
@@ -614,8 +626,8 @@ WHERE pe.idPruebaEntrada = $P{ID};]]>
 										<rightPen lineWidth="1.0"/>
 									</box>
 									<staticText>
-										<reportElement x="0" y="5" width="90" height="16" forecolor="#FFFFFF" backcolor="#000000"/>
-										<textElement textAlignment="Center"/>
+										<reportElement x="0" y="0" width="90" height="30" forecolor="#FFFFFF" backcolor="#000000"/>
+										<textElement textAlignment="Center" verticalAlignment="Middle"/>
 										<text><![CDATA[Horas Teóricas]]></text>
 									</staticText>
 								</jr:columnHeader>
@@ -628,7 +640,7 @@ WHERE pe.idPruebaEntrada = $P{ID};]]>
 								</jr:detailCell>
 							</jr:column>
 							<jr:column width="90">
-								<jr:columnHeader style="CH" height="23" rowSpan="1">
+								<jr:columnHeader style="CH" height="30" rowSpan="1">
 									<box>
 										<pen lineWidth="1.0"/>
 										<topPen lineWidth="1.0"/>
@@ -637,8 +649,8 @@ WHERE pe.idPruebaEntrada = $P{ID};]]>
 										<rightPen lineWidth="1.0"/>
 									</box>
 									<staticText>
-										<reportElement x="0" y="5" width="90" height="16" forecolor="#FFFFFF" backcolor="#000000"/>
-										<textElement textAlignment="Center"/>
+										<reportElement x="0" y="0" width="90" height="30" forecolor="#FFFFFF" backcolor="#000000"/>
+										<textElement textAlignment="Center" verticalAlignment="Middle"/>
 										<text><![CDATA[Horas Prácticas]]></text>
 									</staticText>
 								</jr:columnHeader>
@@ -779,6 +791,7 @@ WHERE pe.idPruebaEntrada = $P{ID};]]>
 			</staticText>
 			<textField>
 				<reportElement x="80" y="85" width="95" height="18"/>
+				<textElement/>
 				<textFieldExpression class="java.lang.String"><![CDATA[$F{fechaPruebaEntrada}.toString()]]></textFieldExpression>
 			</textField>
 			<staticText>

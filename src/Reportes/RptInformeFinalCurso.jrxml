@@ -2,7 +2,7 @@
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="report name" pageWidth="700" pageHeight="1500" columnWidth="660" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20">
 	<property name="ireport.zoom" value="1.5"/>
 	<property name="ireport.x" value="0"/>
-	<property name="ireport.y" value="96"/>
+	<property name="ireport.y" value="0"/>
 	<style name="table">
 		<box>
 			<pen lineWidth="1.0" lineColor="#000000"/>
@@ -115,9 +115,9 @@
 	</style>
 	<subDataset name="Cabecera">
 		<parameter name="ID1" class="java.lang.Integer"/>
-		<queryString language="SQL">
+		<queryString>
 			<![CDATA[SELECT c.idCurso, c.nombre, c.horasTeoricas, c.horasPracticas, ifc.lab, ifc.taller,
-d.nombreDocente, d.emailDocente, d.celularDocente
+d.nombreDocente, d.emailDocente, d.celularDocente, ca.seccion
 FROM informefinalcurso ifc
 INNER JOIN cargaacademica ca ON
     ca.idCargaAcademica = ifc.idCargaAcademica
@@ -133,6 +133,10 @@ WHERE ifc.idinformefinalcurso = 11;]]>
 		<field name="horasPracticas" class="java.lang.Integer"/>
 		<field name="lab" class="java.lang.String"/>
 		<field name="taller" class="java.lang.String"/>
+		<field name="nombreDocente" class="java.lang.String"/>
+		<field name="emailDocente" class="java.lang.String"/>
+		<field name="celularDocente" class="java.lang.String"/>
+		<field name="seccion" class="java.lang.String"/>
 	</subDataset>
 	<subDataset name="DatosDocente">
 		<parameter name="ID2" class="java.lang.Integer"/>
@@ -296,11 +300,11 @@ WHERE ifc.idinformefinalcurso = $P{ID};]]>
 							</staticText>
 						</jr:columnHeader>
 						<jr:detailCell style="table_TD" height="30" rowSpan="1">
-							<staticText>
-								<reportElement style="table" x="0" y="0" width="36" height="30"/>
+							<textField>
+								<reportElement x="0" y="0" width="36" height="30"/>
 								<textElement textAlignment="Center" verticalAlignment="Middle"/>
-								<text><![CDATA[A]]></text>
-							</staticText>
+								<textFieldExpression class="java.lang.String"><![CDATA[$F{seccion}]]></textFieldExpression>
+							</textField>
 						</jr:detailCell>
 					</jr:column>
 					<jr:column width="131">
